@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+@mixin neon-border($color) {
+  box-shadow:
+    0 0 6px rgba($color, 0.6),
+    0 0 12px rgba($color, 0.4),
+    0 0 24px rgba($color, 0.3);
+  border: 1px solid rgba($color, 0.6);
+}
+
+.toast-success {
+  @include neon-border($success);
+}
+
+.toast-error {
+  @include neon-border($error);
+}
