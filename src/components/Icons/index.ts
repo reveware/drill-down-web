@@ -1,4 +1,1 @@
-export {
-    Sun,
-    Moon,
-} from 'lucide-react'
+export { Sun, Moon, User, LogOut, Menu, X, Search, Gift, Users } from 'lucide-react';

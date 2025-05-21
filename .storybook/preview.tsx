@@ -1,7 +1,6 @@
-import type { Preview } from '@storybook/react'
-import '../src/styles/globals.css'
-import { withThemeByClassName } from '@storybook/addon-themes'
-
+import type { Preview } from '@storybook/react';
+import '../src/styles/globals.css';
+import { withThemeByClassName } from '@storybook/addon-themes';
 
 const parameters = {
   layout: 'padded',
@@ -10,10 +9,10 @@ const parameters = {
     default: 'light',
     values: [
       { name: 'light', value: '#ffffff' },
-      { name: 'dark',  value: '#1c1b22' },
+      { name: 'dark', value: '#1c1b22' },
     ],
   },
-}
+};
 
 export const decorators = [
   withThemeByClassName({
@@ -28,6 +27,4 @@ export const decorators = [
 export const preview: Preview = {
   parameters,
   decorators,
-  
 };
-
