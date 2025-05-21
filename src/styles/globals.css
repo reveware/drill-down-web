@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -23,11 +22,11 @@
   --color-on-secondary: #ffffff;
   --color-accent: #e620a6;
   --color-on-accent: #ffffff;
-  --color-surface: #f9f6f2;
-  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-background: #fdfdfc;
   --color-foreground: #171717;
 
-  --color-border: #e5e7eb;
+  --color-border: #c7c7c7;
   --color-muted: #6c6d70;
   --color-info: #0b688c;
   --color-success: #00ff90;
@@ -35,15 +34,12 @@
   --color-danger: #ff0015;
 
   /* Mapped to Shadcn UI tokens */
-
   --color-primary-foreground: var(--color-on-primary);
   --color-secondary-foreground: var(--color-on-secondary);
   --color-accent-foreground: var(--color-on-accent);
   --color-muted-foreground: var(--color-foreground);
   --color-destructive: var(--color-danger);
-  --ring: var(--color-accent);
-  --input: #e5e7eb;
-  --border: #e5e7eb;
+  --color-ring: var(--color-accent);
 
   /* Sidebar and Charts */
   --color-sidebar: var(--color-surface);
@@ -52,7 +48,7 @@
   --color-sidebar-primary-foreground: var(--color-on-primary);
   --color-sidebar-accent: var(--color-accent);
   --color-sidebar-accent-foreground: var(--color-on-accent);
-  --color-sidebar-border: red;
+  --color-sidebar-border: var(--color-border);
   --color-sidebar-ring: var(--color-accent);
 
   --chart-1: var(--color-accent);
@@ -73,20 +69,21 @@ html {
 }
 
 html.dark {
-  --color-primary: #010409;
+  --color-primary: #333333;
   --color-on-primary: #ffffff;
   --color-secondary: #26303f;
   --color-on-secondary: #ffffff;
-  --color-accent: #e620a6;
+  --color-accent: #07d9c4;
   --color-on-accent: #ffffff;
-  --color-surface: #1a0b24;
+  --color-surface: #0d1117;
   --color-foreground: #f5f5f5;
-  --color-background: #0d1117;
+  --color-background: #121212;
   --color-muted: #9ca1aa;
   --color-info: #2685bf;
   --color-success: #00ff90;
   --color-warning: #f5ae48;
   --color-danger: #ff0015;
+  --color-border: #e5e7eb;
 
   color-scheme: dark;
 }

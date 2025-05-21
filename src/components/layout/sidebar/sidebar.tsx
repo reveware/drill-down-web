@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../../ui/sheet';
-import { Menu, User, LogOut, Gift, Users } from '@/components/Icons';
-import { ThemeToggle } from '../Navbar/ThemeToggle';
+import { Menu, User, LogOut, Gift, Users } from '@/components/shared/Icons';
+import { ThemeToggle } from '../navbar/theme-toggle';
 import { Separator } from '../../ui/separator';
-import { UserAvatar } from '@/components/common/UserAvatar/UserAvatar';
-import { UserOverview } from '@/app/types/user';
+import { UserAvatar } from '@/components/shared/user-avatar/user-avatar';
+import { UserOverview } from '@/types/user';
 import Link from 'next/link';
 
 interface SidebarProps {
@@ -18,7 +18,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user }) => {
           <Menu size={24} />
         </button>
       </SheetTrigger>
-      <SheetContent side="left" className="flex flex-col gap-4 p-4 w-64">
+      <SheetContent side="right" className="flex flex-col gap-4 p-4 w-64">
         <SheetTitle>Settings</SheetTitle>
         <div className="flex items-center gap-2">
           <UserAvatar user={user} />
@@ -41,6 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user }) => {
         <Link href="/assets" className="flex items-center gap-2">
           <Gift size={20} /> Assets
         </Link>
+
         <Separator />
 
         <div

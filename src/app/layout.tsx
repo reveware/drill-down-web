@@ -1,7 +1,8 @@
-import { Navbar } from '@/components/layout/Navbar/Navbar';
+import { Navbar } from '@/components/layout/navbar/navbar';
 import '../styles/globals.css';
 import { Orbitron, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/providers/theme-provider';
+import { QueryProvider } from '@/providers/query-provider';
 
 const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans' });
 const title = Orbitron({ subsets: ['latin'], variable: '--font-title' });
@@ -14,18 +15,16 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${sans.variable} ${title.variable} ${mono.variable}`}
-    >
-      <body>
-        <div className="container mx-auto px-4 py-2">
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-            <Navbar />
-            {children}
-          </ThemeProvider>
-        </div>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${sans.variable} ${title.variable} ${mono.variable}`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          <QueryProvider>
+            <main className="container mx-auto px-4 py-2">
+              <Navbar />
+              <div className="flex justify-around mx-auto max-w-7xl">{children}</div>
+            </main>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

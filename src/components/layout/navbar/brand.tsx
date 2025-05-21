@@ -1,4 +1,4 @@
-import { Logo } from '@/app/assets/images';
+import { Logo } from '@/assets/images';
 import Image from 'next/image';
 import React from 'react';
 import { useRouter } from 'next/navigation';

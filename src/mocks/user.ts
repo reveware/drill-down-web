@@ -1,4 +1,4 @@
-import { UserOverview, UserRole } from '@/app/types/user';
+import { UserOverview, UserRole } from '@/types/user';
 
 export const mockUser: UserOverview = {
   id: 1,
