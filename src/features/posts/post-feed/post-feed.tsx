@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { PostOverview } from '@/types/post';
 import { PostSkeleton } from '../post-card/post-skeleton';
@@ -39,7 +39,7 @@ export const PostFeed = () => {
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-4 max-w-md mx-auto">
         {Array.from({ length: 3 }).map((_, i) => (
           <PostSkeleton key={i} />
         ))}
@@ -48,7 +48,7 @@ export const PostFeed = () => {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-w-md mx-auto">
       {data?.pages.flat().map((post: PostOverview) => <PostCard key={post.id} post={post} />)}
 
       {hasNextPage && <div ref={loaderRef}>{isFetchingNextPage && <PostSkeleton />}</div>}

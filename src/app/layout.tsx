@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import { Orbitron, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/providers/theme-provider';
 import { QueryProvider } from '@/providers/query-provider';
+import React from 'react';
 
 const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans' });
 const title = Orbitron({ subsets: ['latin'], variable: '--font-title' });
@@ -19,10 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${sans.variable} ${title.variable} ${mono.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <QueryProvider>
-            <main className="container mx-auto px-4 py-2">
+            <div className="w-full max-w-6xl px-4 mx-auto py-4 min-h-screen flex flex-col gap-4 ">
               <Navbar />
-              <div className="flex justify-around mx-auto max-w-7xl">{children}</div>
-            </main>
+              <React.Fragment>{children}</React.Fragment>
+            </div>
           </QueryProvider>
         </ThemeProvider>
       </body>

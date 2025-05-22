@@ -5,10 +5,8 @@ export const PostPhotoContent = ({ content }: { content: PhotoPostContent }) => 
     return null;
   }
   return (
-    <img
-      src={content.urls[0]}
-      alt="Post photo"
-      className="w-full rounded-lg object-cover max-h-64"
-    />
+    <div className="w-full rounded-lg overflow-hidden aspect-[4/3]">
+      <img src={content.urls[0]} alt="Post photo" className="w-full h-full object-cover" />
+    </div>
   );
 };

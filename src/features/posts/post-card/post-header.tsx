@@ -1,9 +1,8 @@
 import { UserAvatar } from '@/components/shared/user-avatar/user-avatar';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { UserOverview } from '@/types/user';
 import { formatDistanceToNow } from 'date-fns';
 
-export default function PostHeader({ user, date }: { user: UserOverview; date: Date }) {
+export const PostHeader = ({ user, date }: { user: UserOverview; date: Date }) => {
   return (
     <div className="flex items-center gap-3">
       <UserAvatar user={user} />
@@ -15,4 +14,4 @@ export default function PostHeader({ user, date }: { user: UserOverview; date: D
       </div>
     </div>
   );
-}
+};
