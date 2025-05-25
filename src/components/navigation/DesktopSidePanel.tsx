@@ -51,7 +51,7 @@ export const DesktopSidePanel: React.FC<DesktopSidePanelProps> = ({ user }) => {
   );
 
   return (
-    <aside className="hidden md:flex flex-col w-72 h-screen bg-primary text-on-primary border-l-0 border-1 border-border">
+    <aside className="hidden md:flex flex-col w-96 h-screen bg-primary text-on-primary border-l-0 border-1 border-border">
       <div className="p-4">
         <Brand />
       </div>

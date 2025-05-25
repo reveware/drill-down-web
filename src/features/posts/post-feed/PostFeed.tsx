@@ -5,6 +5,7 @@ import { PostOverview } from '@/types/post';
 import { PostSkeleton } from '../post-card/PostSkeleton';
 import { PostCard } from '../post-card';
 import { fetchMockPosts } from '@/mocks/posts';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const PAGE_SIZE = 5;
 
@@ -32,33 +33,18 @@ export const PostFeed = () => {
 
     observer.observe(loader);
 
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage]);
 
-  if (isLoading) {
-    return (
-      <div className="space-y-4 max-w-md mx-auto">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <PostSkeleton key={i} />
-        ))}
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-4 max-w-md mx-auto">
-      {data?.pages.flat().map((post: PostOverview) => {
-        return (
-          <React.Fragment key={post.id}>
-            <PostCard post={post} />
-            <PostSkeleton />
-          </React.Fragment>
-        );
-      })}
+    <ScrollArea className="h-full w-full">
+      <div className="min-h-full flex flex-col items-center justify-start gap-6 py-6 px-4">
+        {isLoading
+          ? Array.from({ length: 3 }).map((_, i) => <PostSkeleton key={i} />)
+          : data?.pages.flat().map((post: PostOverview) => <PostCard key={post.id} post={post} />)}
 
-      {hasNextPage && <div ref={loaderRef}>{isFetchingNextPage && <PostSkeleton />}</div>}
-    </div>
+        {hasNextPage && <div ref={loaderRef}>{isFetchingNextPage && <PostSkeleton />}</div>}
+      </div>
+    </ScrollArea>
   );
 };

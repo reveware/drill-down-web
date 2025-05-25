@@ -31,3 +31,5 @@ export interface QuotePostContent {
   date?: Date;
   location?: string; // contry
 }
+
+export type PhotoPost = PostOverview & { type: PostTypes.PHOTO };

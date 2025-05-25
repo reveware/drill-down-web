@@ -19,11 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${sans.variable} ${title.variable} ${mono.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <QueryProvider>
-            <div className="min-h-screen flex-col">
+            <div className="h-screen flex flex-col">
               <MobileTopbar user={mockUser} />
-              <div className="flex-1 flex max-h-screen">
+              <div className="flex-1 flex min-h-0">
                 <DesktopSidePanel user={mockUser} />
-                <main className="flex-1 p-4 overflow-y-hidden">{children}</main>
+                <main className="flex-1 p-4">{children}</main>
               </div>
             </div>
           </QueryProvider>

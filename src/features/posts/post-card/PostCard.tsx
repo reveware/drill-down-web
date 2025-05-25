@@ -11,7 +11,7 @@ interface PostCardProps {
 
 export const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card className="card max-w-sm">
+    <Card className="card">
       <PostCardHeader user={post.author} date={new Date(post.created_at)} />
       <PostCardContent post={post} />
       <PostCardFooter likeCount={post.like_count} commentCount={post.comment_count} />

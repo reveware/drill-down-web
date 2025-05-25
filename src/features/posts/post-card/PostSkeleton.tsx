@@ -17,7 +17,7 @@ export const PostSkeleton = () => {
       </div>
 
       {/* Footer bar */}
-      <div className="flex gap-3 px-2 py-3">
+      <div className="flex justify-center px-2 py-3 gap-3 ">
         <Skeleton className="w-16 h-4 rounded-md" />
         <Skeleton className="w-16 h-4 rounded-md" />
       </div>
