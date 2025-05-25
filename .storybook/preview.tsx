@@ -1,6 +1,8 @@
+import React from 'react';
 import type { Preview } from '@storybook/react';
 import '../src/styles/globals.css';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import { QueryProvider } from '../src/providers/query-provider';
 
 const parameters = {
   layout: 'padded',
@@ -15,6 +17,11 @@ const parameters = {
 };
 
 export const decorators = [
+  (Story) => (
+    <QueryProvider>
+      <Story />
+    </QueryProvider>
+  ),
   withThemeByClassName({
     themes: {
       light: 'light',

@@ -19,18 +19,22 @@ const buttonVariants = cva(
         danger: 'bg-destructive text-on-accent',
         outline:
           'border-accent border-2 text-accent bg-surface shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input',
-
-        link: 'text-info underline-offset-4 hover:underline',
+        link: 'br-transparent text-info underline-offset-4 hover:underline shadow-none',
       },
       size: {
         sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
         md: 'h-9 px-4 py-2 has-[>svg]:px-3',
         lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
       },
+      block: {
+        true: 'w-full',
+        false: '',
+      },
     },
     defaultVariants: {
       variant: 'primary',
       size: 'md',
+      block: false,
     },
   }
 );
@@ -39,6 +43,7 @@ function Button({
   className,
   variant,
   size,
+  block,
   asChild = false,
   ...props
 }: React.ComponentProps<'button'> &
@@ -50,7 +55,7 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, block, className }))}
       {...props}
     />
   );

@@ -1,6 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { UserOverview } from '@/types/user';
-import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 interface UserAvatarProps {
   user: UserOverview;

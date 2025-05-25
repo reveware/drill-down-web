@@ -1,7 +1,7 @@
 'use client';
 
-import { PostFeed } from '../posts/post-feed/post-feed';
-import { UpcomingTimebombCard } from '../time-bombs/UpcomingTimebombCard';
+import { PostFeed } from '../posts/post-feed/PostFeed';
+import { UpcomingTimebomb } from '../time-bombs/UpcomingTimebomb';
 import { mockTimeBomb } from '../../mocks/timebomb';
 
 export const Home = () => {
@@ -11,7 +11,7 @@ export const Home = () => {
         <PostFeed />
       </section>
 
-      <aside className="col-span-2 space-y-4">
+      <aside className="col-span-2 space-y-4 hidden md:block">
         <div className="card">
           <h2 className="font-semibold text-lg mb-2">Recommended Posts</h2>
           <div className="h-64 bg-muted/30 rounded-md flex items-center justify-center text-muted-foreground text-sm">
@@ -19,7 +19,7 @@ export const Home = () => {
           </div>
         </div>
 
-        <UpcomingTimebombCard timebomb={mockTimeBomb} />
+        <UpcomingTimebomb timebomb={mockTimeBomb} />
       </aside>
     </main>
   );

@@ -69,7 +69,7 @@ html {
 }
 
 html.dark {
-  --color-primary: #333333;
+  --color-primary: #010409;
   --color-on-primary: #ffffff;
   --color-secondary: #26303f;
   --color-on-secondary: #ffffff;
@@ -105,11 +105,6 @@ a {
 
 .neon-text {
   @apply text-accent;
-  text-shadow:
-    0 0 4px #5d002f,
-    0 0 8px #f472b6,
-    0 0 16px #ec4899,
-    0 0 24px #ec4899;
 }
 
 @keyframes neon-pulse {
@@ -146,6 +141,6 @@ a {
 }
 
 .card {
-  @apply bg-surface text-foreground border border-border shadow-lg rounded-xl px-3 py-3;
-  /*animation: neon-pulse 4s infinite ease-in-out; */
+  @apply bg-surface text-foreground border border-border shadow-lg rounded-xl max-w-sm min-w-xs;
+  animation: neon-pulse 4s infinite ease-in-out;
 }
