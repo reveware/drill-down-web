@@ -1,5 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton';
-export const PostSkeleton = () => {
+
+export const PostCardSkeleton = () => {
   return (
     <div className="card">
       {/* Header */}

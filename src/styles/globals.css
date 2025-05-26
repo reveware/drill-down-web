@@ -16,7 +16,7 @@
   --animate-bounce: bounce 1s infinite;
 
   /* Colors (Base Palette) */
-  --color-primary: #111826;
+  --color-primary: #0a0311;
   --color-on-primary: #ffffff;
   --color-secondary: #333536;
   --color-on-secondary: #ffffff;
@@ -105,6 +105,9 @@ a {
 
 .neon-text {
   @apply text-accent;
+  text-shadow:
+    0 0 2px #ec4899,
+    0 0 30px #f472b6;
 }
 
 @keyframes neon-pulse {
@@ -141,6 +144,6 @@ a {
 }
 
 .card {
-  @apply bg-surface text-foreground border border-border shadow-lg rounded-xl w-full  max-w-sm;
+  @apply bg-surface text-foreground border border-border shadow-lg rounded-xl w-full max-w-md;
   animation: neon-pulse 4s infinite ease-in-out;
 }

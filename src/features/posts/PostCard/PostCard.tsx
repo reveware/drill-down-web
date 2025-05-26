@@ -3,7 +3,7 @@ import { Card } from '@/components/ui/card';
 import { PostOverview } from '@/types/post';
 import { PostCardHeader } from './PostCardHeader';
 import { PostCardFooter } from './PostCardFooter';
-import { PostCardContent } from './PostCardContent';
+import { PostCardContent } from './PostCardContent/PostCardContent';
 
 interface PostCardProps {
   post: PostOverview;

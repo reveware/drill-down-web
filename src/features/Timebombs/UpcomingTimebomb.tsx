@@ -57,7 +57,7 @@ export const UpcomingTimebomb: React.FC<UpcomingTimebomb> = ({ timebomb }) => {
             </div>
           </div>
 
-          <div className="relative h-64 rounded-md overflow-hidden bg-muted/30">
+          <div className="relative h-32 rounded-md overflow-hidden bg-primary">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-5xl font-title font-bold tracking-widest neon-text">
                 {formattedTime}
