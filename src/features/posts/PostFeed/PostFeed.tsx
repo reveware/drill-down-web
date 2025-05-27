@@ -1,13 +1,11 @@
 import React, { useRef } from 'react';
-
 import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { useFeedPosts } from './useFeedPosts';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { PostOverview } from '@/types/post';
 
-export const PostFeed = () => {
+export const PostFeed: React.FC = () => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useFeedPosts();
@@ -18,24 +16,24 @@ export const PostFeed = () => {
     enabled: !!hasNextPage,
   });
 
-  const posts = data?.pages.flat() || [];
+  const posts: PostOverview[] = data?.pages.flat() ?? [];
 
   return (
-    <ScrollArea className="h-full w-full">
-      <div className="min-h-full flex flex-col items-center gap-6">
-        {isLoading && <LoadingState count={3} />}
-        {!isLoading && posts.map((post: PostOverview) => <PostCard key={post.id} post={post} />)}
-        {hasNextPage && (
-          <div className="w-full flex justify-center" ref={loaderRef}>
-            {isFetchingNextPage && <PostCardSkeleton />}
-          </div>
-        )}
-      </div>
-    </ScrollArea>
+    <div className="w-full flex flex-col items-center gap-6 p-4">
+      {isLoading && <LoadingState count={3} />}
+
+      {!isLoading && posts.map((post) => <PostCard key={post.id} post={post} />)}
+
+      {hasNextPage && (
+        <div ref={loaderRef} className="w-full flex justify-center">
+          {isFetchingNextPage && <PostCardSkeleton />}
+        </div>
+      )}
+    </div>
   );
 };
 
-const LoadingState = ({ count = 3 }: { count?: number }) => (
+const LoadingState: React.FC<{ count?: number }> = ({ count = 3 }) => (
   <>
     {Array.from({ length: count }).map((_, i) => (
       <PostCardSkeleton key={i} />

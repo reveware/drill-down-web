@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Sheet, SheetContent } from '../ui/sheet';
+import { Sheet, SheetContent, SheetTitle } from '../ui/sheet';
 import { User, LogOut, Gift, Users } from '@/components/shared/Icons';
 import { ThemeToggle } from './ThemeToggle';
 import { Separator } from '../ui/separator';
 import { UserAvatar } from '@/components/shared/user-avatar/UserAvatar';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 interface MobileSidebarProps {
   user: UserOverview;
@@ -54,6 +55,9 @@ export const MobileSidebar: React.FC<MobileSidebarProps> = ({ user, open, onOpen
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent side="right" className="flex flex-col gap-4 p-4 w-64">
+        <VisuallyHidden>
+          <SheetTitle>User Menu</SheetTitle>
+        </VisuallyHidden>
         {userSection}
       </SheetContent>
     </Sheet>

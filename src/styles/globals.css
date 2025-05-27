@@ -144,6 +144,6 @@ a {
 }
 
 .card {
-  @apply bg-surface text-foreground border border-border shadow-lg rounded-xl w-full max-w-md;
+  @apply bg-surface text-foreground border border-none shadow-lg rounded-xl w-full max-w-md;
   animation: neon-pulse 4s infinite ease-in-out;
 }

@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <MobileTopbar user={mockUser} />
               <div className="flex-1 flex min-h-0">
                 <DesktopSidePanel user={mockUser} />
-                <main className="flex-1 p-4">{children}</main>
+                <main className="flex-1">{children}</main>
               </div>
             </div>
           </QueryProvider>
