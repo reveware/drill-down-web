@@ -14,7 +14,7 @@ export const Home = () => {
         <PostFeed />
       </section>
 
-      <aside className="order-1 lg:order-2 p-4 flex flex-col gap-8 lg:col-span-3 border-l-1 border-border">
+      <aside className="order-1 lg:order-2 p-4 flex flex-col items-center gap-8 lg:col-span-3 border-l-1 border-border">
         <RecommendedPhotoPosts posts={recommendedPhotoPosts} />
         <UpcomingTimebomb timebomb={mockTimeBomb} />
       </aside>

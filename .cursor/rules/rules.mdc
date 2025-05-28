@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## 🧱 Project Architecture & Structure
+
+- This is a **Next.js 15 App Router project** with the following structure:
+  - `src/app` for pages/layouts
+  - `src/components/ui` for primitives
+  - `src/components/shared` for reusable widgets
+  - `src/components/layout` for layout scaffolds
+  - `src/features/[domain]` for feature-driven UI
+  - `src/types` for app-wide type definitions
+  - `src/mocks` for reusable mocks that used as base content and stories
+  - `src/styles/globals.css` for Tailwind base
+
+- AI should infer where to place a new file based on this structure.  
+  For example:
+  - A styled `Input` → `components/ui/Input.tsx`
+  - A post preview card → `features/posts/components/PostCard.tsx`
+
+---
+
+## 🧼 Clean Code Principles
+- Follow early returns to reduce nesting.
+- Organize JSX from high-level structure to detail.
+- Co-locate component helpers unless reused.
+- Avoid inline conditionals longer than a line.
+- Always remove unused imports, props, and variables.
+- Follow SOLID principles for shared logic.
+
+
+## 🎨 Tailwind + shadcn/ui Design System
+
+- Use **Tailwind CSS v4+** via `globals.css`.
+- Prefer **semantic utilities** (`text-primary`, `bg-muted`) over hardcoded values.
+- When repeated classes emerge, factor them into `styles/utilities.scss` or `@apply` blocks.
+
+- Components should use **shadcn/ui primitives** where appropriate, and they should be generated using shadcn CLI:
+  - Buttons → `<Button />` from shadcn
+  - Dialogs → `<Dialog />`, etc.
+  - Dropdowns, Inputs, Badges, Cards → all come from `@/components/ui/`
+
+- Follow consistent **padding, radius, and spacing tokens** (e.g., `p-4`, `rounded-2xl`).
+
+✅ Example:
+```tsx
+<Card className="p-4 shadow-md rounded-2xl bg-background">
+  <CardContent className="text-sm text-muted-foreground">
+    Welcome back!
+  </CardContent>
+</Card>
+``` 
+
+## 🧩 Component Conventions
+- Components must use arrow functions.
+- Use named exports unless it is a page in app/.
+- Props must be explicitly typed (avoid any).
+
+## 🧪 Storybook Integration
+
+This project uses **Storybook 8.6+** to build and document a robust, consistent design system powered by **Tailwind CSS v4+** and **shadcn/ui**.
+
+- Stories should use **CSF3 syntax** with `Meta`, `StoryObj`, and `args`.
+- All variants (e.g. primary, secondary, disabled, loading) should be represented as **named stories**.
+- Leverage `@storybook/addon-essentials` to support:
+  - **Controls (knobs)** — for live editing of props
+  - **Docs** — for auto-generated documentation
+  - **Actions** — for event handlers (onClick, etc.)
+  - **Viewport** — for mobile/desktop previews
+
+✅ Example:
+```tsx
+import { Button } from './Button';
+import type { Meta, StoryObj } from '@storybook/react';
+
+const meta: Meta<typeof Button> = {
+  title: 'UI/Button',
+  component: Button,
+  tags: ['autodocs'],
+  args: {
+    variant: 'default',
+    children: 'Click me',
+  },
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['default', 'outline', 'ghost', 'link'],
+    },
+    onClick: { action: 'clicked' },
+  },
+};
+
+export default meta;
+
+export const Default: StoryObj<typeof Button> = {};
+export const Loading: StoryObj<typeof Button> = {
+  args: { isLoading: true },
+};
+
+```
