@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { Sun, Moon } from '@/components/shared/Icons';
+import { Sun, Moon } from '@/components/shared/icons';
 
 export const ThemeToggle: React.FC = () => {
   const { theme, setTheme } = useTheme();

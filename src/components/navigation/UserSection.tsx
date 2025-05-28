@@ -1,4 +1,4 @@
-import { User, Users, Gift, LogOut } from '../shared/Icons';
+import { User, Users, Gift, LogOut } from '../shared/icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar } from '../shared/user-avatar/UserAvatar';

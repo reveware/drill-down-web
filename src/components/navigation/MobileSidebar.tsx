@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Sheet, SheetContent, SheetTitle } from '../ui/sheet';
-import { User, LogOut, Gift, Users } from '@/components/shared/Icons';
+import { User, LogOut, Gift, Users } from '@/components/shared/icons';
 import { ThemeToggle } from './ThemeToggle';
 import { Separator } from '../ui/separator';
 import { UserAvatar } from '@/components/shared/user-avatar/UserAvatar';

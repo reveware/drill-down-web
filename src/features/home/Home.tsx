@@ -1,8 +1,11 @@
 'use client';
 
-import { PostFeed } from '../posts/PostFeed/PostFeed';
-import { RecommendedPhotoPosts, useRecommendedPhotoPosts } from '../posts/RecommendedPosts';
-import { UpcomingTimebomb } from '../Timebombs/UpcomingTimebomb/UpcomingTimebomb';
+import { PostFeed } from '../posts/components/PostFeed/PostFeed';
+import {
+  RecommendedPhotoPosts,
+  useRecommendedPhotoPosts,
+} from '../posts/components/RecommendedPosts';
+import { UpcomingTimebomb } from '../timebombs/components/UpcomingTimebomb/UpcomingTimebomb';
 import { mockTimeBomb } from '../../mocks/timebomb';
 
 export const Home = () => {

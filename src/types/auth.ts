@@ -1,46 +1,52 @@
 import { z } from 'zod';
+import { UserRole } from './user';
 
-export const LoginCredentialsSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-});
-
-export const RegisterCredentialsSchema = z
+export const RegisterFormSchema = z
   .object({
+    avatar: z.any().optional(),
+    username: z.string().min(2, 'must be at least 2 characters').max(20, 'too long'),
+    first_name: z.string().min(2, 'must be at least 2 characters').max(20, 'too long'),
+    last_name: z.string().min(2, 'must be at least 2 characters').max(20, 'too long'),
     email: z.string().email('Invalid email address'),
-    password: z.string().min(6, 'Password must be at least 6 characters'),
+    password: z.string().min(9, 'must be at least 9 characters'),
     confirmPassword: z.string(),
-    name: z.string().min(2, 'Name must be at least 2 characters'),
+    date_of_birth: z.string().refine((date) => {
+      const birthDate = new Date(date);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        return age - 1 >= 18;
+      }
+      return age >= 18;
+    }, 'must be at least 18 years old'),
+    tagline: z.string().min(2, 'must be at least 2 characters').optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ['confirmPassword'],
   });
 
+export const LoginFormSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
 export const LoginResultSchema = z.object({
   token: z.string(),
 });
 
-export const ApiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
-  z.object({
-    data: dataSchema,
-    message: z.string().optional(),
-    success: z.boolean().optional(),
-  });
-
-export type LoginCredentials = z.infer<typeof LoginCredentialsSchema>;
-export type RegisterCredentials = z.infer<typeof RegisterCredentialsSchema>;
+export type RegisterDto = z.infer<typeof RegisterFormSchema>;
+export type LoginDto = z.infer<typeof LoginFormSchema>;
 export type LoginResult = z.infer<typeof LoginResultSchema>;
 
-export type ApiResponse<T> = {
-  data: T;
-  message?: string;
-  success?: boolean;
-};
-
 export interface JWTPayload {
-  sub: string; // user id
-  email: string;
+  user: {
+    id: number;
+    username: string;
+    role: UserRole;
+  };
   iat: number;
   exp: number;
 }

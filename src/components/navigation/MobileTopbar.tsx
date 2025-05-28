@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { Menu } from '@/components/shared/Icons';
+import { Menu } from '@/components/shared/icons';
 import { MobileSidebar } from './MobileSidebar';
 import { UserOverview } from '@/types/user';
 import { Brand } from '@/components/shared/brand/Brand';
