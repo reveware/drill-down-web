@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Separator } from '../ui/separator';
 import { UserOverview } from '@/types/user';
-import { Brand } from '../shared/brand/Brand';
+import { Brand } from '../shared/Brand/Brand';
 import { UserSection } from './UserSection';
 interface DesktopSidePanelProps {
   user: UserOverview;

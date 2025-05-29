@@ -13,4 +13,6 @@ export {
   Eye,
   EyeOff,
   Upload,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';

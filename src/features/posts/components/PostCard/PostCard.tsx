@@ -14,7 +14,11 @@ export const PostCard = ({ post }: PostCardProps) => {
     <Card className="card">
       <PostCardHeader user={post.author} date={new Date(post.created_at)} />
       <PostCardContent post={post} />
-      <PostCardFooter likeCount={post.like_count} commentCount={post.comment_count} />
+      <PostCardFooter
+        likeCount={post.like_count}
+        commentCount={post.comment_count}
+        tags={post.tags}
+      />
     </Card>
   );
 };

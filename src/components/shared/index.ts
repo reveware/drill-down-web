@@ -1,4 +1,5 @@
-export { UserAvatar } from './user-avatar/UserAvatar';
-export { Button } from './button/Button';
-export { Input } from './input/Input';
-export { Search } from './search/Search';
+export { UserAvatar } from './UserAvatar/UserAvatar';
+export { Button } from './Button/Button';
+export { Input } from './Input/Input';
+export { Search } from './Search/Search';
+export { Spinner } from './Spinner/Spinner';

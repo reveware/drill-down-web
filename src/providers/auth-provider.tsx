@@ -1,7 +1,6 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 import { TokenManager } from '@/lib/auth/token-manager';
 import { AuthState, JWTPayload } from '@/types/auth';
 
@@ -33,8 +32,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isLoading: true,
   });
 
-  const router = useRouter();
-
   const login = (token: string) => {
     TokenManager.setToken(token);
     const user = TokenManager.getUserFromToken();
@@ -55,8 +52,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       user: null,
       isLoading: false,
     });
-
-    router.push('/login');
   };
 
   const setUser = (user: JWTPayload) => {
@@ -72,7 +67,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (token && TokenManager.isTokenValid()) {
         login(token);
       } else {
-        TokenManager.removeToken();
+        if (token) {
+          TokenManager.removeToken();
+        }
         setAuthState({
           isAuthenticated: false,
           token: null,

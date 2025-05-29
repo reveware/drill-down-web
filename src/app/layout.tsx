@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${sans.variable} ${title.variable} ${mono.variable}`}>
         <AppProviders>
           {children}
-          <Toaster position="top-right" richColors />
+          <Toaster position="top-right" />
         </AppProviders>
       </body>
     </html>

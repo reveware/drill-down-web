@@ -1,9 +1,8 @@
 import React from 'react';
 import { TimeBomb } from '@/types/time-bombs';
 import { Card } from '@/components/ui/card';
-import { UserAvatar } from '@/components/shared/user-avatar/UserAvatar';
+import { UserAvatar, Button } from '@/components/shared/';
 import { formatDistanceToNow } from 'date-fns';
-import { Button } from '@/components/shared/button/Button';
 import { Timebomb } from '@/assets/images';
 import Image from 'next/image';
 import { useCountdown } from '../../hooks/useCountdown';

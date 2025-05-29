@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 
-import { Menu } from '@/components/shared/icons';
+import { Menu } from '@/components/shared/Icons';
 import { MobileSidebar } from './MobileSidebar';
 import { UserOverview } from '@/types/user';
-import { Brand } from '@/components/shared/brand/Brand';
-import { Search } from '@/components/shared/search/Search';
+import { Brand } from '@/components/shared/Brand/Brand';
+import { Search } from '@/components/shared/Search/Search';
 
 interface MobileTopbarProps {
   user: UserOverview;

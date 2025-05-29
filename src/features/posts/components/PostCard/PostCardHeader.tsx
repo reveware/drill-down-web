@@ -1,4 +1,4 @@
-import { UserAvatar } from '@/components/shared/user-avatar/UserAvatar';
+import { UserAvatar } from '@/components/shared/';
 import { CardHeader } from '@/components/ui/card';
 import { UserOverview } from '@/types/user';
 import { formatDistanceToNow } from 'date-fns';

@@ -1,14 +1,21 @@
-import { User, Users, Gift, LogOut } from '../shared/icons';
+import { User, Users, Gift, LogOut } from '../shared/Icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';
-import { UserAvatar } from '../shared/user-avatar/UserAvatar';
+import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
+import { useAuth } from '@/providers/auth-provider';
 
 interface UserSectionProps {
   user: UserOverview;
 }
 export const UserSection = ({ user }: UserSectionProps) => {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex items-center gap-2">
@@ -37,9 +44,7 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
       <div
         className="flex items-center gap-2 cursor-pointer p-2 rounded-md hover:bg-muted"
-        onClick={() => {
-          /* TODO: handle logout */
-        }}
+        onClick={handleLogout}
       >
         <LogOut size={20} /> <span>Logout</span>
       </div>

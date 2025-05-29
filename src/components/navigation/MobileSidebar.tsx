@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Sheet, SheetContent, SheetTitle } from '../ui/sheet';
-import { User, LogOut, Gift, Users } from '@/components/shared/icons';
+import { User, LogOut, Gift, Users } from '@/components/shared/Icons';
 import { ThemeToggle } from './ThemeToggle';
 import { Separator } from '../ui/separator';
-import { UserAvatar } from '@/components/shared/user-avatar/UserAvatar';
+import { UserAvatar } from '@/components/shared';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';

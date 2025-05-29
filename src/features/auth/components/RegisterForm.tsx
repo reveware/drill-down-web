@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useMemo, useState } from 'react';
-import { Eye, EyeOff, Upload, User } from '@/components/shared/icons';
+import { Eye, EyeOff, Upload, User } from '@/components/shared/Icons';
 import Link from 'next/link';
 import { RegisterFormSchema, RegisterDto } from '@/types/auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
