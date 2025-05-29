@@ -6,7 +6,7 @@ import { AstroWelcome } from '@/assets/images';
 export const useAvatarUpload = (setValue: UseFormSetValue<RegisterDto>) => {
   const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
-  const [preview, setPreview] = useState<string | null>(AstroWelcome.src);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

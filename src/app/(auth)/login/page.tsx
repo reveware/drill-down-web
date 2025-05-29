@@ -1,68 +1,41 @@
 'use client';
-
-import { Button } from '@/components/shared/button/Button';
+import { redirect } from 'next/navigation';
+import { LoginForm } from '@/features/auth/components/LoginForm';
+import { LoginDto } from '@/types/auth';
+import { toast } from 'sonner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-
-import { useAuth } from '@/lib/auth/auth-context';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useAuth } from '@/providers/auth-provider';
+import { useLogin } from '@/features/auth/hooks/useLogin';
 
 export default function LoginPage() {
-  const { isAuthenticated, logout } = useAuth();
-  const router = useRouter();
+  const { isAuthenticated } = useAuth();
+  const { mutate: login } = useLogin();
 
-  // If user is already authenticated, show logout option
-  useEffect(() => {
-    // Don't redirect automatically - let them choose to logout
-  }, [isAuthenticated]);
-
-  const handleLogout = () => {
-    logout();
-    // After logout, they'll stay on this page to login again
-  };
-
-  const handleGoToHome = () => {
-    router.push('/home');
+  const handleLogin = async (data: LoginDto) => {
+    console.log('Login attempt:', data);
+    login(data);
   };
 
   if (isAuthenticated) {
-    return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader className="text-center">
-          <CardTitle>Already Logged In</CardTitle>
-          <CardDescription>
-            You are currently logged in. You can go to the app or logout to login with a different
-            account.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Button onClick={handleGoToHome} className="w-full" variant="primary">
-            Go to App
-          </Button>
-          <Button onClick={handleLogout} className="w-full" variant="outline">
-            Logout
-          </Button>
-        </CardContent>
-      </Card>
-    );
+    redirect('/home');
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader className="text-center">
-        <CardTitle>Welcome Back</CardTitle>
-        <CardDescription>Please login to access your account</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <p className="text-sm text-muted-foreground text-center">
-            Login form will be implemented next...
-          </p>
-          <Button className="w-full" disabled>
-            Login (Coming Soon)
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col items-center justify-evenly min-h-screen p-4">
+      <h1 className="text-primary text-6xl font-bold font-title">
+        Drill Down
+        {`${process.env.NEXT_PUBLIC_USE_MOCKS}`}
+      </h1>
+
+      <Card className="w-full max-w-md mx-auto card shadow-none p-6">
+        <CardHeader className="text-center">
+          <CardTitle className="font-title text-2xl font-bold">Welcome Back</CardTitle>
+          <CardDescription className="text-sm text-accent">Sign in to your account</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LoginForm onSubmit={handleLogin} isLoading={false} />
+        </CardContent>
+      </Card>
+    </div>
   );
 }

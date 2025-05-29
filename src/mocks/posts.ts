@@ -33,7 +33,6 @@ export const quotePost = (id: number): PostOverview => ({
   },
 });
 
-// Generate posts with optional type filtering
 export const generatePosts = (length: number, type?: PostTypes): PostOverview[] => {
   const posts: PostOverview[] = [];
 
@@ -61,10 +60,9 @@ export const generatePosts = (length: number, type?: PostTypes): PostOverview[] 
   return posts;
 };
 
-// Default mixed posts for general use
 const mockPosts: PostOverview[] = generatePosts(20);
 
-export async function fetchMockPosts(
+export async function mockFetchPosts(
   page: number,
   pageSize: number,
   type?: PostTypes
@@ -73,7 +71,6 @@ export async function fetchMockPosts(
 
   let postsToUse = mockPosts;
 
-  // Filter by type if specified
   if (type) {
     postsToUse = mockPosts.filter((post) => post.type === type);
   }
@@ -81,7 +78,6 @@ export async function fetchMockPosts(
   const start = page * pageSize;
   const end = start + pageSize;
 
-  // If we need more posts than we have, cycle through them
   if (start >= postsToUse.length) {
     const cycleStart = start % postsToUse.length;
     const cycleEnd = Math.min(cycleStart + pageSize, postsToUse.length);

@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { TokenManager } from './token-manager';
+import { TokenManager } from '@/lib/auth/token-manager';
 import { AuthState, JWTPayload } from '@/types/auth';
 
 interface AuthContextType extends AuthState {

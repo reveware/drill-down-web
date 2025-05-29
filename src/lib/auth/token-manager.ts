@@ -27,6 +27,19 @@ export class TokenManager {
 
   static decodeToken(token: string): JWTPayload | null {
     try {
+      if (process.env.NEXT_PUBLIC_USE_MOCKS === 'true') {
+        return {
+          user: {
+            id: 1234567890,
+            email: 'fake@email.com',
+            role: 'ADMIN',
+            username: 'fake',
+          },
+          iat: Date.now(),
+          exp: Date.now() + 1000 * 60 * 60 * 24,
+        } as JWTPayload;
+      }
+
       return decodeJwt(token) as JWTPayload;
     } catch (error) {
       console.error('Failed to decode token:', error);

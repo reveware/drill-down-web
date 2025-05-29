@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-// TODO: replace toast library
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 const createApiClient = (): AxiosInstance => {
   const client = axios.create({
@@ -13,7 +12,6 @@ const createApiClient = (): AxiosInstance => {
 
   client.interceptors.request.use(
     (config) => {
-      // TODO: Refactor to use cookies
       const token = localStorage.getItem('auth_token');
 
       if (token) {
@@ -39,7 +37,6 @@ const createApiClient = (): AxiosInstance => {
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
 
-        // Clear token and redirect to login
         localStorage.removeItem('auth_token');
 
         toast.error('Session expired. Please login again.');

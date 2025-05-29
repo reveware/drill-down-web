@@ -1,15 +1,19 @@
 'use client';
 
-import { useAuth } from './auth-context';
+import { useAuth } from '@/providers/auth-provider';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface AuthMiddlewareProps {
+interface AuthGuardProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
 }
 
-export const AuthMiddleware = ({ children, fallback }: AuthMiddlewareProps) => {
+/**
+ * AuthGuard component for protecting routes
+ * Following 2025 best practices - components that render UI go in components/
+ */
+export const AuthGuard = ({ children, fallback }: AuthGuardProps) => {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
