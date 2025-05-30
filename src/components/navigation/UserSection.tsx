@@ -4,11 +4,12 @@ import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
-import { useAuth } from '@/providers/auth-provider';
+import { useAuth } from '@/providers/AuthProvider';
 
 interface UserSectionProps {
   user: UserOverview;
 }
+
 export const UserSection = ({ user }: UserSectionProps) => {
   const { logout } = useAuth();
 
@@ -30,7 +31,10 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
       <Separator />
 
-      <Link href="/profile" className="flex items-center gap-2 p-2 rounded-md hover:bg-muted">
+      <Link
+        href={`/user/${user.id}`}
+        className="flex items-center gap-2 p-2 rounded-md hover:bg-muted"
+      >
         <User size={20} /> Profile
       </Link>
       <Link href="/friends" className="flex items-center gap-2 p-2 rounded-md hover:bg-muted">

@@ -1,7 +1,8 @@
+'use client';
+import React, { useState } from 'react';
 import { Command, CommandDialog } from '@/components/ui/command';
 import { Input } from '@/components/shared/Input/Input';
 import { Search as SearchIcon } from '@/components/shared/Icons';
-import React, { useState } from 'react';
 import { Button } from '@/components/shared';
 
 interface MobileSearchCommandProps {

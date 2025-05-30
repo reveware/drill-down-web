@@ -1,8 +1,8 @@
 'use client';
 import { ReactNode } from 'react';
-import { QueryProvider } from './query-provider';
-import { ThemeProvider } from './theme-provider';
-import { AuthProvider } from './auth-provider';
+import { QueryProvider } from './QueryProvider';
+import { ThemeProvider } from './ThemeProvider';
+import { AuthProvider } from './AuthProvider';
 
 interface AppProvidersProps {
   children: ReactNode;

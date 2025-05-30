@@ -1,13 +1,17 @@
+'use client';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { UserOverview } from '@/types/user';
 import { useRouter } from 'next/navigation';
+
 interface UserAvatarProps {
   user: UserOverview;
 }
+
 export const UserAvatar: React.FC<UserAvatarProps> = ({ user }) => {
   const router = useRouter();
+
   return (
-    <Avatar className="cursor-pointer" onClick={() => router.push(`/profile/${user.id}`)}>
+    <Avatar className="cursor-pointer" onClick={() => router.push(`/user/${user.id}`)}>
       <AvatarImage src={user.avatar} alt={user.username} />
       <AvatarFallback className="bg-primary">{`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`}</AvatarFallback>
     </Avatar>

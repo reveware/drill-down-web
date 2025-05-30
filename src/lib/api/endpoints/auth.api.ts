@@ -1,7 +1,7 @@
-import { mockLogin, mockRegister } from '@/mocks/auth';
 import { apiClient } from '../client';
 import { LoginDto, LoginResult, CreateUserDto } from '@/types/auth';
 import { ApiResponse } from '@/types/response';
+import { mockLogin, mockRegister } from '@/mocks/auth';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
@@ -20,9 +20,5 @@ export const authApi = {
       return mockRegister(user);
     }
     return (await apiClient.post<ApiResponse<LoginResult>>('/auth/register', user)).data;
-  },
-
-  getMe: async (): Promise<ApiResponse<any>> => {
-    return (await apiClient.get<ApiResponse<any>>('/auth/me')).data;
   },
 };

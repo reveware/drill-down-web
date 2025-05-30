@@ -1,18 +1,24 @@
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
+import { z } from 'zod';
 
-export interface UserOverview {
-  id: number;
-  username: string;
-  email: string;
-  avatar: string;
-  first_name: string;
-  last_name: string;
-  date_of_birth: string;
-  tagline: string | null;
-  role: UserRole;
-  created_at: string;
-  updated_at: string;
-}
+export const UserRole = z.enum(['ADMIN', 'USER']);
+
+export const UserOverviewSchema = z.object({
+  id: z.number().int(),
+  username: z.string(),
+  email: z.string().email(),
+  avatar: z.string().url(),
+  first_name: z.string(),
+  last_name: z.string(),
+  date_of_birth: z.string(),
+  tagline: z.string().nullable(),
+  role: UserRole,
+
+  is_self: z.boolean(),
+  is_following: z.boolean(),
+  is_followed_by: z.boolean(),
+
+  created_at: z.string(),
+  updated_at: z.string(),
+});
+
+export type UserOverview = z.infer<typeof UserOverviewSchema>;

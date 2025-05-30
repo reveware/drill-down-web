@@ -1,19 +1,18 @@
-// features/posts/RecommendedPhotoPosts.tsx
 'use client';
 
 import Image from 'next/image';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { PhotoPost } from '@/types/post';
 
-interface Props {
-  posts: PhotoPost[];
-}
+import { useRecommendedPhotoPosts } from '../../hooks/useRecommendedPhotoPosts';
 
-export const RecommendedPhotoPosts: React.FC<Props> = ({ posts }) => {
+export const RecommendedPhotoPosts: React.FC = () => {
   const title = 'Recommended Photos';
   const isMobile = useMediaQuery('mobile'); // < 768 px
-  const visiblePosts = posts.slice(0, isMobile ? 4 : 12);
+
+  const { data: recommendedPhotoPosts = [] } = useRecommendedPhotoPosts();
+
+  const visiblePosts = recommendedPhotoPosts.slice(0, isMobile ? 4 : 12);
 
   if (visiblePosts.length === 0) {
     return <EmptyState title={title} />;

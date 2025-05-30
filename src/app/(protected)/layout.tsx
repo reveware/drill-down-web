@@ -1,5 +1,6 @@
 'use client';
-import { AuthGuard } from '@/components/auth/auth-guard';
+
+import { AuthGuard } from '@/components/auth/AuthGuard';
 import { DesktopSidePanel } from '@/components/navigation/DesktopSidePanel';
 import { MobileTopbar } from '@/components/navigation/MobileTopbar';
 import { mockUser } from '@/mocks/user';

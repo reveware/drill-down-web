@@ -1,23 +1,15 @@
 'use client';
 
-import { Delorean } from '@/assets/images';
-import { RegisterForm } from '@/features/auth/components/RegisterForm';
-import { RegisterDto } from '@/types/auth';
-import { useState } from 'react';
-import Image from 'next/image';
-import { toast } from 'sonner';
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
+import { RegisterForm, useRegister } from '@/features/auth';
+import Image from 'next/image';
+import { Delorean } from '@/assets/images';
 
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleRegister = (data: RegisterDto) => {
-    console.log(data);
-    toast('handleRegister', { description: JSON.stringify(data) });
-  };
+  const { mutate: register, isPending } = useRegister();
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <main className="flex items-center justify-center min-h-screen p-4">
       <div className="flex flex-col md:flex-row rounded-xl overflow-hidden shadow-lg w-full h-full neon-border md:max-w-5xl">
         <div className="relative w-full md:w-1/2 hidden md:block">
           <Image src={Delorean} alt="Delorean" fill className="object-cover" priority />
@@ -32,11 +24,11 @@ export default function RegisterPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <RegisterForm onSubmit={handleRegister} isLoading={isLoading} />
+              <RegisterForm onSubmit={register} isLoading={isPending} />
             </CardContent>
           </Card>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

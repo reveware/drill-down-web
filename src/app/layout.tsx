@@ -2,7 +2,7 @@
 import React from 'react';
 import '../styles/globals.css';
 import { Orbitron, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
-import { AppProviders } from '@/providers/app-providers';
+import { AppProviders } from '@/providers/AppProviders';
 import { Toaster } from '@/components/ui/sonner';
 
 const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans' });

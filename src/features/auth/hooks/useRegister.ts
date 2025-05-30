@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { authApi } from '@/lib/api/endpoints/auth';
+import { authApi } from '@/lib/api/endpoints/auth.api';
 import { RegisterDto, CreateUserDto } from '@/types/auth';
 import { toast } from 'sonner';
 

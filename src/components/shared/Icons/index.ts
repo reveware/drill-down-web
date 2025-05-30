@@ -15,4 +15,9 @@ export {
   Upload,
   ChevronDown,
   ChevronUp,
+  Edit,
+  Settings,
+  UserMinus,
+  UserPlus,
+  Camera,
 } from 'lucide-react';

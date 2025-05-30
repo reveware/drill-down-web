@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';

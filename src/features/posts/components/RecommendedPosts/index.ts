@@ -1,2 +1,2 @@
 export { RecommendedPhotoPosts } from './RecommendedPhotoPosts';
-export { useRecommendedPhotoPosts } from './useRecommendedPhotoPosts';
+export { useRecommendedPhotoPosts } from '../../hooks/useRecommendedPhotoPosts';

@@ -2,7 +2,7 @@ import React from 'react';
 import type { Preview } from '@storybook/react';
 import '../src/styles/globals.css';
 import { withThemeByClassName } from '@storybook/addon-themes';
-import { QueryProvider } from '../src/providers/query-provider';
+import { QueryProvider } from '../src/providers/QueryProvider';
 
 const parameters = {
   layout: 'padded',
