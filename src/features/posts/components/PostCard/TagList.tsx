@@ -1,4 +1,3 @@
-'use client';
 import * as React from 'react';
 import { ChevronDown, ChevronUp } from '@/components/shared/Icons';
 

@@ -1,3 +1,4 @@
+'use client';
 import { User, Users, Gift, LogOut } from '../shared/Icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';

@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 
 import { Menu } from '@/components/shared/Icons';

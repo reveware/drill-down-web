@@ -1,4 +1,3 @@
-'use client';
 import * as React from 'react';
 import { UserOverview } from '@/types/user';
 import { Brand } from '../shared/Brand/Brand';

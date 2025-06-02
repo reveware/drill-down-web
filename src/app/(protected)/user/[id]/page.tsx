@@ -1,5 +1,3 @@
-'use client';
-
 import { useParams } from 'next/navigation';
 import { ProfileHeader, ProfileStats, ProfileContent, useUserProfile } from '@/features/user';
 import { Spinner } from '@/components/shared';

@@ -1,5 +1,3 @@
-'use client';
-
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { RegisterForm, useRegister } from '@/features/auth';
 import Image from 'next/image';

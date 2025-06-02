@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { useMediaQuery } from '@/hooks/useMediaQuery';

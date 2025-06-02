@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { TimeBomb } from '@/types/time-bombs';
 import { Card } from '@/components/ui/card';

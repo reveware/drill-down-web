@@ -1,5 +1,3 @@
-'use client';
-
 import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
 import { RecommendedPhotoPosts } from '@/features/posts/components/RecommendedPosts';
 import { UpcomingTimebomb } from '@/features/timebombs/components/UpcomingTimebomb/UpcomingTimebomb';
