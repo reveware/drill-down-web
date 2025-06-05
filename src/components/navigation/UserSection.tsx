@@ -20,13 +20,7 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <div className="flex items-center gap-2">
-        <UserAvatar user={user} />
-        <div className="flex flex-col">
-          <span className="text-md font-semibold">{user.username}</span>
-          <span className="text-sm text-accent">{`${user.first_name} ${user.last_name}`}</span>
-        </div>
-      </div>
+      <UserAvatar user={user} accent />
 
       <ThemeToggle />
 

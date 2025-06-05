@@ -13,7 +13,7 @@ interface MobileSidebarProps {
 export const MobileSidebar: React.FC<MobileSidebarProps> = ({ user, open, onOpenChange }) => {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent side="right" className="flex flex-col gap-4 p-4 w-64">
+      <SheetContent side="right" className="flex flex-col gap-4 w-64">
         <VisuallyHidden>
           <SheetTitle>User Menu</SheetTitle>
         </VisuallyHidden>

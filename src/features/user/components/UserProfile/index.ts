@@ -1,3 +1,3 @@
 export * from './ProfileContent';
-export * from './ProfileHeader';
+export * from './ProfileOverview';
 export * from './ProfileStats';

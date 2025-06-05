@@ -1,23 +1,21 @@
 'use client';
-import React, { useRef } from 'react';
+import React from 'react';
 import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
-import { useFeedPosts } from '../../hooks/useFeedPosts';
-import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { PostOverview } from '@/types/post';
-
-export const PostFeed: React.FC = () => {
-  const loaderRef = useRef<HTMLDivElement | null>(null);
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useFeedPosts();
-
-  useInfiniteScrollObserver({
-    ref: loaderRef,
-    onLoadMore: fetchNextPage,
-    enabled: !!hasNextPage,
-  });
-
-  const posts: PostOverview[] = data?.pages.flat() ?? [];
+interface PostFeedProps {
+  posts: PostOverview[];
+  isLoading: boolean;
+  loaderRef: React.RefObject<HTMLDivElement | null>;
+  isFetchingNextPage: boolean;
+}
+export const PostFeed: React.FC<PostFeedProps> = ({
+  posts,
+  isLoading,
+  loaderRef,
+  isFetchingNextPage,
+}) => {
+  console.log('posts', posts);
 
   return (
     <div className="w-full flex flex-col items-center gap-6 p-4">
@@ -25,11 +23,9 @@ export const PostFeed: React.FC = () => {
 
       {!isLoading && posts.map((post) => <PostCard key={post.id} post={post} />)}
 
-      {hasNextPage && (
-        <div ref={loaderRef} className="w-full flex justify-center">
-          {isFetchingNextPage && <PostCardSkeleton />}
-        </div>
-      )}
+      <div ref={loaderRef} className="w-full flex justify-center">
+        {isFetchingNextPage && <PostCardSkeleton />}
+      </div>
     </div>
   );
 };

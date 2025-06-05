@@ -6,7 +6,8 @@ const PAGE_SIZE = 5;
 export const useFeedPosts = () => {
   return useInfiniteQuery<PostOverview[]>({
     queryKey: ['posts'],
-    queryFn: ({ pageParam = 0 }) => postApi.getFeed(pageParam as number, PAGE_SIZE),
+    queryFn: async ({ pageParam = 0 }) =>
+      await postApi.getFeedPosts(pageParam as number, PAGE_SIZE),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length === PAGE_SIZE ? allPages.length : undefined,

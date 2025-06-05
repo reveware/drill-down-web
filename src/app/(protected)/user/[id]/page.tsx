@@ -1,5 +1,6 @@
+'use client';
 import { useParams } from 'next/navigation';
-import { ProfileHeader, ProfileStats, ProfileContent, useUserProfile } from '@/features/user';
+import { ProfileOverview, ProfileStats, ProfileContent, useUserProfile } from '@/features/user';
 import { Spinner } from '@/components/shared';
 
 export default function UserProfilePage() {
@@ -15,11 +16,39 @@ export default function UserProfilePage() {
     return <div>User not found</div>;
   }
 
+  const canViewFullProfile =
+    user.is_self || !user.is_private || (user.is_private && user.is_following);
+
+  if (!canViewFullProfile) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh] p-6">
+        <div className="w-full max-w-2xl">
+          <ProfileOverview user={user} />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col gap-6 h-full p-6 w-full mx-auto border-1 border-red-500">
-      <ProfileHeader user={user} />
-      <ProfileStats user={user} />
-      <ProfileContent user={user} />
+    <div className="p-6 flex items-center justify-center mx-auto">
+      {/* Mobile: Single column layout */}
+      <div className="flex flex-col gap-6 md:hidden">
+        <ProfileOverview user={user} />
+        <ProfileStats user={user} />
+        <ProfileContent user={user} />
+      </div>
+
+      {/* Desktop: Two column layout */}
+      <div className="hidden md:flex justify-center gap-6">
+        {/* Left column: ProfileOverview and ProfileStats */}
+        <div className="flex flex-col gap-4">
+          <ProfileOverview user={user} />
+          <ProfileStats user={user} />
+        </div>
+        <div>
+          <ProfileContent user={user} />
+        </div>
+      </div>
     </div>
   );
 }

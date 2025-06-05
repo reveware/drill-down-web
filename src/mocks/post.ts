@@ -1,6 +1,6 @@
+import { mockUser } from './user';
 import { sleep } from '@/lib/utils';
 import { PostOverview, PostTypes } from '@/types/post';
-import { mockUser } from './user';
 
 export const photoPost = (id: number, seed?: number): PostOverview => ({
   id,

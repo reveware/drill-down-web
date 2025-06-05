@@ -1,43 +1,35 @@
-import { UserOverview } from '@/types/user';
+import { UserDetail, UserOverview } from '@/types/user';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
-import { FriendsList } from '../FriendsList';
-import { ActivityFeed } from '../ActivityFeed';
+import { FollowersTab } from './ContentTabs/FollowersTab';
+import { LikesTab } from './ContentTabs/LikesTab';
+import { PostsTab } from './ContentTabs/PostsTab';
 
 interface ProfileContentProps {
-  user: UserOverview;
-  isOwnProfile?: boolean;
+  user: UserDetail;
 }
 
-export const ProfileContent = ({ user, isOwnProfile = false }: ProfileContentProps) => {
+export const ProfileContent = ({ user }: ProfileContentProps) => {
   return (
-    <Card className="card flex-1">
-      <CardContent className="p-6">
-        <Tabs defaultValue="posts" className="w-full">
-          <TabsList className="grid grid-cols-3 w-full mb-6">
+    <Card className="w-full card min-w-lg h-full">
+      <CardContent>
+        <Tabs defaultValue="posts" className="w-full ">
+          <TabsList className="grid grid-cols-3 w-full mb-4">
             <TabsTrigger value="posts">Posts</TabsTrigger>
-            <TabsTrigger value="friends">Friends</TabsTrigger>
-            <TabsTrigger value="activity">Activity</TabsTrigger>
+            <TabsTrigger value="followers">Followers</TabsTrigger>
+            <TabsTrigger value="likes">Likes</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="posts" className="space-y-4">
-            <div className="text-lg font-semibold mb-4">
-              {isOwnProfile ? 'My Posts' : `${user.first_name}'s Posts`}
-            </div>
-            <div className="max-h-[600px] overflow-y-auto">
-              <PostFeed />
-            </div>
+          <TabsContent value="posts" className="bg-primary/5 rounded-lg h-full">
+            <PostsTab user={user} />
           </TabsContent>
 
-          <TabsContent value="friends" className="space-y-4">
-            <div className="text-lg font-semibold mb-4">Friends</div>
-            <FriendsList user={user} isOwnProfile={isOwnProfile} />
+          <TabsContent value="followers" className="bg-primary/5 rounded-lg h-full">
+            <FollowersTab user={user} />
           </TabsContent>
 
-          <TabsContent value="activity" className="space-y-4">
-            <div className="text-lg font-semibold mb-4">Recent Activity</div>
-            <ActivityFeed user={user} isOwnProfile={isOwnProfile} />
+          <TabsContent value="likes" className="bg-primary/5 rounded-lg h-full">
+            <LikesTab user={user} />
           </TabsContent>
         </Tabs>
       </CardContent>

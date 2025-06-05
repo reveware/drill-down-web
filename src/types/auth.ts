@@ -53,7 +53,7 @@ export interface JWTPayload {
   user: {
     id: number;
     username: string;
-    role: UserRole;
+    role: typeof UserRole.enum;
   };
   iat: number;
   exp: number;

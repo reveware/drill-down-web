@@ -13,12 +13,25 @@ export const UserOverviewSchema = z.object({
   tagline: z.string().nullable(),
   role: UserRole,
 
+  is_private: z.boolean(),
   is_self: z.boolean(),
   is_following: z.boolean(),
   is_followed_by: z.boolean(),
 
+  last_seen: z.string(),
   created_at: z.string(),
   updated_at: z.string(),
 });
 
 export type UserOverview = z.infer<typeof UserOverviewSchema>;
+
+export const UserDetailSchema = UserOverviewSchema.extend({
+  posts_count: z.number(),
+  likes_count: z.number(),
+  followers_count: z.number(),
+  following_count: z.number(),
+  created_time_bombs: z.number(),
+  received_time_bombs: z.number().nullable(),
+});
+
+export type UserDetail = z.infer<typeof UserDetailSchema>;

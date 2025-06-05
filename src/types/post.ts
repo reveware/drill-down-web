@@ -33,3 +33,11 @@ export interface QuotePostContent {
 }
 
 export type PhotoPost = PostOverview & { type: PostTypes.PHOTO };
+
+export type PostSearchParams = {
+  id?: number;
+  tags?: string[];
+  author?: string;
+  created_before?: string;
+  created_after?: string;
+};

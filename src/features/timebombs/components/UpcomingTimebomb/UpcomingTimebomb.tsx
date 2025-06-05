@@ -39,13 +39,7 @@ const EmptyState: React.FC = () => (
 );
 
 const Header: React.FC<{ user: TimeBomb['author'] }> = ({ user }) => (
-  <div className="flex items-center gap-3">
-    <UserAvatar user={user} />
-    <div>
-      <div className="font-semibold text-lg text-foreground">{user.username}</div>
-      <div className="text-xs text-muted-foreground">Sent you a Timebomb!</div>
-    </div>
-  </div>
+  <UserAvatar user={user} subtitle="Sent you a Timebomb!" />
 );
 
 const Countdown: React.FC<{ time: string }> = ({ time }) => (
