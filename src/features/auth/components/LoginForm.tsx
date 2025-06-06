@@ -43,11 +43,11 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-light text-muted text-xs">Email</FormLabel>
+              <FormLabel className="text-muted text-xs font-light">Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormMessage className="font-light text-xs min-h-[1rem]" />
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
           )}
         />
@@ -58,7 +58,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-light text-muted text-xs">Password</FormLabel>
+              <FormLabel className="text-muted text-xs font-light">Password</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input
@@ -71,14 +71,14 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                     type="button"
                     variant="accent"
                     size="sm"
-                    className="absolute right-0 top-0 h-full px-3 py-2 bg-zinc-300"
+                    className="absolute top-0 right-0 h-full bg-zinc-300 px-3 py-2"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
               </FormControl>
-              <FormMessage className="font-light text-xs min-h-[1rem]" />
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
           )}
         />
@@ -94,8 +94,8 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
         </Button>
 
         {/* Register Link */}
-        <div className="text-center text-sm mt-4">
-          <span className="text-muted">Don't have an account? </span>
+        <div className="mt-4 text-center text-sm">
+          <span className="text-muted">{`Don't have an account?`} </span>
           <span className="text-info font-medium">
             <Link href="/register">Sign up</Link>
           </span>

@@ -24,13 +24,10 @@ export const useRegister = () => {
 
       return authApi.register(createUserData);
     },
-    onSuccess: (response) => {
+    onSuccess: () => {
       toast.success('Account created successfully!');
 
       router.push('/login');
-    },
-    onError: (error: any) => {
-      toast.error(error.response?.data?.message || 'Registration failed');
     },
   });
 };

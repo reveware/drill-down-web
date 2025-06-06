@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+@tailwind utilities;
+
+@import './animation.css';
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -23,7 +27,7 @@
   --color-accent: #e620a6;
   --color-on-accent: #ffffff;
   --color-surface: #ffffff;
-  --color-background: #fdfdfc;
+  --color-background: #ffffff;
   --color-foreground: #171717;
 
   --color-border: #b6b6b6;
@@ -64,6 +68,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
+
 html {
   color-scheme: light;
 }
@@ -84,7 +89,6 @@ html.dark {
   --color-warning: #f5ae48;
   --color-danger: #ff0015;
   --color-border: #e5e7eb;
-
   color-scheme: dark;
 }
 
@@ -110,40 +114,15 @@ a {
     0 0 30px #f472b6;
 }
 
-@keyframes neon-pulse {
-  0% {
-    box-shadow:
-      0 0 1px #ec4899,
-      0 0 4px #f472b6;
-  }
-  25% {
-    box-shadow:
-      0 0 2px #8b5cf6,
-      0 0 6px #c084fc;
-  }
-  50% {
-    box-shadow:
-      0 0 1px #22d3ee,
-      0 0 4px #67e8f9;
-  }
-  75% {
-    box-shadow:
-      0 0 2px #facc15,
-      0 0 6px #fde047;
-  }
-  100% {
-    box-shadow:
-      0 0 1px #ec4899,
-      0 0 4px #f472b6;
-  }
-}
-
 .neon-border {
   @apply rounded-xl border border-transparent transition-all;
   animation: neon-pulse 4s infinite ease-in-out;
 }
 
 .card {
-  @apply bg-surface text-foreground border border-none shadow-lg rounded-xl w-full max-w-lg;
-  animation: neon-pulse 4s infinite ease-in-out;
+  @apply bg-surface text-foreground w-full rounded-xl border border-none shadow-lg;
+}
+
+.photo {
+  @apply transition-transform duration-200 hover:scale-105 hover:opacity-80;
 }

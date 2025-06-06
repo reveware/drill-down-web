@@ -5,8 +5,10 @@ export const useCountdown = (target: string | undefined | null): number => {
   const [remaining, setRemaining] = useState(0);
 
   useEffect(() => {
-    if (!target) return;
-
+    if (!target) {
+      return;
+    }
+    console.log('target', target);
     const unlockTime = new Date(target).getTime();
     const update = () => setRemaining(Math.max(0, unlockTime - Date.now()));
     update();

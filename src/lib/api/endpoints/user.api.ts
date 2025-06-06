@@ -1,8 +1,8 @@
 import { apiClient } from '../client';
 import { ApiResponse } from '@/types/response';
-import { UserDetail, UserOverview } from '@/types/user';
+import { TagCount, UserDetail, UserOverview } from '@/types/user';
 import { Like } from '@/types/like';
-import { mockFetchFollowers, mockFetchUser } from '@/mocks/user';
+import { mockFetchFollowers, mockFetchTags, mockFetchUser } from '@/mocks/user';
 import { mockFetchLikes } from '@/mocks/like';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
@@ -39,5 +39,12 @@ export const userApi = {
         params: { page, pageSize },
       })
     ).data.data;
+  },
+
+  getUserTags: async (userId: number): Promise<TagCount[]> => {
+    if (useMocks) {
+      return mockFetchTags(userId);
+    }
+    return (await apiClient.get<ApiResponse<TagCount[]>>(`/users/${userId}/tags`)).data.data;
   },
 };

@@ -49,6 +49,8 @@ export type CreateUserDto = z.infer<typeof CreateUserDto>;
 export type LoginDto = z.infer<typeof LoginFormSchema>;
 export type LoginResult = z.infer<typeof LoginResultSchema>;
 
+export type RegisterResult = object; // TODO: Replace with actual type
+
 export interface JWTPayload {
   user: {
     id: number;

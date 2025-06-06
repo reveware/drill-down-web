@@ -35,7 +35,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
 
   useEffect(() => {
     form.trigger('avatar');
-  }, []);
+  }, [form]);
 
   const { preview, handleChange } = useAvatarUpload(form.setValue);
   const firstName = form.watch('first_name');
@@ -55,19 +55,19 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           render={({ field }) => (
             <FormItem className="flex flex-col items-center space-y-4">
               <div className="relative">
-                <Label htmlFor="avatar" className="cursor-pointer block">
-                  <Avatar className="w-32 h-32">
+                <Label htmlFor="avatar" className="block cursor-pointer">
+                  <Avatar className="h-32 w-32">
                     <AvatarImage src={preview || undefined} className="object-cover" />
-                    <AvatarFallback className="text-lg bg-secondary text-on-primary">
-                      {preview ? null : initials || <User className="w-10 h-10" />}
+                    <AvatarFallback className="bg-secondary text-on-primary text-lg">
+                      {preview ? null : initials || <User className="h-10 w-10" />}
                     </AvatarFallback>
                   </Avatar>
                 </Label>
                 <Label
                   htmlFor="avatar"
-                  className="absolute bottom-0 right-0 bg-primary text-primary-foreground rounded-full p-2 cursor-pointer hover:bg-primary/90 transition-colors"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full p-2 transition-colors"
                 >
-                  <Upload className="w-4 h-4" />
+                  <Upload className="h-4 w-4" />
                 </Label>
               </div>
               <div className="space-y-2 text-center">
@@ -87,7 +87,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 {form.formState.errors.avatar?.message && (
                   <Label
                     htmlFor="avatar"
-                    className="text-xs font-light text-muted cursor-pointer hover:text-foreground"
+                    className="text-muted hover:text-foreground cursor-pointer text-xs font-light"
                   >
                     Click to upload avatar
                   </Label>
@@ -103,11 +103,11 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-light text-muted text-xs">Username</FormLabel>
+              <FormLabel className="text-muted text-xs font-light">Username</FormLabel>
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
-              <FormMessage className="font-light text-xs min-h-[1rem]" />
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
           )}
         />
@@ -119,11 +119,11 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="first_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-light text-muted text-xs">First Name</FormLabel>
+                <FormLabel className="text-muted text-xs font-light">First Name</FormLabel>
                 <FormControl>
                   <Input placeholder="John" {...field} />
                 </FormControl>
-                <FormMessage className="font-light text-xs min-h-[1rem]" />
+                <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>
             )}
           />
@@ -132,11 +132,11 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="last_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-light text-muted text-xs">Last Name</FormLabel>
+                <FormLabel className="text-muted text-xs font-light">Last Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Doe" {...field} />
                 </FormControl>
-                <FormMessage className="font-light text-xs min-h-[1rem]" />
+                <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>
             )}
           />
@@ -148,23 +148,23 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-light text-muted text-xs">Email</FormLabel>
+              <FormLabel className="text-muted text-xs font-light">Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormMessage className="font-light text-xs min-h-[1rem]" />
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
           )}
         />
 
         {/* Password & Confirm Password */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-light text-muted text-xs">Password</FormLabel>
+                <FormLabel className="text-muted text-xs font-light">Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -177,14 +177,14 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                       type="button"
                       variant="accent"
                       size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 bg-zinc-300"
+                      className="absolute top-0 right-0 h-full bg-zinc-300 px-3 py-2"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </Button>
                   </div>
                 </FormControl>
-                <FormMessage className="font-light text-xs min-h-[1rem]" />
+                <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>
             )}
           />
@@ -194,7 +194,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-light text-muted text-xs">Confirm Password</FormLabel>
+                <FormLabel className="text-muted text-xs font-light">Confirm Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -207,7 +207,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                       type="button"
                       variant="accent"
                       size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 bg-zinc-300"
+                      className="absolute top-0 right-0 h-full bg-zinc-300 px-3 py-2"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? (
@@ -218,24 +218,24 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     </Button>
                   </div>
                 </FormControl>
-                <FormMessage className="font-light text-xs min-h-[1rem]" />
+                <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>
             )}
           />
         </div>
 
         {/* Date of Birth & Tagline */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
             name="date_of_birth"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-light text-muted text-xs">Date of Birth</FormLabel>
+                <FormLabel className="text-muted text-xs font-light">Date of Birth</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
-                <FormMessage className="font-light text-xs min-h-[1rem]" />
+                <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>
             )}
           />
@@ -244,11 +244,11 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="tagline"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-light text-muted text-xs">Tagline (Optional)</FormLabel>
+                <FormLabel className="text-muted text-xs font-light">Tagline (Optional)</FormLabel>
                 <FormControl>
                   <Input placeholder="Slow down..." {...field} />
                 </FormControl>
-                <FormMessage className="font-light text-xs min-h-[1rem]" />
+                <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>
             )}
           />
@@ -265,7 +265,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
         </Button>
 
         {/* Login Link */}
-        <div className="text-center text-sm mt-4">
+        <div className="mt-4 text-center text-sm">
           <span className="text-muted">Already have an account? </span>
           <span className="text-info font-medium">
             <Link href="/login">Sign in</Link>

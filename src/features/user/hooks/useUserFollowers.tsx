@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { userApi } from '@/lib/api/endpoints/user.api';
 import { UserOverview } from '@/types/user';
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 25;
 
 export const useUserFollowers = (userId: number) => {
   return useInfiniteQuery<UserOverview[]>({

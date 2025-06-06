@@ -1,7 +1,6 @@
 import { RegisterDto } from '@/types/auth';
 import { useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
-import { AstroWelcome } from '@/assets/images';
 
 export const useAvatarUpload = (setValue: UseFormSetValue<RegisterDto>) => {
   const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];

@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { TimeBomb } from '@/types/time-bombs';
-import { Card } from '@/components/ui/card';
-import { UserAvatar, Button } from '@/components/shared/';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { UserAvatar } from '@/components/shared/';
 import { formatDistanceToNow } from 'date-fns';
 import { Timebomb } from '@/assets/images';
 import Image from 'next/image';
@@ -17,46 +17,46 @@ export const UpcomingTimebomb: React.FC<Props> = ({ timebomb }) => {
   const remaining = useCountdown(timebomb?.unlocks_at);
   const formatted = formatCountdownPadded(remaining);
 
-  if (!timebomb) {
-    return <EmptyState />;
-  }
-
   return (
-    <Card className="card p-6 space-y-4">
-      <Header user={timebomb.author} />
-      <Countdown time={formatted} />
-      <Footer unlocksAt={timebomb.unlocks_at} />
+    <Card className="card max-w-lg">
+      <CardHeader>
+        <CardTitle className="font-title text-lg font-semibold">Upcoming Timebomb</CardTitle>
+      </CardHeader>
+
+      <CardContent className="flex h-full flex-col gap-4 px-4">
+        {!timebomb && <EmptyState />}
+        {timebomb && (
+          <>
+            <UserAvatar user={timebomb.author} subtitle="Sent you a Timebomb!" />
+            <Countdown time={formatted} />
+            <Footer unlocksAt={timebomb.unlocks_at} />
+          </>
+        )}
+      </CardContent>
     </Card>
   );
 };
 
 const EmptyState: React.FC = () => (
-  <Card className="card p-6 flex flex-col items-center justify-center text-center space-y-4">
-    <div className="font-title text-lg font-semibold text-foreground">No upcoming Timebombs</div>
+  <div className="flex h-full flex-col items-center justify-evenly gap-4 text-center">
+    <div className="text-foreground text-lg">No upcoming Timebombs</div>
     <Image src={Timebomb} alt="No Timebomb" className="h-64 object-cover" />
-    <div className="text-sm text-muted-foreground">Check back later for surprises!</div>
-  </Card>
-);
-
-const Header: React.FC<{ user: TimeBomb['author'] }> = ({ user }) => (
-  <UserAvatar user={user} subtitle="Sent you a Timebomb!" />
+    <div className="text-muted-foreground text-sm">Check back later for surprises!</div>
+  </div>
 );
 
 const Countdown: React.FC<{ time: string }> = ({ time }) => (
-  <div className="relative h-32 rounded-md overflow-hidden bg-primary">
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="text-5xl font-title font-bold tracking-widest neon-text">{time}</div>
+  <div className="bg-primary flex items-center justify-center rounded-md p-4">
+    <div className="font-title neon-text text-lg font-bold tracking-widest sm:text-2xl md:text-3xl lg:text-5xl">
+      {time}
     </div>
   </div>
 );
 
 const Footer: React.FC<{ unlocksAt: string }> = ({ unlocksAt }) => (
   <div className="flex flex-col items-center justify-center">
-    <div className="text-sm text-muted-foreground mb-4">
+    <div className="text-muted-foreground mb-4 text-sm">
       Unlocks {formatDistanceToNow(new Date(unlocksAt), { addSuffix: true })}
     </div>
-    <Button variant="outline" block>
-      Send timebomb
-    </Button>
   </div>
 );

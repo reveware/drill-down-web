@@ -11,7 +11,7 @@ interface PostCardProps {
 
 export const PostCard = ({ post }: PostCardProps) => {
   return (
-    <Card className="card">
+    <Card className="card w-full">
       <PostCardHeader user={post.author} date={new Date(post.created_at)} />
       <PostCardContent post={post} />
       <PostCardFooter

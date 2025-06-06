@@ -1,5 +1,5 @@
 import { sleep } from '@/lib/utils';
-import { UserDetail, UserOverview, UserRole } from '@/types/user';
+import { TagCount, UserDetail, UserOverview, UserRole } from '@/types/user';
 
 export const mockUser: UserOverview = {
   id: 1,
@@ -121,4 +121,23 @@ export const mockFetchFollowers = async (
     ...friend,
     id: index,
   }));
+};
+
+export const mockFetchTags = async (_: number): Promise<TagCount[]> => {
+  await sleep(3);
+  const tags: TagCount[] = [
+    { tag: 'nostalgia', count: 500 },
+    { tag: 'movies', count: 300 },
+    { tag: 'music', count: 1000 },
+    { tag: 'sexy', count: 400 },
+    { tag: 'quotes', count: 600 },
+    { tag: 'illustration', count: 800 },
+    { tag: 'dogs', count: 200 },
+    { tag: 'cats', count: 200 },
+    { tag: 'food', count: 14 },
+    { tag: 'travel', count: 200 },
+    { tag: 'fashion', count: 200 },
+    { tag: 'art', count: 200 },
+  ];
+  return tags;
 };

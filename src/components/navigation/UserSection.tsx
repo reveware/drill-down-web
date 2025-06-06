@@ -1,5 +1,5 @@
 'use client';
-import { User, Users, Gift, LogOut } from '../shared/Icons';
+import { User, Gift, LogOut } from '../shared/Icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
@@ -28,21 +28,19 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
       <Link
         href={`/user/${user.id}`}
-        className="flex items-center gap-2 p-2 rounded-md hover:bg-muted"
+        className="hover:bg-muted flex items-center gap-2 rounded-md p-2"
       >
         <User size={20} /> Profile
       </Link>
-      <Link href="/friends" className="flex items-center gap-2 p-2 rounded-md hover:bg-muted">
-        <Users size={20} /> Friends
-      </Link>
-      <Link href="/assets" className="flex items-center gap-2 p-2 rounded-md hover:bg-muted">
+
+      <Link href="/assets" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
         <Gift size={20} /> Assets
       </Link>
 
       <Separator />
 
       <div
-        className="flex items-center gap-2 cursor-pointer p-2 rounded-md hover:bg-muted"
+        className="hover:bg-muted flex cursor-pointer items-center gap-2 rounded-md p-2"
         onClick={handleLogout}
       >
         <LogOut size={20} /> <span>Logout</span>

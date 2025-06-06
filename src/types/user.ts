@@ -35,3 +35,10 @@ export const UserDetailSchema = UserOverviewSchema.extend({
 });
 
 export type UserDetail = z.infer<typeof UserDetailSchema>;
+
+export const TagCountSchema = z.object({
+  tag: z.string(),
+  count: z.number(),
+});
+
+export type TagCount = z.infer<typeof TagCountSchema>;

@@ -1,0 +1,53 @@
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neon-pulse {
+  0% {
+    box-shadow:
+      0 0 1px #ec4899,
+      0 0 4px #f472b6;
+  }
+
+  25% {
+    box-shadow:
+      0 0 2px #8b5cf6,
+      0 0 6px #c084fc;
+  }
+
+  50% {
+    box-shadow:
+      0 0 1px #22d3ee,
+      0 0 4px #67e8f9;
+  }
+
+  75% {
+    box-shadow:
+      0 0 2px #facc15,
+      0 0 6px #fde047;
+  }
+
+  100% {
+    box-shadow:
+      0 0 1px #ec4899,
+      0 0 4px #f472b6;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.4s ease-out forwards;
+  }
+
+  .animate-neon-pulse {
+    animation: neon-pulse 1.5s ease-in-out infinite;
+  }
+}

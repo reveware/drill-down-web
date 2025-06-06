@@ -20,7 +20,7 @@ export const PostsTab = ({ user }: { user: UserOverview }) => {
   const posts = data?.pages.flat() ?? [];
 
   return (
-    <div className="space-y-4 max-h-[600px] overflow-y-auto">
+    <div className="flex h-full w-full justify-center overflow-y-auto">
       <PostFeed
         posts={posts}
         isLoading={isLoading}

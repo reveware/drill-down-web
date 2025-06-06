@@ -8,7 +8,7 @@ export const mockTimeBomb: TimeBomb = {
   author: mockUser,
   recipient: mockUser,
   content: null,
-  unlocks_at: new Date(add(new Date(), { days: 1 })).toISOString(),
+  unlocks_at: new Date(add(new Date(), { months: 0, days: 13 })).toISOString(),
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 };

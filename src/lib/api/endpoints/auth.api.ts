@@ -1,5 +1,5 @@
 import { apiClient } from '../client';
-import { LoginDto, LoginResult, CreateUserDto } from '@/types/auth';
+import { LoginDto, LoginResult, CreateUserDto, RegisterResult } from '@/types/auth';
 import { ApiResponse } from '@/types/response';
 import { mockLogin, mockRegister } from '@/mocks/auth';
 
@@ -14,8 +14,7 @@ export const authApi = {
     return (await apiClient.post<ApiResponse<LoginResult>>('/auth', loginAttempt)).data;
   },
 
-  // TODO: change return type to RegisterResult
-  register: async (user: CreateUserDto): Promise<ApiResponse<any>> => {
+  register: async (user: CreateUserDto): Promise<ApiResponse<RegisterResult>> => {
     if (useMocks) {
       return mockRegister(user);
     }

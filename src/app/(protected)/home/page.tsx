@@ -1,7 +1,7 @@
 'use client';
 
 import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
-import { useFeedPosts, RecommendedPhotoPosts } from '@/features/posts';
+import { useFeedPosts, RecommendedPhotos } from '@/features/posts';
 import { UpcomingTimebomb } from '@/features/timebombs/components/UpcomingTimebomb/UpcomingTimebomb';
 import { mockTimeBomb } from '@/mocks/timebomb';
 import { useRef } from 'react';
@@ -19,8 +19,8 @@ export default function HomePage() {
 
   const feedPosts = posts?.pages.flat() ?? [];
   return (
-    <div className="flex flex-col gap-6 h-full lg:grid lg:grid-cols-6 ">
-      <section className="order-2 lg:col-span-3 flex flex-col min-h-0 lg:overflow-y-auto">
+    <div className="flex h-full flex-col gap-6 lg:grid lg:grid-cols-6">
+      <section className="order-2 flex min-h-0 w-full flex-col items-center lg:col-span-3 lg:overflow-y-auto">
         <PostFeed
           posts={feedPosts}
           isLoading={isLoading}
@@ -29,9 +29,9 @@ export default function HomePage() {
         />
       </section>
 
-      <aside className="order-1 lg:order-2 p-4 flex flex-col items-center gap-8 lg:col-span-3 border-l-1 border-border">
-        <RecommendedPhotoPosts />
+      <aside className="border-border order-1 flex flex-col items-center gap-8 border-l-1 p-4 lg:order-2 lg:col-span-3">
         <UpcomingTimebomb timebomb={mockTimeBomb} />
+        <RecommendedPhotos userId={1} />
       </aside>
     </div>
   );

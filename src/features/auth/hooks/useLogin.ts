@@ -18,9 +18,5 @@ export const useLogin = () => {
 
       toast.success('Welcome back!');
     },
-    onError: (error: any) => {
-      // Error is already handled by axios interceptor, but we can add specific handling
-      toast.error(error.response?.data?.message || 'Login failed');
-    },
   });
 };

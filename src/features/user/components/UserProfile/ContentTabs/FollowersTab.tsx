@@ -1,4 +1,3 @@
-import { Spinner } from '@/components/shared';
 import { UserList } from '@/features/user';
 import { useUserFollowers } from '@/features/user/hooks/useUserFollowers';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
@@ -15,25 +14,19 @@ export const FollowersTab = ({ user }: { user: UserOverview }) => {
   useInfiniteScrollObserver({
     ref: loadMoreRef,
     onLoadMore: fetchNextPage,
-    enabled: !!hasNextPage,
+    enabled: !!hasNextPage && !isLoading,
   });
 
   const users = data?.pages.flat() ?? [];
 
   return (
-    <div className="space-y-4 max-h-[600px] overflow-y-auto">
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <>
-          <UserList title="Followers" user={user} users={users} />
-          {hasNextPage && (
-            <div ref={loadMoreRef} className="h-6 text-center">
-              {isFetchingNextPage ? 'Loading more...' : 'Scroll to load more'}
-            </div>
-          )}
-        </>
-      )}
+    <div className="flex h-full w-full justify-center space-y-4 overflow-y-auto">
+      <UserList
+        users={users}
+        isLoading={isLoading}
+        isFetchingNextPage={isFetchingNextPage}
+        loaderRef={loadMoreRef}
+      />
     </div>
   );
 };

@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UpcomingTimebomb } from './UpcomingTimebomb';
-import { mockTimeBomb, mockTimeBomb2 } from '@/mocks/timebomb';
-
-const now = Date.now();
+import { mockTimeBomb } from '@/mocks/timebomb';
 
 const meta: Meta<typeof UpcomingTimebomb> = {
   title: 'Features/Timebombs/UpcomingTimebomb',
