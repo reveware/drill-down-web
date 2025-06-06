@@ -1,3 +1,4 @@
+@custom-variant dark (&:where(.dark, .dark *));
 @layer base {
   @theme {
     /* Fonts */
@@ -6,7 +7,7 @@
     --font-mono: 'JetBrains Mono', monospace;
 
     /* Colors */
-    --color-primary: #0a0311;
+    --color-primary: #0a030a;
     --color-on-primary: #ffffff;
     --color-secondary: #333536;
     --color-on-secondary: #ffffff;
@@ -56,20 +57,20 @@
   }
 
   html.dark {
-    --color-primary: #010409;
+    --color-primary: #000000;
     --color-on-primary: #ffffff;
     --color-secondary: #26303f;
     --color-on-secondary: #ffffff;
     --color-accent: #07d9c4;
     --color-on-accent: #ffffff;
-    --color-surface: #0d1117;
+    --color-surface: #090a0b;
     --color-foreground: #f5f5f5;
-    --color-background: #0a0a0a;
+    --color-background: #08090a;
+    --color-border: #424449;
     --color-muted: #9ca1aa;
     --color-info: #2685bf;
     --color-success: #00ff90;
     --color-warning: #f5ae48;
     --color-danger: #ff0015;
-    --color-border: #e5e7eb;
   }
 }

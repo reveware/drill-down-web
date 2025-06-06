@@ -1,0 +1,21 @@
+@layer utilities {
+  .neon-text {
+    @apply text-accent;
+    text-shadow:
+      0 0 2px var(--color-accent),
+      0 0 10px var(--color-accent);
+  }
+
+  .neon-border {
+    @apply rounded-xl border border-transparent transition-all;
+    animation: neon-pulse 4s infinite ease-in-out;
+  }
+
+  .card {
+    @apply bg-surface text-foreground border-border w-full rounded-xl border-1 shadow-lg;
+  }
+
+  .photo {
+    @apply transition-transform duration-200 hover:scale-105 hover:opacity-80;
+  }
+}
