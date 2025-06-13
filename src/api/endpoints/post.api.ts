@@ -1,5 +1,4 @@
 import { apiClient } from '../client';
-import { ApiResponse } from '@/types/response';
 import { PostOverview, PostSearchParams, PostTypes } from '@/types/post';
 import { mockFetchPosts } from '@/mocks/post';
 
@@ -10,7 +9,7 @@ export const postApi = {
     if (useMocks) {
       return await mockFetchPosts(page, limit);
     }
-    return (await apiClient.get<ApiResponse<PostOverview[]>>('/posts/feed')).data.data;
+    return (await apiClient.get<PostOverview[]>('/posts/feed')).data;
   },
 
   getRecommendedPosts: async (
@@ -23,10 +22,10 @@ export const postApi = {
       return await mockFetchPosts(page, limit, type);
     }
     return (
-      await apiClient.get<ApiResponse<PostOverview[]>>('/posts/recommended', {
+      await apiClient.get<PostOverview[]>('/posts/recommended', {
         params: { userId, type, page, limit },
       })
-    ).data.data;
+    ).data;
   },
 
   async searchPosts(
@@ -38,9 +37,9 @@ export const postApi = {
       return await mockFetchPosts(page, limit);
     }
     return (
-      await apiClient.get<ApiResponse<PostOverview[]>>('/posts', {
+      await apiClient.get<PostOverview[]>('/posts', {
         params: { ...search, page, limit },
       })
-    ).data.data;
+    ).data;
   },
 };

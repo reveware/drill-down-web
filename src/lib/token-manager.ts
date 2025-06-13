@@ -1,5 +1,6 @@
 import { decodeJwt } from 'jose';
 import { JWTPayload } from '@/types/auth';
+import { mockJWTPayload } from '@/mocks/auth';
 
 export class TokenManager {
   private static readonly TOKEN_KEY = 'auth_token';
@@ -28,16 +29,7 @@ export class TokenManager {
   static decodeToken(token: string): JWTPayload | null {
     try {
       if (process.env.NEXT_PUBLIC_USE_MOCKS === 'true') {
-        return {
-          user: {
-            id: 1234567890,
-            email: 'fake@email.com',
-            role: 'ADMIN',
-            username: 'fake',
-          },
-          iat: Date.now(),
-          exp: Date.now() + 1000 * 60 * 60 * 24,
-        } as JWTPayload;
+        return mockJWTPayload;
       }
 
       return decodeJwt(token) as JWTPayload;

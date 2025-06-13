@@ -3,7 +3,7 @@ import { UserRole } from './user';
 
 const RegisterSchema = z.object({
   avatar: z.instanceof(File, { message: 'Please select an avatar image' }),
-  username: z.string().min(2, 'must be at least 2 characters').max(20, 'too long'),
+  username: z.string().min(3, 'must be at least 3 characters').max(20, 'too long'),
   first_name: z.string().min(2, 'must be at least 2 characters').max(20, 'too long'),
   last_name: z.string().min(2, 'must be at least 2 characters').max(20, 'too long'),
   email: z.string().email('Invalid email address'),
@@ -20,7 +20,7 @@ const RegisterSchema = z.object({
     }
     return age >= 18;
   }, 'must be at least 18 years old'),
-  tagline: z.string().optional(),
+  tagline: z.string().max(100, 'too long').optional(),
 });
 
 export const RegisterFormSchema = RegisterSchema.refine(
@@ -41,6 +41,11 @@ export const LoginFormSchema = z.object({
 });
 
 export const LoginResultSchema = z.object({
+  user: z.object({
+    id: z.number(),
+    username: z.string(),
+    role: z.nativeEnum(UserRole.enum),
+  }),
   token: z.string(),
 });
 
@@ -49,17 +54,17 @@ export type CreateUserDto = z.infer<typeof CreateUserDto>;
 export type LoginDto = z.infer<typeof LoginFormSchema>;
 export type LoginResult = z.infer<typeof LoginResultSchema>;
 
-export type RegisterResult = object; // TODO: Replace with actual type
+export const JWTPayloadSchema = z.object({
+  user: z.object({
+    id: z.number(),
+    username: z.string(),
+    role: UserRole,
+  }),
+  iat: z.number(),
+  exp: z.number(),
+});
 
-export interface JWTPayload {
-  user: {
-    id: number;
-    username: string;
-    role: typeof UserRole.enum;
-  };
-  iat: number;
-  exp: number;
-}
+export type JWTPayload = z.infer<typeof JWTPayloadSchema>;
 
 export interface AuthState {
   isAuthenticated: boolean;

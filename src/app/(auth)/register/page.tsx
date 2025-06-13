@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { RegisterForm, useRegister } from '@/features/auth';
 import Image from 'next/image';
@@ -7,17 +9,17 @@ export default function RegisterPage() {
   const { mutate: register, isPending } = useRegister();
 
   return (
-    <main className="flex items-center justify-center min-h-screen p-4">
-      <div className="flex flex-col md:flex-row rounded-xl overflow-hidden shadow-lg w-full h-full neon-border md:max-w-5xl">
-        <div className="relative w-full md:w-1/2 hidden md:block">
+    <main className="flex min-h-screen items-center justify-center p-4">
+      <div className="neon-border flex h-full w-full flex-col overflow-hidden rounded-xl shadow-lg md:max-w-5xl md:flex-row">
+        <div className="relative hidden w-full md:block md:w-1/2">
           <Image src={Delorean} alt="Delorean" fill className="object-cover" priority />
         </div>
 
-        <div className="w-full md:w-1/2 overflow-y-auto flex items-center justify-center">
-          <Card className="w-full border-none shadow-none p-6">
+        <div className="flex w-full items-center justify-center overflow-y-auto md:w-1/2">
+          <Card className="w-full border-none p-6 shadow-none">
             <CardHeader className="text-center">
               <CardTitle className="font-title text-2xl font-bold">Register</CardTitle>
-              <CardDescription className="text-sm text-accent">
+              <CardDescription className="text-accent text-sm">
                 Join our community today
               </CardDescription>
             </CardHeader>

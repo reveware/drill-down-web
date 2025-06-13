@@ -1,4 +1,4 @@
-import { userApi } from '@/lib/api';
+import { userApi } from '@/api';
 import { useQuery } from '@tanstack/react-query';
 
 export const useUserTags = (userId: number) => {

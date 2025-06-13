@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { PhotoPost, PostTypes } from '@/types/post';
-import { postApi } from '@/lib/api/endpoints/post.api';
+import { postApi } from '@/api/endpoints/post.api';
 
 export const useRecommendedPhotoPosts = (userId: number) => {
   const PAGE_SIZE = 20;

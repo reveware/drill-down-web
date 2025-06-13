@@ -1,13 +1,13 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { authApi } from '@/lib/api/endpoints/auth.api';
+import { authApi } from '@/api/endpoints/auth.api';
 import { RegisterDto, CreateUserDto } from '@/types/auth';
 import { toast } from 'sonner';
+import { useAuth } from '@/providers/AuthProvider';
 
 export const useRegister = () => {
-  const router = useRouter();
+  const { login } = useAuth();
 
   return useMutation({
     mutationFn: async (data: RegisterDto) => {
@@ -24,10 +24,14 @@ export const useRegister = () => {
 
       return authApi.register(createUserData);
     },
-    onSuccess: () => {
+    onSuccess: (response) => {
       toast.success('Account created successfully!');
-
-      router.push('/login');
+      const token = response.token;
+      login(token);
+    },
+    onError: (error) => {
+      console.log('Register failed', error);
+      toast.error(error.message);
     },
   });
 };

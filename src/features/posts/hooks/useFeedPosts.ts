@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PostOverview } from '@/types/post';
-import { postApi } from '@/lib/api/endpoints/post.api';
+import { postApi } from '@/api/endpoints/post.api';
 const PAGE_SIZE = 5;
 
 export const useFeedPosts = () => {

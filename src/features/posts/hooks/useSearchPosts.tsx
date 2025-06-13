@@ -1,4 +1,4 @@
-import { postApi } from '@/lib/api';
+import { postApi } from '@/api';
 import { PostOverview, PostSearchParams } from '@/types/post';
 import { useInfiniteQuery } from '@tanstack/react-query';
 

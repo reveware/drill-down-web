@@ -4,13 +4,17 @@ import { mockUser } from './user';
 export const mockLogin = async (loginAttempt: LoginDto) => {
   console.log('mockLogin', loginAttempt);
   return {
-    data: {
-      token: '1234567890',
-      user: mockUser,
-    },
+    token: '1234567890',
+    user: mockUser,
   };
 };
 
 export const mockRegister = async (user: CreateUserDto) => {
-  return { data: user };
+  return mockLogin(user);
+};
+
+export const mockJWTPayload = {
+  user: mockUser,
+  iat: Date.now(),
+  exp: Date.now() + 1000 * 60 * 60 * 24,
 };

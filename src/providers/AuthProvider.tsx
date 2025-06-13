@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { TokenManager } from '@/lib/auth/token-manager';
+import { TokenManager } from '@/lib/token-manager';
 import { AuthState, JWTPayload } from '@/types/auth';
 
 interface AuthContextType extends AuthState {

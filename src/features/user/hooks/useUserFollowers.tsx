@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { userApi } from '@/lib/api/endpoints/user.api';
+import { userApi } from '@/api/endpoints/user.api';
 import { UserOverview } from '@/types/user';
 
 const PAGE_SIZE = 25;

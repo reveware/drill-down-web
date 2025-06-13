@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UserDetail } from '@/types/user';
-import { userApi } from '@/lib/api/endpoints/user.api';
+import { userApi } from '@/api/endpoints/user.api';
 
 export const useUserProfile = (userId: number) => {
   return useQuery<UserDetail, Error>({

@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
-import { authApi } from '@/lib/api/endpoints/auth.api';
+import { authApi } from '@/api/endpoints/auth.api';
 import { LoginDto } from '@/types/auth';
 import { toast } from 'sonner';
 
@@ -12,11 +12,13 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: async (data: LoginDto) => await authApi.login(data),
     onSuccess: (response) => {
-      const token = response.data.token;
-
-      login(token);
-
       toast.success('Welcome back!');
+      const token = response.token;
+      login(token);
+    },
+    onError: (error) => {
+      console.log('Login failed', error);
+      toast.error(error.message);
     },
   });
 };

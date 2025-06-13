@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 
 const createApiClient = (): AxiosInstance => {
   const client = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
+    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080',
     timeout: 10000,
     headers: {
       'Content-Type': 'application/json',
@@ -33,28 +33,19 @@ const createApiClient = (): AxiosInstance => {
     async (error) => {
       const originalRequest = error.config;
 
-      // Handle 401 errors (unauthorized)
-      if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
+      const isLoginCall = originalRequest.url.includes('/auth/login');
+      const unauthorized = error.response?.status === 401;
 
-        localStorage.removeItem('auth_token');
-
+      if (unauthorized && !isLoginCall) {
         toast.error('Session expired. Please login again.');
+        localStorage.removeItem('auth_token');
 
         if (typeof window !== 'undefined') {
           window.location.href = '/login';
         }
-
-        return Promise.reject(error);
       }
 
-      if (error.response?.data?.message) {
-        toast.error(error.response.data.message);
-      } else if (error.message) {
-        toast.error(error.message);
-      }
-
-      return Promise.reject(error);
+      return Promise.reject(error.response?.data);
     }
   );
 
