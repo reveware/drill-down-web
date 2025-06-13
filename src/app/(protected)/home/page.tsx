@@ -9,7 +9,7 @@ import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 
 export default function HomePage() {
   const loaderRef = useRef<HTMLDivElement | null>(null);
-  const { data: posts, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useFeedPosts();
+  const { posts, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useFeedPosts();
 
   useInfiniteScrollObserver({
     ref: loaderRef,
@@ -17,12 +17,11 @@ export default function HomePage() {
     enabled: !!hasNextPage,
   });
 
-  const feedPosts = posts?.pages.flat() ?? [];
   return (
     <div className="flex h-full flex-col gap-6 lg:grid lg:grid-cols-6">
       <section className="order-2 flex min-h-0 w-full flex-col items-center lg:col-span-3 lg:overflow-y-auto">
         <PostFeed
-          posts={feedPosts}
+          posts={posts}
           isLoading={isLoading}
           loaderRef={loaderRef}
           isFetchingNextPage={isFetchingNextPage}

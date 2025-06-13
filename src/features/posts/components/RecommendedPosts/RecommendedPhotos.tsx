@@ -15,9 +15,9 @@ interface RecommendedPhotosProps {
 export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
   const title = 'Recommended Photos';
   const isMobile = useMediaQuery('mobile'); // < 768 px
-  const { data: recommendedPhotoPosts = [], isLoading } = useRecommendedPhotoPosts(userId);
+  const { posts, isLoading } = useRecommendedPhotoPosts(userId);
 
-  const visiblePosts = recommendedPhotoPosts.slice(0, isMobile ? 4 : 12);
+  const visiblePosts = posts.slice(0, isMobile ? 4 : 12);
 
   return (
     <Card className="card max-w-lg">

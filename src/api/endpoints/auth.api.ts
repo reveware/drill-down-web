@@ -13,10 +13,16 @@ export const authApi = {
     return (await apiClient.post<LoginResult>('/auth/login', loginAttempt)).data;
   },
 
-  register: async (user: CreateUserDto): Promise<LoginResult> => {
+  register: async (formData: FormData): Promise<LoginResult> => {
     if (useMocks) {
-      return mockRegister(user);
+      return mockRegister(formData);
     }
-    return (await apiClient.post<LoginResult>('/auth/register', user)).data;
+    return (
+      await apiClient.post<LoginResult>('/auth/register', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+    ).data;
   },
 };

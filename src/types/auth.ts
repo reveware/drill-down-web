@@ -42,7 +42,7 @@ export const LoginFormSchema = z.object({
 
 export const LoginResultSchema = z.object({
   user: z.object({
-    id: z.number(),
+    id: z.string(),
     username: z.string(),
     role: z.nativeEnum(UserRole.enum),
   }),
@@ -56,7 +56,7 @@ export type LoginResult = z.infer<typeof LoginResultSchema>;
 
 export const JWTPayloadSchema = z.object({
   user: z.object({
-    id: z.number(),
+    id: z.string(),
     username: z.string(),
     role: UserRole,
   }),

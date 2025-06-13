@@ -5,24 +5,28 @@ import { authApi } from '@/api/endpoints/auth.api';
 import { RegisterDto, CreateUserDto } from '@/types/auth';
 import { toast } from 'sonner';
 import { useAuth } from '@/providers/AuthProvider';
+import { formatISO, startOfDay } from 'date-fns';
 
 export const useRegister = () => {
   const { login } = useAuth();
 
   return useMutation({
     mutationFn: async (data: RegisterDto) => {
-      const createUserData: CreateUserDto = {
-        avatar: data.avatar,
-        username: data.username,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        password: data.password,
-        date_of_birth: data.date_of_birth,
-        tagline: data.tagline,
-      };
+      const formData = new FormData();
+      const dateOfBirth = startOfDay(new Date(data.date_of_birth));
+      const formattedDate = formatISO(dateOfBirth);
+      formData.append('avatar', data.avatar);
+      formData.append('username', data.username);
+      formData.append('first_name', data.first_name);
+      formData.append('last_name', data.last_name);
+      formData.append('email', data.email);
+      formData.append('password', data.password);
+      formData.append('date_of_birth', formattedDate);
+      if (data.tagline) {
+        formData.append('tagline', data.tagline);
+      }
 
-      return authApi.register(createUserData);
+      return authApi.register(formData);
     },
     onSuccess: (response) => {
       toast.success('Account created successfully!');

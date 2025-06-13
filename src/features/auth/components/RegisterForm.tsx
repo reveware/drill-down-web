@@ -47,7 +47,11 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-4"
+        encType="multipart/form-data"
+      >
         {/* Avatar Upload */}
         <FormField
           control={form.control}

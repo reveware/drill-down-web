@@ -9,8 +9,12 @@ export const mockLogin = async (loginAttempt: LoginDto) => {
   };
 };
 
-export const mockRegister = async (user: CreateUserDto) => {
-  return mockLogin(user);
+export const mockRegister = async (user: FormData) => {
+  console.log('mockRegister', user);
+  return {
+    token: '1234567890',
+    user: mockUser,
+  };
 };
 
 export const mockJWTPayload = {

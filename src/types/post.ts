@@ -1,43 +1,57 @@
-import { UserOverview } from './user';
-
-export type PostOverview = {
-  id: number;
-  author: UserOverview;
-  description: string | null;
-  like_count: number;
-  comment_count: number;
-  tags: string[];
-  created_at: string;
-  updated_at: string;
-} & PostContent;
+import { z } from 'zod';
+import { UserOverviewSchema } from './user';
 
 export enum PostTypes {
   PHOTO = 'PHOTO',
   QUOTE = 'QUOTE',
 }
 
-export type PostContent =
-  | { type: PostTypes.PHOTO; content: PhotoPostContent }
-  | { type: PostTypes.QUOTE; content: QuotePostContent };
+export const PhotoPostContentSchema = z.object({
+  urls: z.array(z.string().url()),
+});
 
-export interface PhotoPostContent {
-  urls: string[];
-  keys?: string[];
-}
+export const QuotePostContentSchema = z.object({
+  quote: z.string(),
+  author: z.string(),
+  date: z.string().datetime().optional(),
+  location: z.string().optional(),
+});
 
-export interface QuotePostContent {
-  quote: string;
-  author: string;
-  date?: Date;
-  location?: string; // contry
-}
+const BasePostSchema = z.object({
+  id: z.string(),
+  author: UserOverviewSchema,
+  description: z.string().nullable(),
+  like_count: z.number(),
+  comment_count: z.number(),
+  tags: z.array(z.string()),
+  created_at: z.string().datetime(),
+  updated_at: z.string().datetime(),
+});
 
-export type PhotoPost = PostOverview & { type: PostTypes.PHOTO };
+export const PhotoPostSchema = BasePostSchema.extend({
+  type: z.literal(PostTypes.PHOTO),
+  content: PhotoPostContentSchema,
+});
 
-export type PostSearchParams = {
-  id?: number;
-  tags?: string[];
-  author?: string;
-  created_before?: string;
-  created_after?: string;
-};
+export const QuotePostSchema = BasePostSchema.extend({
+  type: z.literal(PostTypes.QUOTE),
+  content: QuotePostContentSchema,
+});
+
+export const PostOverviewSchema = z.discriminatedUnion('type', [PhotoPostSchema, QuotePostSchema]);
+
+export type PhotoPostContent = z.infer<typeof PhotoPostContentSchema>;
+export type QuotePostContent = z.infer<typeof QuotePostContentSchema>;
+export type PhotoPost = z.infer<typeof PhotoPostSchema>;
+export type QuotePost = z.infer<typeof QuotePostSchema>;
+export type PostOverview = z.infer<typeof PostOverviewSchema>;
+
+export const PostSearchParamsSchema = z.object({
+  id: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  author: z.string().optional(),
+  created_before: z.string().datetime().optional(),
+  created_after: z.string().datetime().optional(),
+});
+
+export type PostSearchParams = z.infer<typeof PostSearchParamsSchema>;

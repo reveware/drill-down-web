@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const UserRole = z.enum(['ADMIN', 'USER']);
 
 export const UserOverviewSchema = z.object({
-  id: z.number().int(),
+  id: z.string(),
   username: z.string(),
   email: z.string().email(),
   avatar: z.string().url(),
@@ -16,7 +16,10 @@ export const UserOverviewSchema = z.object({
   is_private: z.boolean(),
   is_self: z.boolean(),
   is_following: z.boolean(),
-  is_followed_by: z.boolean(),
+  is_follower: z.boolean(),
+  is_mutual: z.boolean(),
+  is_pending_follow: z.boolean(),
+  is_pending_follower: z.boolean(),
 
   last_seen: z.string(),
   created_at: z.string(),
@@ -30,15 +33,8 @@ export const UserDetailSchema = UserOverviewSchema.extend({
   likes_count: z.number(),
   followers_count: z.number(),
   following_count: z.number(),
-  created_time_bombs: z.number(),
-  received_time_bombs: z.number().nullable(),
+  created_locked_posts: z.number(),
+  received_locked_posts: z.number(),
 });
 
 export type UserDetail = z.infer<typeof UserDetailSchema>;
-
-export const TagCountSchema = z.object({
-  tag: z.string(),
-  count: z.number(),
-});
-
-export type TagCount = z.infer<typeof TagCountSchema>;

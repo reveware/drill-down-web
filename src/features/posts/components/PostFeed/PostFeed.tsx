@@ -17,6 +17,7 @@ export const PostFeed: React.FC<PostFeedProps> = ({
   loaderRef,
   isFetchingNextPage,
 }) => {
+  console.log('### posts in PostFeed', posts);
   return (
     <div className="flex w-full max-w-lg flex-col items-center gap-4 px-2 py-4">
       {isLoading && <LoadingState count={3} />}

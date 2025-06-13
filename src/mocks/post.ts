@@ -1,8 +1,10 @@
 import { mockUser } from './user';
 import { sleep } from '@/lib/utils';
-import { PostOverview, PostTypes } from '@/types/post';
+import { PaginatedResponse } from '@/types/pagination';
+import { PhotoPost, PostOverview, PostTypes } from '@/types/post';
+import { QuotePost } from '@/types/post';
 
-export const photoPost = (id: number, seed?: number): PostOverview => ({
+export const photoPost = (id: string, seed?: number): PostOverview => ({
   id,
   author: mockUser,
   description: 'Lorem ipsum dolor sit amet...',
@@ -17,7 +19,7 @@ export const photoPost = (id: number, seed?: number): PostOverview => ({
   updated_at: '2024-06-01T12:00:00.000Z',
 });
 
-export const quotePost = (id: number): PostOverview => ({
+export const quotePost = (id: string): PostOverview => ({
   id,
   author: mockUser,
   description: 'Inspirational quote...',
@@ -49,20 +51,20 @@ export const generatePosts = (length: number, type?: PostTypes): PostOverview[] 
   if (type === PostTypes.PHOTO) {
     // Generate only photo posts
     for (let i = 1; i <= length; i++) {
-      posts.push(photoPost(i, i * 10));
+      posts.push(photoPost(i.toString(), i * 10));
     }
   } else if (type === PostTypes.QUOTE) {
     // Generate only quote posts
     for (let i = 1; i <= length; i++) {
-      posts.push(quotePost(i));
+      posts.push(quotePost(i.toString()));
     }
   } else {
     // Generate mixed posts (default behavior)
     for (let i = 1; i <= length; i++) {
       if (i % 3 === 0) {
-        posts.push(quotePost(i));
+        posts.push(quotePost(i.toString()));
       } else {
-        posts.push(photoPost(i, i * 10));
+        posts.push(photoPost(i.toString(), i * 10));
       }
     }
   }
@@ -70,29 +72,26 @@ export const generatePosts = (length: number, type?: PostTypes): PostOverview[] 
   return posts;
 };
 
-const mockPosts: PostOverview[] = generatePosts(20);
-
-export async function mockFetchPosts(
+export async function mockFetchPosts<T extends PhotoPost | QuotePost>(
   page: number,
   pageSize: number,
   type?: PostTypes
-): Promise<PostOverview[]> {
+): Promise<PaginatedResponse<T>> {
   await sleep(3);
 
-  let postsToUse = mockPosts;
-
-  if (type) {
-    postsToUse = mockPosts.filter((post) => post.type === type);
-  }
-
+  const postsToUse = generatePosts(20, type);
   const start = page * pageSize;
   const end = start + pageSize;
+  const totalPages = Math.ceil(postsToUse.length / pageSize);
 
-  if (start >= postsToUse.length) {
-    const cycleStart = start % postsToUse.length;
-    const cycleEnd = Math.min(cycleStart + pageSize, postsToUse.length);
-    return postsToUse.slice(cycleStart, cycleEnd);
-  }
+  const actualStart = start >= postsToUse.length ? start % postsToUse.length : start;
+  const actualEnd = Math.min(actualStart + pageSize, postsToUse.length);
 
-  return postsToUse.slice(start, end);
+  return {
+    page,
+    total: postsToUse.length,
+    data: postsToUse.slice(actualStart, actualEnd) as T[],
+    total_pages: totalPages,
+    is_last_page: actualEnd >= postsToUse.length,
+  };
 }

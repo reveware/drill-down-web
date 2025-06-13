@@ -2,7 +2,7 @@ import { PostOverview } from './post';
 import { UserOverview } from './user';
 
 export interface Like {
-  id: number;
+  id: string;
   post: PostOverview;
   author: UserOverview;
   created_at: Date;
