@@ -19,4 +19,6 @@ export {
   UserPlus,
   Trash,
   Bomb,
+  Pen,
+  Bot,
 } from 'lucide-react';

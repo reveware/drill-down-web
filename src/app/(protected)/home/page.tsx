@@ -6,6 +6,7 @@ import { UpcomingTimebomb } from '@/features/timebombs/components/UpcomingTimebo
 import { mockTimeBomb } from '@/mocks/timebomb';
 import { useRef } from 'react';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
+import { FloatingActionButton } from '@/components/shared/FloatingActionButton/FloatingActionButton';
 
 export default function HomePage() {
   const loaderRef = useRef<HTMLDivElement | null>(null);
@@ -32,6 +33,8 @@ export default function HomePage() {
         <UpcomingTimebomb timebomb={mockTimeBomb} />
         <RecommendedPhotos userId={1} />
       </aside>
+
+      <FloatingActionButton />
     </div>
   );
 }
