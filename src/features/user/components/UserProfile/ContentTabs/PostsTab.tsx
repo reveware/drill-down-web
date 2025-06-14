@@ -7,7 +7,7 @@ import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
 export const PostsTab = ({ user }: { user: UserOverview }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useSearchPosts({
+  const { posts, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useSearchPosts({
     author: user.username,
   });
 
@@ -16,8 +16,6 @@ export const PostsTab = ({ user }: { user: UserOverview }) => {
     onLoadMore: fetchNextPage,
     enabled: !!hasNextPage,
   });
-
-  const posts = data?.pages.flat() ?? [];
 
   return (
     <div className="flex h-full w-full justify-center overflow-y-auto">

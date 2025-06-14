@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { TagCount } from '@/types/user';
+import { TagCount } from '@/types/tag';
 import { useUserTags } from '../hooks/useUserTags';
 import { Spinner } from '@/components/shared';
 
-export const UserTags = ({ userId }: { userId: number }) => {
+export const UserTags = ({ userId }: { userId: string }) => {
   const { data: tags, isPending: isLoading } = useUserTags(userId);
 
   return (

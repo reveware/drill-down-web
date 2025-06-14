@@ -1,50 +1,56 @@
 import { apiClient } from '../client';
-import { ApiResponse } from '@/types/response';
-import { TagCount, UserDetail, UserOverview } from '@/types/user';
+
+import { UserDetail, UserOverview } from '@/types/user';
 import { Like } from '@/types/like';
 import { mockFetchFollowers, mockFetchTags, mockFetchUser } from '@/mocks/user';
 import { mockFetchLikes } from '@/mocks/like';
+import { TagCount } from '@/types/tag';
+import { PaginatedResponse } from '@/types/pagination';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
 export const userApi = {
-  getUser: async (userId: number): Promise<UserDetail> => {
+  getUser: async (userId: string): Promise<UserDetail> => {
     if (useMocks) {
       return mockFetchUser(userId);
     }
-    return (await apiClient.get<ApiResponse<UserDetail>>(`/users/${userId}`)).data.data;
+    return (await apiClient.get<UserDetail>(`/users/${userId}`)).data;
   },
 
   getUserFollowers: async (
-    userId: number,
+    userId: string,
     page: number,
     pageSize: number
-  ): Promise<UserOverview[]> => {
+  ): Promise<PaginatedResponse<UserOverview>> => {
     if (useMocks) {
       return mockFetchFollowers(userId, page, pageSize);
     }
     return (
-      await apiClient.get<ApiResponse<UserOverview[]>>(`/users/${userId}/followers`, {
+      await apiClient.get<PaginatedResponse<UserOverview>>(`/users/${userId}/followers`, {
         params: { page, pageSize },
       })
-    ).data.data;
+    ).data;
   },
 
-  getUserLikes: async (userId: number, page: number, pageSize: number): Promise<Like[]> => {
+  getUserLikes: async (
+    userId: string,
+    page: number,
+    pageSize: number
+  ): Promise<PaginatedResponse<Like>> => {
     if (useMocks) {
       return mockFetchLikes(userId, page, pageSize);
     }
     return (
-      await apiClient.get<ApiResponse<Like[]>>(`/users/${userId}/likes`, {
+      await apiClient.get<PaginatedResponse<Like>>(`/users/${userId}/likes`, {
         params: { page, pageSize },
       })
-    ).data.data;
+    ).data;
   },
 
-  getUserTags: async (userId: number): Promise<TagCount[]> => {
+  getUserTags: async (userId: string): Promise<TagCount[]> => {
     if (useMocks) {
       return mockFetchTags(userId);
     }
-    return (await apiClient.get<ApiResponse<TagCount[]>>(`/users/${userId}/tags`)).data.data;
+    return (await apiClient.get<TagCount[]>(`/users/${userId}/tags/post-count`)).data;
   },
 };

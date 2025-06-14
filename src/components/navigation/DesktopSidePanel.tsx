@@ -8,7 +8,7 @@ interface DesktopSidePanelProps {
 
 export const DesktopSidePanel: React.FC<DesktopSidePanelProps> = ({ user }) => {
   return (
-    <aside className="hidden md:flex flex-col max-w-md lg:w-md h-screen p-4 gap-4 bg-primary text-on-primary border-r-1 border-border">
+    <aside className="bg-primary text-on-primary border-border hidden h-screen max-w-md flex-col gap-4 border-r-1 p-4 md:flex lg:w-md">
       <Brand />
       <UserSection user={user} />
     </aside>

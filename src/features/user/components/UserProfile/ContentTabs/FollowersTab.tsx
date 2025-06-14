@@ -7,7 +7,7 @@ import { UserOverview } from '@/types/user';
 export const FollowersTab = ({ user }: { user: UserOverview }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useUserFollowers(
+  const { followers, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useUserFollowers(
     user.id
   );
 
@@ -17,12 +17,10 @@ export const FollowersTab = ({ user }: { user: UserOverview }) => {
     enabled: !!hasNextPage && !isLoading,
   });
 
-  const users = data?.pages.flat() ?? [];
-
   return (
     <div className="flex h-full w-full justify-center space-y-4 overflow-y-auto">
       <UserList
-        users={users}
+        users={followers}
         isLoading={isLoading}
         isFetchingNextPage={isFetchingNextPage}
         loaderRef={loadMoreRef}

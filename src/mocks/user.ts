@@ -1,8 +1,10 @@
 import { sleep } from '@/lib/utils';
-import { TagCount, UserDetail, UserOverview, UserRole } from '@/types/user';
+import { UserDetail, UserOverview, UserRole } from '@/types/user';
+import { TagCount } from '@/types/tag';
+import { PaginatedResponse } from '@/types/pagination';
 
 export const mockUser: UserOverview = {
-  id: 1,
+  id: '1',
   username: 'johndoe',
   email: 'john@example.com',
   avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
@@ -17,12 +19,15 @@ export const mockUser: UserOverview = {
   is_private: false,
   is_self: true,
   is_following: false,
-  is_followed_by: false,
+  is_follower: false,
+  is_mutual: false,
+  is_pending_follow: false,
+  is_pending_follower: false,
 };
 
 export const mockAdmin: UserOverview = {
   ...mockUser,
-  id: 2,
+  id: '2',
   username: 'adminjane',
   email: 'jane@admin.com',
   avatar: 'https://randomuser.me/api/portraits/women/45.jpg',
@@ -33,11 +38,14 @@ export const mockAdmin: UserOverview = {
   is_private: false,
   is_self: false,
   is_following: false,
-  is_followed_by: false,
+  is_follower: false,
+  is_mutual: false,
+  is_pending_follow: false,
+  is_pending_follower: false,
 };
 
 export const mockPrivateUser: UserOverview = {
-  id: 3,
+  id: '3',
   username: 'privatebob',
   email: 'bob@private.com',
   avatar: 'https://randomuser.me/api/portraits/men/15.jpg',
@@ -52,11 +60,14 @@ export const mockPrivateUser: UserOverview = {
   is_private: true,
   is_self: false,
   is_following: false,
-  is_followed_by: false,
+  is_follower: false,
+  is_mutual: false,
+  is_pending_follow: false,
+  is_pending_follower: false,
 };
 
 export const mockFollowedUser: UserOverview = {
-  id: 4,
+  id: '4',
   username: 'friendalice',
   email: 'alice@friend.com',
   avatar: 'https://randomuser.me/api/portraits/women/22.jpg',
@@ -71,32 +82,23 @@ export const mockFollowedUser: UserOverview = {
   is_private: false,
   is_self: false,
   is_following: true,
-  is_followed_by: true,
+  is_follower: true,
+  is_mutual: true,
+  is_pending_follow: false,
+  is_pending_follower: false,
 };
 
-export const mockFetchUser = async (userId: number): Promise<UserDetail> => {
-  let user: UserOverview;
-
-  switch (userId) {
-    case 1:
-      user = mockUser;
-      break;
-    case 3:
-      user = mockPrivateUser;
-      break;
-    case 4:
-      user = mockFollowedUser;
-      break;
-    default:
-      user = mockAdmin;
-  }
+export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
+  console.log('mockFetchUser', userId);
+  const users = [mockUser, mockPrivateUser, mockFollowedUser, mockAdmin];
+  const user = users[Math.floor(Math.random() * users.length)];
 
   const posts_count = Math.floor(Math.random() * 100);
   const likes_count = Math.floor(Math.random() * 100);
   const followers_count = Math.floor(Math.random() * 100);
   const following_count = Math.floor(Math.random() * 100);
-  const created_time_bombs = Math.floor(Math.random() * 100);
-  const received_time_bombs = Math.floor(Math.random() * 100);
+  const created_locked_posts = Math.floor(Math.random() * 100);
+  const received_locked_posts = Math.floor(Math.random() * 100);
 
   return {
     ...user,
@@ -104,26 +106,28 @@ export const mockFetchUser = async (userId: number): Promise<UserDetail> => {
     likes_count,
     followers_count,
     following_count,
-    created_time_bombs,
-    received_time_bombs,
+    created_locked_posts,
+    received_locked_posts,
   };
 };
 
 export const mockFetchFollowers = async (
-  userId: number,
+  userId: string,
   page: number,
   pageSize: number
-): Promise<UserOverview[]> => {
+): Promise<PaginatedResponse<UserOverview>> => {
   await sleep(3);
-  const friend = userId === 1 ? mockAdmin : mockUser;
-
-  return Array.from({ length: pageSize }, (_, index) => ({
-    ...friend,
-    id: index,
-  }));
+  const followers = [mockUser, mockPrivateUser, mockFollowedUser, mockAdmin];
+  return {
+    page: page,
+    total: followers.length,
+    total_pages: 1,
+    is_last_page: true,
+    data: followers,
+  };
 };
 
-export const mockFetchTags = async (_: number): Promise<TagCount[]> => {
+export const mockFetchTags = async (_: string): Promise<TagCount[]> => {
   await sleep(3);
   const tags: TagCount[] = [
     { tag: 'nostalgia', count: 500 },

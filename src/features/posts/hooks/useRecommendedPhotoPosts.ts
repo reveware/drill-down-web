@@ -11,7 +11,8 @@ export const useRecommendedPhotoPosts = (userId: number) => {
     queryFn: async (): Promise<PaginatedResponse<PhotoPost>> => {
       return await postApi.getRecommendedPosts(userId, 0, PAGE_SIZE, PostTypes.PHOTO);
     },
-    staleTime: 5 * 60 * 1000,
+    retry: false,
+    // staleTime: 5 * 60 * 1000,
   });
 
   const posts = query.data?.data ?? [];

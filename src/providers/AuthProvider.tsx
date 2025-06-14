@@ -1,12 +1,14 @@
 'use client';
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { TokenManager } from '@/lib/token-manager';
-import { AuthState, JWTPayload } from '@/types/auth';
+import { AuthState } from '@/types/auth';
+import { userApi } from '@/api/endpoints/user.api';
+import { UserDetail } from '@/types/user';
 
 interface AuthContextType extends AuthState {
   login: (token: string) => void;
   logout: () => void;
-  setUser: (user: JWTPayload) => void;
+  setUser: (user: UserDetail) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -31,16 +33,45 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isLoading: true,
   });
 
-  const login = (token: string) => {
+  const fetchUserData = async (userId: string) => {
+    try {
+      const userData = await userApi.getUser(userId);
+      setAuthState((prev) => ({
+        ...prev,
+        user: userData,
+        isLoading: false,
+      }));
+    } catch (error) {
+      console.error('Failed to fetch user data:', error);
+      setAuthState((prev) => ({
+        ...prev,
+        isLoading: false,
+      }));
+    }
+  };
+
+  const login = async (token: string) => {
     TokenManager.setToken(token);
-    const user = TokenManager.getUserFromToken();
+    const jwtUser = TokenManager.getUserFromToken();
+
+    if (!jwtUser) {
+      setAuthState({
+        isAuthenticated: false,
+        token: null,
+        user: null,
+        isLoading: false,
+      });
+      return;
+    }
 
     setAuthState({
       isAuthenticated: true,
       token,
-      user,
-      isLoading: false,
+      user: null,
+      isLoading: true,
     });
+
+    await fetchUserData(jwtUser.user.id);
   };
 
   const logout = () => {
@@ -53,18 +84,37 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     });
   };
 
-  const setUser = (user: JWTPayload) => {
+  const setUser = (user: UserDetail) => {
     setAuthState((prev) => ({
       ...prev,
       user,
+      isLoading: false,
     }));
   };
 
   useEffect(() => {
-    const initializeAuth = () => {
+    const initializeAuth = async () => {
       const token = TokenManager.getToken();
       if (token && TokenManager.isTokenValid()) {
-        login(token);
+        const jwtUser = TokenManager.getUserFromToken();
+        if (!jwtUser) {
+          setAuthState({
+            isAuthenticated: false,
+            token: null,
+            user: null,
+            isLoading: false,
+          });
+          return;
+        }
+
+        setAuthState({
+          isAuthenticated: true,
+          token,
+          user: null,
+          isLoading: true,
+        });
+
+        await fetchUserData(jwtUser.user.id);
       } else {
         if (token) {
           TokenManager.removeToken();

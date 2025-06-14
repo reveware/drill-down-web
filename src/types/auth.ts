@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { UserRole } from './user';
+import { UserDetail, UserRole } from './user';
 
 const RegisterSchema = z.object({
   avatar: z.instanceof(File, { message: 'Please select an avatar image' }),
@@ -69,6 +69,6 @@ export type JWTPayload = z.infer<typeof JWTPayloadSchema>;
 export interface AuthState {
   isAuthenticated: boolean;
   token: string | null;
-  user: JWTPayload | null;
+  user: UserDetail | null;
   isLoading: boolean;
 }
