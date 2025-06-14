@@ -4,13 +4,16 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
+import { CreatePostForm } from './ActionModals/CreatePostForm';
+import { ActionModal } from './ActionModals/ActionModal';
+import { ribbonAnimation, actionButtonAnimation, mainButtonAnimation } from './animations';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface Action {
   icon: LucideIcon;
-  label: string;
-  onClick: () => void;
+  title: string;
+  content: React.ReactNode;
 }
-
 interface FloatingActionButtonProps {
   className?: string;
 }
@@ -21,22 +24,30 @@ export const ActionIcon = ({ icon: Icon }: Action) => {
 
 export const FloatingActionButton = ({ className }: FloatingActionButtonProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [activeModal, setActiveModal] = useState<string | null>(null);
+
+  const handleActionClick = (label: string) => {
+    setActiveModal(label);
+    setIsExpanded(false);
+  };
+
+  const closeModal = () => setActiveModal(null);
 
   const actions: Action[] = [
     {
       icon: Pen,
-      label: 'Create Post',
-      onClick: () => console.log('Create post'),
+      title: 'Create Post',
+      content: <CreatePostForm />,
     },
     {
       icon: Bomb,
-      label: 'Locked Post',
-      onClick: () => console.log('Locked post'),
+      title: 'Locked Post',
+      content: <CreatePostForm />,
     },
     {
       icon: MessageCircle,
-      label: 'Chat',
-      onClick: () => console.log('Chat'),
+      title: 'Chat',
+      content: <CreatePostForm />,
     },
   ];
 
@@ -46,25 +57,24 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
         {/* Ribbon of actions */}
         <AnimatePresence>
           {isExpanded && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.4 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              className="absolute right-16 bottom-0 flex gap-4"
-            >
+            <motion.div {...ribbonAnimation} className="absolute right-16 bottom-0 flex gap-4">
               {actions.map((action, index) => (
-                <motion.button
-                  key={action.label}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  whileHover={{ scale: 1.2 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={action.onClick}
-                  className="bg-primary text-on-primary hover:bg-primary/90 flex items-center gap-2 rounded-full px-4 py-4 shadow-lg transition-colors hover:cursor-pointer"
-                >
-                  <ActionIcon {...action} />
-                </motion.button>
+                <Tooltip key={action.title}>
+                  <TooltipTrigger asChild>
+                    <motion.button
+                      onClick={() => handleActionClick(action.title)}
+                      className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md hover:cursor-pointer"
+                      animate={actionButtonAnimation.animate}
+                      transition={actionButtonAnimation.transition(index)}
+                      whileHover={actionButtonAnimation.whileHover}
+                    >
+                      <ActionIcon {...action} />
+                    </motion.button>
+                  </TooltipTrigger>
+                  <TooltipContent side="top" sideOffset={4}>
+                    {action.title}
+                  </TooltipContent>
+                </Tooltip>
               ))}
             </motion.div>
           )}
@@ -75,29 +85,25 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
           className={cn(
             'h-14 w-14 rounded-full text-white shadow-lg',
             'flex items-center justify-center',
-            'focus:ring-primary focus:ring-2 focus:ring-offset-2 focus:outline-none',
+
             'hover:cursor-pointer',
-            'from-accent/5 via-accent/80 to-primary bg-gradient-to-r',
+            'from-accent/90 to-primary/90 bg-gradient-to-r',
             'bg-[length:200%_200%] bg-[position:0%_50%]'
           )}
-          animate={{
-            rotate: isExpanded ? 45 : 0,
-            scale: isExpanded ? 1.1 : 1,
-            backgroundPosition: !isExpanded ? ['0% 50%', '100% 50%', '0% 50%'] : undefined,
-          }}
-          transition={{
-            rotate: { duration: 0.2 },
-            scale: { duration: 0.2 },
-            backgroundPosition: {
-              duration: 6,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            },
-          }}
+          animate={mainButtonAnimation.animate(isExpanded)}
+          transition={mainButtonAnimation.transition}
+          whileHover={mainButtonAnimation.whileHover}
         >
           <Bot className="text-on-primary" size={40} />
         </motion.button>
       </div>
+
+      <ActionModal
+        title={actions.find((action) => action.title === activeModal)?.title || ''}
+        isOpen={!!activeModal}
+        content={actions.find((action) => action.title === activeModal)?.content}
+        onClose={closeModal}
+      />
     </div>
   );
 };
