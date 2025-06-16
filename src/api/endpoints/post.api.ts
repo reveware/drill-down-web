@@ -1,6 +1,15 @@
 import { apiClient } from '../client';
-import { PhotoPost, PostOverview, PostSearchParams, QuotePost, PostTypes } from '@/types/post';
-import { mockFetchPosts } from '@/mocks/post';
+import {
+  PhotoPost,
+  PostOverview,
+  PostSearchParams,
+  QuotePost,
+  PostTypes,
+  CreatePost,
+  CreateQuotePost,
+  CreatePhotoPost,
+} from '@/types/post';
+import { mockFetchPosts, quotePost } from '@/mocks/post';
 import { PaginatedResponse } from '@/types/pagination';
 import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
 
@@ -46,5 +55,29 @@ export const PostApi = {
         params: { userId, type, page, limit },
       })
     ).data;
+  },
+
+  createPhotoPost: async (post: CreatePhotoPost): Promise<PostOverview> => {
+    const formData = new FormData();
+
+    post.tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
+    post.photos.forEach((file) => formData.append('photos', file));
+
+    if (post.description) {
+      formData.append('description', post.description);
+    }
+
+    return (
+      await apiClient.post('/posts/photo', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+    ).data;
+  },
+
+  createQuotePost: async (post: CreateQuotePost): Promise<PostOverview> => {
+    if (useMocks) {
+      return quotePost(Math.random().toString(36).substring(2, 15));
+    }
+    return (await apiClient.post('/posts/quote', post)).data;
   },
 };

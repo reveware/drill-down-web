@@ -7,7 +7,6 @@ const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
 export const AuthApi = {
   login: async (loginAttempt: LoginDto): Promise<LoginResult> => {
-    console.log('login', { useMocks, loginAttempt });
     if (useMocks) {
       return mockLogin(loginAttempt);
     }

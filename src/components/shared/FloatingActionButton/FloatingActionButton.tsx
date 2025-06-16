@@ -37,17 +37,17 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     {
       icon: Pen,
       title: 'Create Post',
-      content: <CreatePost />,
+      content: <CreatePost onSuccess={closeModal} />,
     },
     {
       icon: Bomb,
       title: 'Locked Post',
-      content: <CreatePost />,
+      content: <CreatePost onSuccess={closeModal} />,
     },
     {
       icon: MessageCircle,
       title: 'Chat',
-      content: <CreatePost />,
+      content: <CreatePost onSuccess={closeModal} />,
     },
   ];
 

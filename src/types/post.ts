@@ -63,8 +63,10 @@ export const createPostBaseSchema = z.object({
 
 export const createPhotoPostSchema = createPostBaseSchema.extend({
   type: z.literal(PostTypes.PHOTO),
-  photos: z.array(z.instanceof(File)).optional(),
+  photos: z.array(z.instanceof(File)),
 });
+
+export type CreatePhotoPost = z.infer<typeof createPhotoPostSchema>;
 
 export const createQuotePostSchema = createPostBaseSchema.extend({
   type: z.literal(PostTypes.QUOTE),
@@ -73,6 +75,8 @@ export const createQuotePostSchema = createPostBaseSchema.extend({
   date: z.string().optional(),
   location: z.string().optional(),
 });
+
+export type CreateQuotePost = z.infer<typeof createQuotePostSchema>;
 
 export const createPostSchema = z.discriminatedUnion('type', [
   createPhotoPostSchema,

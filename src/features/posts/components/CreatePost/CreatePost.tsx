@@ -1,11 +1,15 @@
 'use client';
 import { useState } from 'react';
-import { PostTypes } from '@/types/post';
+import { CreateQuotePost, PostOverview, PostTypes } from '@/types/post';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PhotoPostForm } from './PhotoPostForm';
 import { QuotePostForm } from './QuotePostForm';
+import { useCreatePost } from '../../hooks/useCreatePost';
 
-export const CreatePost = () => {
+interface CreatePostProps {
+  onSuccess: (post: PostOverview) => void;
+}
+export const CreatePost = ({ onSuccess }: CreatePostProps) => {
   const [type, setType] = useState<PostTypes>(PostTypes.PHOTO);
 
   return (
@@ -25,7 +29,7 @@ export const CreatePost = () => {
         </TabsContent>
 
         <TabsContent value={PostTypes.QUOTE} className="h-full">
-          <QuotePostForm />
+          <QuotePostForm onSuccess={onSuccess} />
         </TabsContent>
       </div>
     </Tabs>

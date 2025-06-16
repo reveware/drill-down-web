@@ -1,25 +1,32 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { createQuotePostSchema, PostTypes } from '@/types/post';
+import { CreateQuotePost, createQuotePostSchema, PostTypes, PostOverview } from '@/types/post';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { TagInput } from '@/features/tags/components/TagInput';
 import { Separator } from '@/components/ui/separator';
+import { useCreatePost } from '../../hooks/useCreatePost';
 
-export const QuotePostForm = () => {
+interface QuotePostFormProps {
+  onSuccess: (post: PostOverview) => void;
+}
+
+export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
+  const { mutate: createPost, isPending, isSuccess } = useCreatePost(PostTypes.QUOTE, onSuccess);
+
   const form = useForm({
     resolver: zodResolver(createQuotePostSchema),
     defaultValues: { type: PostTypes.QUOTE, tags: [] },
   });
 
-  const onSubmit = async (data: unknown) => {
-    console.log(data);
+  const handleSubmit = (data: CreateQuotePost) => {
+    createPost(data);
   };
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="flex h-full flex-col space-y-2">
+    <form onSubmit={form.handleSubmit(handleSubmit)} className="flex h-full flex-col space-y-2">
       <div className="space-y-2">
         <Textarea
           {...form.register('quote')}
