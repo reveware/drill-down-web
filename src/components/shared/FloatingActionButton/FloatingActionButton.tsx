@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
-import { CreatePostForm } from './ActionModals/CreatePostForm';
-import { ActionModal } from './ActionModals/ActionModal';
+import { CreatePost } from '../../../features/posts/';
+import { ActionModal } from './ActionModal';
 import { ribbonAnimation, actionButtonAnimation, mainButtonAnimation } from './animations';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
@@ -37,17 +37,17 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     {
       icon: Pen,
       title: 'Create Post',
-      content: <CreatePostForm />,
+      content: <CreatePost />,
     },
     {
       icon: Bomb,
       title: 'Locked Post',
-      content: <CreatePostForm />,
+      content: <CreatePost />,
     },
     {
       icon: MessageCircle,
       title: 'Chat',
-      content: <CreatePostForm />,
+      content: <CreatePost />,
     },
   ];
 

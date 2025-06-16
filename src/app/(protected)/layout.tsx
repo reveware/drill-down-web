@@ -6,6 +6,7 @@ import { useAuth } from '@/providers/AuthProvider';
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
+
   if (!user) {
     return null;
   }

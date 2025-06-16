@@ -21,4 +21,7 @@ export {
   Bomb,
   Pen,
   Bot,
+  Plus,
+  MapPin,
+  Calendar,
 } from 'lucide-react';

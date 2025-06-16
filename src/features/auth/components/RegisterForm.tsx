@@ -7,7 +7,8 @@ import { Eye, EyeOff, Upload, User } from '@/components/shared/Icons';
 import Link from 'next/link';
 import { RegisterFormSchema, RegisterDto } from '@/types/auth';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button, Input } from '@/components/shared';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Form,
   FormControl,
@@ -179,9 +180,8 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     />
                     <Button
                       type="button"
-                      variant="accent"
                       size="sm"
-                      className="absolute top-0 right-0 h-full bg-zinc-300 px-3 py-2"
+                      className="bg-input text-accent absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -209,9 +209,8 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     />
                     <Button
                       type="button"
-                      variant="accent"
                       size="sm"
-                      className="absolute top-0 right-0 h-full bg-zinc-300 px-3 py-2"
+                      className="bg-input text-accent absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? (
@@ -259,12 +258,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
         </div>
 
         {/* Submit Button */}
-        <Button
-          type="submit"
-          variant="primary"
-          block
-          disabled={!form.formState.isValid || isLoading}
-        >
+        <Button type="submit" className="w-full" disabled={!form.formState.isValid || isLoading}>
           {isLoading ? 'Creating Account...' : 'Create Account'}
         </Button>
 

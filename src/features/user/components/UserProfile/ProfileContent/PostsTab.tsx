@@ -8,7 +8,7 @@ export const PostsTab = ({ user }: { user: UserOverview }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const { posts, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useSearchPosts({
-    author: user.username,
+    authorId: user.id,
   });
 
   useInfiniteScrollObserver({

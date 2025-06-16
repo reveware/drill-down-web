@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { Command, CommandDialog } from '@/components/ui/command';
-import { Input } from '@/components/shared/Input/Input';
+import { Input } from '@/components/ui/input';
 import { Search as SearchIcon } from '@/components/shared/Icons';
-import { Button } from '@/components/shared';
+import { Button } from '@/components/ui/button';
 
 interface MobileSearchCommandProps {
   onSearch: (query: string) => void;
@@ -21,16 +21,14 @@ export const Search: React.FC<MobileSearchCommandProps> = ({ onSearch }) => {
       <div className="hidden md:block">
         <Input placeholder="Search..." className="w-full" onChange={handleSearchChange} />
       </div>
-      <button className="p-2 flex gap-2 md:hidden" onClick={() => setIsSearchOpen(true)}>
+      <button className="flex gap-2 p-2 md:hidden" onClick={() => setIsSearchOpen(true)}>
         <SearchIcon size={20} />
       </button>
       <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
         <Command>
           <div className="flex items-center gap-2 p-4">
             <Input placeholder="Search..." className="w-full" onChange={handleSearchChange} />
-            <Button variant="primary" onClick={() => onSearch(searchQuery)}>
-              Search
-            </Button>
+            <Button onClick={() => onSearch(searchQuery)}>Search</Button>
           </div>
         </Command>
       </CommandDialog>

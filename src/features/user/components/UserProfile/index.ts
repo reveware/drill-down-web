@@ -1,2 +1,2 @@
-export * from './ProfileContent';
 export * from './ProfileOverview';
+export * from './ProfileContent/ProfileContent';

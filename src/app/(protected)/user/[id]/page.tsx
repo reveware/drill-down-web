@@ -1,6 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { ProfileOverview, UserTags, ProfileContent, useUserProfile } from '@/features/user';
+import { ProfileOverview, UserTags, useUserProfile, ProfileContent } from '@/features/user';
 import { Spinner } from '@/components/shared';
 
 export default function UserProfilePage() {

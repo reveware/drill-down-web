@@ -1,13 +1,19 @@
 import { UserDetail } from '@/types/user';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FollowersTab } from './ContentTabs/FollowersTab';
-import { LikesTab } from './ContentTabs/LikesTab';
-import { PostsTab } from './ContentTabs/PostsTab';
+import { PostsTab } from './PostsTab';
+import { FollowersTab } from './FollowersTab';
+import { LikesTab } from './LikesTab';
 
 interface ProfileContentProps {
   user: UserDetail;
 }
+
+const TabContent = ({ value, children }: { value: string; children: React.ReactNode }) => (
+  <TabsContent value={value} className="bg-muted/10 flex-1 overflow-hidden rounded-lg">
+    {children}
+  </TabsContent>
+);
 
 export const ProfileContent = ({ user }: ProfileContentProps) => {
   return (
@@ -20,17 +26,17 @@ export const ProfileContent = ({ user }: ProfileContentProps) => {
             <TabsTrigger value="likes">Likes</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="posts" className="bg-primary/5 flex-1 overflow-hidden rounded-lg">
+          <TabContent value="posts">
             <PostsTab user={user} />
-          </TabsContent>
+          </TabContent>
 
-          <TabsContent value="followers" className="bg-primary/5 flex-1 overflow-hidden rounded-lg">
+          <TabContent value="followers">
             <FollowersTab user={user} />
-          </TabsContent>
+          </TabContent>
 
-          <TabsContent value="likes" className="bg-primary/5 flex-1 overflow-hidden rounded-lg">
+          <TabContent value="likes">
             <LikesTab user={user} />
-          </TabsContent>
+          </TabContent>
         </Tabs>
       </CardContent>
     </Card>

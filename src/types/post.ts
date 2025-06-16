@@ -49,9 +49,34 @@ export type PostOverview = z.infer<typeof PostOverviewSchema>;
 export const PostSearchParamsSchema = z.object({
   id: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  author: z.string().optional(),
+  authorId: z.string().optional(),
   created_before: z.string().datetime().optional(),
   created_after: z.string().datetime().optional(),
 });
 
 export type PostSearchParams = z.infer<typeof PostSearchParamsSchema>;
+
+export const createPostBaseSchema = z.object({
+  tags: z.array(z.string()),
+  description: z.string().optional(),
+});
+
+export const createPhotoPostSchema = createPostBaseSchema.extend({
+  type: z.literal(PostTypes.PHOTO),
+  photos: z.array(z.instanceof(File)).optional(),
+});
+
+export const createQuotePostSchema = createPostBaseSchema.extend({
+  type: z.literal(PostTypes.QUOTE),
+  quote: z.string().min(1, 'Quote is required'),
+  author: z.string().min(1, 'Author is required'),
+  date: z.string().optional(),
+  location: z.string().optional(),
+});
+
+export const createPostSchema = z.discriminatedUnion('type', [
+  createPhotoPostSchema,
+  createQuotePostSchema,
+]);
+
+export type CreatePost = z.infer<typeof createPostSchema>;

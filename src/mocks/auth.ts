@@ -9,7 +9,7 @@ export const mockLogin = async (loginAttempt: LoginDto) => {
   };
 };
 
-export const mockRegister = async (user: FormData) => {
+export const mockRegister = async (user: CreateUserDto) => {
   console.log('mockRegister', user);
   return {
     token: '1234567890',

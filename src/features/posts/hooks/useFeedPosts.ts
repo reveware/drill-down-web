@@ -1,16 +1,13 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PostOverview } from '@/types/post';
-import { postApi } from '@/api/endpoints/post.api';
+import { PostApi } from '@/api/endpoints/post.api';
 import { PaginatedResponse } from '@/types/pagination';
-
-const PAGE_SIZE = 5;
 
 export const useFeedPosts = () => {
   const query = useInfiniteQuery<PaginatedResponse<PostOverview>>({
     queryKey: ['posts'],
-    queryFn: async ({ pageParam = 0 }) =>
-      await postApi.getFeedPosts(pageParam as number, PAGE_SIZE),
-    initialPageParam: 0,
+    queryFn: async ({ pageParam }) => await PostApi.getFeedPosts(pageParam as number),
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       return lastPage.is_last_page ? undefined : lastPage.page + 1;
     },

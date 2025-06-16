@@ -1,9 +1,10 @@
 import { UserDetail } from '@/types/user';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/shared';
+import { Button } from '@/components/ui/button';
 import { UserPlus, UserMinus, MessageCircle, Bomb } from '@/components/shared/Icons';
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 interface ProfileOverviewProps {
   user: UserDetail;
@@ -80,8 +81,10 @@ const ProfileActions = ({ user }: { user: UserDetail }) => {
   }
 
   return (
-    <div className="flex w-full flex-wrap justify-center gap-2">
-      <Button variant="outline" size="sm" block={!user.is_following}>
+    <div
+      className={cn('flex w-full flex-wrap justify-center gap-2', user.is_following && 'flex-col')}
+    >
+      <Button variant="outline" size="sm">
         {user.is_following ? (
           <>
             <UserMinus size={16} />
@@ -96,7 +99,7 @@ const ProfileActions = ({ user }: { user: UserDetail }) => {
       </Button>
 
       {user.is_following && (
-        <Button variant="outline" size="sm">
+        <Button size="sm" variant="outline">
           <MessageCircle size={16} />
           Message
         </Button>

@@ -7,9 +7,12 @@ export class TokenManager {
 
   static getToken(): string | null {
     if (typeof window === 'undefined') {
+      console.log('token manager getToken: window is undefined');
       return null;
     }
-    return localStorage.getItem(this.TOKEN_KEY);
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    console.log('token', token);
+    return token;
   }
 
   static setToken(token: string): void {

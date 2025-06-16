@@ -9,7 +9,7 @@ import { PaginatedResponse } from '@/types/pagination';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
-export const userApi = {
+export const UserApi = {
   getUser: async (userId: string): Promise<UserDetail> => {
     if (useMocks) {
       return mockFetchUser(userId);

@@ -1,9 +1,17 @@
 'use client';
-import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useCallback,
+} from 'react';
 import { TokenManager } from '@/lib/token-manager';
 import { AuthState } from '@/types/auth';
-import { userApi } from '@/api/endpoints/user.api';
+import { UserApi } from '@/api/endpoints/user.api';
 import { UserDetail } from '@/types/user';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType extends AuthState {
   login: (token: string) => void;
@@ -26,6 +34,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const router = useRouter();
   const [authState, setAuthState] = useState<AuthState>({
     isAuthenticated: false,
     token: null,
@@ -33,22 +42,67 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isLoading: true,
   });
 
-  const fetchUserData = async (userId: string) => {
-    try {
-      const userData = await userApi.getUser(userId);
-      setAuthState((prev) => ({
-        ...prev,
-        user: userData,
+  const fetchUserData = useCallback(
+    async (userId: string) => {
+      try {
+        const userData = await UserApi.getUser(userId);
+        setAuthState((prev) => ({
+          ...prev,
+          user: userData,
+          isLoading: false,
+        }));
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+        TokenManager.removeToken();
+        setAuthState({
+          isAuthenticated: false,
+          token: null,
+          user: null,
+          isLoading: false,
+        });
+        router.push('/login');
+      }
+    },
+    [router]
+  );
+
+  const initializeAuth = useCallback(async () => {
+    const token = TokenManager.getToken();
+
+    if (!token || !TokenManager.isTokenValid()) {
+      TokenManager.removeToken();
+      setAuthState({
+        isAuthenticated: false,
+        token: null,
+        user: null,
         isLoading: false,
-      }));
-    } catch (error) {
-      console.error('Failed to fetch user data:', error);
-      setAuthState((prev) => ({
-        ...prev,
-        isLoading: false,
-      }));
+      });
+      router.push('/login');
+      return;
     }
-  };
+
+    const jwtUser = TokenManager.getUserFromToken();
+    if (!jwtUser) {
+      TokenManager.removeToken();
+      setAuthState({
+        isAuthenticated: false,
+        token: null,
+        user: null,
+        isLoading: false,
+      });
+      router.push('/login');
+      return;
+    }
+
+    setAuthState({
+      isAuthenticated: true,
+      token,
+      user: null,
+      isLoading: true,
+    });
+
+    await fetchUserData(jwtUser.user.id);
+  }, [fetchUserData, router]);
 
   const login = async (token: string) => {
     TokenManager.setToken(token);
@@ -82,6 +136,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       user: null,
       isLoading: false,
     });
+    router.push('/login');
   };
 
   const setUser = (user: UserDetail) => {
@@ -93,43 +148,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
-    const initializeAuth = async () => {
-      const token = TokenManager.getToken();
-      if (token && TokenManager.isTokenValid()) {
-        const jwtUser = TokenManager.getUserFromToken();
-        if (!jwtUser) {
-          setAuthState({
-            isAuthenticated: false,
-            token: null,
-            user: null,
-            isLoading: false,
-          });
-          return;
-        }
-
-        setAuthState({
-          isAuthenticated: true,
-          token,
-          user: null,
-          isLoading: true,
-        });
-
-        await fetchUserData(jwtUser.user.id);
-      } else {
-        if (token) {
-          TokenManager.removeToken();
-        }
-        setAuthState({
-          isAuthenticated: false,
-          token: null,
-          user: null,
-          isLoading: false,
-        });
-      }
-    };
-
     initializeAuth();
-  }, []);
+  }, [initializeAuth]);
 
   const value: AuthContextType = {
     ...authState,
