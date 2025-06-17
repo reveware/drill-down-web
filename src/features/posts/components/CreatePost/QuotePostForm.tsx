@@ -1,70 +1,127 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateQuotePost, createQuotePostSchema, PostTypes, PostOverview } from '@/types/post';
+import { CreateQuotePost, createQuotePostSchema, PostOverview, PostTypes } from '@/types/post';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { TagInput } from '@/features/tags/components/TagInput';
 import { Separator } from '@/components/ui/separator';
+import { TagInput } from '@/features/tags/components/TagInput';
+import { Textarea } from '@/components/ui/textarea';
 import { useCreatePost } from '../../hooks/useCreatePost';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 interface QuotePostFormProps {
   onSuccess: (post: PostOverview) => void;
 }
 
 export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
-  const { mutate: createPost, isPending, isSuccess } = useCreatePost(PostTypes.QUOTE, onSuccess);
+  const { mutate: createQuotePost } = useCreatePost(PostTypes.QUOTE, onSuccess);
 
   const form = useForm({
     resolver: zodResolver(createQuotePostSchema),
-    defaultValues: { type: PostTypes.QUOTE, tags: [] },
+    defaultValues: {
+      type: PostTypes.QUOTE,
+      quote: '',
+      author: '',
+      date: '',
+      location: '',
+      tags: [],
+      description: '',
+    },
+    mode: 'onChange',
   });
 
-  const handleSubmit = (data: CreateQuotePost) => {
-    createPost(data);
+  const onSubmit = async (data: CreateQuotePost) => {
+    createQuotePost(data);
   };
 
   return (
-    <form onSubmit={form.handleSubmit(handleSubmit)} className="flex h-full flex-col space-y-2">
-      <div className="space-y-2">
-        <Textarea
-          {...form.register('quote')}
-          placeholder="Enter your quote..."
-          className="font-cursive text-foreground/90 h-52 resize-none text-2xl font-extralight"
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex h-full w-full flex-col space-y-4"
+      >
+        {/* Quote */}
+        <FormField
+          control={form.control}
+          name="quote"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Quote*</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Enter your quote..."
+                  className="font-cursive min-h-[100px] resize-none text-2xl"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
+            </FormItem>
+          )}
         />
-        {form.formState.errors.quote && (
-          <p className="text-destructive text-sm">{form.formState.errors.quote.message}</p>
-        )}
-      </div>
 
-      <div className="flex flex-col space-y-2">
-        <label className="text-sm font-medium">Author</label>
-        <Input {...form.register('author')} placeholder="Enter author name..." />
-        {form.formState.errors.author && (
-          <p className="text-destructive text-sm">{form.formState.errors.author.message}</p>
-        )}
-      </div>
-
-      <Separator className="my-4" />
-
-      <div className="flex flex-col space-y-2">
-        <label className="text-sm font-medium">Description</label>
-        <Textarea
-          {...form.register('description')}
-          placeholder="Add a description..."
-          className="min-h-[60px] resize-none"
+        {/* Author */}
+        <FormField
+          control={form.control}
+          name="author"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Author*</FormLabel>
+              <FormControl>
+                <Input placeholder="John Doe" {...field} className="font-cursive text-lg" />
+              </FormControl>
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
+            </FormItem>
+          )}
         />
-      </div>
 
-      <div className="flex flex-col space-y-2">
-        <label className="text-sm font-medium">Tags</label>
-        <TagInput value={form.watch('tags')} onChange={(tags) => form.setValue('tags', tags)} />
-      </div>
+        <Separator className="my-2" />
 
-      <Button type="submit" className="mt-auto mb-4 w-full">
-        Create Quote Post
-      </Button>
-    </form>
+        {/* Description */}
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Add some context..."
+                  className="min-h-[60px] resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
+            </FormItem>
+          )}
+        />
+
+        {/* Tags */}
+        <FormField
+          control={form.control}
+          name="tags"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Tags*</FormLabel>
+              <FormControl>
+                <TagInput value={field.value} onChange={(tags) => field.onChange(tags)} />
+              </FormControl>
+              <FormMessage className="min-h-[1rem] text-xs font-light" />
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit" className="mt-auto mb-4 w-full" disabled={!form.formState.isValid}>
+          Create Quote Post
+        </Button>
+      </form>
+    </Form>
   );
 };

@@ -23,7 +23,7 @@ const BasePostSchema = z.object({
   description: z.string().nullable(),
   like_count: z.number(),
   comment_count: z.number(),
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).min(1, 'At least one tag is required'),
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),
 });
@@ -57,13 +57,13 @@ export const PostSearchParamsSchema = z.object({
 export type PostSearchParams = z.infer<typeof PostSearchParamsSchema>;
 
 export const createPostBaseSchema = z.object({
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).min(1, 'At least one tag is required'),
   description: z.string().optional(),
 });
 
 export const createPhotoPostSchema = createPostBaseSchema.extend({
   type: z.literal(PostTypes.PHOTO),
-  photos: z.array(z.instanceof(File)),
+  photos: z.array(z.instanceof(File)).min(1, 'At least one photo is required'),
 });
 
 export type CreatePhotoPost = z.infer<typeof createPhotoPostSchema>;

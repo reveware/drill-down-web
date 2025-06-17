@@ -10,10 +10,11 @@ import { Tag } from '@/types/tag';
 
 interface TagInputProps {
   value: string[];
+  className?: string;
   onChange: (tags: string[]) => void;
 }
 
-export const TagInput: React.FC<TagInputProps> = ({ value, onChange }) => {
+export const TagInput: React.FC<TagInputProps> = ({ value, onChange, className }) => {
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,7 +48,7 @@ export const TagInput: React.FC<TagInputProps> = ({ value, onChange }) => {
   return (
     <div className="relative w-full">
       <div
-        className={`border-input flex flex-wrap items-center gap-2 rounded border-1 px-2 py-1 ${showSuggestions ? 'rounded-b-none' : ''}`}
+        className={`border-input flex flex-wrap items-center gap-2 rounded border-1 px-2 py-1 ${showSuggestions ? 'rounded-b-none' : ''} ${className}`}
         onClick={() => inputRef.current?.focus()}
       >
         {value.map((tag) => (

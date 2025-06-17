@@ -44,7 +44,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-muted text-xs font-light">Email</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
@@ -59,7 +59,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-muted text-xs font-light">Password</FormLabel>
+              <FormLabel>Password</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input
@@ -70,8 +70,9 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                   />
                   <Button
                     type="button"
+                    variant="ghost"
                     size="sm"
-                    className="bg-input text-accent absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
+                    className="bg-input text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}

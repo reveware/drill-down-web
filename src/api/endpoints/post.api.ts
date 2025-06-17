@@ -59,9 +59,9 @@ export const PostApi = {
 
   createPhotoPost: async (post: CreatePhotoPost): Promise<PostOverview> => {
     const formData = new FormData();
-
-    post.tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
+    formData.append('type', post.type);
     post.photos.forEach((file) => formData.append('photos', file));
+    post.tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
 
     if (post.description) {
       formData.append('description', post.description);

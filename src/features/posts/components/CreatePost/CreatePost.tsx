@@ -25,7 +25,7 @@ export const CreatePost = ({ onSuccess }: CreatePostProps) => {
 
       <div className="flex-1">
         <TabsContent value={PostTypes.PHOTO} className="h-full">
-          <PhotoPostForm />
+          <PhotoPostForm onSuccess={onSuccess} />
         </TabsContent>
 
         <TabsContent value={PostTypes.QUOTE} className="h-full">

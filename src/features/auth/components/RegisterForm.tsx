@@ -108,7 +108,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-muted text-xs font-light">Username</FormLabel>
+              <FormLabel>Username*</FormLabel>
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
@@ -124,7 +124,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="first_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted text-xs font-light">First Name</FormLabel>
+                <FormLabel>First Name*</FormLabel>
                 <FormControl>
                   <Input placeholder="John" {...field} />
                 </FormControl>
@@ -137,7 +137,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="last_name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted text-xs font-light">Last Name</FormLabel>
+                <FormLabel>Last Name*</FormLabel>
                 <FormControl>
                   <Input placeholder="Doe" {...field} />
                 </FormControl>
@@ -153,7 +153,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-muted text-xs font-light">Email</FormLabel>
+              <FormLabel>Email*</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
@@ -169,7 +169,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted text-xs font-light">Password</FormLabel>
+                <FormLabel>Password*</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -181,7 +181,8 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     <Button
                       type="button"
                       size="sm"
-                      className="bg-input text-accent absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
+                      variant="ghost"
+                      className="bg-input text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -198,7 +199,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted text-xs font-light">Confirm Password</FormLabel>
+                <FormLabel>Confirm Password*</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -210,7 +211,8 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     <Button
                       type="button"
                       size="sm"
-                      className="bg-input text-accent absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
+                      variant="ghost"
+                      className="bg-input text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? (
@@ -234,7 +236,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="date_of_birth"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted text-xs font-light">Date of Birth</FormLabel>
+                <FormLabel>Date of Birth*</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -247,7 +249,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
             name="tagline"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted text-xs font-light">Tagline (Optional)</FormLabel>
+                <FormLabel>Tagline</FormLabel>
                 <FormControl>
                   <Input placeholder="Slow down..." {...field} />
                 </FormControl>
