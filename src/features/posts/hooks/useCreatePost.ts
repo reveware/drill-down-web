@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostApi } from '@/api/endpoints/post.api';
 import { PostTypes, CreatePhotoPost, CreateQuotePost, PostOverview } from '@/types/post';
-import { toast } from 'sonner';
+import { toast } from '@/lib/toast';
 
 type PostTypeToDto<T extends PostTypes> = T extends PostTypes.PHOTO
   ? CreatePhotoPost

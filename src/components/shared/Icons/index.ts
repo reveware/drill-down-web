@@ -24,4 +24,8 @@ export {
   Plus,
   MapPin,
   Calendar,
+  CheckCircle2,
+  Info,
+  AlertTriangle,
+  XCircle,
 } from 'lucide-react';

@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/providers/AuthProvider';
 import { AuthApi } from '@/api/endpoints/auth.api';
 import { LoginDto } from '@/types/auth';
-import { toast } from 'sonner';
+import { toast } from '@/lib/toast';
 
 export const useLogin = () => {
   const { login } = useAuth();

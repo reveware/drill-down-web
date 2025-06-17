@@ -3,7 +3,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { AuthApi } from '@/api/endpoints/auth.api';
 import { RegisterDto } from '@/types/auth';
-import { toast } from 'sonner';
+import { toast } from '@/lib/toast';
 import { useAuth } from '@/providers/AuthProvider';
 
 export const useRegister = () => {

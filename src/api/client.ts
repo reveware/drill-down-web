@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { toast } from 'sonner';
+import { toast } from '@/lib/toast';
 
 const createApiClient = (): AxiosInstance => {
   const client = axios.create({
