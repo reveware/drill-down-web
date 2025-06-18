@@ -26,11 +26,11 @@ export const PostApi = {
     return (await apiClient.get<PaginatedResponse<PostOverview>>('/posts/feed')).data;
   },
 
-  async searchPosts(
+  searchPosts: async (
     search: PostSearchParams,
     page: number = PAGE_NUMBER,
     limit: number = PAGE_SIZE
-  ): Promise<PaginatedResponse<PostOverview>> {
+  ): Promise<PaginatedResponse<PostOverview>> => {
     if (useMocks) {
       return await mockFetchPosts(page, limit);
     }
@@ -42,7 +42,7 @@ export const PostApi = {
   },
 
   getRecommendedPosts: async <T extends PhotoPost | QuotePost>(
-    userId: number,
+    userId: string,
     type: PostTypes = PostTypes.PHOTO,
     page: number = PAGE_NUMBER,
     limit: number = PAGE_SIZE
@@ -79,5 +79,13 @@ export const PostApi = {
       return quotePost(Math.random().toString(36).substring(2, 15));
     }
     return (await apiClient.post('/posts/quote', post)).data;
+  },
+
+  deletePost: async (postId: string): Promise<boolean> => {
+    console.log('deletePost', postId);
+    if (useMocks) {
+      return true;
+    }
+    return (await apiClient.delete(`/posts/${postId}`)).data;
   },
 };

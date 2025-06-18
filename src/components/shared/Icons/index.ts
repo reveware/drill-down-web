@@ -28,4 +28,5 @@ export {
   Info,
   AlertTriangle,
   XCircle,
+  EllipsisVertical,
 } from 'lucide-react';

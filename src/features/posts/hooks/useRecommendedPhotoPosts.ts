@@ -3,7 +3,7 @@ import { PhotoPost, PostTypes } from '@/types/post';
 import { PostApi } from '@/api/endpoints/post.api';
 import { PaginatedResponse } from '@/types/pagination';
 
-export const useRecommendedPhotoPosts = (userId: number) => {
+export const useRecommendedPhotoPosts = (userId: string) => {
   const query = useQuery({
     queryKey: ['recommended-photo-posts'],
     queryFn: async (): Promise<PaginatedResponse<PhotoPost>> => {

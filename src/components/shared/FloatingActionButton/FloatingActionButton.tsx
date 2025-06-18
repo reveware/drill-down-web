@@ -6,7 +6,11 @@ import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 import { CreatePost } from '../../../features/posts/';
 import { ActionModal } from './ActionModal';
-import { ribbonAnimation, actionButtonAnimation, mainButtonAnimation } from './animations';
+import {
+  ribbonAnimation,
+  actionButtonAnimation,
+  mainButtonAnimation,
+} from './FloatingActionButton.animations';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface Action {
@@ -51,10 +55,9 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     },
   ];
 
-  return (
-    <div className={cn('fixed right-8 bottom-8 z-50', className)}>
-      <div className="relative">
-        {/* Ribbon of actions */}
+  const ActionRibbon = () => {
+    return (
+      <div>
         <AnimatePresence>
           {isExpanded && (
             <motion.div {...ribbonAnimation} className="absolute right-16 bottom-0 flex gap-4">
@@ -79,7 +82,14 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
             </motion.div>
           )}
         </AnimatePresence>
-
+      </div>
+    );
+  };
+  return (
+    <div className={cn('fixed right-8 bottom-8 z-50', className)}>
+      <div className="relative">
+        {/* Ribbon of actions */}
+        <ActionRibbon />
         <motion.button
           onClick={() => setIsExpanded(!isExpanded)}
           className={cn(

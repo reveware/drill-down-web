@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/hooks/useAuth';
 import { Spinner } from '@/components/shared';
 
 export const GuestGuard = ({ children }: { children: React.ReactNode }) => {

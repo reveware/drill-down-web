@@ -9,7 +9,7 @@ import { RecommendedPhotosSkeleton } from './RecomendedPhotosSkeleton';
 import { PhotoPost } from '@/types/post';
 
 interface RecommendedPhotosProps {
-  userId: number;
+  userId: string;
 }
 
 export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {

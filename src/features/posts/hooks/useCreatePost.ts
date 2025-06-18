@@ -18,7 +18,8 @@ export function useCreatePost<T extends PostTypes>(
     mutationFn: async (data) => {
       if (type === PostTypes.PHOTO) {
         return await PostApi.createPhotoPost(data as CreatePhotoPost);
-      } else if (type === PostTypes.QUOTE) {
+      }
+      if (type === PostTypes.QUOTE) {
         return await PostApi.createQuotePost(data as CreateQuotePost);
       }
       throw new Error('Invalid post type');

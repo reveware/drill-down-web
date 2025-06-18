@@ -19,20 +19,11 @@ interface AuthContextType extends AuthState {
   setUser: (user: UserDetail) => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 interface AuthProviderProps {
   children: ReactNode;
 }
-
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter();
   const [authState, setAuthState] = useState<AuthState>({

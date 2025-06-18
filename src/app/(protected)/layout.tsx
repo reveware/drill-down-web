@@ -2,7 +2,7 @@
 import { AuthGuard } from '@/components/auth/AuthGuard';
 import { DesktopSidePanel } from '@/components/navigation/DesktopSidePanel';
 import { MobileTopbar } from '@/components/navigation/MobileTopbar';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();

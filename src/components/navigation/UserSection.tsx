@@ -5,7 +5,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
-import { useAuth } from '@/providers/AuthProvider';
+import { useAuth } from '@/hooks/useAuth';
 
 interface UserSectionProps {
   user: UserOverview;

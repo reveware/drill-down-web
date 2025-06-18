@@ -3,13 +3,16 @@
 import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
 import { useFeedPosts, RecommendedPhotos } from '@/features/posts';
 import { UpcomingTimebomb } from '@/features/timebombs/components/UpcomingTimebomb/UpcomingTimebomb';
-import { mockTimeBomb } from '@/mocks/timebomb';
+
 import { useRef } from 'react';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { FloatingActionButton } from '@/components/shared/FloatingActionButton/FloatingActionButton';
+import { mockTimeBomb } from '@/mocks/timebomb';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function HomePage() {
   const loaderRef = useRef<HTMLDivElement | null>(null);
+  const { user } = useAuth();
   const { posts, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useFeedPosts();
 
   useInfiniteScrollObserver({
@@ -17,6 +20,10 @@ export default function HomePage() {
     onLoadMore: fetchNextPage,
     enabled: !!hasNextPage,
   });
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="flex h-full flex-col gap-6 lg:grid lg:grid-cols-6">
@@ -31,7 +38,7 @@ export default function HomePage() {
 
       <aside className="border-border order-1 flex flex-col items-center gap-8 border-l-1 p-4 lg:order-2 lg:col-span-3">
         <UpcomingTimebomb timebomb={mockTimeBomb} />
-        <RecommendedPhotos userId={1} />
+        <RecommendedPhotos userId={user.id} />
       </aside>
 
       <FloatingActionButton />
