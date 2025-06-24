@@ -7,7 +7,7 @@ export const TagApi = {
   searchTags: async (query: string, page = PAGE_NUMBER, pageSize = PAGE_SIZE) => {
     return (
       await apiClient.get<PaginatedResponse<Tag>>('/tags/search', {
-        params: { query, page, pageSize },
+        params: { query, page, page_size: pageSize },
       })
     ).data;
   },

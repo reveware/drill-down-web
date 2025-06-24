@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const PaginatedParamsSchema = z.object({
-  page_number: z.number().int(),
+  page: z.number().int(),
   page_size: z.number().int(),
 });
 

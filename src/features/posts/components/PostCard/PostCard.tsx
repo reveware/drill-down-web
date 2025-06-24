@@ -24,11 +24,7 @@ export const PostCard = ({ post }: PostCardProps) => {
         onDelete={() => deletePost(post.id)}
       />
       <PostCardContent post={post} />
-      <PostCardFooter
-        likeCount={post.like_count}
-        commentCount={post.comment_count}
-        tags={post.tags}
-      />
+      <PostCardFooter post={post} />
     </Card>
   );
 };

@@ -2,16 +2,22 @@ import { Heart, MessageCircle } from '@/components/shared/Icons';
 import { CardFooter } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { TagList } from './TagList';
+import { useModal } from '@/hooks/useModal';
+import { Comments } from '../Comments/Comments';
+import { PostOverview } from '@/types/post';
 
-export const PostCardFooter = ({
-  likeCount,
-  commentCount,
-  tags,
-}: {
-  likeCount: number;
-  commentCount: number;
-  tags: string[];
-}) => {
+export const PostCardFooter = ({ post }: { post: PostOverview }) => {
+  const { openModal } = useModal();
+
+  const handleViewComments = () => {
+    openModal({
+      id: 'comments',
+      title: 'Comments',
+      content: <Comments postId={post.id} />,
+    });
+  };
+
+  const { like_count, comment_count, tags } = post;
   return (
     <CardFooter className="flex flex-col gap-3 px-2 text-sm">
       <TagList tags={tags} />
@@ -19,13 +25,13 @@ export const PostCardFooter = ({
       <Separator />
 
       <div className="flex items-center gap-6">
-        <span className="flex items-center gap-1 cursor-pointer">
+        <span className="flex cursor-pointer items-center gap-1">
           <Heart size={20} />
-          {likeCount} likes
+          {like_count} likes
         </span>
-        <span className="flex items-center gap-1 cursor-pointer">
+        <span className="flex cursor-pointer items-center gap-1" onClick={handleViewComments}>
           <MessageCircle size={20} />
-          {commentCount} comments
+          {comment_count} comments
         </span>
       </div>
     </CardFooter>

@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
 } from '@/components/ui/dropdown-menu';
 import { EllipsisVertical, Trash } from '@/components/shared/Icons';
+import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
 
 interface PostCardHeaderProps {
   user: UserOverview;
@@ -20,14 +21,14 @@ export const PostCardHeader = ({ user, createdAt, onDelete }: PostCardHeaderProp
   const subtitle = formatDistanceToNow(createdAt, { addSuffix: true });
 
   const handleDelete = () => {
-    console.log('######## handleDelete');
     onDelete();
   };
 
   return (
     <CardHeader className="flex items-center justify-between gap-3 px-2">
       <div className="flex items-center gap-3">
-        <UserAvatar user={user} subtitle={subtitle} />
+        <UserAvatar user={user} />
+        <UserInfo user={user} subtitle={subtitle} />
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

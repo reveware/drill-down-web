@@ -10,7 +10,7 @@ export const useUserFollowers = (userId: string) => {
     queryKey: ['user', userId, 'followers'],
     queryFn: ({ pageParam = 0 }) =>
       UserApi.getUserFollowers(userId, pageParam as number, PAGE_SIZE),
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => (lastPage.is_last_page ? undefined : lastPage.page + 1),
   });
 

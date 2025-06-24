@@ -8,6 +8,7 @@ import { Timebomb } from '@/assets/images';
 import Image from 'next/image';
 import { useCountdown } from '../../hooks/useCountdown';
 import { formatCountdownPadded } from '../../formatCountdown';
+import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
 
 interface Props {
   timebomb: TimeBomb | null;
@@ -27,7 +28,10 @@ export const UpcomingTimebomb: React.FC<Props> = ({ timebomb }) => {
         {!timebomb && <EmptyState />}
         {timebomb && (
           <>
-            <UserAvatar user={timebomb.author} subtitle="Sent you a Timebomb!" />
+            <div className="flex items-center gap-3">
+              <UserAvatar user={timebomb.author} />
+              <UserInfo user={timebomb.author} subtitle="Sent you a Timebomb!" />
+            </div>
             <Countdown time={formatted} />
             <Footer unlocksAt={timebomb.unlocks_at} />
           </>

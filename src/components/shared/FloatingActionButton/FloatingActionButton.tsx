@@ -5,13 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 import { CreatePost } from '../../../features/posts/';
-import { ActionModal } from './ActionModal';
 import {
   ribbonAnimation,
   actionButtonAnimation,
   mainButtonAnimation,
 } from './FloatingActionButton.animations';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { useModal } from '@/hooks/useModal';
 
 interface Action {
   icon: LucideIcon;
@@ -28,14 +28,16 @@ export const ActionIcon = ({ icon: Icon }: Action) => {
 
 export const FloatingActionButton = ({ className }: FloatingActionButtonProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [activeModal, setActiveModal] = useState<string | null>(null);
+  const { openModal, closeModal } = useModal();
 
-  const handleActionClick = (label: string) => {
-    setActiveModal(label);
+  const handleActionClick = (action: Action) => {
+    openModal({
+      id: action.title,
+      title: action.title,
+      content: action.content,
+    });
     setIsExpanded(false);
   };
-
-  const closeModal = () => setActiveModal(null);
 
   const actions: Action[] = [
     {
@@ -65,7 +67,7 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
                 <Tooltip key={action.title}>
                   <TooltipTrigger asChild>
                     <motion.button
-                      onClick={() => handleActionClick(action.title)}
+                      onClick={() => handleActionClick(action)}
                       className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md hover:cursor-pointer"
                       animate={actionButtonAnimation.animate}
                       transition={actionButtonAnimation.transition(index)}
@@ -107,13 +109,6 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
           <Bot className="text-on-primary" size={40} />
         </motion.button>
       </div>
-
-      <ActionModal
-        title={actions.find((action) => action.title === activeModal)?.title || ''}
-        isOpen={!!activeModal}
-        content={actions.find((action) => action.title === activeModal)?.content}
-        onClose={closeModal}
-      />
     </div>
   );
 };

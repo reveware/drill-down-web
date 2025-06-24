@@ -18,10 +18,10 @@ const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 export const PostApi = {
   getFeedPosts: async (
     page: number = PAGE_NUMBER,
-    limit: number = PAGE_SIZE
+    pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<PostOverview>> => {
     if (useMocks) {
-      return await mockFetchPosts(page, limit);
+      return await mockFetchPosts(page, pageSize);
     }
     return (await apiClient.get<PaginatedResponse<PostOverview>>('/posts/feed')).data;
   },
@@ -29,14 +29,14 @@ export const PostApi = {
   searchPosts: async (
     search: PostSearchParams,
     page: number = PAGE_NUMBER,
-    limit: number = PAGE_SIZE
+    pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<PostOverview>> => {
     if (useMocks) {
-      return await mockFetchPosts(page, limit);
+      return await mockFetchPosts(page, pageSize);
     }
     return (
       await apiClient.get<PaginatedResponse<PostOverview>>('/posts', {
-        params: { ...search, page, limit },
+        params: { ...search, page, page_size: pageSize },
       })
     ).data;
   },
@@ -45,14 +45,14 @@ export const PostApi = {
     userId: string,
     type: PostTypes = PostTypes.PHOTO,
     page: number = PAGE_NUMBER,
-    limit: number = PAGE_SIZE
+    pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<T>> => {
     if (useMocks) {
-      return (await mockFetchPosts(page, limit, type)) as PaginatedResponse<T>;
+      return (await mockFetchPosts(page, pageSize, type)) as PaginatedResponse<T>;
     }
     return (
       await apiClient.get<PaginatedResponse<T>>('/posts/recommended', {
-        params: { userId, type, page, limit },
+        params: { userId, type, page, page_size: pageSize },
       })
     ).data;
   },
