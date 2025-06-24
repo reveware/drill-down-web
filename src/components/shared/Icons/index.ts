@@ -15,6 +15,7 @@ export {
   Upload,
   ChevronDown,
   ChevronUp,
+  ChevronRight,
   UserMinus,
   UserPlus,
   Trash,

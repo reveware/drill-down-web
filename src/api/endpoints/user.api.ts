@@ -27,7 +27,7 @@ export const UserApi = {
     }
     return (
       await apiClient.get<PaginatedResponse<UserOverview>>(`/users/${userId}/followers`, {
-        params: { page, pageSize },
+        params: { page, page_size: pageSize },
       })
     ).data;
   },
@@ -42,7 +42,7 @@ export const UserApi = {
     }
     return (
       await apiClient.get<PaginatedResponse<Like>>(`/users/${userId}/likes`, {
-        params: { page, pageSize },
+        params: { page, page_size: pageSize },
       })
     ).data;
   },

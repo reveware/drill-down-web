@@ -6,6 +6,7 @@ import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
+import { UserInfo } from '../shared/UserInfo/UserInfo';
 
 interface UserSectionProps {
   user: UserOverview;
@@ -20,7 +21,10 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <UserAvatar user={user} accent />
+      <div className="flex items-center gap-3">
+        <UserAvatar user={user} />
+        <UserInfo user={user} />
+      </div>
 
       <ThemeToggle />
 

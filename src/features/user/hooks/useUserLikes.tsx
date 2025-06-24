@@ -9,7 +9,7 @@ export const useUserLikes = (userId: string) => {
   const query = useInfiniteQuery<PaginatedResponse<Like>>({
     queryKey: ['user', userId, 'likes'],
     queryFn: ({ pageParam = 0 }) => UserApi.getUserLikes(userId, pageParam as number, PAGE_SIZE),
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => (lastPage.is_last_page ? undefined : lastPage.page + 1),
   });
 

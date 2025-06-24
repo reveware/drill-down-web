@@ -1,13 +1,13 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-interface ActionModalProps {
-  title: string;
+interface ModalProps {
+  title?: string;
   isOpen: boolean;
   content: React.ReactNode;
   onClose: () => void;
 }
 
-export const ActionModal = ({ title, isOpen, content, onClose }: ActionModalProps) => {
+export const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="card flex h-4/5 min-h-4/5 w-full flex-col shadow-lg">
@@ -15,7 +15,7 @@ export const ActionModal = ({ title, isOpen, content, onClose }: ActionModalProp
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-1">{content}</div>
+        <div className="flex min-h-0 flex-1">{content}</div>
       </DialogContent>
     </Dialog>
   );
