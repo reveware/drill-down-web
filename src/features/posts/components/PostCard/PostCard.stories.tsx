@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PostCard } from './PostCard';
-import { photoPost, quotePost } from '@/mocks/posts';
+import { photoPost, quotePost } from '@/mocks/post';
 
 import { PostTypes } from '@/types/post';
 
@@ -25,14 +25,14 @@ type Story = StoryObj<typeof PostCard>;
 export const Photo: Story = {
   name: 'Photo Post',
   args: {
-    post: photoPost(1),
+    post: photoPost('1'),
   },
 };
 
 export const Quote: Story = {
   name: 'Quote Post',
   args: {
-    post: quotePost(2),
+    post: quotePost('2'),
   },
 };
 
@@ -40,10 +40,10 @@ export const LongQuote: Story = {
   name: 'Long Quote',
   args: {
     post: {
-      ...quotePost(3),
+      ...quotePost('3'),
       type: PostTypes.QUOTE,
       content: {
-        ...quotePost(3).content,
+        ...quotePost('3').content,
         quote: '“' + 'This is a very long quote that keeps going. '.repeat(10) + '”',
         author: 'John Doe',
       },
@@ -55,7 +55,7 @@ export const MultiPhoto: Story = {
   name: 'Multiple Photos',
   args: {
     post: {
-      ...photoPost(5),
+      ...photoPost('5'),
       type: PostTypes.PHOTO,
       content: {
         urls: [
