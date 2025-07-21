@@ -175,7 +175,7 @@ const Preview = ({
         Change
       </button>
     </div>
-    <ScrollArea className="h-full max-h-full flex-1 overflow-hidden border-1 border-red-500">
+    <ScrollArea className="h-full max-h-full flex-1 overflow-hidden">
       <GridContainer>
         {selectedFiles.map((file, index) => (
           <div key={index} className="relative aspect-square overflow-hidden rounded-lg">

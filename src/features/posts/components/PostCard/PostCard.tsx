@@ -37,6 +37,9 @@ export const PostCard = ({ post }: PostCardProps) => {
     }
   };
 
+  const isTouchDevice =
+    typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
   if (isDeleting) {
     return null;
   }
@@ -48,7 +51,11 @@ export const PostCard = ({ post }: PostCardProps) => {
         onDelete={() => deletePost(post.id)}
       />
 
-      <div onTouchEnd={handleTouchEnd} onDoubleClick={handleLike} className="cursor-pointer">
+      <div
+        onTouchEnd={isTouchDevice ? handleTouchEnd : undefined}
+        onDoubleClick={!isTouchDevice ? handleLike : undefined}
+        className="cursor-pointer"
+      >
         <PostCardContent post={post} />
       </div>
 
