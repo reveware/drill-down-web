@@ -57,36 +57,40 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     },
   ];
 
-  const ActionRibbon = () => {
-    return (
-      <div>
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div {...ribbonAnimation} className="absolute right-16 bottom-0 flex gap-4">
-              {actions.map((action, index) => (
-                <Tooltip key={action.title}>
-                  <TooltipTrigger asChild>
-                    <motion.button
-                      onClick={() => handleActionClick(action)}
-                      className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md hover:cursor-pointer"
-                      animate={actionButtonAnimation.animate}
-                      transition={actionButtonAnimation.transition(index)}
-                      whileHover={actionButtonAnimation.whileHover}
-                    >
-                      <ActionIcon {...action} />
-                    </motion.button>
-                  </TooltipTrigger>
-                  <TooltipContent side="top" sideOffset={4}>
-                    {action.title}
-                  </TooltipContent>
-                </Tooltip>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    );
-  };
+  const ActionRibbon = () => (
+    <AnimatePresence>
+      {isExpanded && (
+        <motion.div
+          {...ribbonAnimation}
+          className="absolute right-0 bottom-full mb-4 flex flex-col items-end gap-4"
+        >
+          {actions.map((action, index) => (
+            <Tooltip key={action.title}>
+              <TooltipTrigger asChild>
+                <motion.button
+                  onClick={() => handleActionClick(action)}
+                  className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={actionButtonAnimation.animate(index)}
+                  exit={actionButtonAnimation.exit}
+                  transition={actionButtonAnimation.transition(index)}
+                  whileHover={actionButtonAnimation.whileHover}
+                >
+                  <ActionIcon {...action} />
+                </motion.button>
+              </TooltipTrigger>
+
+              {/* Tooltip on the LEFT so it doesn't cover the buttons */}
+              <TooltipContent side="left" sideOffset={6}>
+                {action.title}
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+
   return (
     <div className={cn('fixed right-8 bottom-8 z-50', className)}>
       <div className="relative">

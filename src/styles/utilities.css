@@ -18,4 +18,8 @@
   .photo {
     @apply transition-transform duration-200 hover:scale-105 hover:opacity-80;
   }
+
+  .liked-heart {
+    fill: var(--color-accent);
+  }
 }

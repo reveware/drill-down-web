@@ -20,6 +20,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 interface PhotoPostFormProps {
   onSuccess: (post: PostOverview) => void;
@@ -115,17 +116,19 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
                     </button>
                   </div>
 
-                  <ScrollArea className="max-h-60">
+                  <ScrollArea className="max-h-40 sm:max-h-60">
                     <GridContainer>
                       {selectedFiles.map((file, index) => (
                         <div
                           key={index}
-                          className="relative aspect-square w-full overflow-hidden rounded-lg"
+                          className="relative aspect-square overflow-hidden rounded-lg"
                         >
-                          <img
+                          <Image
                             src={URL.createObjectURL(file)}
                             alt={`Preview ${index + 1}`}
                             className="h-full w-full object-cover"
+                            width={100}
+                            height={100}
                           />
                           <button
                             type="button"

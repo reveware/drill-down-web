@@ -30,14 +30,14 @@ export const PostCardHeader = ({ user, createdAt, onDelete }: PostCardHeaderProp
         <UserAvatar user={user} />
         <UserInfo user={user} subtitle={subtitle} />
       </div>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="hover:bg-muted focus:ring-accent rounded-full p-2 focus:ring-2 focus:outline-none">
-            <EllipsisVertical className="text-muted-foreground h-5 w-5" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="card p-2" align="end">
-          {user.is_self && (
+      {user.is_self && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="hover:bg-muted focus:ring-accent rounded-full p-2 focus:ring-2 focus:outline-none">
+              <EllipsisVertical className="text-muted-foreground h-5 w-5" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="card p-2" align="end">
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex items-center gap-2">
                 <button className="flex items-center gap-2" onClick={handleDelete}>
@@ -46,9 +46,9 @@ export const PostCardHeader = ({ user, createdAt, onDelete }: PostCardHeaderProp
                 </button>
               </div>
             </DropdownMenuItem>
-          )}
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
     </CardHeader>
   );
 };

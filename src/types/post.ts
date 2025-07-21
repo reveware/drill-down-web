@@ -24,6 +24,7 @@ const BasePostSchema = z.object({
   like_count: z.number(),
   comment_count: z.number(),
   tags: z.array(z.string()).min(1, 'At least one tag is required'),
+  is_liked: z.boolean(),
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),
 });
