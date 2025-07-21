@@ -17,7 +17,6 @@ export const PostCard = ({ post }: PostCardProps) => {
   const { mutate: likePost } = useLikePost();
   const { mutate: unlikePost } = useUnlikePost();
 
-  // Double tap/click logic
   const lastTap = useRef<number>(0);
 
   const handleLike = () => {
@@ -53,11 +52,7 @@ export const PostCard = ({ post }: PostCardProps) => {
         <PostCardContent post={post} />
       </div>
 
-      <PostCardFooter
-        post={post}
-        onLike={() => likePost(post.id)}
-        onUnlike={() => unlikePost(post.id)}
-      />
+      <PostCardFooter post={post} onHeartClick={handleLike} />
     </Card>
   );
 };
