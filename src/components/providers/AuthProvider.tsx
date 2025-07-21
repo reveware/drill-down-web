@@ -1,12 +1,5 @@
 'use client';
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-  useCallback,
-} from 'react';
+import React, { createContext, useEffect, useState, ReactNode, useCallback } from 'react';
 import { TokenManager } from '@/lib/token-manager';
 import { AuthState } from '@/types/auth';
 import { UserApi } from '@/api/endpoints/user.api';

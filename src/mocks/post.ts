@@ -17,6 +17,7 @@ export const photoPost = (id: string, seed?: number): PostOverview => ({
   },
   created_at: '2024-06-01T12:00:00.000Z',
   updated_at: '2024-06-01T12:00:00.000Z',
+  is_liked: false,
 });
 
 export const quotePost = (id: string): PostOverview => ({
@@ -43,6 +44,7 @@ export const quotePost = (id: string): PostOverview => ({
     quote: "The stars don't look bigger, but they do look brighter.",
     author: 'Sally Ride',
   },
+  is_liked: true,
 });
 
 export const generatePosts = (length: number, type?: PostTypes): PostOverview[] => {

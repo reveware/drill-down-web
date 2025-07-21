@@ -73,7 +73,7 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
                   initial={{ opacity: 0, y: 12 }}
                   animate={actionButtonAnimation.animate(index)}
                   exit={actionButtonAnimation.exit}
-                  transition={actionButtonAnimation.transition(index)}
+                  transition={actionButtonAnimation.transition}
                   whileHover={actionButtonAnimation.whileHover}
                 >
                   <ActionIcon {...action} />

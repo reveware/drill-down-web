@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { CreateCommentForm } from './CreateCommentForm';
 import { CommentsList } from './CommentsList';
 import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { useCreateComment } from '../../hooks/useCreateComment';
 
 interface CommentsProps {

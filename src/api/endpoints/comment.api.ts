@@ -1,5 +1,5 @@
 import { apiClient } from '../client';
-import { Comment, CreateComment, CommentResponse } from '@/types/comment';
+import { Comment, CreateComment } from '@/types/comment';
 import { PaginatedResponse } from '@/types/pagination';
 
 export const CommentApi = {

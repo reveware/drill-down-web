@@ -1,10 +1,9 @@
 'use client';
 import { useState } from 'react';
-import { CreateQuotePost, PostOverview, PostTypes } from '@/types/post';
+import { PostOverview, PostTypes } from '@/types/post';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PhotoPostForm } from './PhotoPostForm';
 import { QuotePostForm } from './QuotePostForm';
-import { useCreatePost } from '../../hooks/useCreatePost';
 
 interface CreatePostProps {
   onSuccess: (post: PostOverview) => void;

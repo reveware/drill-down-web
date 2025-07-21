@@ -116,31 +116,7 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
                     </button>
                   </div>
 
-                  <ScrollArea className="max-h-40 sm:max-h-60">
-                    <GridContainer>
-                      {selectedFiles.map((file, index) => (
-                        <div
-                          key={index}
-                          className="relative aspect-square overflow-hidden rounded-lg"
-                        >
-                          <Image
-                            src={URL.createObjectURL(file)}
-                            alt={`Preview ${index + 1}`}
-                            className="h-full w-full object-cover"
-                            width={100}
-                            height={100}
-                          />
-                          <button
-                            type="button"
-                            onClick={() => removeFile(index)}
-                            className="bg-background/80 absolute top-1 right-1 z-10 rounded-full p-1"
-                          >
-                            <X className="h-4 w-4" />
-                          </button>
-                        </div>
-                      ))}
-                    </GridContainer>
-                  </ScrollArea>
+                  <Preview selectedFiles={selectedFiles} removeFile={removeFile} />
                 </>
               )}
               <FormMessage className="min-h-[1rem] text-xs font-light" />
@@ -191,3 +167,34 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
     </Form>
   );
 };
+
+const Preview = ({
+  selectedFiles,
+  removeFile,
+}: {
+  selectedFiles: File[];
+  removeFile: (index: number) => void;
+}) => (
+  <ScrollArea className="max-h-40 sm:max-h-60">
+    <GridContainer>
+      {selectedFiles.map((file, index) => (
+        <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
+          <Image
+            src={URL.createObjectURL(file)}
+            alt={`Preview ${index + 1}`}
+            className="h-full w-full object-cover"
+            width={100}
+            height={100}
+          />
+          <button
+            type="button"
+            onClick={() => removeFile(index)}
+            className="bg-background/80 absolute top-1 right-1 z-10 rounded-full p-1"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      ))}
+    </GridContainer>
+  </ScrollArea>
+);

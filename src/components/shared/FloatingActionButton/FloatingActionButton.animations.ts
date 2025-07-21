@@ -13,12 +13,12 @@ export const actionButtonAnimation = {
     y: 0,
     transition: { delay: index * 0.05, type: 'spring' as const, stiffness: 300 },
   }),
-  transition: (index: number) => ({
+  transition: {
     delay: 0,
     type: 'spring' as const,
     damping: 20,
     stiffness: 260,
-  }),
+  },
   whileHover: { scale: 1.1 },
   exit: { opacity: 0, y: 12 },
 };

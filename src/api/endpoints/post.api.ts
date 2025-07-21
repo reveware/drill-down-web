@@ -5,7 +5,6 @@ import {
   PostSearchParams,
   QuotePost,
   PostTypes,
-  CreatePost,
   CreateQuotePost,
   CreatePhotoPost,
 } from '@/types/post';

@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { Comment } from '@/types/comment';
 import { useComments } from '../../hooks/useComments';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { SingleComment } from './SingleComment';
