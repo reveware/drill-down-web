@@ -13,24 +13,26 @@ export const CreatePost = ({ onSuccess }: CreatePostProps) => {
 
   return (
     <Tabs
-      className="flex flex-1 flex-col justify-between"
+      className="mx-auto flex w-full flex-1 flex-col justify-between"
       value={type}
       onValueChange={(value) => setType(value as PostTypes)}
     >
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value={PostTypes.PHOTO}>Photo</TabsTrigger>
-        <TabsTrigger value={PostTypes.QUOTE}>Quote</TabsTrigger>
+      <TabsList className="mb-2 grid w-full grid-cols-2">
+        <TabsTrigger className="text-xs" value={PostTypes.PHOTO}>
+          Photo
+        </TabsTrigger>
+        <TabsTrigger className="text-xs" value={PostTypes.QUOTE}>
+          Quote
+        </TabsTrigger>
       </TabsList>
 
-      <div className="flex-1">
-        <TabsContent value={PostTypes.PHOTO} className="h-full">
-          <PhotoPostForm onSuccess={onSuccess} />
-        </TabsContent>
+      <TabsContent value={PostTypes.PHOTO} className="flex min-h-0 flex-1 flex-col">
+        <PhotoPostForm onSuccess={onSuccess} />
+      </TabsContent>
 
-        <TabsContent value={PostTypes.QUOTE} className="h-full">
-          <QuotePostForm onSuccess={onSuccess} />
-        </TabsContent>
-      </div>
+      <TabsContent value={PostTypes.QUOTE} className="flex min-h-0 flex-1 flex-col">
+        <QuotePostForm onSuccess={onSuccess} />
+      </TabsContent>
     </Tabs>
   );
 };

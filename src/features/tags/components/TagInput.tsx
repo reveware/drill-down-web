@@ -7,6 +7,7 @@ import { X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useTagSearch } from '../hooks/useTagSearch';
 import { Tag } from '@/types/tag';
+import { Input } from '@/components/ui/input';
 
 interface TagInputProps {
   value: string[];
@@ -67,7 +68,7 @@ export const TagInput: React.FC<TagInputProps> = ({ value, onChange, className }
         <input
           ref={inputRef}
           type="text"
-          className="min-w-[60px] flex-1 bg-transparent outline-none"
+          className="placeholder:text-input min-w-[60px] flex-1 bg-transparent text-sm outline-none sm:text-base"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}

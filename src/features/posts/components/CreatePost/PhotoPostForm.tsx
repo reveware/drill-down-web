@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreatePhotoPost, createPhotoPostSchema, PostOverview, PostTypes } from '@/types/post';
 import { Button } from '@/components/ui/button';
@@ -72,7 +72,7 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex h-full w-full flex-col space-y-2"
+        className="flex h-full min-h-0 w-full flex-col space-y-2 sm:space-y-4"
       >
         <input
           type="file"
@@ -88,36 +88,19 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
           control={form.control}
           name="photos"
           render={({ field }) => (
-            <FormItem className="flex max-h-72 flex-1 flex-col">
-              <FormLabel>Photos*</FormLabel>
+            <FormItem className="flex min-h-0 flex-1 flex-col">
+              <FormLabel className="text-xs sm:text-sm">Photos*</FormLabel>
               {selectedFiles.length === 0 ? (
-                <div
-                  className={cn(
-                    'border-muted/60 hover:bg-muted/20 flex flex-1 cursor-pointer items-center justify-center rounded-lg border border-dashed transition',
-                    form.formState.errors.photos && 'border-red-500'
-                  )}
-                  onClick={triggerFileInput}
-                >
-                  <div className="text-muted flex flex-col items-center">
-                    <Plus className="h-10 w-10" />
-                    <p className="mt-2 text-sm">Upload photos</p>
-                  </div>
-                </div>
+                <UploadArea
+                  triggerFileInput={triggerFileInput}
+                  error={!!form.formState.errors.photos}
+                />
               ) : (
-                <>
-                  <div className="text-foreground mb-2 self-end text-xs">
-                    {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected —{' '}
-                    <button
-                      type="button"
-                      onClick={triggerFileInput}
-                      className="hover:text-accent cursor-pointer underline underline-offset-2"
-                    >
-                      Change
-                    </button>
-                  </div>
-
-                  <Preview selectedFiles={selectedFiles} removeFile={removeFile} />
-                </>
+                <Preview
+                  selectedFiles={selectedFiles}
+                  removeFile={removeFile}
+                  triggerFileInput={triggerFileInput}
+                />
               )}
               <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
@@ -132,11 +115,11 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel className="text-xs sm:text-sm">Description</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Add a description..."
-                  className="min-h-[60px] resize-none"
+                  className="w-full resize-none text-sm sm:text-base"
                   {...field}
                 />
               </FormControl>
@@ -151,7 +134,7 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tags*</FormLabel>
+              <FormLabel className="text-xs sm:text-sm">Tags*</FormLabel>
               <FormControl>
                 <TagInput value={field.value} onChange={(tags) => field.onChange(tags)} />
               </FormControl>
@@ -160,7 +143,11 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
           )}
         />
 
-        <Button type="submit" className="mt-auto mb-4 w-full" disabled={!form.formState.isValid}>
+        <Button
+          type="submit"
+          className="mt-auto mb-2 w-full justify-self-end py-2 text-xs sm:text-sm"
+          disabled={!form.formState.isValid}
+        >
           Create Photo Post
         </Button>
       </form>
@@ -171,30 +158,65 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
 const Preview = ({
   selectedFiles,
   removeFile,
+  triggerFileInput,
 }: {
   selectedFiles: File[];
   removeFile: (index: number) => void;
+  triggerFileInput: () => void;
 }) => (
-  <ScrollArea className="max-h-40 sm:max-h-60">
-    <GridContainer>
-      {selectedFiles.map((file, index) => (
-        <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
-          <Image
-            src={URL.createObjectURL(file)}
-            alt={`Preview ${index + 1}`}
-            className="h-full w-full object-cover"
-            width={100}
-            height={100}
-          />
-          <button
-            type="button"
-            onClick={() => removeFile(index)}
-            className="bg-background/80 absolute top-1 right-1 z-10 rounded-full p-1"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-      ))}
-    </GridContainer>
-  </ScrollArea>
+  <>
+    <div className="text-foreground mb-2 self-end text-xs">
+      {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected —{' '}
+      <button
+        type="button"
+        onClick={triggerFileInput}
+        className="hover:text-accent cursor-pointer underline underline-offset-2"
+      >
+        Change
+      </button>
+    </div>
+    <ScrollArea className="h-full max-h-full flex-1 overflow-hidden border-1 border-red-500">
+      <GridContainer>
+        {selectedFiles.map((file, index) => (
+          <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
+            <Image
+              src={URL.createObjectURL(file)}
+              alt={`Preview ${index + 1}`}
+              className="h-full w-full object-cover"
+              width={100}
+              height={100}
+            />
+            <button
+              type="button"
+              onClick={() => removeFile(index)}
+              className="bg-background/80 absolute top-1 right-1 z-10 rounded-full p-1"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        ))}
+      </GridContainer>
+    </ScrollArea>
+  </>
+);
+
+const UploadArea = ({
+  triggerFileInput,
+  error,
+}: {
+  triggerFileInput: () => void;
+  error: boolean;
+}) => (
+  <div
+    className={cn(
+      'border-muted/60 hover:bg-muted/20 flex flex-1 cursor-pointer items-center justify-center rounded-lg border border-dashed transition',
+      error && 'border-red-500'
+    )}
+    onClick={triggerFileInput}
+  >
+    <div className="text-muted flex flex-col items-center">
+      <Plus className="h-10 w-10" />
+      <p className="mt-2 text-sm">Upload photos</p>
+    </div>
+  </div>
 );

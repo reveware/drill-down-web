@@ -46,7 +46,7 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex h-full w-full flex-col space-y-4"
+        className="flex h-full w-full flex-col space-y-2 sm:space-y-4"
       >
         {/* Quote */}
         <FormField
@@ -54,11 +54,11 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           name="quote"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Quote*</FormLabel>
+              <FormLabel className="text-xs sm:text-sm">Quote*</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Enter your quote..."
-                  className="font-cursive min-h-[100px] resize-none text-2xl"
+                  className="font-cursive min-h-[80px] resize-none text-lg sm:text-2xl"
                   {...field}
                 />
               </FormControl>
@@ -73,16 +73,20 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           name="author"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Author*</FormLabel>
+              <FormLabel className="text-xs sm:text-sm">Author*</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} className="font-cursive text-lg" />
+                <Input
+                  placeholder="John Doe"
+                  {...field}
+                  className="font-cursive text-base sm:text-lg"
+                />
               </FormControl>
               <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
           )}
         />
 
-        <Separator className="my-2" />
+        <Separator className="my-4" />
 
         {/* Description */}
         <FormField
@@ -90,11 +94,11 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel className="text-xs sm:text-sm">Description</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Add some context..."
-                  className="min-h-[60px] resize-none"
+                  placeholder="Add a description..."
+                  className="resize-none text-sm sm:text-base"
                   {...field}
                 />
               </FormControl>
@@ -109,7 +113,7 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Tags*</FormLabel>
+              <FormLabel className="text-xs sm:text-sm">Tags*</FormLabel>
               <FormControl>
                 <TagInput value={field.value} onChange={(tags) => field.onChange(tags)} />
               </FormControl>
@@ -118,7 +122,11 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           )}
         />
 
-        <Button type="submit" className="mt-auto mb-4 w-full" disabled={!form.formState.isValid}>
+        <Button
+          type="submit"
+          className="mt-auto mb-2 w-full justify-self-end py-2 text-xs sm:text-sm"
+          disabled={!form.formState.isValid}
+        >
           Create Quote Post
         </Button>
       </form>
