@@ -1,5 +1,5 @@
 import { UserList } from '@/features/user';
-import { useUserFollowers } from '@/features/user/hooks/useUserFollowers';
+import { useUserFollowers } from '@/features/follow/hooks/useUserFollowers';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { useRef } from 'react';
 import { UserOverview } from '@/types/user';

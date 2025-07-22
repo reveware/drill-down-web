@@ -7,7 +7,6 @@ import { X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useTagSearch } from '../hooks/useTagSearch';
 import { Tag } from '@/types/tag';
-import { Input } from '@/components/ui/input';
 
 interface TagInputProps {
   value: string[];

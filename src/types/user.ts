@@ -20,6 +20,7 @@ export const UserOverviewSchema = z.object({
   is_mutual: z.boolean(),
   is_pending_follow: z.boolean(),
   is_pending_follower: z.boolean(),
+  follow_request_id: z.string().optional(),
 
   last_seen: z.string(),
   created_at: z.string(),

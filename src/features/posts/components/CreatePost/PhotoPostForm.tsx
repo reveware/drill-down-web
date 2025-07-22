@@ -1,6 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
-import { FieldErrors, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreatePhotoPost, createPhotoPostSchema, PostOverview, PostTypes } from '@/types/post';
 import { Button } from '@/components/ui/button';
@@ -87,7 +87,7 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
         <FormField
           control={form.control}
           name="photos"
-          render={({ field }) => (
+          render={() => (
             <FormItem className="flex min-h-0 flex-1 flex-col">
               <FormLabel className="text-xs sm:text-sm">Photos*</FormLabel>
               {selectedFiles.length === 0 ? (

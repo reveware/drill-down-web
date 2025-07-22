@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/form';
 import { useAvatarUpload } from '../hooks/useAvatarUpload';
 import { Label } from '@/components/ui/label';
+import { format } from 'date-fns';
 
 interface RegisterFormProps {
   onSubmit: (data: RegisterDto) => void;
@@ -89,13 +90,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     }}
                   />
                 </FormControl>
-                {form.formState.errors.avatar?.message && (
-                  <Label
-                    htmlFor="avatar"
-                    className="text-muted hover:text-foreground cursor-pointer text-xs font-light"
-                  >
-                    Click to upload avatar
-                  </Label>
+
+                {form.formState.isDirty && (
+                  <FormMessage className="min-h-[1rem] text-xs font-light" />
                 )}
               </div>
             </FormItem>
@@ -238,7 +235,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormItem>
                 <FormLabel>Date of Birth*</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} />
+                  <Input type="date" {...field} max={format(new Date(), 'yyyy-MM-dd')} />
                 </FormControl>
                 <FormMessage className="min-h-[1rem] text-xs font-light" />
               </FormItem>

@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { UserApi } from '@/api/endpoints/user.api';
+import { FollowApi } from '@/api/endpoints/follow.api';
 import { UserOverview } from '@/types/user';
 import { PaginatedResponse } from '@/types/pagination';
 
@@ -9,7 +9,7 @@ export const useUserFollowers = (userId: string) => {
   const query = useInfiniteQuery<PaginatedResponse<UserOverview>>({
     queryKey: ['user', userId, 'followers'],
     queryFn: ({ pageParam = 0 }) =>
-      UserApi.getUserFollowers(userId, pageParam as number, PAGE_SIZE),
+      FollowApi.getUserFollowers(userId, pageParam as number, PAGE_SIZE),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => (lastPage.is_last_page ? undefined : lastPage.page + 1),
   });

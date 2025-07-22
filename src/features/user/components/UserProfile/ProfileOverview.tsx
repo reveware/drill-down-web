@@ -1,10 +1,8 @@
 import { UserDetail } from '@/types/user';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { UserPlus, UserMinus, MessageCircle, Bomb } from '@/components/shared/Icons';
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { ProfileActions } from './ProfileActions/ProfileActions';
 
 interface ProfileOverviewProps {
   user: UserDetail;
@@ -71,46 +69,6 @@ const ProfileDetails = ({ user }: { user: UserDetail }) => {
           <span className="text-xs font-light">{key}</span>
         </div>
       ))}
-    </div>
-  );
-};
-
-const ProfileActions = ({ user }: { user: UserDetail }) => {
-  if (user.is_self) {
-    return null;
-  }
-
-  return (
-    <div
-      className={cn('flex w-full flex-wrap justify-center gap-2', user.is_following && 'flex-col')}
-    >
-      <Button variant="outline" size="sm">
-        {user.is_following ? (
-          <>
-            <UserMinus size={16} />
-            Unfollow
-          </>
-        ) : (
-          <>
-            <UserPlus size={16} />
-            Follow
-          </>
-        )}
-      </Button>
-
-      {user.is_following && (
-        <Button size="sm" variant="outline">
-          <MessageCircle size={16} />
-          Message
-        </Button>
-      )}
-
-      {user.is_following && (
-        <Button variant="outline" size="sm">
-          <Bomb size={16} />
-          Timebomb
-        </Button>
-      )}
     </div>
   );
 };

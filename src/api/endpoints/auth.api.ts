@@ -1,7 +1,6 @@
 import { apiClient } from '../client';
 import { LoginDto, LoginResult, CreateUserDto } from '@/types/auth';
 import { mockLogin, mockRegister } from '@/mocks/auth';
-import { formatISO, startOfDay } from 'date-fns';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
@@ -19,8 +18,6 @@ export const AuthApi = {
     }
 
     const formData = new FormData();
-    const dateOfBirth = startOfDay(new Date(user.date_of_birth));
-    const formattedDate = formatISO(dateOfBirth);
 
     formData.append('avatar', user.avatar);
     formData.append('username', user.username);
@@ -28,7 +25,7 @@ export const AuthApi = {
     formData.append('last_name', user.last_name);
     formData.append('email', user.email);
     formData.append('password', user.password);
-    formData.append('date_of_birth', formattedDate);
+    formData.append('date_of_birth', new Date(user.date_of_birth).toISOString());
 
     if (user.tagline) {
       formData.append('tagline', user.tagline);
