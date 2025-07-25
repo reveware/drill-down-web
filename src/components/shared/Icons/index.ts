@@ -16,6 +16,7 @@ export {
   ChevronDown,
   ChevronUp,
   ChevronRight,
+  ChevronLeft,
   UserMinus,
   UserPlus,
   Trash,

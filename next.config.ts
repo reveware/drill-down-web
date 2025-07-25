@@ -2,10 +2,19 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      'drill-down-users-bucket.s3.us-east-1.amazonaws.com',
-      'picsum.photos',
-      'randomuser.me',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'drill-down-users-bucket.s3.us-east-1.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me',
+      },
     ],
   },
 };
