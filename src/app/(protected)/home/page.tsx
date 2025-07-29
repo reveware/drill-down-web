@@ -9,6 +9,7 @@ import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { FloatingActionButton } from '@/components/shared/FloatingActionButton/FloatingActionButton';
 import { mockTimeBomb } from '@/mocks/timebomb';
 import { useAuth } from '@/hooks/useAuth';
+import { UserRecommendations } from '@/features/user/components/UserRecommendations/UserRecommendations';
 
 export default function HomePage() {
   const loaderRef = useRef<HTMLDivElement | null>(null);
@@ -36,9 +37,10 @@ export default function HomePage() {
         />
       </section>
 
-      <aside className="border-border order-1 flex flex-col items-center gap-8 border-l-1 p-4 lg:order-2 lg:col-span-3">
+      <aside className="border-border order-1 flex flex-col items-center gap-8 border-l-1 px-2 py-4 lg:order-2 lg:col-span-3 lg:p-4">
         <UpcomingTimebomb timebomb={mockTimeBomb} />
         <RecommendedPhotos userId={user.id} />
+        <UserRecommendations userId={user.id} />
       </aside>
 
       <FloatingActionButton />

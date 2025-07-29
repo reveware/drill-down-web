@@ -10,7 +10,10 @@ export const useFollowUser = () => {
     },
     onSuccess: (_data, userId) => {
       toast.success('Follow request sent');
+      // Invalidate user profile data
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
+      // Invalidate user recommendations to remove followed user from recommendations
+      queryClient.invalidateQueries({ queryKey: ['user-recommendations'] });
     },
     onError: () => {
       toast.error('Failed to send follow request');
