@@ -10,4 +10,4 @@
 
 ## Testing
 
-<!---  Describe the steps to test and validate your changes -->%
+<!---  Describe the steps to test and validate your changes -->
