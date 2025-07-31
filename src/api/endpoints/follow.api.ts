@@ -1,6 +1,7 @@
 import { UserOverview } from '@/types/user';
+import { FollowRequest } from '@/types/follow';
 import { apiClient } from '../client';
-import { mockFetchFollowers } from '@/mocks/user';
+import { mockFetchPendingFollowRequests, mockFetchFollowers } from '@/mocks/follow';
 import { PaginatedResponse } from '@/types/pagination';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
@@ -23,6 +24,20 @@ export const FollowApi = {
     }
     return (
       await apiClient.get<PaginatedResponse<UserOverview>>(`/users/${userId}/followers`, {
+        params: { page, page_size: pageSize },
+      })
+    ).data;
+  },
+
+  getPendingFollowRequests: async (
+    page: number,
+    pageSize: number
+  ): Promise<PaginatedResponse<FollowRequest>> => {
+    if (useMocks) {
+      return mockFetchPendingFollowRequests(page, pageSize);
+    }
+    return (
+      await apiClient.get<PaginatedResponse<FollowRequest>>('/follow-requests/pending', {
         params: { page, page_size: pageSize },
       })
     ).data;

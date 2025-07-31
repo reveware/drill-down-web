@@ -43,7 +43,7 @@ export const UserRecommendations: React.FC<UserRecommendationsProps> = ({ userId
       <CardContent className="h-full">
         <Carousel className="w-full">
           <CarouselContent className="-ml-4">
-            {recommendations.map((rec, idx) => (
+            {recommendations.map((rec) => (
               <CarouselItem key={rec.user.id} className="basis-1/2 pl-4 sm:basis-1/2 lg:basis-1/3">
                 <UserRecommendationCard
                   userRecommendation={rec}

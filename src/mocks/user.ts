@@ -1,7 +1,6 @@
 import { sleep } from '@/lib/utils';
 import { UserDetail, UserOverview, UserRole } from '@/types/user';
 import { TagCount } from '@/types/tag';
-import { PaginatedResponse } from '@/types/pagination';
 
 export const mockUser: UserOverview = {
   id: '1',
@@ -108,22 +107,6 @@ export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
     following_count,
     created_locked_posts,
     received_locked_posts,
-  };
-};
-
-export const mockFetchFollowers = async (
-  userId: string,
-  page: number,
-  pageSize: number
-): Promise<PaginatedResponse<UserOverview>> => {
-  await sleep(3);
-  const followers = [mockUser, mockPrivateUser, mockFollowedUser, mockAdmin];
-  return {
-    page: page,
-    total: followers.length,
-    total_pages: 1,
-    is_last_page: true,
-    data: followers,
   };
 };
 

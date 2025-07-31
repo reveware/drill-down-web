@@ -7,6 +7,7 @@ export const userAffinityRecommendationMock: UserRecommendation = {
   reason: UserRecommendationReason.AFFINITY,
   match: {
     percentage: 100,
+    strength: 55,
     shared_affinities: [],
   },
 };
@@ -16,6 +17,7 @@ export const userPopularRecommendationMock: UserRecommendation = {
   reason: UserRecommendationReason.POPULAR,
   match: {
     percentage: null,
+    strength: null,
     shared_affinities: [],
   },
 };

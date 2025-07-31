@@ -22,7 +22,7 @@ export const Search: React.FC<MobileSearchCommandProps> = ({ onSearch }) => {
         <Input placeholder="Search..." className="w-full" onChange={handleSearchChange} />
       </div>
       <button className="flex gap-2 p-2 md:hidden" onClick={() => setIsSearchOpen(true)}>
-        <SearchIcon size={20} />
+        <SearchIcon className="cursor-pointer" size={24} />
       </button>
       <CommandDialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
         <Command>

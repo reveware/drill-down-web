@@ -14,6 +14,8 @@ export const useFollowUser = () => {
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
       // Invalidate user recommendations to remove followed user from recommendations
       queryClient.invalidateQueries({ queryKey: ['user-recommendations'] });
+      // Invalidate pending follow requests in case the target user has pending requests
+      queryClient.invalidateQueries({ queryKey: ['pending-follow-requests'] });
     },
     onError: () => {
       toast.error('Failed to send follow request');

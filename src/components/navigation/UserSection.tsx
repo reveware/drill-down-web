@@ -7,6 +7,7 @@ import { UserOverview } from '@/types/user';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import { UserInfo } from '../shared/UserInfo/UserInfo';
+import { Notifications } from '../shared/Notifications';
 
 interface UserSectionProps {
   user: UserOverview;
@@ -29,6 +30,10 @@ export const UserSection = ({ user }: UserSectionProps) => {
       <ThemeToggle />
 
       <Separator />
+
+      <Link href="/notifications" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+        <Notifications size={20} /> Notifications
+      </Link>
 
       <Link
         href={`/user/${user.id}`}

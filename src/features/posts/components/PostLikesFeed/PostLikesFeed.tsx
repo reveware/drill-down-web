@@ -2,20 +2,26 @@
 import React, { useRef } from 'react';
 import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
-import { useFeedPosts } from '@/features/posts/hooks/useFeedPosts';
+import { useUserLikes } from '@/features/user/hooks/useUserLikes';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import Image from 'next/image';
 import { Lost } from '@/assets/images';
 
-export const PostFeed: React.FC = () => {
+interface PostLikesFeedProps {
+  userId: string;
+}
+
+export const PostLikesFeed: React.FC<PostLikesFeedProps> = ({ userId }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  const { posts, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useFeedPosts();
+  const { likes, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useUserLikes(userId);
 
   useInfiniteScrollObserver({
     ref: loadMoreRef,
     onLoadMore: fetchNextPage,
     enabled: !!hasNextPage && !isLoading,
   });
+
+  const posts = likes.map((like) => like.post);
 
   if (posts.length === 0 && !isLoading) {
     return <EmptyState />;
@@ -44,8 +50,8 @@ const LoadingState = ({ count }: { count: number }) => (
 
 const EmptyState = () => (
   <div className="flex flex-col items-center justify-center py-12 text-center">
-    <Image src={Lost} alt="No posts found" className="mb-4 h-32 w-32" />
-    <h3 className="mb-2 text-lg font-semibold">No posts found</h3>
-    <p className="text-muted-foreground">There are no posts to display at the moment.</p>
+    <Image src={Lost} alt="No liked posts found" className="mb-4 h-32 w-32" />
+    <h3 className="mb-2 text-lg font-semibold">No liked posts</h3>
+    <p className="text-muted-foreground">{`This user hasn't liked any posts yet.`}</p>
   </div>
 );

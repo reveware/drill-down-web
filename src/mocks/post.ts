@@ -83,7 +83,6 @@ export async function mockFetchPosts<T extends PhotoPost | QuotePost>(
 
   const postsToUse = generatePosts(20, type);
   const start = page * pageSize;
-  const end = start + pageSize;
   const totalPages = Math.ceil(postsToUse.length / pageSize);
 
   const actualStart = start >= postsToUse.length ? start % postsToUse.length : start;
