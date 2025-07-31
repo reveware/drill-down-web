@@ -32,4 +32,5 @@ export {
   XCircle,
   EllipsisVertical,
   Dna,
+  Bell,
 } from 'lucide-react';

@@ -1,0 +1,1 @@
+export { UserPostsFeed } from './UserPostsFeed';

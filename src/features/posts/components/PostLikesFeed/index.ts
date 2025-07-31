@@ -1,0 +1,1 @@
+export { PostLikesFeed } from './PostLikesFeed';

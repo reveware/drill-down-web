@@ -11,6 +11,7 @@ export const useApproveFollowRequest = (userId: string) => {
     onSuccess: () => {
       toast.success('Follow request approved');
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
+      queryClient.invalidateQueries({ queryKey: ['pending-follow-requests'] });
     },
     onError: () => {
       toast.error('Failed to approve follow request');

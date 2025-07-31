@@ -1,7 +1,6 @@
 import { FollowApi } from '@/api/endpoints/follow.api';
-import { useMutation } from '@tanstack/react-query';
-import { useQueryClient } from '@tanstack/react-query';
 import { toast } from '@/lib/toast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const useRejectFollowRequests = (userId: string) => {
   const queryClient = useQueryClient();
@@ -12,6 +11,7 @@ export const useRejectFollowRequests = (userId: string) => {
     onSuccess: () => {
       toast.success('Follow request rejected');
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
+      queryClient.invalidateQueries({ queryKey: ['pending-follow-requests'] });
     },
     onError: () => {
       toast.error('Failed to reject follow request');

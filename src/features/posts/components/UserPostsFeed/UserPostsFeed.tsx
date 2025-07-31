@@ -2,14 +2,20 @@
 import React, { useRef } from 'react';
 import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
-import { useFeedPosts } from '@/features/posts/hooks/useFeedPosts';
+import { useSearchPosts } from '@/features/posts/hooks/useSearchPosts';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import Image from 'next/image';
 import { Lost } from '@/assets/images';
 
-export const PostFeed: React.FC = () => {
+interface UserPostsFeedProps {
+  authorId: string;
+}
+
+export const UserPostsFeed: React.FC<UserPostsFeedProps> = ({ authorId }) => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
-  const { posts, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useFeedPosts();
+  const { posts, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useSearchPosts({
+    authorId,
+  });
 
   useInfiniteScrollObserver({
     ref: loadMoreRef,
@@ -46,6 +52,6 @@ const EmptyState = () => (
   <div className="flex flex-col items-center justify-center py-12 text-center">
     <Image src={Lost} alt="No posts found" className="mb-4 h-32 w-32" />
     <h3 className="mb-2 text-lg font-semibold">No posts found</h3>
-    <p className="text-muted-foreground">There are no posts to display at the moment.</p>
+    <p className="text-muted-foreground">{`This user hasn't posted anything yet.`}</p>
   </div>
 );
