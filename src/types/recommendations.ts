@@ -12,6 +12,7 @@ export const UserRecommendationSchema = z.object({
   reason: z.nativeEnum(UserRecommendationReason),
   match: z.object({
     percentage: z.number().nullable(),
+    strength: z.number().nullable(),
     shared_affinities: z.array(AffinitySchema),
   }),
 });

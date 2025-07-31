@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'drill-down-users-bucket.s3.us-east-1.amazonaws.com',
+        hostname: 'drill-down-*.amazonaws.com',
       },
       {
         protocol: 'https',

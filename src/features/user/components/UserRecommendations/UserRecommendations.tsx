@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
 import Link from 'next/link';
 import { useFollowUser } from '@/features/follow/hooks/useFollowUser';
+import { Dna } from '@/components/shared/Icons';
 
 interface UserRecommendationsProps {
   userId: string;
@@ -22,7 +23,7 @@ export const UserRecommendations: React.FC<UserRecommendationsProps> = ({ userId
   const affinityData = affinityQuery.data?.data || [];
   const popularData = popularQuery.data?.data || [];
 
-  const all: UserRecommendation[] = [...affinityData, ...popularData];
+  const all: UserRecommendation[] = [...popularData, ...affinityData];
   const recommendations = Array.from(new Map(all.map((r) => [r.user.id, r])).values());
 
   const handleFollow = (userToFollow: UserRecommendation) => {
@@ -64,13 +65,13 @@ const UserRecommendationCard: React.FC<{
   isFollowing: boolean;
 }> = ({ userRecommendation, onFollow, isFollowing }) => {
   const { user, reason, match } = userRecommendation;
-  const matchPercentage = match.percentage || 0;
 
   const MatchLabel = () => (
     <div className="mb-4 self-end">
       {reason === UserRecommendationReason.AFFINITY ? (
-        <div className="border-accent bg-accent/60 text-on-accent rounded-xl border px-2 pb-1 text-[10px] font-medium whitespace-nowrap">
-          {matchPercentage}% MATCH
+        <div className="text-accent flex items-center gap-2 text-xs font-extrabold">
+          <Dna className="mr-1 h-4 w-4" />
+          {match.percentage || 0}%
         </div>
       ) : (
         <div className="h-6 w-16"></div> // Placeholder to maintain layout

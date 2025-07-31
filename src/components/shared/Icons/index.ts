@@ -31,4 +31,5 @@ export {
   AlertTriangle,
   XCircle,
   EllipsisVertical,
+  Dna,
 } from 'lucide-react';
