@@ -6,17 +6,6 @@ export enum PostTypes {
   QUOTE = 'QUOTE',
 }
 
-export const PhotoPostContentSchema = z.object({
-  urls: z.array(z.string().url()),
-});
-
-export const QuotePostContentSchema = z.object({
-  quote: z.string(),
-  author: z.string(),
-  date: z.string().datetime().optional(),
-  location: z.string().optional(),
-});
-
 const BasePostSchema = z.object({
   id: z.string(),
   author: UserOverviewSchema,
@@ -31,18 +20,19 @@ const BasePostSchema = z.object({
 
 export const PhotoPostSchema = BasePostSchema.extend({
   type: z.literal(PostTypes.PHOTO),
-  content: PhotoPostContentSchema,
+  urls: z.array(z.string().url()),
 });
 
 export const QuotePostSchema = BasePostSchema.extend({
   type: z.literal(PostTypes.QUOTE),
-  content: QuotePostContentSchema,
+  quote: z.string(),
+  quote_author: z.string(),
+  date: z.string().datetime().optional(),
+  location: z.string().optional(),
 });
 
 export const PostOverviewSchema = z.discriminatedUnion('type', [PhotoPostSchema, QuotePostSchema]);
 
-export type PhotoPostContent = z.infer<typeof PhotoPostContentSchema>;
-export type QuotePostContent = z.infer<typeof QuotePostContentSchema>;
 export type PhotoPost = z.infer<typeof PhotoPostSchema>;
 export type QuotePost = z.infer<typeof QuotePostSchema>;
 export type PostOverview = z.infer<typeof PostOverviewSchema>;

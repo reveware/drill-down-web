@@ -5,10 +5,10 @@ import { PostQuoteContent } from './PostQuoteContent';
 
 export const PostCardContent = ({ post }: { post: PostOverview }) => {
   if (post.type === PostTypes.PHOTO) {
-    return <PostPhotoContent content={post.content} />;
+    return <PostPhotoContent post={post} />;
   }
   if (post.type === PostTypes.QUOTE) {
-    return <PostQuoteContent content={post.content} />;
+    return <PostQuoteContent post={post} />;
   }
   return null;
 };

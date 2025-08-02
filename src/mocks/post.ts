@@ -12,9 +12,7 @@ export const photoPost = (id: string, seed?: number): PostOverview => ({
   comment_count: Math.floor(Math.random() * 20) + 1,
   tags: ['random', 'tag', 'another tag'],
   type: PostTypes.PHOTO,
-  content: {
-    urls: [`https://picsum.photos/seed/${seed || id}/400/400`],
-  },
+  urls: [`https://picsum.photos/seed/${seed || id}/400/400`],
   created_at: '2024-06-01T12:00:00.000Z',
   updated_at: '2024-06-01T12:00:00.000Z',
   is_liked: false,
@@ -40,10 +38,8 @@ export const quotePost = (id: string): PostOverview => ({
   created_at: '2024-06-01T12:00:00.000Z',
   updated_at: '2024-06-01T12:00:00.000Z',
   type: PostTypes.QUOTE,
-  content: {
-    quote: "The stars don't look bigger, but they do look brighter.",
-    author: 'Sally Ride',
-  },
+  quote: "The stars don't look bigger, but they do look brighter.",
+  quote_author: 'Sally Ride',
   is_liked: true,
 });
 

@@ -42,11 +42,8 @@ export const LongQuote: Story = {
     post: {
       ...quotePost('3'),
       type: PostTypes.QUOTE,
-      content: {
-        ...quotePost('3').content,
-        quote: '“' + 'This is a very long quote that keeps going. '.repeat(10) + '”',
-        author: 'John Doe',
-      },
+      quote: 'This is a very long quote that keeps going. '.repeat(10),
+      quote_author: 'John Doe',
     },
   },
 };
@@ -57,13 +54,11 @@ export const MultiPhoto: Story = {
     post: {
       ...photoPost('5'),
       type: PostTypes.PHOTO,
-      content: {
-        urls: [
-          'https://picsum.photos/200/300?1',
-          'https://picsum.photos/200/300?2',
-          'https://picsum.photos/200/300?3',
-        ],
-      },
+      urls: [
+        'https://picsum.photos/200/300?1',
+        'https://picsum.photos/200/300?2',
+        'https://picsum.photos/200/300?3',
+      ],
     },
   },
 };

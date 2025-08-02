@@ -1,4 +1,4 @@
-import { PhotoPostContent } from '@/types/post';
+import { PhotoPost } from '@/types/post';
 import Image from 'next/image';
 import React from 'react';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/carousel';
 import { ChevronLeft, ChevronRight } from '@/components/shared/Icons';
 
-export const PostPhotoContent = ({ content }: { content: PhotoPostContent }) => {
+export const PostPhotoContent = ({ post }: { post: PhotoPost }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
 
@@ -21,15 +21,16 @@ export const PostPhotoContent = ({ content }: { content: PhotoPostContent }) => 
     });
   }, [api]);
 
-  if (!content.urls.length) {
+  const { urls } = post;
+  if (!urls.length) {
     return null;
   }
-  const count = content.urls.length;
-  if (content.urls.length === 1) {
+  const count = urls.length;
+  if (urls.length === 1) {
     return (
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image
-          src={content.urls[0]}
+          src={urls[0]}
           alt="Post photo"
           fill
           className="photo object-cover"
@@ -43,7 +44,7 @@ export const PostPhotoContent = ({ content }: { content: PhotoPostContent }) => 
     <div className="relative w-full">
       <Carousel className="w-full" setApi={setApi}>
         <CarouselContent className="-ml-4">
-          {content.urls.map((url, idx) => (
+          {urls.map((url, idx) => (
             <CarouselItem key={idx} className={idx === 0 ? 'pl-0' : 'pl-4'}>
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <Image

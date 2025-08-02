@@ -31,10 +31,9 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
       <Separator />
 
-      <Link href="/notifications" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
-        <Notifications size={20} /> Notifications
-      </Link>
-
+      <div className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+        <Notifications size={20} /> <Link href="/notifications">Notifications</Link>
+      </div>
       <Link
         href={`/user/${user.id}`}
         className="hover:bg-muted flex items-center gap-2 rounded-md p-2"

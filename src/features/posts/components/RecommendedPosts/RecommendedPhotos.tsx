@@ -18,7 +18,7 @@ export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
   const { posts, isLoading } = useRecommendedPhotoPosts(userId);
 
   const visiblePosts = posts.slice(0, isMobile ? 4 : 12);
-
+  console.log('visiblePosts', visiblePosts);
   return (
     <Card className="card max-w-lg">
       <CardHeader>
@@ -40,14 +40,14 @@ export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
 
 const PhotoGrid: React.FC<{ posts: PhotoPost[] }> = ({ posts }) => (
   <GridContainer>
-    {posts.map((post) => (
+    {posts.map((post, idx) => (
       <button
         key={post.id}
         type="button"
         className="bg-muted/20 relative aspect-square overflow-hidden rounded-md"
       >
         <Image
-          src={post.content.urls[0]}
+          src={post.urls[idx]}
           alt={`Photo by ${post.author.username}`}
           fill
           loading="lazy"
