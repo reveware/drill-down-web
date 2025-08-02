@@ -50,7 +50,6 @@ const LoadingState = ({ count }: { count: number }) => (
 
 const EmptyState = () => (
   <div className="flex flex-col items-center justify-center py-12 text-center">
-    <Image src={Lost} alt="No posts found" className="mb-4 h-32 w-32" />
     <h3 className="mb-2 text-lg font-semibold">No posts found</h3>
     <p className="text-muted-foreground">{`This user hasn't posted anything yet.`}</p>
   </div>

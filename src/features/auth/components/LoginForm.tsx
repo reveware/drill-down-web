@@ -48,7 +48,9 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <div className="min-h-[1rem] text-xs font-light">
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />
@@ -79,7 +81,9 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                   </Button>
                 </div>
               </FormControl>
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <div className="min-h-[1rem] text-xs font-light">
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />

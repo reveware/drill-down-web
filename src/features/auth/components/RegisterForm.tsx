@@ -59,7 +59,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           control={form.control}
           name="avatar"
           render={({ field }) => (
-            <FormItem className="flex flex-col items-center space-y-4">
+            <FormItem className="flex flex-col items-center space-y-2">
               <div className="relative">
                 <Label htmlFor="avatar" className="block cursor-pointer">
                   <Avatar className="h-32 w-32">
@@ -91,9 +91,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                   />
                 </FormControl>
 
-                {form.formState.isDirty && (
-                  <FormMessage className="min-h-[1rem] text-xs font-light" />
-                )}
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </div>
             </FormItem>
           )}
@@ -109,7 +109,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <div className="min-h-[1rem] text-xs font-light">
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />
@@ -125,7 +127,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input placeholder="John" {...field} />
                 </FormControl>
-                <FormMessage className="min-h-[1rem] text-xs font-light" />
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -138,7 +142,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input placeholder="Doe" {...field} />
                 </FormControl>
-                <FormMessage className="min-h-[1rem] text-xs font-light" />
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -154,7 +160,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <div className="min-h-[1rem] text-xs font-light">
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />
@@ -186,7 +194,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     </Button>
                   </div>
                 </FormControl>
-                <FormMessage className="min-h-[1rem] text-xs font-light" />
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -220,7 +230,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     </Button>
                   </div>
                 </FormControl>
-                <FormMessage className="min-h-[1rem] text-xs font-light" />
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -237,7 +249,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input type="date" {...field} max={format(new Date(), 'yyyy-MM-dd')} />
                 </FormControl>
-                <FormMessage className="min-h-[1rem] text-xs font-light" />
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />
@@ -250,7 +264,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input placeholder="Slow down..." {...field} />
                 </FormControl>
-                <FormMessage className="min-h-[1rem] text-xs font-light" />
+                <div className="min-h-[1rem] text-xs font-light">
+                  <FormMessage />
+                </div>
               </FormItem>
             )}
           />

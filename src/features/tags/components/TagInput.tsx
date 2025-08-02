@@ -7,6 +7,7 @@ import { X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useTagSearch } from '../hooks/useTagSearch';
 import { Tag } from '@/types/tag';
+import { cn } from '@/lib/utils';
 
 interface TagInputProps {
   value: string[];
@@ -48,7 +49,12 @@ export const TagInput: React.FC<TagInputProps> = ({ value, onChange, className }
   return (
     <div className="relative w-full">
       <div
-        className={`border-input flex flex-wrap items-center gap-2 rounded border-1 px-2 py-1 ${showSuggestions ? 'rounded-b-none' : ''} ${className}`}
+        className={cn(
+          'border-input flex flex-wrap items-center gap-2 rounded-md border bg-transparent px-2 py-1 transition-all',
+          isFocused && 'border-ring ring-ring/50 ring-2',
+          showSuggestions ? 'rounded-b-none' : '',
+          className
+        )}
         onClick={() => inputRef.current?.focus()}
       >
         {value.map((tag) => (
@@ -72,7 +78,12 @@ export const TagInput: React.FC<TagInputProps> = ({ value, onChange, className }
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onBlur={() => {
+            setIsFocused(false);
+            if (inputValue.trim()) {
+              addTag(inputValue); // auto-confirm unconfirmed tag
+            }
+          }}
           placeholder={value.length ? '' : 'Add tags...'}
           autoComplete="off"
         />
@@ -94,7 +105,7 @@ const TagSuggestions = ({ suggestions, onSelect }: TagSuggestionsProps) => {
   }
 
   return (
-    <ul className="card absolute z-10 mt-1 max-h-40 w-full overflow-auto !rounded-t-none opacity-70 shadow-md">
+    <ul className="card absolute z-10 mt-1 max-h-40 w-full overflow-auto !rounded-t-none opacity-95 shadow-md">
       {suggestions.map((tag) => (
         <li
           key={tag.id}
