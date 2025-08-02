@@ -4,8 +4,6 @@ import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
 import { useFeedPosts } from '@/features/posts/hooks/useFeedPosts';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
-import Image from 'next/image';
-import { Lost } from '@/assets/images';
 
 export const PostFeed: React.FC = () => {
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -44,7 +42,6 @@ const LoadingState = ({ count }: { count: number }) => (
 
 const EmptyState = () => (
   <div className="flex flex-col items-center justify-center py-12 text-center">
-    <Image src={Lost} alt="No posts found" className="mb-4 h-32 w-32" />
     <h3 className="mb-2 text-lg font-semibold">No posts found</h3>
     <p className="text-muted-foreground">There are no posts to display at the moment.</p>
   </div>
