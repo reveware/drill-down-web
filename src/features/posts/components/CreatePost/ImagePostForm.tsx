@@ -148,7 +148,7 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
           className="mt-auto mb-2 w-full justify-self-end py-2 text-xs sm:text-sm"
           disabled={!form.formState.isValid}
         >
-          Create Photo Post
+          Create Image Post
         </Button>
       </form>
     </Form>
