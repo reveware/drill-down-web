@@ -3,13 +3,10 @@ import { FollowApi } from '@/api/endpoints/follow.api';
 import { UserOverview } from '@/types/user';
 import { PaginatedResponse } from '@/types/pagination';
 
-const PAGE_SIZE = 25;
-
 export const useUserFollowers = (userId: string) => {
   const query = useInfiniteQuery<PaginatedResponse<UserOverview>>({
     queryKey: ['user', userId, 'followers'],
-    queryFn: ({ pageParam = 0 }) =>
-      FollowApi.getUserFollowers(userId, pageParam as number, PAGE_SIZE),
+    queryFn: ({ pageParam = 0 }) => FollowApi.getUserFollowers(userId, pageParam as number),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => (lastPage.is_last_page ? undefined : lastPage.page + 1),
   });

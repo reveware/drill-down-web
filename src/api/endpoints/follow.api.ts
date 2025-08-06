@@ -3,6 +3,7 @@ import { FollowRequest } from '@/types/follow';
 import { apiClient } from '../client';
 import { mockFetchPendingFollowRequests, mockFetchFollowers } from '@/mocks/follow';
 import { PaginatedResponse } from '@/types/pagination';
+import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
@@ -16,8 +17,8 @@ export const FollowApi = {
 
   getUserFollowers: async (
     userId: string,
-    page: number,
-    pageSize: number
+    page: number = PAGE_NUMBER,
+    pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<UserOverview>> => {
     if (useMocks) {
       return mockFetchFollowers(userId, page, pageSize);
