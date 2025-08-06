@@ -2,7 +2,7 @@
 import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreatePhotoPost, createPhotoPostSchema, PostOverview, PostTypes } from '@/types/post';
+import { CreateImagePost, createImagePostSchema, PostOverview, PostTypes } from '@/types/post';
 import { Button } from '@/components/ui/button';
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { X, Plus } from '@/components/shared/Icons';
@@ -22,20 +22,20 @@ import {
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
-interface PhotoPostFormProps {
+interface ImagePostFormProps {
   onSuccess: (post: PostOverview) => void;
 }
 
-export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
-  const { mutate: createPhotoPost } = useCreatePost(PostTypes.PHOTO, onSuccess);
+export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
+  const { mutate: createImagePost } = useCreatePost(PostTypes.IMAGE, onSuccess);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm({
-    resolver: zodResolver(createPhotoPostSchema),
+    resolver: zodResolver(createImagePostSchema),
     defaultValues: {
-      type: PostTypes.PHOTO,
-      photos: [],
+      type: PostTypes.IMAGE,
+      images: [],
       tags: [],
       description: '',
     },
@@ -45,7 +45,7 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     setSelectedFiles(files);
-    form.setValue('photos', files, {
+    form.setValue('images', files, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -54,7 +54,7 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
   const removeFile = (index: number) => {
     const updated = selectedFiles.filter((_, i) => i !== index);
     setSelectedFiles(updated);
-    form.setValue('photos', updated, {
+    form.setValue('images', updated, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -64,8 +64,8 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
     fileInputRef.current?.click();
   };
 
-  const onSubmit = async (data: CreatePhotoPost) => {
-    createPhotoPost(data);
+  const onSubmit = async (data: CreateImagePost) => {
+    createImagePost(data);
   };
 
   return (
@@ -86,14 +86,14 @@ export const PhotoPostForm = ({ onSuccess }: PhotoPostFormProps) => {
         {/* Photos Upload */}
         <FormField
           control={form.control}
-          name="photos"
+          name="images"
           render={() => (
             <FormItem className="flex min-h-0 flex-1 flex-col">
               <FormLabel className="text-xs sm:text-sm">Photos*</FormLabel>
               {selectedFiles.length === 0 ? (
                 <UploadArea
                   triggerFileInput={triggerFileInput}
-                  error={!!form.formState.errors.photos}
+                  error={!!form.formState.errors.images}
                 />
               ) : (
                 <Preview

@@ -1,14 +1,14 @@
 import React from 'react';
 import { PostOverview, PostTypes } from '@/types/post';
-import { PostPhotoContent } from './PostPhotoContent';
-import { PostQuoteContent } from './PostQuoteContent';
+import { ImagePostContent } from './ImagePostContent';
+import { QuotePostContent } from './QuotePostContent';
 
 export const PostCardContent = ({ post }: { post: PostOverview }) => {
-  if (post.type === PostTypes.PHOTO) {
-    return <PostPhotoContent post={post} />;
+  if (post.type === PostTypes.IMAGE) {
+    return <ImagePostContent post={post} />;
   }
   if (post.type === PostTypes.QUOTE) {
-    return <PostQuoteContent post={post} />;
+    return <QuotePostContent post={post} />;
   }
   return null;
 };

@@ -2,14 +2,14 @@
 import { useState } from 'react';
 import { PostOverview, PostTypes } from '@/types/post';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PhotoPostForm } from './PhotoPostForm';
+import { ImagePostForm } from './ImagePostForm';
 import { QuotePostForm } from './QuotePostForm';
 
 interface CreatePostProps {
   onSuccess: (post: PostOverview) => void;
 }
 export const CreatePost = ({ onSuccess }: CreatePostProps) => {
-  const [type, setType] = useState<PostTypes>(PostTypes.PHOTO);
+  const [type, setType] = useState<PostTypes>(PostTypes.IMAGE);
 
   return (
     <Tabs
@@ -18,16 +18,16 @@ export const CreatePost = ({ onSuccess }: CreatePostProps) => {
       onValueChange={(value) => setType(value as PostTypes)}
     >
       <TabsList className="mb-2 grid w-full grid-cols-2">
-        <TabsTrigger className="text-xs" value={PostTypes.PHOTO}>
-          Photo
+        <TabsTrigger className="text-xs" value={PostTypes.IMAGE}>
+          Image
         </TabsTrigger>
         <TabsTrigger className="text-xs" value={PostTypes.QUOTE}>
           Quote
         </TabsTrigger>
       </TabsList>
 
-      <TabsContent value={PostTypes.PHOTO} className="flex min-h-0 flex-1 flex-col">
-        <PhotoPostForm onSuccess={onSuccess} />
+      <TabsContent value={PostTypes.IMAGE} className="flex min-h-0 flex-1 flex-col">
+        <ImagePostForm onSuccess={onSuccess} />
       </TabsContent>
 
       <TabsContent value={PostTypes.QUOTE} className="flex min-h-0 flex-1 flex-col">

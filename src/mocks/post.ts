@@ -1,17 +1,17 @@
 import { mockUser } from './user';
 import { sleep } from '@/lib/utils';
 import { PaginatedResponse } from '@/types/pagination';
-import { PhotoPost, PostOverview, PostTypes } from '@/types/post';
+import { ImagePost, PostOverview, PostTypes } from '@/types/post';
 import { QuotePost } from '@/types/post';
 
-export const photoPost = (id: string, seed?: number): PostOverview => ({
+export const imagePost = (id: string, seed?: number): PostOverview => ({
   id,
   author: mockUser,
   description: 'Lorem ipsum dolor sit amet...',
   like_count: Math.floor(Math.random() * 50) + 1,
   comment_count: Math.floor(Math.random() * 20) + 1,
   tags: ['random', 'tag', 'another tag'],
-  type: PostTypes.PHOTO,
+  type: PostTypes.IMAGE,
   urls: [`https://picsum.photos/seed/${seed || id}/400/400`],
   created_at: '2024-06-01T12:00:00.000Z',
   updated_at: '2024-06-01T12:00:00.000Z',
@@ -46,10 +46,10 @@ export const quotePost = (id: string): PostOverview => ({
 export const generatePosts = (length: number, type?: PostTypes): PostOverview[] => {
   const posts: PostOverview[] = [];
 
-  if (type === PostTypes.PHOTO) {
+  if (type === PostTypes.IMAGE) {
     // Generate only photo posts
     for (let i = 1; i <= length; i++) {
-      posts.push(photoPost(i.toString(), i * 10));
+      posts.push(imagePost(i.toString(), i * 10));
     }
   } else if (type === PostTypes.QUOTE) {
     // Generate only quote posts
@@ -62,7 +62,7 @@ export const generatePosts = (length: number, type?: PostTypes): PostOverview[] 
       if (i % 3 === 0) {
         posts.push(quotePost(i.toString()));
       } else {
-        posts.push(photoPost(i.toString(), i * 10));
+        posts.push(imagePost(i.toString(), i * 10));
       }
     }
   }
@@ -70,7 +70,7 @@ export const generatePosts = (length: number, type?: PostTypes): PostOverview[] 
   return posts;
 };
 
-export async function mockFetchPosts<T extends PhotoPost | QuotePost>(
+export async function mockFetchPosts<T extends ImagePost | QuotePost>(
   page: number,
   pageSize: number,
   type?: PostTypes

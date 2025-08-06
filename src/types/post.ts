@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { UserOverviewSchema } from './user';
 
 export enum PostTypes {
-  PHOTO = 'PHOTO',
+  IMAGE = 'IMAGE',
   QUOTE = 'QUOTE',
 }
 
@@ -18,8 +18,8 @@ const BasePostSchema = z.object({
   updated_at: z.string().datetime(),
 });
 
-export const PhotoPostSchema = BasePostSchema.extend({
-  type: z.literal(PostTypes.PHOTO),
+export const ImagePostSchema = BasePostSchema.extend({
+  type: z.literal(PostTypes.IMAGE),
   urls: z.array(z.string().url()),
 });
 
@@ -31,14 +31,14 @@ export const QuotePostSchema = BasePostSchema.extend({
   location: z.string().optional(),
 });
 
-export const PostOverviewSchema = z.discriminatedUnion('type', [PhotoPostSchema, QuotePostSchema]);
+export const PostOverviewSchema = z.discriminatedUnion('type', [ImagePostSchema, QuotePostSchema]);
 
-export type PhotoPost = z.infer<typeof PhotoPostSchema>;
+export type ImagePost = z.infer<typeof ImagePostSchema>;
 export type QuotePost = z.infer<typeof QuotePostSchema>;
 export type PostOverview = z.infer<typeof PostOverviewSchema>;
 
 export const PostSearchParamsSchema = z.object({
-  id: z.string().optional(),
+  ids: z.array(z.string()).optional(),
   tags: z.array(z.string()).optional(),
   authorId: z.string().optional(),
   created_before: z.string().datetime().optional(),
@@ -52,12 +52,12 @@ export const createPostBaseSchema = z.object({
   description: z.string().optional(),
 });
 
-export const createPhotoPostSchema = createPostBaseSchema.extend({
-  type: z.literal(PostTypes.PHOTO),
-  photos: z.array(z.instanceof(File)).min(1, 'At least one photo is required'),
+export const createImagePostSchema = createPostBaseSchema.extend({
+  type: z.literal(PostTypes.IMAGE),
+  images: z.array(z.instanceof(File)).min(1, 'At least one image is required'),
 });
 
-export type CreatePhotoPost = z.infer<typeof createPhotoPostSchema>;
+export type CreateImagePost = z.infer<typeof createImagePostSchema>;
 
 export const createQuotePostSchema = createPostBaseSchema.extend({
   type: z.literal(PostTypes.QUOTE),
@@ -70,7 +70,7 @@ export const createQuotePostSchema = createPostBaseSchema.extend({
 export type CreateQuotePost = z.infer<typeof createQuotePostSchema>;
 
 export const createPostSchema = z.discriminatedUnion('type', [
-  createPhotoPostSchema,
+  createImagePostSchema,
   createQuotePostSchema,
 ]);
 

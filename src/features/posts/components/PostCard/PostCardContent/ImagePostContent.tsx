@@ -1,4 +1,4 @@
-import { PhotoPost } from '@/types/post';
+import { ImagePost } from '@/types/post';
 import Image from 'next/image';
 import React from 'react';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/carousel';
 import { ChevronLeft, ChevronRight } from '@/components/shared/Icons';
 
-export const PostPhotoContent = ({ post }: { post: PhotoPost }) => {
+export const ImagePostContent = ({ post }: { post: ImagePost }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
 

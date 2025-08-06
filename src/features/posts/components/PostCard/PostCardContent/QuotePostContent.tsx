@@ -1,6 +1,6 @@
 import { QuotePost } from '@/types/post';
 
-export const PostQuoteContent = ({ post }: { post: QuotePost }) => {
+export const QuotePostContent = ({ post }: { post: QuotePost }) => {
   const maxLength = 240;
   const trimmedQuote = post.quote.trim();
   const quote =

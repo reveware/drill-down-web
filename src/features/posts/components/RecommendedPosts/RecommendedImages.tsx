@@ -5,21 +5,21 @@ import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { useRecommendedPosts } from '../../hooks/useRecommendedPosts';
-import { RecommendedPhotosSkeleton } from './RecomendedPhotosSkeleton';
-import { PhotoPost, PostTypes } from '@/types/post';
+import { RecommendedImagesSkeleton } from './RecomendedImagesSkeleton';
+import { ImagePost, PostTypes } from '@/types/post';
 
-interface RecommendedPhotosProps {
+interface RecommendedImagesProps {
   userId: string;
 }
 
-export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
+export const RecommendedImages = ({ userId }: RecommendedImagesProps) => {
   const title = 'Recommended Photos';
   const isMobile = useMediaQuery('mobile'); // < 768 px
   const { recommendations, isLoading } = useRecommendedPosts(userId);
 
   const posts = recommendations
     .map((recommendation) => recommendation.post)
-    .filter((post) => post.type === PostTypes.PHOTO);
+    .filter((post) => post.type === PostTypes.IMAGE);
 
   const visiblePosts = posts.slice(0, isMobile ? 6 : 12);
 
@@ -31,18 +31,18 @@ export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
 
       <CardContent className="h-full px-4">
         {isLoading ? (
-          <RecommendedPhotosSkeleton isMobile={isMobile} />
+          <RecommendedImagesSkeleton isMobile={isMobile} />
         ) : visiblePosts.length === 0 ? (
           <EmptyState />
         ) : (
-          <PhotoGrid posts={visiblePosts} />
+          <ImageGrid posts={visiblePosts} />
         )}
       </CardContent>
     </Card>
   );
 };
 
-const PhotoGrid: React.FC<{ posts: PhotoPost[] }> = ({ posts }) => (
+const ImageGrid: React.FC<{ posts: ImagePost[] }> = ({ posts }) => (
   <GridContainer>
     {posts.map((post) => (
       <button

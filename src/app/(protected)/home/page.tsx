@@ -1,7 +1,7 @@
 'use client';
 
 import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
-import { RecommendedPhotos } from '@/features/posts';
+import { RecommendedImages } from '@/features/posts';
 import { UpcomingTimebomb } from '@/features/timebombs/components/UpcomingTimebomb/UpcomingTimebomb';
 import { FloatingActionButton } from '@/components/shared/FloatingActionButton/FloatingActionButton';
 import { mockTimeBomb } from '@/mocks/timebomb';
@@ -23,7 +23,7 @@ export default function HomePage() {
 
       <aside className="border-border order-1 flex flex-col items-center gap-8 border-l-1 px-2 py-4 lg:order-2 lg:col-span-3 lg:p-4">
         <UpcomingTimebomb timebomb={mockTimeBomb} />
-        <RecommendedPhotos userId={user.id} />
+        <RecommendedImages userId={user.id} />
         <UserRecommendations userId={user.id} />
       </aside>
 

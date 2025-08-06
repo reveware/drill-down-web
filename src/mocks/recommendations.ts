@@ -5,7 +5,7 @@ import {
 } from '@/types/recommendations';
 import { mockAdmin, mockUser } from './user';
 import { PaginatedResponse } from '@/types/pagination';
-import { photoPost } from './post';
+import { imagePost } from './post';
 
 export const userAffinityRecommendationMock: UserRecommendation = {
   user: mockUser,
@@ -28,7 +28,7 @@ export const userPopularRecommendationMock: UserRecommendation = {
 };
 
 export const postAffinityRecommendationMock: PostRecommendation = {
-  post: photoPost('1'),
+  post: imagePost('1'),
   reason: RecommendationReason.AFFINITY,
   match: {
     percentage: 100,
@@ -38,7 +38,7 @@ export const postAffinityRecommendationMock: PostRecommendation = {
 };
 
 export const postPopularRecommendationMock: PostRecommendation = {
-  post: photoPost('2'),
+  post: imagePost('2'),
   reason: RecommendationReason.POPULAR,
   match: {
     percentage: null,

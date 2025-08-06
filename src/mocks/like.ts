@@ -9,7 +9,7 @@ export const mockFetchLikes = async (
   page: number,
   pageSize: number
 ): Promise<PaginatedResponse<Like>> => {
-  const posts = await mockFetchPosts(page, pageSize, PostTypes.PHOTO);
+  const posts = await mockFetchPosts(page, pageSize, PostTypes.IMAGE);
   const likes = posts.data.map((post) => ({
     id: post.id,
     post,

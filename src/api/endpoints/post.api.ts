@@ -1,5 +1,5 @@
 import { apiClient } from '../client';
-import { PostOverview, PostSearchParams, CreateQuotePost, CreatePhotoPost } from '@/types/post';
+import { PostOverview, PostSearchParams, CreateQuotePost, CreateImagePost } from '@/types/post';
 import { mockFetchPosts, quotePost } from '@/mocks/post';
 import { PaginatedResponse } from '@/types/pagination';
 import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
@@ -32,10 +32,10 @@ export const PostApi = {
     ).data;
   },
 
-  createPhotoPost: async (post: CreatePhotoPost): Promise<PostOverview> => {
+  createImagePost: async (post: CreateImagePost): Promise<PostOverview> => {
     const formData = new FormData();
     formData.append('type', post.type);
-    post.photos.forEach((file) => formData.append('photos', file));
+    post.images.forEach((file) => formData.append('images', file));
     post.tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
 
     if (post.description) {
@@ -43,7 +43,7 @@ export const PostApi = {
     }
 
     return (
-      await apiClient.post('/posts/photo', formData, {
+      await apiClient.post('/posts/image', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
     ).data;

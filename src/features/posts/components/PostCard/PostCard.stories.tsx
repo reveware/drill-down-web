@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PostCard } from './PostCard';
-import { photoPost, quotePost } from '@/mocks/post';
+import { imagePost, quotePost } from '@/mocks/post';
 
 import { PostTypes } from '@/types/post';
 
@@ -22,10 +22,10 @@ const meta: Meta<typeof PostCard> = {
 export default meta;
 type Story = StoryObj<typeof PostCard>;
 
-export const Photo: Story = {
-  name: 'Photo Post',
+export const Image: Story = {
+  name: 'Image Post',
   args: {
-    post: photoPost('1'),
+    post: imagePost('1'),
   },
 };
 
@@ -48,12 +48,12 @@ export const LongQuote: Story = {
   },
 };
 
-export const MultiPhoto: Story = {
-  name: 'Multiple Photos',
+export const MultiImage: Story = {
+  name: 'Multiple Images',
   args: {
     post: {
-      ...photoPost('5'),
-      type: PostTypes.PHOTO,
+      ...imagePost('5'),
+      type: PostTypes.IMAGE,
       urls: [
         'https://picsum.photos/200/300?1',
         'https://picsum.photos/200/300?2',

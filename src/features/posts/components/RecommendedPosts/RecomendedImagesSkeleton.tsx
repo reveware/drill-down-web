@@ -1,11 +1,11 @@
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { Skeleton } from '@/components/ui/skeleton';
 
-interface RecommendedPhotosSkeletonProps {
+interface RecommendedImagesSkeletonProps {
   isMobile: boolean;
 }
 
-export const RecommendedPhotosSkeleton = ({ isMobile }: RecommendedPhotosSkeletonProps) => {
+export const RecommendedImagesSkeleton = ({ isMobile }: RecommendedImagesSkeletonProps) => {
   const skeletonCount = isMobile ? 6 : 12;
 
   return (
