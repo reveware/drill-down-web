@@ -30,7 +30,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
     resolver: zodResolver(LoginFormSchema),
     mode: 'onChange',
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
   });
@@ -41,7 +41,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
         {/* Email */}
         <FormField
           control={form.control}
-          name="email"
+          name="username"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
@@ -50,7 +50,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                   type="email"
                   placeholder="john@example.com"
                   {...field}
-                  autoComplete="email"
+                  autoComplete="username"
                 />
               </FormControl>
               <div className="min-h-[1rem] text-xs font-light">

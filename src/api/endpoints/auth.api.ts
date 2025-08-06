@@ -9,7 +9,12 @@ export const AuthApi = {
     if (useMocks) {
       return mockLogin(loginAttempt);
     }
-    return (await apiClient.post<LoginResult>('/auth/login', loginAttempt)).data;
+    return (
+      await apiClient.post<LoginResult>('/auth/login', {
+        email: loginAttempt.username,
+        password: loginAttempt.password,
+      })
+    ).data;
   },
 
   register: async (user: CreateUserDto): Promise<LoginResult> => {
