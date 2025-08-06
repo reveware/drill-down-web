@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRecommendation, UserRecommendationReason } from '@/types/recommendations';
+import { UserRecommendation, RecommendationReason } from '@/types/recommendations';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Button } from '@/components/ui/button';
 import { useUserRecommendations } from '@/features/user/hooks/useUserRecommendations';
@@ -14,8 +14,8 @@ interface UserRecommendationsProps {
 }
 
 export const UserRecommendations: React.FC<UserRecommendationsProps> = ({ userId }) => {
-  const affinityQuery = useUserRecommendations(userId, UserRecommendationReason.AFFINITY);
-  const popularQuery = useUserRecommendations(userId, UserRecommendationReason.POPULAR);
+  const affinityQuery = useUserRecommendations(userId, RecommendationReason.AFFINITY);
+  const popularQuery = useUserRecommendations(userId, RecommendationReason.POPULAR);
 
   const { mutate: followUser, isPending: isFollowing } = useFollowUser();
 
@@ -68,7 +68,7 @@ const UserRecommendationCard: React.FC<{
 
   const MatchLabel = () => (
     <div className="mb-4 self-end">
-      {reason === UserRecommendationReason.AFFINITY ? (
+      {reason === RecommendationReason.AFFINITY ? (
         <div className="text-accent flex items-center gap-2 text-xs font-extrabold">
           <Dna className="mr-1 h-4 w-4" />
           {match.percentage || 0}%

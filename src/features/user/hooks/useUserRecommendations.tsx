@@ -1,12 +1,12 @@
 import { PAGE_NUMBER, PAGE_SIZE } from '@/api/defaults';
 import { RecommendationApi } from '@/api/endpoints/recommendatios.api';
 import { PaginatedResponse } from '@/types/pagination';
-import { UserRecommendation, UserRecommendationReason } from '@/types/recommendations';
+import { UserRecommendation, RecommendationReason } from '@/types/recommendations';
 import { useQuery } from '@tanstack/react-query';
 
 export const useUserRecommendations = (
   userId: string,
-  reason: UserRecommendationReason = UserRecommendationReason.AFFINITY,
+  reason: RecommendationReason = RecommendationReason.AFFINITY,
   page: number = PAGE_NUMBER,
   pageSize: number = PAGE_SIZE
 ) => {

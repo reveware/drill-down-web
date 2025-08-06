@@ -4,8 +4,6 @@ import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
 import { useSearchPosts } from '@/features/posts/hooks/useSearchPosts';
 import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
-import Image from 'next/image';
-import { Lost } from '@/assets/images';
 
 interface UserPostsFeedProps {
   authorId: string;

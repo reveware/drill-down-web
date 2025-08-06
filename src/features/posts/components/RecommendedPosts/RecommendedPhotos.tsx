@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
-import { useRecommendedPhotoPosts } from '../../hooks/useRecommendedPhotoPosts';
+import { useRecommendedPosts } from '../../hooks/useRecommendedPosts';
 import { RecommendedPhotosSkeleton } from './RecomendedPhotosSkeleton';
-import { PhotoPost } from '@/types/post';
+import { PhotoPost, PostTypes } from '@/types/post';
 
 interface RecommendedPhotosProps {
   userId: string;
@@ -15,7 +15,11 @@ interface RecommendedPhotosProps {
 export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
   const title = 'Recommended Photos';
   const isMobile = useMediaQuery('mobile'); // < 768 px
-  const { posts, isLoading } = useRecommendedPhotoPosts(userId);
+  const { recommendations, isLoading } = useRecommendedPosts(userId);
+
+  const posts = recommendations
+    .map((recommendation) => recommendation.post)
+    .filter((post) => post.type === PostTypes.PHOTO);
 
   const visiblePosts = posts.slice(0, isMobile ? 4 : 12);
   console.log('visiblePosts', visiblePosts);
@@ -40,14 +44,14 @@ export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
 
 const PhotoGrid: React.FC<{ posts: PhotoPost[] }> = ({ posts }) => (
   <GridContainer>
-    {posts.map((post, idx) => (
+    {posts.map((post) => (
       <button
         key={post.id}
         type="button"
         className="bg-muted/20 relative aspect-square overflow-hidden rounded-md"
       >
         <Image
-          src={post.urls[idx]}
+          src={post.urls[0]}
           alt={`Photo by ${post.author.username}`}
           fill
           loading="lazy"

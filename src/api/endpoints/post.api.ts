@@ -1,13 +1,5 @@
 import { apiClient } from '../client';
-import {
-  PhotoPost,
-  PostOverview,
-  PostSearchParams,
-  QuotePost,
-  PostTypes,
-  CreateQuotePost,
-  CreatePhotoPost,
-} from '@/types/post';
+import { PostOverview, PostSearchParams, CreateQuotePost, CreatePhotoPost } from '@/types/post';
 import { mockFetchPosts, quotePost } from '@/mocks/post';
 import { PaginatedResponse } from '@/types/pagination';
 import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
@@ -36,22 +28,6 @@ export const PostApi = {
     return (
       await apiClient.get<PaginatedResponse<PostOverview>>('/posts', {
         params: { ...search, page, page_size: pageSize },
-      })
-    ).data;
-  },
-
-  getRecommendedPosts: async <T extends PhotoPost | QuotePost>(
-    userId: string,
-    type: PostTypes = PostTypes.PHOTO,
-    page: number = PAGE_NUMBER,
-    pageSize: number = PAGE_SIZE
-  ): Promise<PaginatedResponse<T>> => {
-    if (useMocks) {
-      return (await mockFetchPosts(page, pageSize, type)) as PaginatedResponse<T>;
-    }
-    return (
-      await apiClient.get<PaginatedResponse<T>>('/posts/recommended', {
-        params: { userId, type, page, page_size: pageSize },
       })
     ).data;
   },
