@@ -6,7 +6,7 @@ interface RecommendedPhotosSkeletonProps {
 }
 
 export const RecommendedPhotosSkeleton = ({ isMobile }: RecommendedPhotosSkeletonProps) => {
-  const skeletonCount = isMobile ? 4 : 12;
+  const skeletonCount = isMobile ? 6 : 12;
 
   return (
     <GridContainer>
