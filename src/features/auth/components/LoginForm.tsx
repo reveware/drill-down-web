@@ -37,7 +37,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" autoComplete="on">
         {/* Email */}
         <FormField
           control={form.control}
@@ -46,7 +46,12 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="john@example.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="john@example.com"
+                  {...field}
+                  autoComplete="email"
+                />
               </FormControl>
               <div className="min-h-[1rem] text-xs font-light">
                 <FormMessage />
@@ -69,6 +74,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                     placeholder="••••••••"
                     className="pr-10"
                     {...field}
+                    autoComplete="current-password"
                   />
                   <Button
                     type="button"
