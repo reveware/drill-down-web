@@ -21,7 +21,7 @@ export const RecommendedPhotos = ({ userId }: RecommendedPhotosProps) => {
     .map((recommendation) => recommendation.post)
     .filter((post) => post.type === PostTypes.PHOTO);
 
-  const visiblePosts = posts.slice(0, isMobile ? 4 : 12);
+  const visiblePosts = posts.slice(0, isMobile ? 6 : 12);
   console.log('visiblePosts', visiblePosts);
   return (
     <Card className="card max-w-lg">
