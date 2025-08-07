@@ -7,7 +7,7 @@ import { UserReward } from '@/types/reward';
 
 export const RewardsGallery = () => {
   const { rewards, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useRewards();
-  console.log('rewards', rewards);
+
   const EmptyState = () => (
     <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
       <div className="mb-4 text-6xl">🎁</div>

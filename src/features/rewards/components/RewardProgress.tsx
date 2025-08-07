@@ -1,14 +1,18 @@
 'use client';
 import { useAuth } from '@/hooks/useAuth';
+import { useUserProfile } from '@/features/user/hooks/useUserProfile';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 
 const POSTS_PER_REWARD = 10;
 
 export const RewardProgress = () => {
-  const { user } = useAuth();
+  const { user: authUser } = useAuth();
+  const { data: user, isLoading } = useUserProfile(authUser?.id || '');
 
-  if (!user) return null;
+  if (!user || isLoading) {
+    return null;
+  }
 
   const postsCount = user.posts_count;
   const postsInCurrentCycle = postsCount % POSTS_PER_REWARD;

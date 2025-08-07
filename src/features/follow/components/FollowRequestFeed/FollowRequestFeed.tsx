@@ -48,7 +48,9 @@ const LoadingState = () => (
 );
 
 const EmptyState = () => (
-  <div className="flex flex-col items-center justify-center py-12 text-center">
-    <p className="text-muted-foreground">No pending follow requests</p>
+  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
+    <div className="mb-4 text-6xl">🫂</div>
+    <h2 className="mb-2 text-2xl font-bold">No Follow Requests</h2>
+    <p className="text-muted-foreground max-w-md">Guess you are not popular yet.</p>
   </div>
 );
