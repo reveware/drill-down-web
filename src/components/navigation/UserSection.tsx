@@ -30,10 +30,6 @@ export const UserSection = ({ user }: UserSectionProps) => {
       <ThemeToggle />
 
       <Separator />
-
-      <div className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
-        <Notifications size={20} /> <Link href="/notifications">Notifications</Link>
-      </div>
       <Link
         href={`/user/${user.id}`}
         className="hover:bg-muted flex items-center gap-2 rounded-md p-2"
@@ -41,8 +37,12 @@ export const UserSection = ({ user }: UserSectionProps) => {
         <User size={20} /> Profile
       </Link>
 
-      <Link href="/assets" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
-        <Gift size={20} /> Assets
+      <div className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+        <Notifications size={20} /> <Link href="/notifications">Notifications</Link>
+      </div>
+
+      <Link href="/rewards" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+        <Gift size={20} /> Rewards
       </Link>
 
       <Separator />

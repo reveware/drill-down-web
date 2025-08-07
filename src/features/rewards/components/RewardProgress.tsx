@@ -1,0 +1,49 @@
+'use client';
+import { useAuth } from '@/hooks/useAuth';
+import { Progress } from '@/components/ui/progress';
+import { Card, CardContent } from '@/components/ui/card';
+
+const POSTS_PER_REWARD = 10;
+
+export const RewardProgress = () => {
+  const { user } = useAuth();
+
+  if (!user) return null;
+
+  const postsCount = user.posts_count;
+  const postsInCurrentCycle = postsCount % POSTS_PER_REWARD;
+  const postsUntilNextReward = POSTS_PER_REWARD - postsInCurrentCycle;
+  const progressPercentage = (postsInCurrentCycle / POSTS_PER_REWARD) * 100;
+
+  // If user just completed a reward cycle, show they're at 0/10 for next reward
+  const displayProgress = postsInCurrentCycle === 0 && postsCount > 0 ? 0 : postsInCurrentCycle;
+  const displayPercentage = postsInCurrentCycle === 0 && postsCount > 0 ? 0 : progressPercentage;
+
+  const getProgressMessage = () => {
+    return postsUntilNextReward === POSTS_PER_REWARD
+      ? 'Start posting to earn rewards!'
+      : postsUntilNextReward === 1
+        ? 'Just 1 more post until your next reward!'
+        : `Continue posting to earn a new reward!`;
+  };
+  return (
+    <Card className="card mb-6">
+      <CardContent className="p-4">
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold">Next Reward</h3>
+
+          <div className="space-y-2">
+            <div className="text-foreground flex items-center justify-between text-sm">
+              <span>{getProgressMessage()}</span>
+              <span>
+                {displayProgress}/{POSTS_PER_REWARD} posts
+              </span>
+            </div>
+
+            <Progress value={displayPercentage} className="h-2" />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
