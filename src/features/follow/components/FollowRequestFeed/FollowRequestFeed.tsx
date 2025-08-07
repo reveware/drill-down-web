@@ -32,7 +32,7 @@ export const FollowRequestFeed: React.FC = () => {
         </div>
       )}
 
-      <div ref={loadMoreRef} className="text-center">
+      <div ref={loadMoreRef} className="mt-4 text-center">
         {isFetchingNextPage && <FollowRequestItemSkeleton />}
       </div>
     </div>

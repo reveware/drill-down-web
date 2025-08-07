@@ -26,9 +26,7 @@ export const FollowRequestItem = ({ followRequest }: FollowRequestItemProps) => 
         <div className="mb-4 flex items-center gap-2">
           <UserAvatar user={followRequest.requester} />
           <div className="flex-1">
-            <Link href={`/user/${followRequest.requester.id}`} className="hover:underline">
-              <UserInfo user={followRequest.requester} />
-            </Link>
+            <UserInfo user={followRequest.requester} />
           </div>
         </div>
 

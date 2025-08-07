@@ -5,26 +5,15 @@ import { mockUser, mockAdmin, mockPrivateUser, mockFollowedUser } from './user';
 import { sleep } from '@/lib/utils';
 
 // Mock follow requests data
-const mockFollowRequests: FollowRequest[] = [
-  {
-    id: 'fr1',
+// repeat 10x
+const mockFollowRequests: FollowRequest[] = Array.from({ length: 100 }, (_, index) => {
+  return {
+    id: `fr${index}`,
     requester: mockAdmin,
     recipient: mockUser,
     created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
-  },
-  {
-    id: 'fr2',
-    requester: mockPrivateUser,
-    recipient: mockUser,
-    created_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
-  },
-  {
-    id: 'fr3',
-    requester: mockFollowedUser,
-    recipient: mockUser,
-    created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
-  },
-];
+  };
+});
 
 export const mockFetchPendingFollowRequests = async (
   page: number,
