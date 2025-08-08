@@ -2,6 +2,7 @@ import { apiClient } from '../client';
 import { UserReward, RewardAssetType } from '@/types/reward';
 import { mockFetchRewards } from '@/mocks/rewards';
 import { PaginatedResponse } from '@/types/pagination';
+import { RewardJob, JobStatus } from '@/types/rewardJob';
 import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
 
 const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
@@ -31,5 +32,17 @@ export const RewardsApi = {
       };
     }
     return (await apiClient.post<UserReward>(`/rewards/${rewardId}/reveal`)).data;
+  },
+
+  getRewardJobs: async (
+    params: { userId?: string; status?: JobStatus },
+    page: number = PAGE_NUMBER,
+    pageSize: number = PAGE_SIZE
+  ): Promise<PaginatedResponse<RewardJob>> => {
+    return (
+      await apiClient.get<PaginatedResponse<RewardJob>>('/reward-generation-jobs/', {
+        params: { userId: params.userId, status: params.status, page, page_size: pageSize },
+      })
+    ).data;
   },
 };
