@@ -36,7 +36,7 @@ export const CreateUserDto = RegisterSchema.omit({
 });
 
 export const LoginFormSchema = z.object({
-  username: z.string().min(3, 'must be at least 3 characters').max(20, 'too long'),
+  email: z.string().email('Invalid email address'),
   password: z.string().min(9, 'Password must be at least 9 characters'),
 });
 

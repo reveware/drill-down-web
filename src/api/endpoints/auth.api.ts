@@ -11,7 +11,7 @@ export const AuthApi = {
     }
     return (
       await apiClient.post<LoginResult>('/auth/login', {
-        email: loginAttempt.username,
+        email: loginAttempt.email,
         password: loginAttempt.password,
       })
     ).data;

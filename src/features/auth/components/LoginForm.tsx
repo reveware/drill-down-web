@@ -30,7 +30,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
     resolver: zodResolver(LoginFormSchema),
     mode: 'onChange',
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
     },
   });
@@ -41,7 +41,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
         {/* Email */}
         <FormField
           control={form.control}
-          name="username"
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>

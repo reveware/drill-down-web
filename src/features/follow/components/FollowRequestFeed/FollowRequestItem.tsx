@@ -5,7 +5,6 @@ import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { FollowRequest } from '@/types/follow';
 import { useApproveFollowRequest, useRejectFollowRequests } from '@/features/follow/hooks';
-import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 
 interface FollowRequestItemProps {
