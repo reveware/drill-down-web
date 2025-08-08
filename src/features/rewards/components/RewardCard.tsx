@@ -24,7 +24,7 @@ export const RewardCard = ({ reward }: RewardCardProps) => {
   const HiddenContent = () => {
     return (
       <div
-        className="bg-primary flex h-full w-full cursor-pointer flex-col text-white"
+        className="bg-primary flex h-full w-full cursor-pointer flex-col p-4 text-white"
         onClick={handleReveal}
       >
         <div className="flex flex-1 flex-col items-center justify-center">
@@ -33,7 +33,7 @@ export const RewardCard = ({ reward }: RewardCardProps) => {
         </div>
 
         {/* Description at the bottom */}
-        <div className="max-h-1/3 overflow-hidden p-4">
+        <div className="overflow-hidden">
           <div className="line-clamp-6 text-xs leading-relaxed opacity-70">
             {reward.description}
           </div>

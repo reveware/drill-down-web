@@ -14,7 +14,11 @@ export const PostApi = {
     if (useMocks) {
       return await mockFetchPosts(page, pageSize);
     }
-    return (await apiClient.get<PaginatedResponse<PostOverview>>('/posts/feed')).data;
+    return (
+      await apiClient.get<PaginatedResponse<PostOverview>>('/posts/feed', {
+        params: { page, page_size: pageSize },
+      })
+    ).data;
   },
 
   searchPosts: async (

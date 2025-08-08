@@ -1,5 +1,5 @@
 'use client';
-import { FollowRequestFeed } from '@/features/follow/components/FollowRequestFeed';
+import { FollowRequestFeed } from '@/features/follow';
 
 export default function NotificationsPage() {
   return (

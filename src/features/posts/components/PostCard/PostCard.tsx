@@ -5,8 +5,8 @@ import { PostCardHeader } from './PostCardHeader';
 import { PostCardFooter } from './PostCardFooter';
 import { PostCardContent } from './PostCardContent/PostCardContent';
 import { useDeletePost } from '../../hooks/useDeletePost';
-import { useLikePost } from '../../hooks/useLikePost';
-import { useUnlikePost } from '../../hooks/useUnlikePost';
+import { useLikePost } from '../../../likes/hooks/useLikePost';
+import { useUnlikePost } from '../../../likes/hooks/useUnlikePost';
 
 interface PostCardProps {
   post: PostOverview;

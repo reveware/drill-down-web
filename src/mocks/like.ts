@@ -5,7 +5,6 @@ import { PaginatedResponse } from '@/types/pagination';
 import { PostTypes } from '@/types/post';
 
 export const mockFetchLikes = async (
-  userId: string,
   page: number,
   pageSize: number
 ): Promise<PaginatedResponse<Like>> => {

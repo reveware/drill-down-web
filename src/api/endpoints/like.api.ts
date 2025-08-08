@@ -20,10 +20,25 @@ export const LikeApi = {
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<Like>> => {
     if (useMocks) {
-      return mockFetchLikes(userId, page, pageSize);
+      return mockFetchLikes(page, pageSize);
     }
     return (
       await apiClient.get<PaginatedResponse<Like>>(`/users/${userId}/likes`, {
+        params: { page, page_size: pageSize },
+      })
+    ).data;
+  },
+
+  getPostLikes: async (
+    postId: string,
+    page: number = PAGE_NUMBER,
+    pageSize: number = PAGE_SIZE
+  ): Promise<PaginatedResponse<Like>> => {
+    if (useMocks) {
+      return mockFetchLikes(page, pageSize);
+    }
+    return (
+      await apiClient.get<PaginatedResponse<Like>>(`/posts/${postId}/likes`, {
         params: { page, page_size: pageSize },
       })
     ).data;

@@ -5,6 +5,7 @@ import { TagList } from './TagList';
 import { useModal } from '@/hooks/useModal';
 import { Comments } from '../Comments/Comments';
 import { PostOverview } from '@/types/post';
+import { PostLikesFeed } from '@/features/likes';
 
 interface PostCardFooterProps {
   post: PostOverview;
@@ -22,6 +23,14 @@ export const PostCardFooter = ({ post, onHeartClick }: PostCardFooterProps) => {
     });
   };
 
+  const handleViewLikes = () => {
+    openModal({
+      id: 'likes',
+      title: 'Likes',
+      content: <PostLikesFeed postId={post.id} />,
+    });
+  };
+
   const { like_count, comment_count, tags } = post;
   return (
     <CardFooter className="flex flex-col gap-3 px-2 text-sm">
@@ -30,9 +39,11 @@ export const PostCardFooter = ({ post, onHeartClick }: PostCardFooterProps) => {
       <Separator />
 
       <div className="flex items-center gap-6">
-        <span className="flex cursor-pointer items-center gap-1" onClick={onHeartClick}>
-          <Heart size={20} className={post.is_liked ? 'liked-heart' : ''} />
-          {like_count} likes
+        <span className="flex cursor-pointer items-center gap-1">
+          <Heart size={20} className={post.is_liked ? 'liked-heart' : ''} onClick={onHeartClick} />
+          <span className="text-sm" onClick={handleViewLikes}>
+            {like_count} likes
+          </span>
         </span>
         <span className="flex cursor-pointer items-center gap-1" onClick={handleViewComments}>
           <MessageCircle size={20} />
