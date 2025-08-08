@@ -37,7 +37,7 @@ export const CreateUserDto = RegisterSchema.omit({
 
 export const LoginFormSchema = z.object({
   username: z.string().min(3, 'must be at least 3 characters').max(20, 'too long'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  password: z.string().min(9, 'Password must be at least 9 characters'),
 });
 
 export const LoginResultSchema = z.object({
