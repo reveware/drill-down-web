@@ -71,7 +71,7 @@ const UserRecommendationCard: React.FC<{
       {reason === RecommendationReason.AFFINITY ? (
         <div className="text-accent flex items-center gap-2 text-xs font-extrabold">
           <Dna className="mr-1 h-4 w-4" />
-          {match.percentage || 0}%
+          {match?.overall || 0}%
         </div>
       ) : (
         <div className="h-6 w-16"></div> // Placeholder to maintain layout

@@ -29,7 +29,6 @@ export const ProfileActions = ({ user }: ProfileActionsProps) => {
     return null;
   }
 
-  // Define the rules for what actions are available based on relationship state
   const getAvailableActions = () => {
     const actions: Action[] = [];
 
@@ -61,8 +60,7 @@ export const ProfileActions = ({ user }: ProfileActionsProps) => {
       });
     }
 
-    // Rule: Mutual actions only available when there's some relationship
-    if (user.is_following || user.is_follower || user.is_mutual) {
+    if (user.is_mutual) {
       actions.push({
         label: 'Match',
         icon: <Dna size={16} />,
