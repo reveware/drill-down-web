@@ -2,73 +2,91 @@ import { UserDetail } from '@/types/user';
 import { useFollowUser } from '@/features/follow/hooks/useFollowUser';
 import { useUnfollowUser } from '@/features/follow/hooks/useUnfollowUser';
 import { Button } from '@/components/ui/button';
-import { Bomb, MessageCircle, UserMinus, UserPlus } from '@/components/shared/Icons';
+import { Dna, UserMinus, UserPlus } from '@/components/shared/Icons';
 import { cn } from '@/lib/utils';
 import { useApproveFollowRequest } from '@/features/follow/hooks/useApproveFollowRequest';
 import { useRejectFollowRequests } from '@/features/follow/hooks/useRejectFollowRequests';
+import { useRouter } from 'next/navigation';
 
-export const ProfileActions = ({ user }: { user: UserDetail }) => {
+type Action = {
+  label: string;
+  icon: React.ReactNode;
+  onClick: () => void;
+  disabled: boolean;
+};
+
+type ProfileActionsProps = {
+  user: UserDetail;
+};
+
+export const ProfileActions = ({ user }: ProfileActionsProps) => {
   const { mutate: followUser } = useFollowUser();
   const { mutate: unfollowUser } = useUnfollowUser();
+  const router = useRouter();
+  const matchWithUser = (userId: string) => router.push(`/user/${userId}/match`);
 
-  if (user.is_self) return null;
+  if (user.is_self) {
+    return null;
+  }
 
-  const followAction = (() => {
-    if (user.is_following) {
-      return {
+  // Define the rules for what actions are available based on relationship state
+  const getAvailableActions = () => {
+    const actions: Action[] = [];
+
+    // Rule: Follow actions based on relationship state
+    if (!user.is_following && !user.is_pending_follow) {
+      actions.push({
+        label: 'Follow',
+        icon: <UserPlus size={16} />,
+        onClick: () => followUser(user.id),
+        disabled: false,
+      });
+    }
+
+    if (user.is_following || user.is_mutual) {
+      actions.push({
         label: 'Unfollow',
         icon: <UserMinus size={16} />,
         onClick: () => unfollowUser(user.id),
         disabled: false,
-      };
+      });
     }
+
     if (user.is_pending_follow) {
-      return {
+      actions.push({
         label: 'Pending',
         icon: <UserPlus size={16} />,
-        onClick: undefined,
+        onClick: () => {},
         disabled: true,
-      };
+      });
     }
-    return {
-      label: 'Follow',
-      icon: <UserPlus size={16} />,
-      onClick: () => followUser(user.id),
-      disabled: false,
-    };
-  })();
 
-  const mutualActions = user.is_mutual
-    ? [
-        {
-          label: 'Message',
-          icon: <MessageCircle size={16} />,
-          onClick: () => {}, // TODO: implement messaging
-        },
-        {
-          label: 'Timebomb',
-          icon: <Bomb size={16} />,
-          onClick: () => {}, // TODO: implement timebomb feature
-        },
-      ]
-    : [];
+    // Rule: Mutual actions only available when there's some relationship
+    if (user.is_following || user.is_follower || user.is_mutual) {
+      actions.push({
+        label: 'Match',
+        icon: <Dna size={16} />,
+        onClick: () => matchWithUser(user.id),
+        disabled: false,
+      });
+    }
+
+    return actions;
+  };
+
+  const actions = getAvailableActions();
 
   return (
     <div className="flex w-full flex-col gap-4">
-      {/* Follow Button Row */}
       <div className={cn('flex flex-wrap justify-center gap-2', 'flex-col')}>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={followAction.onClick}
-          disabled={followAction.disabled}
-        >
-          {followAction.icon}
-          {followAction.label}
-        </Button>
-
-        {mutualActions.map((action) => (
-          <Button key={action.label} size="sm" variant="outline" onClick={action.onClick}>
+        {actions.map((action) => (
+          <Button
+            key={action.label}
+            variant="outline"
+            size="sm"
+            onClick={action.onClick}
+            disabled={action.disabled}
+          >
             {action.icon}
             {action.label}
           </Button>

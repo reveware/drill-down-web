@@ -33,4 +33,9 @@ export {
   EllipsisVertical,
   Dna,
   Bell,
+  CircleDot,
+  TrendingUp,
+  TrendingDown,
+  ArrowRight,
+  Activity,
 } from 'lucide-react';

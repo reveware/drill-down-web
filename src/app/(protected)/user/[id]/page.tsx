@@ -7,7 +7,6 @@ export default function UserProfilePage() {
   const params = useParams();
   const userId = params.id as string;
   const { data: user, isPending: isProfileUserLoading } = useUserProfile(userId);
-  console.log('user profile page', { user, isProfileUserLoading });
 
   if (isProfileUserLoading) {
     return <Spinner />;

@@ -1,5 +1,5 @@
 'use client';
-import { User, Gift, LogOut } from '../shared/Icons';
+import { User, Gift, LogOut, Activity } from '../shared/Icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
@@ -43,6 +43,13 @@ export const UserSection = ({ user }: UserSectionProps) => {
 
       <Link href="/rewards" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
         <Gift size={20} /> Rewards
+      </Link>
+
+      <Link
+        href={`/user/${user.id}/insights`}
+        className="hover:bg-muted flex items-center gap-2 rounded-md p-2"
+      >
+        <Activity size={20} /> Insights
       </Link>
 
       <Separator />
