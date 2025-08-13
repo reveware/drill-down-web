@@ -23,8 +23,9 @@ export const RewardProgress = () => {
   const progressPercentage = (postsInCurrentCycle / POSTS_PER_REWARD) * 100;
 
   // If user just completed a reward cycle, show they're at 0/10 for next reward
-  const displayProgress = postsInCurrentCycle === 0 && postsCount > 0 ? 0 : postsInCurrentCycle;
-  const displayPercentage = postsInCurrentCycle === 0 && postsCount > 0 ? 0 : progressPercentage;
+  const isStartOfCycle = postsCount === 0 || (postsInCurrentCycle === 0 && postsCount > 0);
+  const displayProgress = isStartOfCycle ? 0 : postsInCurrentCycle;
+  const displayPercentage = isStartOfCycle ? 0 : progressPercentage;
 
   const getProgressMessage = () => {
     return postsUntilNextReward === POSTS_PER_REWARD
@@ -53,7 +54,7 @@ export const RewardProgress = () => {
           </div>
         </CardContent>
       </Card>
-      {true && <RewardPendingCard />}
+      {hasPending && <RewardPendingCard />}
     </div>
   );
 };
