@@ -37,11 +37,11 @@ export const RewardProgress = () => {
     <div className="flex flex-col gap-2">
       <Card className="card">
         <CardContent className="px-4 py-2">
-          <div className="space-y-3">
+          <div>
             <h3 className="text-lg font-semibold">Next Reward</h3>
 
             <div className="space-y-2">
-              <div className="text-foreground flex items-center justify-between text-sm">
+              <div className="text-muted flex items-center justify-between text-xs">
                 <span>{getProgressMessage()}</span>
                 <span>
                   {displayProgress}/{POSTS_PER_REWARD} posts
@@ -53,7 +53,7 @@ export const RewardProgress = () => {
           </div>
         </CardContent>
       </Card>
-      {hasPending && <RewardPendingCard />}
+      {true && <RewardPendingCard />}
     </div>
   );
 };

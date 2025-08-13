@@ -8,10 +8,8 @@ export default function UserInsightsPage() {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-4 px-2 py-4">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Insights</h1>
-        <p className="mt-2 text-gray-600">Explore your affinity patterns over time</p>
-      </div>
+      <h2 className="text-md font-title text-2xl font-bold">Insights</h2>
+      <p className="text-muted text-sm">Explore your affinity patterns over time.</p>
 
       <div className="h-[700px] w-full">
         <AffinityTimeline userId={userId} />

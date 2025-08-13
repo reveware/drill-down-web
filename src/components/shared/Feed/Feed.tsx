@@ -31,7 +31,7 @@ export const Feed = <T,>({
     enabled: !!hasNextPage && !isLoading,
   });
 
-  const className = 'flex w-full max-w-lg flex-col items-center gap-4 px-2 py-4';
+  const className = 'flex w-full max-w-lg flex-col items-center gap-4 px-2 py-4 h-full';
 
   const LoadingState = ({ count }: { count: number }) => (
     <>

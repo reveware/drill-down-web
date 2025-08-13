@@ -30,7 +30,7 @@ export default function UserProfilePage() {
   }
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-7xl justify-center px-2 py-4">
+    <div className="mx-auto flex max-w-7xl flex-col gap-4 px-2 py-4">
       {/* Mobile: Single column layout */}
       <div className="flex w-full flex-col gap-6 md:hidden">
         <ProfileOverview user={user} />

@@ -35,7 +35,7 @@ interface AffinityTimelineProps {
 
 export const AffinityTimeline = ({ userId, className = '' }: AffinityTimelineProps) => {
   const keyRef = useRef<number>(0);
-  const [selectedType, setSelectedType] = useState<AffinityType>(AffinityType.TAG);
+  const [selectedType, setSelectedType] = useState<AffinityType>(AffinityType.MOOD);
   const [selectedInterval, setSelectedInterval] = useState<TimelineInterval>(TimelineInterval.WEEK);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
