@@ -54,10 +54,37 @@ export const MultiImage: Story = {
     post: {
       ...imagePost('5'),
       type: PostTypes.IMAGE,
-      urls: [
-        'https://picsum.photos/200/300?1',
-        'https://picsum.photos/200/300?2',
-        'https://picsum.photos/200/300?3',
+      images: [
+        {
+          url: 'https://picsum.photos/200/300?1',
+          meta: {
+            width: 200,
+            height: 300,
+            aspect_ratio: 200 / 300,
+            byte_size: 1000,
+            mime_type: 'image/jpeg',
+          },
+        },
+        {
+          url: 'https://picsum.photos/200/300?2',
+          meta: {
+            width: 200,
+            height: 300,
+            aspect_ratio: 200 / 300,
+            byte_size: 1000,
+            mime_type: 'image/jpeg',
+          },
+        },
+        {
+          url: 'https://picsum.photos/200/300?3',
+          meta: {
+            width: 200,
+            height: 300,
+            aspect_ratio: 200 / 300,
+            byte_size: 1000,
+            mime_type: 'image/jpeg',
+          },
+        },
       ],
     },
   },
