@@ -18,9 +18,20 @@ const BasePostSchema = z.object({
   updated_at: z.string().datetime(),
 });
 
+const PostImageSchema = z.object({
+  url: z.string().url(),
+  meta: z.object({
+    width: z.number(),
+    height: z.number(),
+    aspect_ratio: z.number(),
+    byte_size: z.number(),
+    mime_type: z.string(),
+  }),
+});
+
 export const ImagePostSchema = BasePostSchema.extend({
   type: z.literal(PostTypes.IMAGE),
-  urls: z.array(z.string().url()),
+  images: z.array(PostImageSchema),
 });
 
 export const QuotePostSchema = BasePostSchema.extend({

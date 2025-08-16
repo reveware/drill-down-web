@@ -28,7 +28,7 @@ export const Feed = <T,>({
   useInfiniteScrollObserver({
     ref: loadMoreRef,
     onLoadMore: fetchNextPage,
-    enabled: !!hasNextPage && !isLoading,
+    enabled: !!hasNextPage && !isLoading && !isFetchingNextPage,
   });
 
   const className = 'flex w-full max-w-lg flex-col items-center gap-4 px-2 py-4 h-full';
@@ -64,7 +64,7 @@ export const Feed = <T,>({
           </div>
         ))}
 
-      <div ref={loadMoreRef} className="flex w-full justify-center">
+      <div ref={loadMoreRef} className="flex min-h-[20px] w-full justify-center">
         {isFetchingNextPage && <div className="w-full">{renderSkeleton(0)}</div>}
       </div>
     </div>

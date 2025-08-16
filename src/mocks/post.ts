@@ -12,7 +12,18 @@ export const imagePost = (id: string, seed?: number): PostOverview => ({
   comment_count: Math.floor(Math.random() * 20) + 1,
   tags: ['random', 'tag', 'another tag'],
   type: PostTypes.IMAGE,
-  urls: [`https://picsum.photos/seed/${seed || id}/400/400`],
+  images: [
+    {
+      url: `https://picsum.photos/seed/${seed || id}/400/400`,
+      meta: {
+        width: 400,
+        height: 400,
+        aspect_ratio: 1,
+        byte_size: 1000,
+        mime_type: 'image/jpeg',
+      },
+    },
+  ],
   created_at: '2024-06-01T12:00:00.000Z',
   updated_at: '2024-06-01T12:00:00.000Z',
   is_liked: false,
@@ -78,17 +89,17 @@ export async function mockFetchPosts<T extends ImagePost | QuotePost>(
   await sleep(3);
 
   const postsToUse = generatePosts(20, type);
-  const start = page * pageSize;
+  const start = (page - 1) * pageSize; // Fix: page should be 1-indexed
+  const end = start + pageSize;
   const totalPages = Math.ceil(postsToUse.length / pageSize);
 
-  const actualStart = start >= postsToUse.length ? start % postsToUse.length : start;
-  const actualEnd = Math.min(actualStart + pageSize, postsToUse.length);
+  const data = postsToUse.slice(start, end) as T[];
 
   return {
     page,
     total: postsToUse.length,
-    data: postsToUse.slice(actualStart, actualEnd) as T[],
+    data,
     total_pages: totalPages,
-    is_last_page: actualEnd >= postsToUse.length,
+    is_last_page: page >= totalPages,
   };
 }

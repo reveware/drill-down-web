@@ -51,7 +51,7 @@ const ImageGrid: React.FC<{ posts: ImagePost[] }> = ({ posts }) => (
         className="bg-muted/20 relative aspect-square overflow-hidden rounded-md"
       >
         <Image
-          src={post.urls[0]}
+          src={post.images[0].url}
           alt={`Photo by ${post.author.username}`}
           fill
           loading="lazy"

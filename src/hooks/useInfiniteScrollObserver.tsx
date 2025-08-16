@@ -21,7 +21,10 @@ export const useInfiniteScrollObserver = <T extends HTMLElement = HTMLElement>({
           onLoadMore();
         }
       },
-      { threshold: 1 }
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+        rootMargin: '100px', // Trigger 100px before the element comes into view
+      }
     );
 
     observer.observe(element);
