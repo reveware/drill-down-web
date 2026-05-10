@@ -1,5 +1,5 @@
 import { apiClient } from '../client';
-import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
+import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 import { PaginatedResponse } from '@/types/pagination';
 import {
   PostRecommendation,
@@ -11,8 +11,6 @@ import {
   mockFetchUserRecommendations,
 } from '@/mocks/recommendations';
 
-const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
-
 export const RecommendationApi = {
   getRecommendations: async (
     userId: string,
@@ -20,7 +18,7 @@ export const RecommendationApi = {
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<UserRecommendation>> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockFetchUserRecommendations();
     }
 
@@ -41,7 +39,7 @@ export const RecommendationApi = {
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<PostRecommendation>> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return await mockFetchPostRecommendations();
     }
     return (

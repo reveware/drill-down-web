@@ -209,7 +209,7 @@ const UploadArea = ({
 }) => (
   <div
     className={cn(
-      'border-muted/60 hover:bg-muted/20 flex flex-1 cursor-pointer items-center justify-center rounded-lg border border-dashed transition',
+      'border-input hover:bg-muted/20 flex flex-1 cursor-pointer items-center justify-center rounded-lg border border-dashed transition',
       error && 'border-red-500'
     )}
     onClick={triggerFileInput}

@@ -4,6 +4,7 @@ import { QueryProvider } from './QueryProvider';
 import { ThemeProvider } from './ThemeProvider';
 import { AuthProvider } from './AuthProvider';
 import { ModalProvider } from './ModalProvider';
+import { ChatSocketProvider } from './ChatSocketProvider';
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -14,7 +15,9 @@ export const AppProviders = ({ children }: AppProvidersProps) => {
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
       <QueryProvider>
         <AuthProvider>
-          <ModalProvider>{children}</ModalProvider>
+          <ChatSocketProvider>
+            <ModalProvider>{children}</ModalProvider>
+          </ChatSocketProvider>
         </AuthProvider>
       </QueryProvider>
     </ThemeProvider>
