@@ -1,7 +1,6 @@
 import { decodeJwt } from 'jose';
 import { JWTPayload } from '@/types/auth';
 import { mockJWTPayload } from '@/mocks/auth';
-import { USE_MOCKS } from '@/api/constants';
 
 export class TokenManager {
   private static readonly TOKEN_KEY = 'auth_token';
@@ -30,7 +29,7 @@ export class TokenManager {
 
   static decodeToken(token: string): JWTPayload | null {
     try {
-      if (USE_MOCKS) {
+      if (process.env.NEXT_PUBLIC_USE_MOCKS === 'true') {
         return mockJWTPayload;
       }
 

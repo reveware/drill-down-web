@@ -2,14 +2,16 @@ import { apiClient } from '../client';
 import { PostOverview, PostSearchParams, CreateQuotePost, CreateImagePost } from '@/types/post';
 import { mockFetchPosts, quotePost } from '@/mocks/post';
 import { PaginatedResponse } from '@/types/pagination';
-import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
+import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
+
+const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
 export const PostApi = {
   getFeedPosts: async (
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<PostOverview>> => {
-    if (USE_MOCKS) {
+    if (useMocks) {
       return await mockFetchPosts(page, pageSize);
     }
     return (
@@ -24,7 +26,7 @@ export const PostApi = {
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<PostOverview>> => {
-    if (USE_MOCKS) {
+    if (useMocks) {
       return await mockFetchPosts(page, pageSize);
     }
     return (
@@ -52,7 +54,7 @@ export const PostApi = {
   },
 
   createQuotePost: async (post: CreateQuotePost): Promise<PostOverview> => {
-    if (USE_MOCKS) {
+    if (useMocks) {
       return quotePost(Math.random().toString(36).substring(2, 15));
     }
     return (await apiClient.post('/posts/quote', post)).data;
@@ -60,7 +62,7 @@ export const PostApi = {
 
   deletePost: async (postId: string): Promise<boolean> => {
     console.log('deletePost', postId);
-    if (USE_MOCKS) {
+    if (useMocks) {
       return true;
     }
     return (await apiClient.delete(`/posts/${postId}`)).data;
