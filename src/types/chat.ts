@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 // ---------------------------------------------------------------------------
 // MessagePart — content unit inside a message
 // ---------------------------------------------------------------------------
@@ -62,6 +60,7 @@ export interface WireMessage {
   timestamp: string; // ISO 8601
   sender: WireActor; // typed sender identity
   client_temp_id?: string; // echoed from message:send for dedup
+  stream_id?: string; // present on persona replies — correlates with message:stream
   type: string; // content type of the first part
   status: 'sending' | 'sent' | 'read' | 'failed';
 }
@@ -71,7 +70,8 @@ export interface WireMessage {
 // ---------------------------------------------------------------------------
 export interface WireConversation {
   id: string;
-  type: 'DIRECT' | 'PERSONA';
+  title: string; // resolved by the backend (counterpart's display name for 1:1)
+  type: 'USER' | 'PERSONA';
   created_at: string;
   last_activity: string;
   unread_count: number;
@@ -96,13 +96,13 @@ export interface Participant {
 
 export interface Conversation {
   id: string;
-  type: 'direct' | 'ai_assistant';
+  title: string;
+  type: 'USER' | 'PERSONA';
   participants: Participant[];
   messages: WireMessage[];
   last_message?: WireMessage;
   last_activity: string;
   unread_count: number;
-  title?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -124,94 +124,40 @@ export interface ChatEvents {
   // Server → Client
   'conversation:joined': {
     conversation_id: string;
-    type: 'DIRECT' | 'PERSONA';
+    title: string;
+    type: 'USER' | 'PERSONA';
     room_name: string;
     actor_id: string;
     participants: WireParticipant[];
   };
   'message:new': WireMessage;
-  'message:updated': { message_id: string; client_temp_id?: string; status: 'sent' | 'failed' };
+  // Server emits this only on success — failures come through `error` with code `send_failed`
+  'message:updated': { message_id: string; client_temp_id?: string; status: 'sent' };
+  // Streaming persona replies — one event per token chunk
+  'message:stream': { stream_id: string; conversation_id: string; delta: string };
+  // Persona stream failure — separate from the generic `error` event, correlated by stream_id
+  'message:error': {
+    stream_id: string;
+    conversation_id: string;
+    code: 'persona_response_failed';
+    reason?: string;
+    message: string;
+  };
   // typing is bidirectional:
   //   Client → Server: { conversation_id }
   //   Server → Room:   { conversation_id, actor_id }
   'typing:start': { conversation_id: string; actor_id?: string };
   'typing:stop': { conversation_id: string; actor_id?: string };
-  error: { code: string; message: string };
+  // `client_temp_id` is echoed back on send-related failures (send_failed, rate_limited)
+  error: { code: string; message: string; client_temp_id?: string };
 }
 
 export type ConnectionStatus = 'connecting' | 'connected' | 'disconnected' | 'error';
 
-// ---------------------------------------------------------------------------
-// Zod schemas — for REST response validation only
-// ---------------------------------------------------------------------------
-const MessagePartSchema = z.object({
-  type: z.enum(['text', 'image', 'audio', 'post_ref']),
-  text: z.string().optional(),
-  media_key: z.string().optional(),
-  w: z.number().optional(),
-  h: z.number().optional(),
-  alt: z.string().optional(),
-  duration_s: z.number().optional(),
-  waveform: z.array(z.number()).optional(),
-  post_id: z.string().optional(),
-  snapshot: z.any().optional(),
-});
+export type ConversationInit = { byId: string } | { byPersonaSlug: string } | { byUserId: string };
 
-const WireActorSchema = z.object({
-  actor_id: z.string(),
-  actor_type: z.enum(['USER', 'PERSONA']),
-  user: z
-    .object({
-      id: z.string(),
-      username: z.string(),
-      first_name: z.string(),
-      last_name: z.string(),
-      avatar: z.string().optional(),
-    })
-    .optional(),
-  persona: z
-    .object({
-      id: z.string(),
-      slug: z.string(),
-      name: z.string(),
-      avatar: z.string().optional(),
-    })
-    .optional(),
-});
-
-const WireParticipantSchema = WireActorSchema.extend({
-  last_read_seq: z.string(),
-});
-
-const WireMessageSchema = z.object({
-  id: z.string(),
-  conversation_id: z.string(),
-  content: z.array(MessagePartSchema),
-  seq: z.string().optional(),
-  timestamp: z.string(),
-  sender: WireActorSchema,
-  client_temp_id: z.string().optional(),
-  type: z.string(),
-  status: z.enum(['sending', 'sent', 'read', 'failed']),
-});
-
-const WireConversationSchema = z.object({
-  id: z.string(),
-  type: z.enum(['DIRECT', 'PERSONA']),
-  created_at: z.string(),
-  last_activity: z.string(),
-  unread_count: z.number(),
-  participants: z.array(WireParticipantSchema),
-  last_message: WireMessageSchema.optional(),
-});
-
-export const ListConversationsResponseSchema = z.object({
-  items: z.array(WireConversationSchema),
-  next_cursor: z.string().nullable(),
-});
-export type ListConversationsResponseDto = z.infer<typeof ListConversationsResponseSchema>;
-
-export const ListMessagesResponseSchema = z.object({
-  items: z.array(WireMessageSchema),
-});
-export type ListMessagesResponseDto = z.infer<typeof ListMessagesResponseSchema>;
+export interface JoinError {
+  code: string;
+  message: string;
+  retry: () => void;
+}

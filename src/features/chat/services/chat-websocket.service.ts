@@ -1,5 +1,26 @@
 import { createWebSocketAdapter, WebSocketAdapter } from '@/lib/websocket/websocket-adapter';
-import { ChatEvents, ConnectionStatus, MessagePart, WireMessage } from '@/types/chat';
+import {
+  ChatEvents,
+  ConnectionStatus,
+  ConversationInit,
+  MessagePart,
+  WireMessage,
+} from '@/types/chat';
+
+/** Function returned by every `onX` listener, call to unsubscribe. */
+export type Unsubscribe = () => void;
+
+export const JOIN_ERROR_CODES = new Set([
+  'conversation_not_found',
+  'user_not_found',
+  'persona_not_found',
+  'persona_inactive',
+  'invalid_join_request',
+  'join_failed',
+  'not_in_conversation',
+]);
+
+export const SEND_ERROR_CODES = new Set(['send_failed', 'rate_limited']);
 
 export class ChatWebSocketService {
   private adapter: WebSocketAdapter;
@@ -40,16 +61,14 @@ export class ChatWebSocketService {
   // Client → Server
   // ---------------------------------------------------------------------------
 
-  joinConversation(conversationId: string): void {
-    this.adapter.emit('conversation:join', { conversation_id: conversationId });
-  }
-
-  startPersonaChat(personaSlug: string): void {
-    this.adapter.emit('conversation:join', { persona_slug: personaSlug });
-  }
-
-  startUserChat(userId: string): void {
-    this.adapter.emit('conversation:join', { user_id: userId });
+  initConversation(init: ConversationInit): void {
+    if ('byId' in init) {
+      this.adapter.emit('conversation:join', { conversation_id: init.byId });
+    } else if ('byPersonaSlug' in init) {
+      this.adapter.emit('conversation:join', { persona_slug: init.byPersonaSlug });
+    } else {
+      this.adapter.emit('conversation:join', { user_id: init.byUserId });
+    }
   }
 
   sendMessage(conversationId: string, parts: MessagePart[], clientTempId?: string): void {
@@ -74,58 +93,55 @@ export class ChatWebSocketService {
 
   // ---------------------------------------------------------------------------
   // Server → Client listeners
+  // Every onX returns an Unsubscribe so multiple consumers can subscribe independently
   // ---------------------------------------------------------------------------
 
-  onConversationJoined(handler: (data: ChatEvents['conversation:joined']) => void): void {
+  onConversationJoined(handler: (data: ChatEvents['conversation:joined']) => void): Unsubscribe {
     this.adapter.on('conversation:joined', handler);
+    return () => this.adapter.off('conversation:joined', handler);
   }
 
-  onNewMessage(handler: (message: WireMessage) => void): void {
+  onNewMessage(handler: (message: WireMessage) => void): Unsubscribe {
     this.adapter.on('message:new', handler);
+    return () => this.adapter.off('message:new', handler);
   }
 
-  onMessageUpdated(handler: (data: ChatEvents['message:updated']) => void): void {
+  onMessageUpdated(handler: (data: ChatEvents['message:updated']) => void): Unsubscribe {
     this.adapter.on('message:updated', handler);
+    return () => this.adapter.off('message:updated', handler);
   }
 
-  onMessageRead(handler: (data: ChatEvents['message:read']) => void): void {
+  onMessageRead(handler: (data: ChatEvents['message:read']) => void): Unsubscribe {
     this.adapter.on('message:read', handler);
+    return () => this.adapter.off('message:read', handler);
   }
 
-  onTypingStart(handler: (data: ChatEvents['typing:start']) => void): void {
+  onMessageStream(handler: (data: ChatEvents['message:stream']) => void): Unsubscribe {
+    this.adapter.on('message:stream', handler);
+    return () => this.adapter.off('message:stream', handler);
+  }
+
+  onMessageError(handler: (data: ChatEvents['message:error']) => void): Unsubscribe {
+    this.adapter.on('message:error', handler);
+    return () => this.adapter.off('message:error', handler);
+  }
+
+  onTypingStart(handler: (data: ChatEvents['typing:start']) => void): Unsubscribe {
     this.adapter.on('typing:start', handler);
+    return () => this.adapter.off('typing:start', handler);
   }
 
-  onTypingStop(handler: (data: ChatEvents['typing:stop']) => void): void {
+  onTypingStop(handler: (data: ChatEvents['typing:stop']) => void): Unsubscribe {
     this.adapter.on('typing:stop', handler);
+    return () => this.adapter.off('typing:stop', handler);
   }
 
-  onError(handler: (data: { code: string; message: string }) => void): void {
+  onError(handler: (data: ChatEvents['error']) => void): Unsubscribe {
     this.adapter.on('error', handler);
-  }
-
-  offError(handler: (data: { code: string; message: string }) => void): void {
-    this.adapter.off('error', handler);
+    return () => this.adapter.off('error', handler);
   }
 
   onConnectionChange(handler: (status: ConnectionStatus) => void): void {
     this.adapter.onConnectionChange(handler);
-  }
-
-  getConnectionStatus(): ConnectionStatus {
-    return this.adapter.getConnectionStatus();
-  }
-
-  removeAllListeners(): void {
-    const events: (keyof ChatEvents)[] = [
-      'conversation:joined',
-      'message:new',
-      'message:updated',
-      'message:read',
-      'typing:start',
-      'typing:stop',
-      'error',
-    ];
-    events.forEach((event) => this.adapter.off(event));
   }
 }

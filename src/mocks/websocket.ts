@@ -3,6 +3,8 @@ import { sleep } from '@/lib/utils';
 import { generateResponse } from '@/mocks/chat';
 import type { WebSocketAdapter } from '@/lib/websocket/websocket-adapter';
 
+type EventHandler = (...args: unknown[]) => void;
+
 const MOCK_USER_ACTOR_ID = 'mock-user-actor';
 const MOCK_AOI_PARTICIPANTS: WireParticipant[] = [
   {
@@ -26,7 +28,7 @@ const MOCK_AOI_PARTICIPANTS: WireParticipant[] = [
 
 export class MockWebSocketAdapter implements WebSocketAdapter {
   private connectionStatus: ConnectionStatus = 'disconnected';
-  private eventHandlers = new Map<string, Set<(...args: unknown[]) => void>>();
+  private eventHandlers = new Map<string, Set<EventHandler>>();
   private connectionHandlers = new Set<(status: ConnectionStatus) => void>();
 
   constructor(
@@ -55,7 +57,8 @@ export class MockWebSocketAdapter implements WebSocketAdapter {
       setTimeout(() => {
         this.dispatch('conversation:joined', {
           conversation_id: conversationId,
-          type: payload.persona_slug ? 'PERSONA' : 'DIRECT',
+          title: 'Aoi',
+          type: payload.persona_slug ? 'PERSONA' : 'USER',
           room_name: `conv:${conversationId}`,
           actor_id: MOCK_USER_ACTOR_ID,
           participants: MOCK_AOI_PARTICIPANTS,
@@ -96,13 +99,13 @@ export class MockWebSocketAdapter implements WebSocketAdapter {
   on<K extends keyof ChatEvents>(event: K, handler: (data: ChatEvents[K]) => void): void {
     const key = event as string;
     if (!this.eventHandlers.has(key)) this.eventHandlers.set(key, new Set());
-    this.eventHandlers.get(key)!.add(handler);
+    this.eventHandlers.get(key)!.add(handler as EventHandler);
   }
 
   off<K extends keyof ChatEvents>(event: K, handler?: (data: ChatEvents[K]) => void): void {
     const key = event as string;
     if (!this.eventHandlers.has(key)) return;
-    if (handler) this.eventHandlers.get(key)!.delete(handler);
+    if (handler) this.eventHandlers.get(key)!.delete(handler as EventHandler);
     else this.eventHandlers.get(key)!.clear();
   }
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { WireMessage, Participant } from '@/types/chat';
 import { MessageBubble } from '../MessageBubble/MessageBubble';
+import { useIsActorSelf } from '../../hooks/useIsActorSelf';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { differenceInMinutes } from 'date-fns';
@@ -10,7 +11,6 @@ import { differenceInMinutes } from 'date-fns';
 interface ChatHistoryProps {
   messages: WireMessage[];
   participants: Participant[];
-  currentUserId: string;
   typingUsers?: string[];
   isLoading?: boolean;
   className?: string;
@@ -41,11 +41,11 @@ const TypingIndicator = () => (
 export const ChatHistory = ({
   messages,
   participants,
-  currentUserId,
   typingUsers = [],
   isLoading = false,
   className,
 }: ChatHistoryProps) => {
+  const isSelf = useIsActorSelf();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isNearBottom, setIsNearBottom] = useState(true);
 
@@ -72,9 +72,9 @@ export const ChatHistory = ({
     );
   };
 
-  // Derive read status from the watermark. For own messages, compare seq
-  // against the counterpart's last_read_seq.
-  const counterpart = participants.find((p) => p.id !== currentUserId);
+  // Derive read status from the watermark.
+  // For own messages, compare seq against the counterpart's last_read_seq.
+  const counterpart = participants.find((p) => !isSelf(p));
   const counterpartReadSeq = counterpart?.last_read_seq;
 
   const getDisplayStatus = (message: WireMessage): WireMessage['status'] => {
@@ -86,11 +86,9 @@ export const ChatHistory = ({
   };
 
   const typingNames = typingUsers
-    .filter((id) => id !== currentUserId)
-    .map((id) => {
-      const participant = participants.find((p) => p.id === id);
-      return participant?.name ?? id;
-    });
+    .map((id) => participants.find((p) => p.id === id))
+    .filter((p): p is Participant => !!p && !isSelf(p))
+    .map((p) => p.name);
 
   if (isLoading) {
     return (
@@ -105,33 +103,30 @@ export const ChatHistory = ({
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="absolute inset-0 overflow-y-auto px-4"
+        className="absolute inset-0 overflow-y-auto px-4 select-text"
       >
-        <div className="flex flex-col gap-4 py-4">
+        <div className={cn('flex flex-col gap-4 py-4', messages.length === 0 && 'h-full')}>
           {messages.length === 0 ? (
-            <div className="text-muted-foreground flex h-32 items-center justify-center">
-              <p>No messages yet. Start the conversation!</p>
-            </div>
+            <EmptyState />
           ) : (
-            messages.map((message, index) => (
-              <motion.div
-                key={message.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <MessageBubble
-                  message={message}
-                  isOwn={message.sender.actor_id === currentUserId}
-                  displayStatus={
-                    message.sender.actor_id === currentUserId
-                      ? getDisplayStatus(message)
-                      : undefined
-                  }
-                  showTimestamp={shouldShowTimestamp(message, index)}
-                />
-              </motion.div>
-            ))
+            messages.map((message, index) => {
+              const own = isSelf(message.sender);
+              return (
+                <motion.div
+                  key={message.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <MessageBubble
+                    message={message}
+                    isOwn={own}
+                    displayStatus={own ? getDisplayStatus(message) : undefined}
+                    showTimestamp={shouldShowTimestamp(message, index)}
+                  />
+                </motion.div>
+              );
+            })
           )}
 
           <AnimatePresence>{typingNames.length > 0 && <TypingIndicator />}</AnimatePresence>
@@ -166,3 +161,11 @@ export const ChatHistory = ({
     </div>
   );
 };
+
+const EmptyState = () => (
+  <div className="flex h-full flex-col items-center justify-center p-8 text-center">
+    <div className="mb-4 text-6xl">💭</div>
+    <h2 className="mb-2 text-2xl font-bold">No messages yet</h2>
+    <p className="text-muted-foreground max-w-md">Start the conversation!</p>
+  </div>
+);

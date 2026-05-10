@@ -64,10 +64,9 @@ const ImageGrid: React.FC<{ posts: ImagePost[] }> = ({ posts }) => (
 );
 
 const EmptyState: React.FC = () => (
-  <div className="flex h-full flex-col items-center justify-center text-center">
-    <div>
-      <div className="font-title mb-2 text-2xl font-bold">No photos available</div>
-      <div className="text-accent text-sm">Check back later for recommendations!</div>
-    </div>
+  <div className="flex flex-col items-center justify-center py-8 text-center">
+    <div className="mb-3 text-4xl">🔭</div>
+    <h3 className="mb-1 text-base font-semibold">No Photos Available</h3>
+    <p className="text-muted-foreground text-sm">Check back later for recommendations!</p>
   </div>
 );

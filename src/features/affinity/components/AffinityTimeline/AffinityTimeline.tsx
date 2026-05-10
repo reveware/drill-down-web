@@ -20,11 +20,12 @@ const LoadingState = () => (
 );
 
 const EmptyState = () => (
-  <div className="flex h-full items-center justify-center">
-    <div className="text-center">
-      <p className="text-lg text-gray-500">No timeline data available</p>
-      <p className="text-sm text-gray-400">Try selecting a different affinity type</p>
-    </div>
+  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
+    <div className="mb-4 text-6xl">📉</div>
+    <h2 className="mb-2 text-2xl font-bold">No timeline data available</h2>
+    <p className="text-muted-foreground max-w-md">
+      Try selecting a different date range or affinity type
+    </p>
   </div>
 );
 

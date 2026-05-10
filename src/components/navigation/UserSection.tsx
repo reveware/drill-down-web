@@ -1,5 +1,5 @@
 'use client';
-import { User, Gift, LogOut, Activity } from '../shared/Icons';
+import { User, Gift, LogOut, Activity, MessageCircle } from '../shared/Icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
@@ -40,6 +40,10 @@ export const UserSection = ({ user }: UserSectionProps) => {
       <div className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
         <Notifications size={20} /> <Link href="/notifications">Notifications</Link>
       </div>
+
+      <Link href="/chat" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+        <MessageCircle size={20} /> Chat
+      </Link>
 
       <Link href="/rewards" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
         <Gift size={20} /> Rewards

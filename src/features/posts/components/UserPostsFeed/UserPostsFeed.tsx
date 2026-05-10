@@ -29,8 +29,9 @@ export const UserPostsFeed: React.FC<UserPostsFeedProps> = ({ authorId }) => {
 };
 
 const EmptyState = () => (
-  <div className="flex flex-col items-center justify-center py-12 text-center">
-    <h3 className="mb-2 text-lg font-semibold">No posts found</h3>
-    <p className="text-muted-foreground">{`This user hasn't posted anything yet.`}</p>
+  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
+    <div className="mb-4 text-6xl">🍃</div>
+    <h2 className="mb-2 text-2xl font-bold">No posts found</h2>
+    <p className="text-muted-foreground max-w-md">{`This user hasn't posted anything yet.`}</p>
   </div>
 );
