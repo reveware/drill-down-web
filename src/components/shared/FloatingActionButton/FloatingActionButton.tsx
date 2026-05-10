@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 import { CreatePost } from '../../../features/posts/';
+import { Chat } from '../../../features/chat';
 import {
   ribbonAnimation,
   actionButtonAnimation,
@@ -31,11 +32,7 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
   const { openModal, closeModal } = useModal();
 
   const handleActionClick = (action: Action) => {
-    openModal({
-      id: action.title,
-      title: action.title,
-      content: action.content,
-    });
+    openModal({ id: action.title, title: action.title, content: action.content });
     setIsExpanded(false);
   };
 
@@ -53,7 +50,12 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     {
       icon: MessageCircle,
       title: 'Chat',
-      content: <CreatePost onSuccess={closeModal} />,
+      content: (
+        <Chat
+          init={{ personaSlug: process.env.NEXT_PUBLIC_DEFAULT_PERSONA_SLUG ?? 'aoi' }}
+          onSuccess={closeModal}
+        />
+      ),
     },
   ];
 

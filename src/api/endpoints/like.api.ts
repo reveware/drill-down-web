@@ -2,9 +2,7 @@ import { Like } from '@/types/like';
 import { apiClient } from '../client';
 import { mockFetchLikes } from '@/mocks/like';
 import { PaginatedResponse } from '@/types/pagination';
-import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
-
-const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
+import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 
 export const LikeApi = {
   likePost: async (postId: string) => {
@@ -19,7 +17,7 @@ export const LikeApi = {
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<Like>> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockFetchLikes(page, pageSize);
     }
     return (
@@ -34,7 +32,7 @@ export const LikeApi = {
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<Like>> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockFetchLikes(page, pageSize);
     }
     return (

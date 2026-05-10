@@ -6,12 +6,11 @@ import {
   AffinityType,
 } from '@/types/affinity';
 import { mockFetchAffinityMatch, mockFetchAffinityTimeline } from '@/mocks/affinity';
-
-const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
+import { USE_MOCKS } from '../constants';
 
 export const AffinityApi = {
   getAffinityMatch: async (userId: string): Promise<UserAffinityScore> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockFetchAffinityMatch(userId);
     }
     return (await apiClient.get<UserAffinityScore>(`/users/${userId}/affinities/match`)).data;
@@ -21,7 +20,7 @@ export const AffinityApi = {
     userId: string,
     params?: AffinityTimelineRequest
   ): Promise<AffinityTimeline> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockFetchAffinityTimeline(userId, params);
     }
 

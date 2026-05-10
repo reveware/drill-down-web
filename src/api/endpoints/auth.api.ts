@@ -1,12 +1,11 @@
 import { apiClient } from '../client';
 import { LoginDto, LoginResult, CreateUserDto } from '@/types/auth';
 import { mockLogin, mockRegister } from '@/mocks/auth';
-
-const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
+import { USE_MOCKS } from '../constants';
 
 export const AuthApi = {
   login: async (loginAttempt: LoginDto): Promise<LoginResult> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockLogin(loginAttempt);
     }
     return (
@@ -18,7 +17,7 @@ export const AuthApi = {
   },
 
   register: async (user: CreateUserDto): Promise<LoginResult> => {
-    if (useMocks) {
+    if (USE_MOCKS) {
       return mockRegister(user);
     }
 
