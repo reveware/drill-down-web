@@ -38,13 +38,4 @@ export {
   TrendingDown,
   ArrowRight,
   Activity,
-  Wifi,
-  WifiOff,
-  ArrowLeft,
-  Check,
-  CheckCheck,
-  Clock,
-  ExternalLink,
-  Send,
-  Smile,
 } from 'lucide-react';

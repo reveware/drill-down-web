@@ -1,10 +1,6 @@
 import { z } from 'zod';
 
-export enum UserRole {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-  SYSTEM = 'SYSTEM',
-}
+export const UserRole = z.enum(['ADMIN', 'USER']);
 
 export const UserOverviewSchema = z.object({
   id: z.string(),
@@ -15,7 +11,7 @@ export const UserOverviewSchema = z.object({
   last_name: z.string(),
   date_of_birth: z.string(),
   tagline: z.string().nullable(),
-  role: z.nativeEnum(UserRole),
+  role: UserRole,
 
   is_private: z.boolean(),
   is_self: z.boolean(),

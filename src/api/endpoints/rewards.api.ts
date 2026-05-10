@@ -3,21 +3,23 @@ import { UserReward, RewardAssetType } from '@/types/reward';
 import { mockFetchRewards } from '@/mocks/rewards';
 import { PaginatedResponse } from '@/types/pagination';
 import { RewardJob, JobStatus } from '@/types/rewardJob';
-import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
+import { PAGE_NUMBER, PAGE_SIZE } from '../defaults';
+
+const useMocks = process.env.NEXT_PUBLIC_USE_MOCKS === 'true';
 
 export const RewardsApi = {
   getUserRewards: async (
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
   ): Promise<PaginatedResponse<UserReward>> => {
-    if (USE_MOCKS) {
+    if (useMocks) {
       return await mockFetchRewards(page, pageSize);
     }
     return (await apiClient.get<PaginatedResponse<UserReward>>('/rewards')).data;
   },
 
   revealReward: async (rewardId: string): Promise<UserReward> => {
-    if (USE_MOCKS) {
+    if (useMocks) {
       // Mock implementation - just return updated reward with revealed_at timestamp
       return {
         id: rewardId,
