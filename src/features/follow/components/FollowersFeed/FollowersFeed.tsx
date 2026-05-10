@@ -23,7 +23,9 @@ export const FollowerFeed = ({ userId }: { userId: string }) => {
 };
 
 const EmptyState = () => (
-  <div className="text-foreground py-8 text-center">
-    <div className="mb-2 text-lg">This user has no followers</div>
+  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
+    <div className="mb-4 text-6xl">🐦‍⬛</div>
+    <h2 className="mb-2 text-2xl font-bold">No followers</h2>
+    <p className="text-muted-foreground max-w-md">This user has no followers yet.</p>
   </div>
 );

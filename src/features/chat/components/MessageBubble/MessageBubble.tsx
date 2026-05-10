@@ -1,8 +1,10 @@
 'use client';
 
 import { WireMessage, MessagePart } from '@/types/chat';
-import { cn, formatTimestamp } from '@/lib/utils';
-import { Check, CheckCheck, Clock } from '@/components/shared/Icons';
+import { cn, formatTimestamp, copyToClipboard } from '@/lib/utils';
+import { useLongPress } from '@/hooks/useLongPress';
+import { Check, CheckCheck, Clock, XCircle } from '@/components/shared/Icons';
+import { toast } from '@/lib/toast';
 
 interface MessageBubbleProps {
   message: WireMessage;
@@ -39,6 +41,14 @@ const RenderContent = ({ parts }: { parts: MessagePart[] }) => (
   </>
 );
 
+const ErrorCallout = ({ text }: { text: string }) => (
+  <div className="mx-auto max-w-[85%] py-1">
+    <div className="bg-destructive/5 text-destructive border-destructive/30 border-l-2 px-4 py-2 text-sm">
+      {text}
+    </div>
+  </div>
+);
+
 const StatusIcon = ({ status }: { status: WireMessage['status'] }) => {
   switch (status) {
     case 'sending':
@@ -47,6 +57,8 @@ const StatusIcon = ({ status }: { status: WireMessage['status'] }) => {
       return <Check className="text-muted-foreground h-3 w-3" />;
     case 'read':
       return <CheckCheck className="h-3 w-3 text-blue-500" />;
+    case 'failed':
+      return <XCircle className="text-destructive h-3 w-3" />;
     default:
       return null;
   }
@@ -61,6 +73,23 @@ export const MessageBubble = ({
 }: MessageBubbleProps) => {
   const effectiveStatus = displayStatus ?? message.status;
 
+  const textContent = message.content
+    .filter((p) => p.type === 'text')
+    .map((p) => p.text)
+    .join('');
+
+  const longPressHandlers = useLongPress({
+    onLongPressed: async () => {
+      if (!textContent) return;
+      const ok = await copyToClipboard(textContent);
+      if (ok) toast.success('Copied to clipboard');
+    },
+  });
+
+  if (!isOwn && effectiveStatus === 'failed') {
+    return <ErrorCallout text={message.content[0]?.text ?? 'Something went wrong.'} />;
+  }
+
   return (
     <div
       className={cn(
@@ -71,6 +100,7 @@ export const MessageBubble = ({
     >
       <div className={cn('flex flex-col gap-1', isOwn ? 'items-end' : 'items-start')}>
         <div
+          {...longPressHandlers}
           className={cn(
             'max-w-full rounded-2xl px-4 py-2 text-sm break-words',
             'group relative',

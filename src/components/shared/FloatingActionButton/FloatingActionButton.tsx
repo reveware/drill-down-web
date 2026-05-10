@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 import { CreatePost } from '../../../features/posts/';
-import { Chat } from '../../../features/chat';
+import { Chat } from '@/features/chat/components/Chat/Chat';
+import { useCompanion } from '@/features/persona/hooks/useCompanion';
 import {
   ribbonAnimation,
   actionButtonAnimation,
@@ -18,6 +19,7 @@ interface Action {
   icon: LucideIcon;
   title: string;
   content: React.ReactNode;
+  disabled?: boolean;
 }
 interface FloatingActionButtonProps {
   className?: string;
@@ -30,8 +32,10 @@ export const ActionIcon = ({ icon: Icon }: Action) => {
 export const FloatingActionButton = ({ className }: FloatingActionButtonProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { openModal, closeModal } = useModal();
+  const { data: companion } = useCompanion();
 
   const handleActionClick = (action: Action) => {
+    if (action.disabled) return;
     openModal({ id: action.title, title: action.title, content: action.content });
     setIsExpanded(false);
   };
@@ -50,12 +54,8 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     {
       icon: MessageCircle,
       title: 'Chat',
-      content: (
-        <Chat
-          init={{ personaSlug: process.env.NEXT_PUBLIC_DEFAULT_PERSONA_SLUG ?? 'aoi' }}
-          onSuccess={closeModal}
-        />
-      ),
+      disabled: !companion,
+      content: companion ? <Chat init={{ byPersonaSlug: companion.slug }} /> : null,
     },
   ];
 
@@ -71,7 +71,7 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
               <TooltipTrigger asChild>
                 <motion.button
                   onClick={() => handleActionClick(action)}
-                  className="bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md"
+                  className={`bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md ${action.disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                   initial={{ opacity: 0, y: 12 }}
                   animate={actionButtonAnimation.animate(index)}
                   exit={actionButtonAnimation.exit}

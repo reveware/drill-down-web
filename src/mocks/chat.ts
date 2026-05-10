@@ -10,7 +10,8 @@ const aoiActor = {
 
 export const mockAoiConversation: Conversation = {
   id: 'aoi-conversation',
-  type: 'ai_assistant',
+  title: 'Aoi',
+  type: 'PERSONA',
   participants: [
     { id: 'current-user', name: 'You', is_agent: false },
     {
@@ -35,7 +36,6 @@ export const mockAoiConversation: Conversation = {
   ],
   last_activity: new Date().toISOString(),
   unread_count: 0,
-  title: 'Aoi',
 };
 
 export const createMockConversation = (): Conversation => ({ ...mockAoiConversation });

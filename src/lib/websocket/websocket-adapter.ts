@@ -1,8 +1,8 @@
 // WebSocket abstraction layer for Socket.IO (with mock support)
+import { io, Socket } from 'socket.io-client';
 import { ChatEvents, ConnectionStatus } from '@/types/chat';
 import { USE_MOCKS } from '@/api/constants';
 import { MockWebSocketAdapter } from '@/mocks/websocket';
-import type { Socket } from 'socket.io-client';
 
 type EventHandler = (...args: unknown[]) => void;
 
@@ -16,31 +16,20 @@ export interface WebSocketAdapter {
   onConnectionChange(handler: (status: ConnectionStatus) => void): void;
 }
 
+const CONNECTION_TIMEOUT_MS = 20000;
+
 export class SocketIOAdapter implements WebSocketAdapter {
-  private socket: Socket | null = null;
+  private socket: Socket;
   private connectionStatus: ConnectionStatus = 'disconnected';
-  private eventHandlers = new Map<string, Set<EventHandler>>();
   private connectionHandlers = new Set<(status: ConnectionStatus) => void>();
 
-  constructor(
-    private url: string,
-    private authToken?: string
-  ) {}
-
-  async connect(): Promise<void> {
-    if (this.socket && this.connectionStatus === 'connected') return;
-
-    this.setConnectionStatus('connecting');
-
-    const { io } = await import('socket.io-client');
-    const socketUrl = `${this.url}/chat`;
-    this.socket = io(socketUrl, {
-      auth: this.authToken ? { token: this.authToken } : undefined,
+  constructor(url: string, authToken?: string) {
+    this.socket = io(`${url}/chat`, {
+      auth: authToken ? { token: authToken } : undefined,
       transports: ['websocket', 'polling'],
       upgrade: false,
-      autoConnect: true,
-      forceNew: true,
-      timeout: 20000,
+      autoConnect: false,
+      timeout: CONNECTION_TIMEOUT_MS,
       path: '/socket.io',
       withCredentials: true,
       reconnection: true,
@@ -48,83 +37,66 @@ export class SocketIOAdapter implements WebSocketAdapter {
       reconnectionDelay: 1000,
     });
 
+    this.socket.on('connect', () => this.setConnectionStatus('connected'));
+    this.socket.on('disconnect', () => this.setConnectionStatus('disconnected'));
+    this.socket.on('error', (error: Error) => {
+      console.error('SocketIOAdapter: Socket error:', error);
+    });
+    this.socket.io.on('reconnect_attempt', (attempt: number) => {
+      console.log('SocketIOAdapter: Reconnect attempt', attempt);
+    });
+    this.socket.io.on('reconnect_failed', () => {
+      console.error('SocketIOAdapter: Reconnect failed');
+    });
+  }
+
+  async connect(): Promise<void> {
+    if (this.socket.connected) return;
+    this.setConnectionStatus('connecting');
+
     return new Promise((resolve, reject) => {
-      let resolved = false;
-
+      const cleanup = () => {
+        clearTimeout(timeout);
+        this.socket.off('connect', onOk);
+        this.socket.off('connect_error', onErr);
+      };
+      const onOk = () => {
+        cleanup();
+        resolve();
+      };
+      const onErr = (err: Error) => {
+        cleanup();
+        console.error('SocketIOAdapter: Connection error:', err.message);
+        this.setConnectionStatus('error');
+        reject(err);
+      };
       const timeout = setTimeout(() => {
-        if (!resolved) {
-          resolved = true;
-          this.setConnectionStatus('error');
-          reject(new Error('Connection timeout'));
-        }
-      }, 20000);
+        cleanup();
+        this.setConnectionStatus('error');
+        reject(new Error('Connection timeout'));
+      }, CONNECTION_TIMEOUT_MS);
 
-      this.socket!.on('connect', () => {
-        if (!resolved) {
-          resolved = true;
-          clearTimeout(timeout);
-          this.setConnectionStatus('connected');
-          resolve();
-        }
-      });
-
-      this.socket!.on('disconnect', (_reason: string) => {
-        this.setConnectionStatus('disconnected');
-      });
-
-      this.socket!.on('connect_error', (err: Error) => {
-        if (!resolved) {
-          resolved = true;
-          clearTimeout(timeout);
-          console.error('SocketIOAdapter: Connection error:', err.message);
-          this.setConnectionStatus('error');
-          reject(err);
-        }
-      });
-
-      this.socket!.on('error', (error: Error) => {
-        console.error('SocketIOAdapter: Socket error:', error);
-      });
-
-      this.socket!.io.on('reconnect_attempt', (attempt: number) => {
-        console.log('SocketIOAdapter: Reconnect attempt', attempt);
-      });
-      this.socket!.io.on('reconnect_failed', () => {
-        console.error('SocketIOAdapter: Reconnect failed');
-      });
+      this.socket.once('connect', onOk);
+      this.socket.once('connect_error', onErr);
+      this.socket.connect();
     });
   }
 
   disconnect(): void {
-    if (this.socket) {
-      this.socket.disconnect();
-    }
-    this.socket = null;
-    this.setConnectionStatus('disconnected');
+    this.socket.disconnect();
   }
 
   emit<K extends keyof ChatEvents>(event: K, data: ChatEvents[K]): void {
-    if (!this.socket) return;
     this.socket.emit(event as string, data);
   }
 
   on<K extends keyof ChatEvents>(event: K, handler: (data: ChatEvents[K]) => void): void {
-    const eventName = String(event);
-    if (!this.eventHandlers.has(eventName)) this.eventHandlers.set(eventName, new Set());
-    this.eventHandlers.get(eventName)!.add(handler as EventHandler);
-    if (this.socket) this.socket.on(eventName, handler as EventHandler);
+    this.socket.on(event as string, handler as EventHandler);
   }
 
   off<K extends keyof ChatEvents>(event: K, handler?: (data: ChatEvents[K]) => void): void {
-    const eventName = String(event);
-    const handlers = this.eventHandlers.get(eventName);
-    if (handlers) {
-      if (handler) handlers.delete(handler as EventHandler);
-      else handlers.clear();
-    }
-    if (!this.socket) return;
-    if (handler) this.socket.off(eventName, handler as EventHandler);
-    else this.socket.off(eventName);
+    if (handler) this.socket.off(event as string, handler as EventHandler);
+    else this.socket.off(event as string);
   }
 
   getConnectionStatus(): ConnectionStatus {

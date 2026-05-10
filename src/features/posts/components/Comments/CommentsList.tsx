@@ -59,8 +59,10 @@ export const CommentsList = ({ className, postId, onReply }: CommentsListProps) 
 
 const EmptyState = () => {
   return (
-    <div className="text-muted-foreground py-8 text-center">
-      <p>No comments yet. Be the first to comment!</p>
+    <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
+      <div className="mb-4 text-6xl">🥀</div>
+      <h2 className="mb-2 text-2xl font-bold">No Comments Yet</h2>
+      <p className="text-muted-foreground max-w-md">Be the first to comment on this post!</p>
     </div>
   );
 };

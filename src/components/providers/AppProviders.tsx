@@ -4,6 +4,7 @@ import { QueryProvider } from './QueryProvider';
 import { ThemeProvider } from './ThemeProvider';
 import { AuthProvider } from './AuthProvider';
 import { ModalProvider } from './ModalProvider';
+import { ConfirmProvider } from './ConfirmProvider';
 import { ChatSocketProvider } from './ChatSocketProvider';
 
 interface AppProvidersProps {
@@ -16,7 +17,9 @@ export const AppProviders = ({ children }: AppProvidersProps) => {
       <QueryProvider>
         <AuthProvider>
           <ChatSocketProvider>
-            <ModalProvider>{children}</ModalProvider>
+            <ModalProvider>
+              <ConfirmProvider>{children}</ConfirmProvider>
+            </ModalProvider>
           </ChatSocketProvider>
         </AuthProvider>
       </QueryProvider>

@@ -3,8 +3,6 @@ import React from 'react';
 import { PostCard } from '../../../posts/components/PostCard';
 import { PostCardSkeleton } from '../../../posts/components/PostCard/PostCardSkeleton';
 import { useUserLikes } from '@/features/likes/hooks/useUserLikes';
-import Image from 'next/image';
-import { Lost } from '@/assets/images';
 import { Feed } from '@/components/shared/Feed/Feed';
 
 interface UserLikesFeedProps {
@@ -30,9 +28,9 @@ export const UserLikesFeed: React.FC<UserLikesFeedProps> = ({ userId }) => {
 };
 
 const EmptyState = () => (
-  <div className="flex flex-col items-center justify-center py-12 text-center">
-    <Image src={Lost} alt="No liked posts found" className="mb-4 h-32 w-32" />
-    <h3 className="mb-2 text-lg font-semibold">No liked posts</h3>
-    <p className="text-muted-foreground">{`This user hasn't liked any posts yet.`}</p>
+  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
+    <div className="mb-4 text-6xl">🥀</div>
+    <h2 className="mb-2 text-2xl font-bold">No Likes Yet</h2>
+    <p className="text-muted-foreground max-w-md">{`This user hasn't liked any posts yet`}</p>
   </div>
 );

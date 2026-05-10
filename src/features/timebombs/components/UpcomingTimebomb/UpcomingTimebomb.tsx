@@ -4,8 +4,7 @@ import { TimeBomb } from '@/types/time-bombs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserAvatar } from '@/components/shared/';
 import { formatDistanceToNow } from 'date-fns';
-import { Timebomb } from '@/assets/images';
-import Image from 'next/image';
+
 import { useCountdown } from '../../hooks/useCountdown';
 import { formatCountdownPadded } from '../../formatCountdown';
 import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
@@ -42,10 +41,10 @@ export const UpcomingTimebomb: React.FC<Props> = ({ timebomb }) => {
 };
 
 const EmptyState: React.FC = () => (
-  <div className="flex h-full flex-col items-center justify-evenly gap-4 text-center">
-    <div className="text-foreground text-lg">No upcoming Timebombs</div>
-    <Image src={Timebomb} alt="No Timebomb" className="h-64 object-cover" />
-    <div className="text-muted-foreground text-sm">Check back later for surprises!</div>
+  <div className="flex flex-col items-center justify-center py-8 text-center">
+    <div className="mb-3 text-4xl">💣</div>
+    <h3 className="mb-1 text-base font-semibold">No upcoming Timebombs</h3>
+    <p className="text-muted-foreground text-sm">Check back later for surprises!</p>
   </div>
 );
 

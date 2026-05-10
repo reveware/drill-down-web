@@ -10,6 +10,15 @@ export const sleep = (seconds: number) => {
   return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 };
 
+export const copyToClipboard = async (text: string): Promise<boolean> => {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
 export const formatTimestamp = (iso: string): string => {
   const d = new Date(iso);
   if (isToday(d)) return format(d, 'HH:mm');
