@@ -53,7 +53,6 @@ export function CustomToast({
         borderBottomLeftRadius: '0px',
       }}
     >
-      {/* ICON */}
       {Icon && (
         <Icon
           size={24}
@@ -66,7 +65,6 @@ export function CustomToast({
         />
       )}
 
-      {/* TEXT */}
       <div className="ml-2 flex-1 py-2">
         <p className="text-sm font-semibold">{title}</p>
         <p className="mt-0.5 text-xs">{description}</p>

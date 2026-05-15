@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { PaginatedResponse } from '@/types/pagination';
 import { PostRecommendation, RecommendationReason } from '@/types/recommendations';
-import { RecommendationApi } from '@/api/endpoints/recommendatios.api';
+import { RecommendationApi } from '@/api/endpoints/recommendations.api';
 
 export const useRecommendedPosts = (userId: string) => {
   const query = useQuery({

@@ -3,10 +3,8 @@ import { PaginatedResponse } from '@/types/pagination';
 import { UserOverview } from '@/types/user';
 import { mockUser, mockFollowedUser, mockPrivateUser } from './user';
 
-// Reuse existing mock users from user.ts
 const mockUsers: UserOverview[] = [mockUser, mockFollowedUser, mockPrivateUser];
 
-// Mock comment data
 const mockComments: Comment[] = [
   {
     id: '1',
@@ -47,7 +45,6 @@ export const mockGetComments = (
   console.log('mockGetComments', postId, page, pageSize);
   const postComments = mockComments.filter((comment) => comment.post_id == postId);
 
-  // Calculate pagination
   const totalItems = postComments.length;
   const totalPages = Math.ceil(totalItems / pageSize);
   const startIndex = (page - 1) * pageSize;
@@ -64,7 +61,6 @@ export const mockGetComments = (
 };
 
 export const mockCreateComment = (data: CreateComment): Comment => {
-  // Use the current user (mockUser) as the author for new comments
   const newComment: Comment = {
     id: `comment-${Date.now()}`,
     post_id: data.post_id,
@@ -75,7 +71,6 @@ export const mockCreateComment = (data: CreateComment): Comment => {
     reply_to: data.reply_to || null,
   };
 
-  // Add to mock data
   mockComments.push(newComment);
 
   return newComment;

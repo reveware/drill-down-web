@@ -38,7 +38,6 @@ export const generateRewards = (length: number): UserReward[] => {
     });
   }
 
-  // Sort by created_at descending (newest first)
   return rewards.sort(
     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   );

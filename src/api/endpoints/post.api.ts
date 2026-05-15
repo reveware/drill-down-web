@@ -59,7 +59,6 @@ export const PostApi = {
   },
 
   deletePost: async (postId: string): Promise<boolean> => {
-    console.log('deletePost', postId);
     if (USE_MOCKS) {
       return true;
     }

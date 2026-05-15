@@ -4,8 +4,6 @@ import { PaginatedResponse } from '@/types/pagination';
 import { mockUser, mockAdmin, mockPrivateUser, mockFollowedUser } from './user';
 import { sleep } from '@/lib/utils';
 
-// Mock follow requests data
-// repeat 10x
 const mockFollowRequests: FollowRequest[] = Array.from({ length: 100 }, (_, index) => {
   return {
     id: `fr${index}`,

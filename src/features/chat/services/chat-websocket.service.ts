@@ -57,10 +57,6 @@ export class ChatWebSocketService {
     this.adapter.disconnect();
   }
 
-  // ---------------------------------------------------------------------------
-  // Client → Server
-  // ---------------------------------------------------------------------------
-
   initConversation(init: ConversationInit): void {
     if ('byId' in init) {
       this.adapter.emit('conversation:join', { conversation_id: init.byId });
@@ -91,11 +87,7 @@ export class ChatWebSocketService {
     this.adapter.emit('typing:stop', { conversation_id: conversationId });
   }
 
-  // ---------------------------------------------------------------------------
-  // Server → Client listeners
   // Every onX returns an Unsubscribe so multiple consumers can subscribe independently
-  // ---------------------------------------------------------------------------
-
   onConversationJoined(handler: (data: ChatEvents['conversation:joined']) => void): Unsubscribe {
     this.adapter.on('conversation:joined', handler);
     return () => this.adapter.off('conversation:joined', handler);

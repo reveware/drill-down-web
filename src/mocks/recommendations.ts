@@ -85,7 +85,6 @@ export const userAffinityRecommendationMock: UserRecommendation = {
 export const userPopularRecommendationMock: UserRecommendation = {
   user: mockAdmin,
   reason: RecommendationReason.POPULAR,
-  // No match property for popular recommendations (optional)
 };
 
 export const postAffinityRecommendationMock: PostRecommendation = {

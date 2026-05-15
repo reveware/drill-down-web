@@ -40,14 +40,12 @@ export const AffinityMatch = ({ userId }: { userId: string }) => {
 
   return (
     <>
-      {/* Mobile: Single column layout */}
       <div className="flex w-full flex-col gap-6 md:hidden">
         <UserAffinityScore matchData={matchData} />
         <AffinityRadar data={matchData} />
         <AffinityOverlap matchData={matchData} />
       </div>
 
-      {/* Desktop: Two column layout */}
       <div className="hidden h-full w-full justify-center gap-6 md:flex">
         <div className="flex w-full max-w-md flex-col gap-4">
           <UserAffinityScore matchData={matchData} />

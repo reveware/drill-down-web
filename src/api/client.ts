@@ -25,7 +25,6 @@ const createApiClient = (): AxiosInstance => {
     }
   );
 
-  // Response interceptor - Handle errors and token refresh
   client.interceptors.response.use(
     (response: AxiosResponse) => {
       return response;

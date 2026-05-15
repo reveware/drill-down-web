@@ -18,7 +18,6 @@ export const RewardsApi = {
 
   revealReward: async (rewardId: string): Promise<UserReward> => {
     if (USE_MOCKS) {
-      // Mock implementation - just return updated reward with revealed_at timestamp
       return {
         id: rewardId,
         description: 'A beautiful AI-generated landscape with mountains and rivers',

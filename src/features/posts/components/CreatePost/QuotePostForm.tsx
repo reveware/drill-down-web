@@ -48,7 +48,6 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex h-full w-full flex-col space-y-2 sm:space-y-4"
       >
-        {/* Quote */}
         <FormField
           control={form.control}
           name="quote"
@@ -67,7 +66,6 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           )}
         />
 
-        {/* Author */}
         <FormField
           control={form.control}
           name="author"
@@ -88,7 +86,6 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
 
         <Separator className="my-4" />
 
-        {/* Description */}
         <FormField
           control={form.control}
           name="description"
@@ -107,7 +104,6 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
           )}
         />
 
-        {/* Tags */}
         <FormField
           control={form.control}
           name="tags"

@@ -31,16 +31,13 @@ export default function UserProfilePage() {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-4 px-2 py-4">
-      {/* Mobile: Single column layout */}
       <div className="flex w-full flex-col gap-6 md:hidden">
         <ProfileOverview user={user} />
         <UserTags userId={user.id} />
         <ProfileContent user={user} />
       </div>
 
-      {/* Desktop: Two column layout */}
       <div className="hidden h-full w-full justify-center gap-6 md:flex">
-        {/* Left column: ProfileOverview and ProfileStats */}
         <div className="flex min-w-sm flex-col gap-4">
           <ProfileOverview user={user} />
           <UserTags userId={user.id} />

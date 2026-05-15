@@ -96,7 +96,6 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
   return (
     <div className={cn('fixed right-8 bottom-8 z-50', className)}>
       <div className="relative">
-        {/* Ribbon of actions */}
         <ActionRibbon />
         <motion.button
           onClick={() => setIsExpanded(!isExpanded)}

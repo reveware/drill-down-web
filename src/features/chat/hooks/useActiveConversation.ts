@@ -77,9 +77,7 @@ export const useActiveConversation = ({
     }
   }, [service, initKey]);
 
-  // ---------------------------------------------------------------------------
   // Messages cache — REST seeds it once, WS events patch it from here on.
-  // ---------------------------------------------------------------------------
   const messagesQuery = useQuery<WireMessage[]>({
     queryKey: ['conversation', activeId ?? '__idle__', 'messages'],
     queryFn: () => ConversationsApi.getMessages(activeId!),
@@ -89,9 +87,7 @@ export const useActiveConversation = ({
   const messages = useMemo(() => messagesQuery.data ?? [], [messagesQuery.data]);
   const loadingHistory = messagesQuery.isPending && !!activeId;
 
-  // ---------------------------------------------------------------------------
   // WS event subscriptions — patch the messages cache or update meta.
-  // ---------------------------------------------------------------------------
   useEffect(() => {
     if (!service) return;
 
@@ -236,9 +232,6 @@ export const useActiveConversation = ({
     };
   }, [service, queryClient]);
 
-  // ---------------------------------------------------------------------------
-  // Actions
-  // ---------------------------------------------------------------------------
   const sendMessage = useCallback(
     (content: string) => {
       if (!activeId || !service) return;
@@ -294,7 +287,6 @@ export const useActiveConversation = ({
     [errorPayload, retry]
   );
 
-  // Construct the public Conversation by joining metadata with cached messages
   const conversation = useMemo<Conversation | null>(() => {
     if (!meta) return null;
     return {

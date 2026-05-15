@@ -32,7 +32,6 @@ export const ProfileActions = ({ user }: ProfileActionsProps) => {
   const getAvailableActions = () => {
     const actions: Action[] = [];
 
-    // Rule: Follow actions based on relationship state
     if (!user.is_following && !user.is_pending_follow) {
       actions.push({
         label: 'Follow',
@@ -91,7 +90,6 @@ export const ProfileActions = ({ user }: ProfileActionsProps) => {
         ))}
       </div>
 
-      {/* Pending Follower Banner (always separate) */}
       {user.is_pending_follower && <PendingFollowerBanner user={user} />}
     </div>
   );

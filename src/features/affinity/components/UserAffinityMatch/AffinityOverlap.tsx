@@ -58,10 +58,8 @@ export function AffinityOverlap({ matchData }: AffinityOverlapProps) {
                 </CardHeader>
 
                 <CardContent>
-                  {/* Progress bar */}
                   <Progress value={metrics.overall} className="h-2" />
 
-                  {/* Shared affinities */}
                   {sharedAffinities.length > 0 && (
                     <div className="transition-all duration-200 ease-in-out">
                       <p className="text-foreground mt-2 mb-2 text-xs">Shared affinities:</p>

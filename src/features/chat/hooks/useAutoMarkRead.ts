@@ -2,9 +2,6 @@ import { useEffect } from 'react';
 import { Conversation } from '@/types/chat';
 import { useIsActorSelf } from './useIsActorSelf';
 
-/**
- * Mark the latest incoming message as read whenever it changes.
- */
 export const useAutoMarkRead = (
   conversation: Conversation | null | undefined,
   markAsRead: (upToSeq: string) => void

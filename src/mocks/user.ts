@@ -1,5 +1,5 @@
 import { sleep } from '@/lib/utils';
-import { UserDetail, UserOverview } from '@/types/user';
+import { UserDetail, UserOverview, UserRole } from '@/types/user';
 import { TagCount } from '@/types/tag';
 
 export const mockUser: UserOverview = {
@@ -11,7 +11,7 @@ export const mockUser: UserOverview = {
   last_name: 'Doe',
   date_of_birth: '1990-01-01',
   tagline: 'Photography enthusiast',
-  role: 'USER' as const,
+  role: UserRole.USER,
   is_private: false,
   is_self: true,
   is_following: false,
@@ -33,7 +33,7 @@ export const mockAdmin: UserOverview = {
   last_name: 'User',
   date_of_birth: '1985-01-01',
   tagline: 'System Administrator',
-  role: 'ADMIN' as const,
+  role: UserRole.ADMIN,
   is_private: false,
   is_self: false,
   is_following: false,
@@ -55,7 +55,7 @@ export const mockPrivateUser: UserOverview = {
   last_name: 'User',
   date_of_birth: '1995-01-01',
   tagline: 'Private account',
-  role: 'USER' as const,
+  role: UserRole.USER,
   is_private: true,
   is_self: false,
   is_following: false,
@@ -77,7 +77,7 @@ export const mockFollowedUser: UserOverview = {
   last_name: 'Smith',
   date_of_birth: '1992-05-15',
   tagline: 'Travel lover',
-  role: 'USER' as const,
+  role: UserRole.USER,
   is_private: false,
   is_self: false,
   is_following: true,

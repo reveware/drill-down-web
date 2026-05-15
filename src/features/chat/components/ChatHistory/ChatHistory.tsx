@@ -49,7 +49,6 @@ export const ChatHistory = ({
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isNearBottom, setIsNearBottom] = useState(true);
 
-  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (isNearBottom) {
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });

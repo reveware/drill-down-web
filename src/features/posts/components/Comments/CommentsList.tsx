@@ -22,7 +22,6 @@ export const CommentsList = ({ className, postId, onReply }: CommentsListProps) 
     enabled: !!hasNextPage,
   });
 
-  // Filter out replies to show only top-level comments
   const topLevelComments = comments.filter((comment) => !comment.reply_to);
 
   return (
@@ -43,7 +42,6 @@ export const CommentsList = ({ className, postId, onReply }: CommentsListProps) 
         </div>
       )}
 
-      {/* Infinite scroll loader */}
       <div ref={loaderRef} className="flex justify-center py-4">
         {isFetchingNextPage && (
           <div className="w-full space-y-4">

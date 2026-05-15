@@ -83,7 +83,6 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
           className="hidden"
         />
 
-        {/* Photos Upload */}
         <FormField
           control={form.control}
           name="images"
@@ -109,7 +108,6 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
 
         <Separator className="my-4" />
 
-        {/* Description */}
         <FormField
           control={form.control}
           name="description"
@@ -128,7 +126,6 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
           )}
         />
 
-        {/* Tags */}
         <FormField
           control={form.control}
           name="tags"

@@ -107,10 +107,8 @@ export const AffinityTimelineFilter = ({
 
   return (
     <div className="flex items-center gap-3">
-      {/* Type Filter */}
       {renderMenu(typeOptions, selectedType, onTypeChange, selectedTypeOption)}
 
-      {/* Interval Filter */}
       {renderMenu(intervalOptions, selectedInterval, handleIntervalChange, selectedIntervalOption)}
     </div>
   );

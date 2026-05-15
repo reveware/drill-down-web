@@ -1,4 +1,3 @@
-// WebSocket abstraction layer for Socket.IO (with mock support)
 import { io, Socket } from 'socket.io-client';
 import { ChatEvents, ConnectionStatus } from '@/types/chat';
 import { USE_MOCKS } from '@/api/constants';

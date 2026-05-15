@@ -53,7 +53,6 @@ export const AffinityTimeline = ({ userId, className = '' }: AffinityTimelinePro
     end_date: endDate ? format(endDate, 'yyyy-MM-dd') : undefined,
   });
 
-  // Filter to top N affinities by total weight across all buckets
   const series = useMemo(() => {
     if (!timelineData?.buckets) return [];
 

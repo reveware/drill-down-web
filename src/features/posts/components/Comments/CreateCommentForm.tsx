@@ -58,7 +58,6 @@ export const CreateCommentForm = ({
     <div className="space-y-3">
       {replyTo && ReplyBanner(replyTo)}
 
-      {/* Comment form */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-3">
           <FormField

@@ -58,17 +58,14 @@ export const generatePosts = (length: number, type?: PostTypes): PostOverview[] 
   const posts: PostOverview[] = [];
 
   if (type === PostTypes.IMAGE) {
-    // Generate only photo posts
     for (let i = 1; i <= length; i++) {
       posts.push(imagePost(i.toString(), i * 10));
     }
   } else if (type === PostTypes.QUOTE) {
-    // Generate only quote posts
     for (let i = 1; i <= length; i++) {
       posts.push(quotePost(i.toString()));
     }
   } else {
-    // Generate mixed posts (default behavior)
     for (let i = 1; i <= length; i++) {
       if (i % 3 === 0) {
         posts.push(quotePost(i.toString()));

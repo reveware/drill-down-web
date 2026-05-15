@@ -145,9 +145,7 @@ export const mockFetchAffinityTimeline = async (
   const endDate = params?.end_date ? new Date(params.end_date) : new Date();
   const interval = params?.interval || TimelineInterval.WEEK;
 
-  // Expanded mock affinities with more variety
   const mockAffinities = [
-    // TAGS
     { type: AffinityType.TAG, name: 'photography', slug: 'photography' },
     { type: AffinityType.TAG, name: 'travel', slug: 'travel' },
     { type: AffinityType.TAG, name: 'food', slug: 'food' },
@@ -159,7 +157,6 @@ export const mockFetchAffinityTimeline = async (
     { type: AffinityType.TAG, name: 'nature', slug: 'nature-tag' },
     { type: AffinityType.TAG, name: 'coffee', slug: 'coffee' },
 
-    // THEMES
     { type: AffinityType.THEME, name: 'adventure', slug: 'adventure' },
     { type: AffinityType.THEME, name: 'minimalism', slug: 'minimalism' },
     { type: AffinityType.THEME, name: 'creativity', slug: 'creativity' },
@@ -169,7 +166,6 @@ export const mockFetchAffinityTimeline = async (
     { type: AffinityType.THEME, name: 'learning', slug: 'learning' },
     { type: AffinityType.THEME, name: 'community', slug: 'community' },
 
-    // STYLES
     { type: AffinityType.STYLE, name: 'vintage', slug: 'vintage' },
     { type: AffinityType.STYLE, name: 'modern', slug: 'modern' },
     { type: AffinityType.STYLE, name: 'bohemian', slug: 'bohemian' },
@@ -179,7 +175,6 @@ export const mockFetchAffinityTimeline = async (
     { type: AffinityType.STYLE, name: 'rustic', slug: 'rustic' },
     { type: AffinityType.STYLE, name: 'colorful', slug: 'colorful' },
 
-    // MOODS
     { type: AffinityType.MOOD, name: 'peaceful', slug: 'peaceful' },
     { type: AffinityType.MOOD, name: 'energetic', slug: 'energetic' },
     { type: AffinityType.MOOD, name: 'contemplative', slug: 'contemplative' },
@@ -190,31 +185,25 @@ export const mockFetchAffinityTimeline = async (
     { type: AffinityType.MOOD, name: 'mysterious', slug: 'mysterious' },
   ];
 
-  // Generate mock timeline data
   const buckets: AffinityTimelineBucket[] = [];
   const currentDate = new Date(startDate);
 
   while (currentDate <= endDate) {
-    // Filter affinities by type if specified
     const filteredAffinities = params?.type
       ? mockAffinities.filter((affinity) => affinity.type === params.type)
       : mockAffinities;
 
-    // Select 3-7 random affinities for each time period
     const selectedAffinities = filteredAffinities
       .sort(() => 0.5 - Math.random())
       .slice(0, Math.floor(Math.random() * 5) + 3);
 
     selectedAffinities.forEach((affinity) => {
-      // Create more realistic weight distributions
       let baseWeight = Math.random() * 0.6 + 0.2; // Base between 0.2-0.8
 
-      // Add some trending effects for certain affinities
       if (['photography', 'travel', 'food'].includes(affinity.slug)) {
         baseWeight = Math.min(1.0, baseWeight + 0.2);
       }
 
-      // Add seasonal variations
       const month = currentDate.getMonth();
       if (affinity.slug === 'fitness' && (month === 0 || month === 1)) {
         baseWeight = Math.min(1.0, baseWeight + 0.3); // New Year fitness trend
@@ -233,7 +222,6 @@ export const mockFetchAffinityTimeline = async (
       });
     });
 
-    // Move to next interval
     switch (interval) {
       case TimelineInterval.DAY:
         currentDate.setDate(currentDate.getDate() + 1);

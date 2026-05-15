@@ -74,7 +74,6 @@ export const SingleComment = ({ comment, postId, onReply, depth = 0 }: SingleCom
         </div>
       </div>
 
-      {/* Replies */}
       {hasReplies && isShowingReplies && depth < maxDepth && (
         <div className="border-muted/20 ml-6 border-l-1">
           {comment.replies?.map((reply: Comment) => (

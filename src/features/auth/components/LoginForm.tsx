@@ -38,7 +38,6 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" autoComplete="on">
-        {/* Email */}
         <FormField
           control={form.control}
           name="email"
@@ -60,7 +59,6 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
           )}
         />
 
-        {/* Password */}
         <FormField
           control={form.control}
           name="password"
@@ -94,12 +92,10 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
           )}
         />
 
-        {/* Submit Button */}
         <Button type="submit" className="w-full" disabled={!form.formState.isValid || isLoading}>
           {isLoading ? 'Signing In...' : 'Sign In'}
         </Button>
 
-        {/* Register Link */}
         <div className="mt-4 text-center text-sm">
           <span className="text-muted">{`Don't have an account?`} </span>
           <span className="text-info font-medium">

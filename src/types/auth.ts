@@ -44,7 +44,7 @@ export const LoginResultSchema = z.object({
   user: z.object({
     id: z.string(),
     username: z.string(),
-    role: z.nativeEnum(UserRole.enum),
+    role: z.nativeEnum(UserRole),
   }),
   token: z.string(),
 });
@@ -58,7 +58,7 @@ export const JWTPayloadSchema = z.object({
   user: z.object({
     id: z.string(),
     username: z.string(),
-    role: UserRole,
+    role: z.nativeEnum(UserRole),
   }),
   iat: z.number(),
   exp: z.number(),

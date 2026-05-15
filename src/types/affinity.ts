@@ -17,7 +17,6 @@ export const AffinitySchema = z.object({
 
 export type Affinity = z.infer<typeof AffinitySchema>;
 
-// Match types
 export const MatchMetricsSchema = z.object({
   overall: z.number(),
   strength: z.number(),

@@ -26,7 +26,6 @@ export const ImagePostContent = ({ post }: { post: ImagePost }) => {
 
   const count = images.length;
 
-  // --- Single image case ---
   if (count === 1) {
     const { url, meta } = images[0];
     return (
@@ -44,7 +43,6 @@ export const ImagePostContent = ({ post }: { post: ImagePost }) => {
     );
   }
 
-  // --- Multiple images (carousel) ---
   return (
     <div className="relative w-full">
       <Carousel className="w-full" setApi={setApi}>

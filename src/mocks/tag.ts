@@ -1,7 +1,6 @@
 import { Tag } from '@/types/tag';
 import { PaginatedResponse } from '@/types/pagination';
 
-// Mock tag data
 const mockTags: Tag[] = [
   { id: '1', name: 'javascript', slug: 'javascript', usage_count: 1250 },
   { id: '2', name: 'react', slug: 'react', usage_count: 980 },
@@ -13,12 +12,10 @@ export const mockSearchTags = (
   page: number = 1,
   pageSize: number = 25
 ): PaginatedResponse<Tag> => {
-  // Filter tags based on query
   const filteredTags = mockTags.filter((tag) =>
     tag.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Calculate pagination
   const totalItems = filteredTags.length;
   const totalPages = Math.ceil(totalItems / pageSize);
   const startIndex = (page - 1) * pageSize;

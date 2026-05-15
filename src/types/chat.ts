@@ -1,6 +1,3 @@
-// ---------------------------------------------------------------------------
-// MessagePart — content unit inside a message
-// ---------------------------------------------------------------------------
 export interface MessagePart {
   type: 'text' | 'image' | 'audio' | 'post_ref';
   text?: string;
@@ -14,10 +11,7 @@ export interface MessagePart {
   snapshot?: Record<string, unknown>;
 }
 
-// ---------------------------------------------------------------------------
-// WireActor — typed sender/participant identity.
 // Exactly one of `user` or `persona` is present based on `actor_type`.
-// ---------------------------------------------------------------------------
 export interface WireActorUser {
   id: string;
   username: string;
@@ -40,18 +34,12 @@ export interface WireActor {
   persona?: WireActorPersona;
 }
 
-// ---------------------------------------------------------------------------
-// WireParticipant — extends WireActor with conversation-scoped state
-// ---------------------------------------------------------------------------
 export interface WireParticipant extends WireActor {
   last_read_seq: string;
 }
 
-// ---------------------------------------------------------------------------
-// WireMessage — as returned by the backend (WS + REST).
 // `status` from the server is always "sent". The frontend adds "sending"
 // (optimistic) and derives "read" from the watermark.
-// ---------------------------------------------------------------------------
 export interface WireMessage {
   id: string;
   conversation_id: string;
@@ -65,9 +53,7 @@ export interface WireMessage {
   status: 'sending' | 'sent' | 'read' | 'failed';
 }
 
-// ---------------------------------------------------------------------------
 // WireConversation — shape from GET /conversations REST response
-// ---------------------------------------------------------------------------
 export interface WireConversation {
   id: string;
   title: string; // resolved by the backend (counterpart's display name for 1:1)
@@ -79,9 +65,7 @@ export interface WireConversation {
   last_message?: WireMessage;
 }
 
-// ---------------------------------------------------------------------------
 // UI types — derived / display layer
-// ---------------------------------------------------------------------------
 
 export interface Participant {
   id: string; // actor_id
@@ -105,9 +89,6 @@ export interface Conversation {
   unread_count: number;
 }
 
-// ---------------------------------------------------------------------------
-// WebSocket event contract
-// ---------------------------------------------------------------------------
 export interface ChatEvents {
   // Client → Server
   'conversation:join': { conversation_id?: string; persona_slug?: string; user_id?: string };

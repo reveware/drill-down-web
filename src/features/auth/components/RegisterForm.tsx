@@ -54,7 +54,6 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
         className="space-y-4"
         encType="multipart/form-data"
       >
-        {/* Avatar Upload */}
         <FormField
           control={form.control}
           name="avatar"
@@ -99,7 +98,6 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           )}
         />
 
-        {/* Username */}
         <FormField
           control={form.control}
           name="username"
@@ -116,7 +114,6 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           )}
         />
 
-        {/* First Name & Last Name */}
         <div className="grid grid-cols-2 gap-4">
           <FormField
             control={form.control}
@@ -150,7 +147,6 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           />
         </div>
 
-        {/* Email */}
         <FormField
           control={form.control}
           name="email"
@@ -167,7 +163,6 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           )}
         />
 
-        {/* Password & Confirm Password */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
@@ -238,7 +233,6 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           />
         </div>
 
-        {/* Date of Birth & Tagline */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
@@ -272,12 +266,10 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           />
         </div>
 
-        {/* Submit Button */}
         <Button type="submit" className="w-full" disabled={!form.formState.isValid || isLoading}>
           {isLoading ? 'Creating Account...' : 'Create Account'}
         </Button>
 
-        {/* Login Link */}
         <div className="mt-4 text-center text-sm">
           <span className="text-muted">Already have an account? </span>
           <span className="text-info font-medium">

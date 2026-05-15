@@ -32,7 +32,6 @@ export const RewardCard = ({ reward }: RewardCardProps) => {
           <div className="text-xl font-bold tracking-widest">Tap to reveal</div>
         </div>
 
-        {/* Description at the bottom */}
         <div className="overflow-hidden">
           <div className="line-clamp-6 text-xs leading-relaxed opacity-70">
             {reward.description}

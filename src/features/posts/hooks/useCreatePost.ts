@@ -33,7 +33,6 @@ export function useCreatePost<T extends PostTypes>(
     onSuccess: (data) => {
       onSuccess(data);
       queryClient.invalidateQueries({ queryKey: ['posts'] });
-      // Invalidate user data to update posts_count for reward progress
       if (user?.id) {
         queryClient.invalidateQueries({ queryKey: ['user', user.id] });
       }
