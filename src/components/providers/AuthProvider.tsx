@@ -23,32 +23,32 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isAuthenticated: false,
     token: null,
     user: null,
+    isOnboarded: false,
     isLoading: true,
   });
 
-  const fetchUserData = useCallback(
-    async (userId: string) => {
-      try {
-        const userData = await UserApi.getUser(userId);
-        setAuthState((prev) => ({
-          ...prev,
-          user: userData,
-          isLoading: false,
-        }));
-      } catch (error) {
-        console.error('Failed to fetch user data:', error);
-        TokenManager.removeToken();
-        setAuthState({
-          isAuthenticated: false,
-          token: null,
-          user: null,
-          isLoading: false,
-        });
-        router.push('/login');
-      }
-    },
-    [router]
-  );
+  const fetchCurrentUser = useCallback(async () => {
+    try {
+      const userData = await UserApi.getCurrentUser();
+      setAuthState((prev) => ({
+        ...prev,
+        user: userData,
+        isOnboarded: userData.is_onboarded,
+        isLoading: false,
+      }));
+    } catch (error) {
+      console.error('Failed to fetch current user:', error);
+      TokenManager.removeToken();
+      setAuthState({
+        isAuthenticated: false,
+        token: null,
+        user: null,
+        isOnboarded: false,
+        isLoading: false,
+      });
+      router.push('/login');
+    }
+  }, [router]);
 
   const initializeAuth = useCallback(async () => {
     const token = TokenManager.getToken();
@@ -59,19 +59,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         isAuthenticated: false,
         token: null,
         user: null,
-        isLoading: false,
-      });
-      router.push('/login');
-      return;
-    }
-
-    const jwtUser = TokenManager.getUserFromToken();
-    if (!jwtUser) {
-      TokenManager.removeToken();
-      setAuthState({
-        isAuthenticated: false,
-        token: null,
-        user: null,
+        isOnboarded: false,
         isLoading: false,
       });
       router.push('/login');
@@ -82,34 +70,25 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       isAuthenticated: true,
       token,
       user: null,
+      isOnboarded: false,
       isLoading: true,
     });
 
-    await fetchUserData(jwtUser.user.id);
-  }, [fetchUserData, router]);
+    await fetchCurrentUser();
+  }, [fetchCurrentUser, router]);
 
   const login = async (token: string) => {
     TokenManager.setToken(token);
-    const jwtUser = TokenManager.getUserFromToken();
-
-    if (!jwtUser) {
-      setAuthState({
-        isAuthenticated: false,
-        token: null,
-        user: null,
-        isLoading: false,
-      });
-      return;
-    }
 
     setAuthState({
       isAuthenticated: true,
       token,
       user: null,
+      isOnboarded: false,
       isLoading: true,
     });
 
-    await fetchUserData(jwtUser.user.id);
+    await fetchCurrentUser();
   };
 
   const logout = () => {
@@ -118,6 +97,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       isAuthenticated: false,
       token: null,
       user: null,
+      isOnboarded: false,
       isLoading: false,
     });
     router.push('/login');
@@ -127,6 +107,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setAuthState((prev) => ({
       ...prev,
       user,
+      isOnboarded: user.is_onboarded,
       isLoading: false,
     }));
   };

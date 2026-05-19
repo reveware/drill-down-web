@@ -1,10 +1,10 @@
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { LoginForm, SsoActions, useLogin } from '@/features/auth';
+import { OnboardingForm, useOnboarding } from '@/features/onboarding';
 
-export default function LoginPage() {
-  const { mutate: login, isPending } = useLogin();
+export default function OnboardingPage() {
+  const { mutate: complete, isPending } = useOnboarding();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-evenly p-4">
@@ -12,13 +12,13 @@ export default function LoginPage() {
 
       <Card className="card mx-auto w-full max-w-md p-6 shadow-none">
         <CardHeader className="text-center">
-          <CardTitle className="font-title text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription className="text-accent text-sm">Sign in to your account</CardDescription>
+          <CardTitle className="font-title text-2xl font-bold">Almost there</CardTitle>
+          <CardDescription className="text-accent text-sm">
+            Pick a username and confirm your date of birth
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm onSubmit={login} isLoading={isPending} />
-
-          <SsoActions />
+          <OnboardingForm onSubmit={complete} isLoading={isPending} />
         </CardContent>
       </Card>
     </main>

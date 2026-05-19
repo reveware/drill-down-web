@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { UserFieldsSchema } from './user-fields';
 
 export enum UserRole {
   ADMIN = 'ADMIN',
@@ -10,12 +11,13 @@ export const UserOverviewSchema = z.object({
   id: z.string(),
   username: z.string(),
   email: z.string().email(),
-  avatar: z.string().url(),
+  avatar: z.string().url().nullable(),
   first_name: z.string(),
   last_name: z.string(),
   date_of_birth: z.string(),
   tagline: z.string().nullable(),
   role: z.nativeEnum(UserRole),
+  is_onboarded: z.boolean(),
 
   is_private: z.boolean(),
   is_self: z.boolean(),
@@ -43,3 +45,20 @@ export const UserDetailSchema = UserOverviewSchema.extend({
 });
 
 export type UserDetail = z.infer<typeof UserDetailSchema>;
+
+export const UpdateUserSchema = UserFieldsSchema.partial();
+
+export type UpdateUserDto = z.infer<typeof UpdateUserSchema>;
+
+// Stricter than UpdateUserSchema: onboarding requires username + date_of_birth
+export const OnboardingFormSchema = UserFieldsSchema.pick({
+  username: true,
+  date_of_birth: true,
+  tagline: true,
+  avatar: true,
+}).required({
+  username: true,
+  date_of_birth: true,
+});
+
+export type OnboardingDto = z.infer<typeof OnboardingFormSchema>;

@@ -58,12 +58,4 @@ export class TokenManager {
     }
     return !this.isTokenExpired(token);
   }
-
-  static getUserFromToken(): JWTPayload | null {
-    const token = this.getToken();
-    if (!token || this.isTokenExpired(token)) {
-      return null;
-    }
-    return this.decodeToken(token);
-  }
 }

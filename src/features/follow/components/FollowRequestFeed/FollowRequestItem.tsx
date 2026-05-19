@@ -1,4 +1,4 @@
-import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -23,7 +23,7 @@ export const FollowRequestItem = ({ followRequest }: FollowRequestItemProps) => 
         </div>
 
         <div className="mb-4 flex items-center gap-2">
-          <UserAvatar user={followRequest.requester} />
+          <UserAvatar {...userAvatarProps(followRequest.requester)} />
           <div className="flex-1">
             <UserInfo user={followRequest.requester} />
           </div>

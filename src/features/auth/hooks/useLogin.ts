@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/useAuth';
 import { AuthApi } from '@/api/endpoints/auth.api';
 import { LoginDto } from '@/types/auth';
+import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 
 export const useLogin = () => {
@@ -18,7 +19,7 @@ export const useLogin = () => {
     },
     onError: (error) => {
       console.log('Login failed', error);
-      toast.error(error.message);
+      toast.error(getApiErrorMessage(error));
     },
   });
 };

@@ -1,12 +1,13 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Trash } from '@/components/shared/Icons';
+import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
+import { getInitials } from '@/lib/utils';
 
 interface ChatHeaderProps {
   title: string;
-  avatar?: string;
+  avatar?: string | null;
   subtitle?: string;
 
   onBack?: () => void;
@@ -28,12 +29,7 @@ export const ChatHeader = ({ title, avatar, subtitle, onBack, onDelete }: ChatHe
         </Button>
       )}
 
-      <Avatar className="h-10 w-10">
-        <AvatarImage src={avatar} alt={title} />
-        <AvatarFallback className="from-accent/90 to-primary/90 bg-gradient-to-r text-white">
-          {title.charAt(0).toUpperCase()}
-        </AvatarFallback>
-      </Avatar>
+      <UserAvatar src={avatar} initials={getInitials([title])} alt={title} />
 
       <div className="min-w-0 flex-1">
         <h2 className="truncate font-semibold">{title}</h2>

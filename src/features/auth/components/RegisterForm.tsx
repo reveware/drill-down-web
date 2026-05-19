@@ -2,11 +2,12 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useMemo, useState } from 'react';
-import { Eye, EyeOff, Upload, User } from '@/components/shared/Icons';
+import { useMemo, useState } from 'react';
+import { Eye, EyeOff } from '@/components/shared/Icons';
 import Link from 'next/link';
 import { RegisterFormSchema, RegisterDto } from '@/types/auth';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AvatarUpload } from '@/components/shared';
+import { getInitials } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -17,8 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useAvatarUpload } from '../hooks/useAvatarUpload';
-import { Label } from '@/components/ui/label';
 import { format } from 'date-fns';
 
 interface RegisterFormProps {
@@ -35,17 +34,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    form.trigger('avatar');
-  }, [form]);
-
-  const { preview, handleChange } = useAvatarUpload(form.setValue);
   const firstName = form.watch('first_name');
   const lastName = form.watch('last_name');
-  const initials = useMemo(
-    () => `${firstName?.[0] || ''}${lastName?.[0] || ''}`.toUpperCase(),
-    [firstName, lastName]
-  );
+  const initials = useMemo(() => getInitials([firstName, lastName]), [firstName, lastName]);
 
   return (
     <Form {...form}>
@@ -59,40 +50,9 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           name="avatar"
           render={({ field }) => (
             <FormItem className="flex flex-col items-center space-y-2">
-              <div className="relative">
-                <Label htmlFor="avatar" className="block cursor-pointer">
-                  <Avatar className="h-32 w-32">
-                    <AvatarImage src={preview || undefined} className="object-cover" />
-                    <AvatarFallback className="bg-secondary text-on-primary text-lg">
-                      {preview ? null : initials || <User className="h-10 w-10" />}
-                    </AvatarFallback>
-                  </Avatar>
-                </Label>
-                <Label
-                  htmlFor="avatar"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full p-2 transition-colors"
-                >
-                  <Upload className="h-4 w-4" />
-                </Label>
-              </div>
-              <div className="space-y-2 text-center">
-                <FormControl>
-                  <Input
-                    id="avatar"
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      handleChange(e);
-                      field.onChange(file);
-                    }}
-                  />
-                </FormControl>
-
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+              <AvatarUpload value={field.value} onChange={field.onChange} initials={initials} />
+              <div className="min-h-[1rem] text-xs font-light">
+                <FormMessage />
               </div>
             </FormItem>
           )}

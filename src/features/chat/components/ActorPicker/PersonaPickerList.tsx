@@ -35,8 +35,6 @@ const PersonaRow = ({
 }) => (
   <PickerRow
     avatar={persona.avatar}
-    avatarAlt={persona.name}
-    avatarFallback={persona.name.charAt(0)}
     title={persona.name}
     subtitle={persona.description}
     onClick={() => onSelect(persona.slug)}

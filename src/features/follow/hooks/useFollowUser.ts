@@ -1,5 +1,6 @@
 import { FollowApi } from '@/api/endpoints/follow.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 
 export const useFollowUser = () => {
@@ -16,8 +17,8 @@ export const useFollowUser = () => {
       // Invalidate pending follow requests in case the target user has pending requests
       queryClient.invalidateQueries({ queryKey: ['pending-follow-requests'] });
     },
-    onError: () => {
-      toast.error('Failed to send follow request');
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error));
     },
   });
 };

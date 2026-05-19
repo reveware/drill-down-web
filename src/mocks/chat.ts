@@ -13,7 +13,7 @@ export const mockAoiConversation: Conversation = {
   title: 'Aoi',
   type: 'PERSONA',
   participants: [
-    { id: 'current-user', name: 'You', is_agent: false },
+    { id: 'current-user', name: 'You', avatar: null, is_agent: false },
     {
       id: 'aoi',
       name: 'Aoi',
@@ -55,7 +55,7 @@ export const generateResponse = (conversationId: string, message: string): WireM
       : {
           actor_id: 'assistant',
           actor_type: 'PERSONA',
-          persona: { id: 'assistant', slug: 'assistant', name: 'Assistant' },
+          persona: { id: 'assistant', slug: 'assistant', name: 'Assistant', avatar: null },
         },
     type: 'text',
     status: 'sent',

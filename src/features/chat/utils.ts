@@ -9,8 +9,8 @@ export const getActorDisplayName = (actor: WireActor): string => {
   return 'Unknown';
 };
 
-export const getActorAvatar = (actor: WireActor): string | undefined => {
-  return actor.persona?.avatar ?? actor.user?.avatar;
+export const getActorAvatar = (actor: WireActor): string | null => {
+  return actor.persona?.avatar ?? actor.user?.avatar ?? null;
 };
 
 export const toParticipant = (wp: WireParticipant): Participant => ({

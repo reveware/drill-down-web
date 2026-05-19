@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostApi } from '@/api/endpoints/post.api';
 import { PostTypes, CreateQuotePost, PostOverview, CreateImagePost } from '@/types/post';
 import { toast } from '@/lib/toast';
+import { getApiErrorMessage } from '@/api/errors';
 import { useAuth } from '@/hooks/useAuth';
 
 type PostTypeToDto<T extends PostTypes> = T extends PostTypes.IMAGE
@@ -28,7 +29,7 @@ export function useCreatePost<T extends PostTypes>(
       throw new Error('Invalid post type');
     },
     onError: (error) => {
-      toast.error(error.message);
+      toast.error(getApiErrorMessage(error));
     },
     onSuccess: (data) => {
       onSuccess(data);

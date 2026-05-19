@@ -2,7 +2,7 @@
 import { User, Gift, LogOut, Activity, MessageCircle } from '../shared/Icons';
 import { Separator } from '../ui/separator';
 import { ThemeToggle } from './ThemeToggle';
-import { UserAvatar } from '../shared/UserAvatar/UserAvatar';
+import { UserAvatar, userAvatarProps } from '../shared';
 import { UserOverview } from '@/types/user';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
@@ -23,7 +23,7 @@ export const UserSection = ({ user }: UserSectionProps) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex items-center gap-3">
-        <UserAvatar user={user} />
+        <UserAvatar {...userAvatarProps(user)} />
         <UserInfo user={user} />
       </div>
 

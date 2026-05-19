@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
-import { RegisterForm, useRegister } from '@/features/auth';
+import { RegisterForm, SsoActions, useRegister } from '@/features/auth';
 import Image from 'next/image';
 import { Delorean } from '@/assets/images';
 
@@ -25,6 +25,8 @@ export default function RegisterPage() {
             </CardHeader>
             <CardContent>
               <RegisterForm onSubmit={register} isLoading={isPending} />
+
+              <SsoActions />
             </CardContent>
           </Card>
         </div>

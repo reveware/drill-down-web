@@ -1,6 +1,7 @@
 import { UserDetail } from '@/types/user';
 import { Card, CardContent } from '@/components/ui/card';
 import { formatDistanceToNow } from 'date-fns';
+import { getInitials } from '@/lib/utils';
 import Image from 'next/image';
 import { ProfileActions } from './ProfileActions/ProfileActions';
 
@@ -34,14 +35,20 @@ const UserDetails = ({ user }: { user: UserDetail }) => {
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="relative mx-auto aspect-[3/5] max-h-[250px] w-full overflow-hidden rounded-md">
-        <Image
-          src={user.avatar}
-          alt={user.username}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 300px, 250px"
-          priority
-        />
+        {user.avatar ? (
+          <Image
+            src={user.avatar}
+            alt={user.username}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 300px, 250px"
+            priority
+          />
+        ) : (
+          <div className="bg-secondary text-on-primary font-title flex h-full w-full items-center justify-center text-4xl">
+            {getInitials([user.first_name, user.last_name]) || getInitials([user.username])}
+          </div>
+        )}
       </div>
       <div className="px-4">
         <h1 className="font-title text-foreground text-2xl font-bold">

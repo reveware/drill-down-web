@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Comment } from '@/types/comment';
-import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, ChevronDown, ChevronRight } from '@/components/shared/Icons';
 import { formatDistanceToNow } from 'date-fns';
@@ -39,7 +39,7 @@ export const SingleComment = ({ comment, postId, onReply, depth = 0 }: SingleCom
   return (
     <div className={cn('space-y-4', depth > 0 && 'ml-6')}>
       <div className="mb-2 flex items-start gap-2">
-        <UserAvatar user={comment.author} />
+        <UserAvatar {...userAvatarProps(comment.author)} />
 
         <div className="min-w-0 flex-1">
           <Link className="flex items-center gap-2" href={`/user/${comment.author.id}`}>

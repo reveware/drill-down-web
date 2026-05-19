@@ -1,5 +1,5 @@
 import { apiClient } from '../client';
-import { LoginDto, LoginResult, CreateUserDto } from '@/types/auth';
+import { LoginDto, LoginResult, CreateUserDto, GoogleSsoDto } from '@/types/auth';
 import { mockLogin, mockRegister } from '@/mocks/auth';
 import { USE_MOCKS } from '../constants';
 
@@ -23,7 +23,9 @@ export const AuthApi = {
 
     const formData = new FormData();
 
-    formData.append('avatar', user.avatar);
+    if (user.avatar) {
+      formData.append('avatar', user.avatar);
+    }
     formData.append('username', user.username);
     formData.append('first_name', user.first_name);
     formData.append('last_name', user.last_name);
@@ -42,5 +44,10 @@ export const AuthApi = {
         },
       })
     ).data;
+  },
+
+  // No USE_MOCKS branch: SSO requires the real GIS widget + backend verification
+  loginWithGoogle: async (payload: GoogleSsoDto): Promise<LoginResult> => {
+    return (await apiClient.post<LoginResult>('/auth/sso/google', payload)).data;
   },
 };

@@ -2,7 +2,7 @@
 import React from 'react';
 import { TimeBomb } from '@/types/time-bombs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { UserAvatar } from '@/components/shared/';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { formatDistanceToNow } from 'date-fns';
 
 import { useCountdown } from '../../hooks/useCountdown';
@@ -28,7 +28,7 @@ export const UpcomingTimebomb: React.FC<Props> = ({ timebomb }) => {
         {timebomb && (
           <>
             <div className="flex items-center gap-3">
-              <UserAvatar user={timebomb.author} />
+              <UserAvatar {...userAvatarProps(timebomb.author)} />
               <UserInfo user={timebomb.author} subtitle="Sent you a Timebomb!" />
             </div>
             <Countdown time={formatted} />
