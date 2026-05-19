@@ -12,6 +12,7 @@ export const mockUser: UserOverview = {
   date_of_birth: '1990-01-01',
   tagline: 'Photography enthusiast',
   role: UserRole.USER,
+  is_onboarded: true,
   is_private: false,
   is_self: true,
   is_following: false,
@@ -34,6 +35,7 @@ export const mockAdmin: UserOverview = {
   date_of_birth: '1985-01-01',
   tagline: 'System Administrator',
   role: UserRole.ADMIN,
+  is_onboarded: true,
   is_private: false,
   is_self: false,
   is_following: false,
@@ -56,6 +58,7 @@ export const mockPrivateUser: UserOverview = {
   date_of_birth: '1995-01-01',
   tagline: 'Private account',
   role: UserRole.USER,
+  is_onboarded: true,
   is_private: true,
   is_self: false,
   is_following: false,
@@ -78,6 +81,7 @@ export const mockFollowedUser: UserOverview = {
   date_of_birth: '1992-05-15',
   tagline: 'Travel lover',
   role: UserRole.USER,
+  is_onboarded: true,
   is_private: false,
   is_self: false,
   is_following: true,
@@ -90,10 +94,25 @@ export const mockFollowedUser: UserOverview = {
   updated_at: '2025-03-15T09:45:00Z',
 };
 
+export const mockCurrentUser = async (): Promise<UserDetail> => {
+  await sleep(1);
+  return {
+    ...mockUser,
+    posts_count: 0,
+    likes_count: 0,
+    followers_count: 0,
+    following_count: 0,
+    created_locked_posts: 0,
+    received_locked_posts: 0,
+  };
+};
+
 export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
   console.log('mockFetchUser', userId);
-  const users = [mockUser, mockPrivateUser, mockFollowedUser, mockAdmin];
-  const user = users[Math.floor(Math.random() * users.length)];
+
+  const user = [mockUser, mockPrivateUser, mockFollowedUser, mockAdmin][
+    Math.floor(Math.random() * 4)
+  ];
 
   const posts_count = Math.floor(Math.random() * 100);
   const likes_count = Math.floor(Math.random() * 100);
@@ -110,6 +129,27 @@ export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
     following_count,
     created_locked_posts,
     received_locked_posts,
+  };
+};
+
+export const mockUpdateUser = async (
+  userId: string,
+  payload: Partial<
+    Pick<UserOverview, 'username' | 'first_name' | 'last_name' | 'date_of_birth' | 'tagline'>
+  >
+): Promise<UserDetail> => {
+  console.log('mockUpdateUser', userId, payload);
+  await sleep(1);
+
+  return {
+    ...mockUser,
+    ...payload,
+    posts_count: 0,
+    likes_count: 0,
+    followers_count: 0,
+    following_count: 0,
+    created_locked_posts: 0,
+    received_locked_posts: 0,
   };
 };
 

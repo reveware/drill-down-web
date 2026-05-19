@@ -1,8 +1,8 @@
 import { RouteGuard } from '@/components/auth/RouteGuard';
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default function OnboardingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <RouteGuard stage="guest">
+    <RouteGuard stage="incompleteAccount">
       <div className="flex h-screen flex-col">
         <div className="flex-1">{children}</div>
       </div>

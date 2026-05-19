@@ -11,7 +11,7 @@ const MOCK_AOI_PARTICIPANTS: WireParticipant[] = [
     actor_id: MOCK_USER_ACTOR_ID,
     actor_type: 'USER',
     last_read_seq: '0',
-    user: { id: 'current-user', username: 'you', first_name: 'You', last_name: '' },
+    user: { id: 'current-user', username: 'you', first_name: 'You', last_name: '', avatar: null },
   },
   {
     actor_id: 'aoi',

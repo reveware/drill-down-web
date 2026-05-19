@@ -1,4 +1,5 @@
-export { UserAvatar } from './UserAvatar/UserAvatar';
+export { UserAvatar, userAvatarProps } from './UserAvatar/UserAvatar';
+export { AvatarUpload } from './AvatarUpload/AvatarUpload';
 export { Search } from './Search/Search';
 export { Spinner } from './Spinner/Spinner';
 export { ModeToggle } from './ModeToggle/ModeToggle';

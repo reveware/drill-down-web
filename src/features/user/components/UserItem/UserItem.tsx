@@ -1,4 +1,4 @@
-import { UserAvatar } from '@/components/shared';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { UserPlus, UserMinus } from '@/components/shared/Icons';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -20,7 +20,7 @@ export const UserItem = ({ user }: UserItemProps) => {
       <Card className="card max-w-md border-1">
         <div className="flex flex-col items-center gap-4 p-4 md:flex-row">
           <div className="flex w-full items-center gap-3">
-            <UserAvatar user={user} />
+            <UserAvatar {...userAvatarProps(user)} />
             <UserInfo user={user} />
           </div>
         </div>
@@ -64,7 +64,7 @@ export const UserItem = ({ user }: UserItemProps) => {
     <Card className="card max-w-md border-1">
       <div className="flex flex-col items-center gap-4 p-4 md:flex-row">
         <div className="flex w-full items-center gap-3">
-          <UserAvatar user={user} />
+          <UserAvatar {...userAvatarProps(user)} />
           <UserInfo user={user} />
         </div>
 

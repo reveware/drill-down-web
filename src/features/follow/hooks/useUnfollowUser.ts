@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FollowApi } from '@/api/endpoints/follow.api';
+import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 
 export const useUnfollowUser = () => {
@@ -12,8 +13,8 @@ export const useUnfollowUser = () => {
       toast.success('You are no longer following this user');
       queryClient.invalidateQueries({ queryKey: ['user', userId] });
     },
-    onError: () => {
-      toast.error('Failed to unfollow this user');
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error));
     },
   });
 };

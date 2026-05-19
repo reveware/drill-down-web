@@ -1,8 +1,8 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
+import { cn, getInitials } from '@/lib/utils';
 import { Conversation, MessagePart } from '@/types/chat';
 import { useIsActorSelf } from '../../hooks/useIsActorSelf';
 
@@ -38,12 +38,12 @@ export const ConversationListItem = ({
         isActive && 'bg-accent'
       )}
     >
-      <Avatar className="h-12 w-12 flex-shrink-0">
-        <AvatarImage src={counterpart?.avatar} alt={conversation.title} />
-        <AvatarFallback className="from-accent/90 to-primary/90 bg-gradient-to-r text-white">
-          {conversation.title.charAt(0).toUpperCase()}
-        </AvatarFallback>
-      </Avatar>
+      <UserAvatar
+        src={counterpart?.avatar}
+        initials={getInitials([conversation.title])}
+        alt={conversation.title}
+        className="h-12 w-12 flex-shrink-0"
+      />
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-2">

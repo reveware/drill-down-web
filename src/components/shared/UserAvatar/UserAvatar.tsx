@@ -1,20 +1,42 @@
 'use client';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { UserOverview } from '@/types/user';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { UserOverview } from '@/types/user';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { User } from '@/components/shared/Icons';
+import { cn, getInitials } from '@/lib/utils';
+
 interface UserAvatarProps {
-  user: UserOverview;
+  src?: string | null;
+  initials?: string;
+  href?: string;
+  alt?: string;
   className?: string;
 }
 
-export const UserAvatar: React.FC<UserAvatarProps> = ({ user, className }) => {
+export const UserAvatar = ({ src, initials, href, alt, className }: UserAvatarProps) => {
+  const avatar = (
+    <Avatar className={cn('h-10 w-10', className)}>
+      <AvatarImage src={src} alt={alt} className="object-cover" />
+      <AvatarFallback className="from-accent/90 to-primary/90 bg-gradient-to-r text-white">
+        {initials || <User className="h-1/2 w-1/2" />}
+      </AvatarFallback>
+    </Avatar>
+  );
+
+  if (!href) {
+    return avatar;
+  }
+
   return (
-    <Link href={`/user/${user.id}`} className={cn('flex items-center gap-3')}>
-      <Avatar className={cn('h-10 w-10 cursor-pointer', className)}>
-        <AvatarImage src={user.avatar} alt={user.username} />
-        <AvatarFallback className="bg-primary">{`${user.first_name.charAt(0)}${user.last_name.charAt(0)}`}</AvatarFallback>
-      </Avatar>
+    <Link href={href} className="flex items-center gap-3">
+      {avatar}
     </Link>
   );
 };
+
+export const userAvatarProps = (user: UserOverview) => ({
+  src: user.avatar,
+  initials: getInitials([user.first_name, user.last_name]),
+  href: `/user/${user.id}`,
+  alt: user.username,
+});

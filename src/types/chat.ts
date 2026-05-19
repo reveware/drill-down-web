@@ -17,14 +17,14 @@ export interface WireActorUser {
   username: string;
   first_name: string;
   last_name: string;
-  avatar?: string;
+  avatar: string | null;
 }
 
 export interface WireActorPersona {
   id: string;
   slug: string;
   name: string;
-  avatar?: string;
+  avatar: string | null;
 }
 
 export interface WireActor {
@@ -70,7 +70,7 @@ export interface WireConversation {
 export interface Participant {
   id: string; // actor_id
   name: string; // derived from WireActor sub-objects
-  avatar?: string;
+  avatar: string | null;
   is_agent: boolean;
   last_read_seq?: string;
   // Routing data

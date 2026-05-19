@@ -1,4 +1,4 @@
-import { UserAvatar } from '@/components/shared/';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { CardHeader } from '@/components/ui/card';
 import { UserOverview } from '@/types/user';
 import { formatDistanceToNow } from 'date-fns';
@@ -27,7 +27,7 @@ export const PostCardHeader = ({ user, createdAt, onDelete }: PostCardHeaderProp
   return (
     <CardHeader className="flex items-center justify-between gap-3 px-2">
       <div className="flex items-center gap-3">
-        <UserAvatar user={user} />
+        <UserAvatar {...userAvatarProps(user)} />
         <UserInfo user={user} subtitle={subtitle} />
       </div>
       {user.is_self && (

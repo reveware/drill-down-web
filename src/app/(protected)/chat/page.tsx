@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useModal } from '@/hooks/useModal';
 import { useConfirm } from '@/components/providers/ConfirmProvider';
-import { toast } from '@/lib/toast';
 import { useChatSocket } from '@/components/providers/ChatSocketProvider';
 import { useDeleteConversation } from '@/features/chat/hooks/useDeleteConversation';
 import { Chat } from '@/features/chat/components/Chat/Chat';
@@ -64,7 +63,6 @@ export default function ChatPage() {
       if (activeId === conversationId) setActiveId(null);
     } catch (e) {
       console.error('Failed to delete conversation', { conversationId, error: e });
-      toast.error('Failed to delete conversation');
     }
   };
 

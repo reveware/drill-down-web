@@ -19,6 +19,13 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
   }
 };
 
+export const getInitials = (parts: Array<string | null | undefined>): string =>
+  parts
+    .map((part) => part?.trim().charAt(0))
+    .filter(Boolean)
+    .join('')
+    .toUpperCase();
+
 export const formatTimestamp = (iso: string): string => {
   const d = new Date(iso);
   if (isToday(d)) return format(d, 'HH:mm');

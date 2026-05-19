@@ -1,25 +1,16 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
+import { cn, getInitials } from '@/lib/utils';
+import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
 
 interface PickerRowProps {
-  avatar?: string;
-  avatarAlt: string;
-  avatarFallback: string;
+  avatar?: string | null;
   title: string;
   subtitle: string;
   onClick: () => void;
 }
 
-export const PickerRow = ({
-  avatar,
-  avatarAlt,
-  avatarFallback,
-  title,
-  subtitle,
-  onClick,
-}: PickerRowProps) => (
+export const PickerRow = ({ avatar, title, subtitle, onClick }: PickerRowProps) => (
   <li>
     <button
       type="button"
@@ -29,12 +20,12 @@ export const PickerRow = ({
         'hover:bg-accent/50'
       )}
     >
-      <Avatar className="h-10 w-10 flex-shrink-0">
-        <AvatarImage src={avatar} alt={avatarAlt} />
-        <AvatarFallback className="from-accent/90 to-primary/90 bg-gradient-to-r text-white">
-          {avatarFallback.toUpperCase()}
-        </AvatarFallback>
-      </Avatar>
+      <UserAvatar
+        src={avatar}
+        initials={getInitials([title])}
+        alt={title}
+        className="flex-shrink-0"
+      />
       <div className="min-w-0 flex-1">
         <p className="truncate font-medium">{title}</p>
         <p className="text-muted-foreground/70 truncate text-xs">{subtitle}</p>

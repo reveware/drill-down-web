@@ -2,7 +2,7 @@
 import { UserAffinityScore as Score } from '@/types/affinity';
 import { Card, CardContent } from '@/components/ui/card';
 import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
-import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { Dna } from '@/components/shared/Icons';
 
 interface UserAffinityScoreProps {
@@ -31,11 +31,11 @@ export function UserAffinityScore({ matchData }: UserAffinityScoreProps) {
 
           <div className="flex flex-col gap-2">
             <div className="flex flex-1 items-center gap-2">
-              <UserAvatar user={matchData.users.a} />
+              <UserAvatar {...userAvatarProps(matchData.users.a)} />
               <UserInfo user={matchData.users.a} subtitle={` `} />
             </div>
             <div className="flex flex-1 items-center gap-2">
-              <UserAvatar user={matchData.users.b} />
+              <UserAvatar {...userAvatarProps(matchData.users.b)} />
               <UserInfo user={matchData.users.b} subtitle={` `} />
             </div>
           </div>

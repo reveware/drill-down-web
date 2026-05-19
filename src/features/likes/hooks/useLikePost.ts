@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LikeApi } from '@/api/endpoints/like.api';
+import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 
 export const useLikePost = () => {
@@ -10,8 +11,8 @@ export const useLikePost = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
-    onError: () => {
-      toast.error('Failed to like post');
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error));
     },
   });
 };

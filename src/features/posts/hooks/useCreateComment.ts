@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CommentApi } from '@/api/endpoints/comment.api';
 import { CreateComment, Comment } from '@/types/comment';
+import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 
 export const useCreateComment = (postId: string) => {
@@ -13,7 +14,7 @@ export const useCreateComment = (postId: string) => {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] });
     },
     onError: (error) => {
-      toast.error(error.message || 'Failed to post comment');
+      toast.error(getApiErrorMessage(error));
     },
   });
 };

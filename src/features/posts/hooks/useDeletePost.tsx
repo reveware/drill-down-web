@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from '@/lib/toast';
+import { getApiErrorMessage } from '@/api/errors';
 import { PostApi } from '@/api/endpoints/post.api';
 
 export const useDeletePost = () => {
@@ -10,8 +11,8 @@ export const useDeletePost = () => {
       toast.success('Post deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['posts'] });
     },
-    onError: () => {
-      toast.error('Failed to delete post');
+    onError: (error) => {
+      toast.error(getApiErrorMessage(error));
     },
   });
 };

@@ -1,7 +1,18 @@
-export const Spinner = () => {
+import { cn } from '@/lib/utils';
+
+interface SpinnerProps {
+  className?: string;
+}
+
+export const Spinner = ({ className }: SpinnerProps) => {
   return (
-    <div className="flex items-center justify-center h-full">
-      <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+    <div
+      role="status"
+      aria-label="Loading"
+      className={cn('flex h-full w-full items-center justify-center py-12', className)}
+    >
+      <div className="border-accent/25 border-t-accent h-10 w-10 animate-spin rounded-full border-4" />
+      <span className="sr-only">Loading…</span>
     </div>
   );
 };

@@ -34,14 +34,10 @@ const UserRow = ({
   onSelect: (userId: string) => void;
 }) => {
   const fullName = `${user.first_name} ${user.last_name}`.trim();
-  const fallback =
-    `${user.first_name.charAt(0)}${user.last_name.charAt(0)}` || user.username.charAt(0);
 
   return (
     <PickerRow
       avatar={user.avatar}
-      avatarAlt={user.username}
-      avatarFallback={fallback}
       title={fullName || user.username}
       subtitle={`@${user.username}`}
       onClick={() => onSelect(user.id)}

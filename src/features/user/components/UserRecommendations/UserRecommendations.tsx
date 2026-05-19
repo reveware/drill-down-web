@@ -4,7 +4,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { Button } from '@/components/ui/button';
 import { useUserRecommendations } from '@/features/user/hooks/useUserRecommendations';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
+import { UserAvatar, userAvatarProps } from '@/components/shared';
 import Link from 'next/link';
 import { useFollowUser } from '@/features/follow/hooks/useFollowUser';
 import { Dna } from '@/components/shared/Icons';
@@ -83,7 +83,7 @@ const UserRecommendationCard: React.FC<{
     <div className="card flex w-full max-w-48 flex-col items-center rounded-lg p-3 shadow-sm">
       <MatchLabel />
 
-      <UserAvatar user={user} className="mb-2 h-12 w-12 rounded-full" />
+      <UserAvatar {...userAvatarProps(user)} className="mb-2 h-12 w-12 rounded-full" />
 
       <Link href={`/user/${user.id}`}>
         <div className="text-on-surface text-foreground text-center text-sm font-bold">
