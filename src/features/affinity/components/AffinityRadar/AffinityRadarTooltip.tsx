@@ -31,10 +31,10 @@ export const AffinityRadarTooltip = ({ type, values, affinities }: AffinityRadar
       <Separator className="my-2" />
 
       {affinities.shared.length > 0 && (
-        <div className="mt-2 text-white/80">
+        <div className="text-muted-foreground mt-2">
           <div className="flex flex-wrap gap-1">
             {affinities.shared.slice(0, 10).map((label) => (
-              <span key={label.slug} className="rounded-full bg-white/10 px-2 py-0.5 text-[10px]">
+              <span key={label.slug} className="bg-muted rounded-full px-2 py-0.5 text-[11px]">
                 {label.name || label.slug}
               </span>
             ))}

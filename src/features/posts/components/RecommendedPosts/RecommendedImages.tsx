@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Card, CardHeader, CardContent, CardTitle } from '@/components/ui/card';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
+import { EmptyState } from '@/components/shared';
 import { useRecommendedPosts } from '../../hooks/useRecommendedPosts';
 import { RecommendedImagesSkeleton } from './RecomendedImagesSkeleton';
 import { ImagePost, PostTypes } from '@/types/post';
@@ -26,14 +27,18 @@ export const RecommendedImages = ({ userId }: RecommendedImagesProps) => {
   return (
     <Card className="card max-w-lg">
       <CardHeader>
-        <CardTitle className="font-title text-lg font-semibold">{title}</CardTitle>
+        <CardTitle className="font-sans text-lg font-semibold">{title}</CardTitle>
       </CardHeader>
 
       <CardContent className="h-full px-4">
         {isLoading ? (
           <RecommendedImagesSkeleton isMobile={isMobile} />
         ) : visiblePosts.length === 0 ? (
-          <EmptyState />
+          <EmptyState
+            emoji="🔭"
+            title="No Photos Available"
+            subtitle="Check back later for recommendations!"
+          />
         ) : (
           <ImageGrid posts={visiblePosts} />
         )}
@@ -61,12 +66,4 @@ const ImageGrid: React.FC<{ posts: ImagePost[] }> = ({ posts }) => (
       </button>
     ))}
   </GridContainer>
-);
-
-const EmptyState: React.FC = () => (
-  <div className="flex flex-col items-center justify-center py-8 text-center">
-    <div className="mb-3 text-4xl">🔭</div>
-    <h3 className="mb-1 text-base font-semibold">No Photos Available</h3>
-    <p className="text-muted-foreground text-sm">Check back later for recommendations!</p>
-  </div>
 );

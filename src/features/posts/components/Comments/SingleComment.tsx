@@ -46,7 +46,7 @@ export const SingleComment = ({ comment, postId, onReply, depth = 0 }: SingleCom
             <span className="text-muted-foreground flex-1 text-sm font-bold">
               @{comment.author.username}
             </span>
-            <span className="text-muted text-xs font-light">
+            <span className="text-muted-foreground text-xs font-light">
               {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
             </span>
           </Link>

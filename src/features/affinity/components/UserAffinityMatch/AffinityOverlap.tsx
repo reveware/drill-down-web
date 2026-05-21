@@ -20,7 +20,7 @@ export function AffinityOverlap({ matchData }: AffinityOverlapProps) {
   return (
     <div className="h-full w-full p-4">
       <div className="mb-2 flex items-center justify-between">
-        <h3 className="font-title text-foreground text-lg font-semibold">Shared Affinities</h3>
+        <h3 className="text-foreground font-sans text-lg font-semibold">Shared Affinities</h3>
         <Button variant="ghost" size="sm" onClick={toggleExpanded} className="h-8 w-8 p-0">
           {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
         </Button>
@@ -42,7 +42,7 @@ export function AffinityOverlap({ matchData }: AffinityOverlapProps) {
                       <CardTitle className="text-md text-foreground font-semibold">
                         {affinityType}
                       </CardTitle>
-                      <div className="text-muted flex gap-2 text-xs">
+                      <div className="text-muted-foreground flex gap-2 text-xs">
                         <div>
                           <span className="font-medium">Strength:</span> {metrics.strength}%
                         </div>
@@ -53,7 +53,7 @@ export function AffinityOverlap({ matchData }: AffinityOverlapProps) {
                       </div>
                     </div>
 
-                    <div className="text-accent text-xl font-bold">{metrics.overall}%</div>
+                    <div className="text-primary text-xl font-bold">{metrics.overall}%</div>
                   </div>
                 </CardHeader>
 
@@ -67,7 +67,7 @@ export function AffinityOverlap({ matchData }: AffinityOverlapProps) {
                         {sharedAffinities.map((affinity, index) => (
                           <span
                             key={index}
-                            className="text-muted bg-surface-50 rounded-md px-2 py-1 text-xs"
+                            className="text-muted-foreground bg-card-50 rounded-md px-2 py-1 text-xs"
                           >
                             {affinity.slug}
                           </span>

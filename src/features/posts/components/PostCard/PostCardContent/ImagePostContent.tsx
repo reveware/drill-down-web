@@ -75,7 +75,7 @@ const OverlayNavigation = ({ api }: { api: CarouselApi }) => (
   <>
     <button
       type="button"
-      className="absolute top-1/2 left-2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white opacity-80 hover:bg-black/60 focus:outline-none sm:flex"
+      className="bg-background/60 text-foreground hover:bg-background/80 absolute top-1/2 left-2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-80 focus:outline-none sm:flex"
       onClick={() => api?.scrollPrev()}
       aria-label="Previous image"
     >
@@ -83,7 +83,7 @@ const OverlayNavigation = ({ api }: { api: CarouselApi }) => (
     </button>
     <button
       type="button"
-      className="absolute top-1/2 right-2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white opacity-80 hover:bg-black/60 focus:outline-none sm:flex"
+      className="bg-background/60 text-foreground hover:bg-background/80 absolute top-1/2 right-2 z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full opacity-80 focus:outline-none sm:flex"
       onClick={() => api?.scrollNext()}
       aria-label="Next image"
     >
@@ -98,7 +98,7 @@ const OverlayIndicators = ({ total, current }: { total: number; current: number 
       <span
         key={idx}
         className={`h-2 w-2 rounded-full transition-all ${
-          current === idx ? 'bg-white opacity-90' : 'bg-white/60 opacity-60'
+          current === idx ? 'bg-foreground opacity-90' : 'bg-foreground/50 opacity-60'
         }`}
       />
     ))}

@@ -19,13 +19,13 @@ export const MobileTopbar: React.FC<MobileTopbarProps> = ({ user }) => {
   };
 
   return (
-    <nav className="bg-primary text-on-primary shadow-secondary sticky top-0 z-50 flex items-center justify-between px-4 py-2 shadow-sm md:hidden">
+    <nav className="bg-sidebar text-sidebar-foreground border-border sticky top-0 z-50 flex items-center justify-between border-b px-4 py-2 md:hidden">
       <div className="flex items-center gap-4">
         <Brand />
       </div>
 
       <div className="flex items-center gap-2">
-        <Notifications className="text-on-primary" />
+        <Notifications className="text-foreground" />
         <Search onSearch={handleSearch} />
         <Menu className="cursor-pointer" size={24} onClick={() => setSidebarOpen(true)} />
       </div>

@@ -1,4 +1,5 @@
 export { UserAvatar, userAvatarProps } from './UserAvatar/UserAvatar';
+export { EmptyState } from './EmptyState/EmptyState';
 export { AvatarUpload } from './AvatarUpload/AvatarUpload';
 export { Search } from './Search/Search';
 export { Spinner } from './Spinner/Spinner';

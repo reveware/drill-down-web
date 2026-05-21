@@ -37,7 +37,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" autoComplete="on">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2" autoComplete="on">
         <FormField
           control={form.control}
           name="email"
@@ -52,9 +52,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                   autoComplete="username"
                 />
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage className="text-xs font-light" />
             </FormItem>
           )}
         />
@@ -78,27 +76,29 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="bg-input text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
+                    className="bg-muted text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </Button>
                 </div>
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage className="text-xs font-light" />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={!form.formState.isValid || isLoading}>
+        <Button
+          type="submit"
+          className="mt-4 w-full"
+          disabled={!form.formState.isValid || isLoading}
+        >
           {isLoading ? 'Signing In...' : 'Sign In'}
         </Button>
 
         <div className="mt-4 text-center text-sm">
-          <span className="text-muted">{`Don't have an account?`} </span>
-          <span className="text-info font-medium">
+          <span className="text-muted-foreground">{`Don't have an account?`} </span>
+          <span className="text-primary font-medium">
             <Link href="/register">Sign up</Link>
           </span>
         </div>

@@ -19,9 +19,9 @@ const DEFAULT_ORDER: AffinityType[] = [
 ];
 
 export const RADAR_COLORS = {
-  onlyA: '#e620a6', // Fuchsia - only A
-  onlyB: '#07d9c4', // Turquoise - only B
-  shared: '#f5ae48', // Gold - shared
+  onlyA: '#b084f5', // iris
+  onlyB: '#00e5a0', // success
+  shared: '#f5a623', // ember
 };
 
 export function AffinityRadar({ data, className }: AffinityRadarProps) {
@@ -59,7 +59,7 @@ export function AffinityRadar({ data, className }: AffinityRadarProps) {
 
   if (isEmpty) {
     return (
-      <div className="rounded-xl bg-gradient-to-b from-slate-900 to-black p-6 text-center text-white/60 shadow-md">
+      <div className="bg-card text-muted-foreground rounded-xl p-6 text-center">
         Not enough affinity data to compare these users yet.
       </div>
     );
@@ -68,7 +68,7 @@ export function AffinityRadar({ data, className }: AffinityRadarProps) {
   return (
     <div className={cn('card w-full rounded-xl p-4', className)}>
       <div className="flex justify-between">
-        <div className="font-xl font-title font-semibold">Radar</div>
+        <div className="font-xl font-sans font-semibold">Radar</div>
 
         <div className="text-foreground flex flex-1 items-center justify-end gap-4 text-xs font-semibold">
           <LegendItem color={RADAR_COLORS.onlyA} label={usernameA} />

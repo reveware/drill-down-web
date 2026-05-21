@@ -56,7 +56,7 @@ const StatusIcon = ({ status }: { status: WireMessage['status'] }) => {
     case 'sent':
       return <Check className="text-muted-foreground h-3 w-3" />;
     case 'read':
-      return <CheckCheck className="h-3 w-3 text-blue-500" />;
+      return <CheckCheck className="text-info h-3 w-3" />;
     case 'failed':
       return <XCircle className="text-destructive h-3 w-3" />;
     default:
@@ -105,8 +105,8 @@ export const MessageBubble = ({
             'max-w-full rounded-2xl px-4 py-2 text-sm break-words',
             'group relative',
             isOwn
-              ? 'bg-accent text-on-accent rounded-br-md'
-              : 'bg-secondary text-on-primary rounded-bl-md'
+              ? 'bg-primary text-primary-foreground rounded-br-md'
+              : 'bg-secondary text-secondary-foreground rounded-bl-md'
           )}
         >
           <RenderContent parts={message.content} />

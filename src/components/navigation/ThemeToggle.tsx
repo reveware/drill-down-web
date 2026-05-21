@@ -22,7 +22,7 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <div
-      className="flex items-center gap-2 hover:opacity-80 cursor-pointer"
+      className="hover:bg-sidebar-accent flex cursor-pointer items-center gap-2 rounded-md p-2"
       onClick={() => setTheme(targetTheme)}
       aria-label={label}
     >

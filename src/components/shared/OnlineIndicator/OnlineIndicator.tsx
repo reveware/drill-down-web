@@ -15,13 +15,15 @@ export const OnlineIndicator = ({ isOnline, className }: OnlineIndicatorProps) =
   };
   const offline = {
     status: 'offline',
-    icon: <WifiOff className="text-danger h-4 w-4" />,
+    icon: <WifiOff className="text-destructive h-4 w-4" />,
   };
 
   const status = isOnline ? online : offline;
   return (
     <div className={cn('flex w-full flex-row items-center justify-end gap-2 p-1', className)}>
-      <span className="text-muted font-mono text-xs font-extralight">{status.status}</span>
+      <span className="text-muted-foreground font-mono text-xs font-extralight">
+        {status.status}
+      </span>
       <span>{status.icon}</span>
     </div>
   );

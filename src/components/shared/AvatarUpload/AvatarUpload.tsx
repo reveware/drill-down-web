@@ -51,13 +51,13 @@ export const AvatarUpload = ({
     <div className={cn('flex flex-col items-center', className)}>
       <div className="relative">
         <Label htmlFor={inputId} className="block cursor-pointer">
-          <UserAvatar src={src} initials={initials} className="h-32 w-32 text-lg" />
+          <UserAvatar src={src} initials={initials} className="h-20 w-20 text-sm" />
         </Label>
         <Label
           htmlFor={inputId}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full p-2 transition-colors"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full p-1.5 transition-colors"
         >
-          <Upload className="h-4 w-4" />
+          <Upload className="h-3 w-3" />
         </Label>
       </div>
       <Input id={inputId} type="file" accept="image/*" className="hidden" onChange={handleChange} />

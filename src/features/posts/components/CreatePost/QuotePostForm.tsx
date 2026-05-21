@@ -57,7 +57,7 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
               <FormControl>
                 <Textarea
                   placeholder="Enter your quote..."
-                  className="font-cursive min-h-[80px] resize-none text-lg sm:text-2xl"
+                  className="min-h-[80px] resize-none italic placeholder:not-italic"
                   {...field}
                 />
               </FormControl>
@@ -73,11 +73,7 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
             <FormItem>
               <FormLabel className="text-xs sm:text-sm">Author*</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="John Doe"
-                  {...field}
-                  className="font-cursive text-base sm:text-lg"
-                />
+                <Input placeholder="John Doe" {...field} />
               </FormControl>
               <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>
@@ -93,11 +89,7 @@ export const QuotePostForm = ({ onSuccess }: QuotePostFormProps) => {
             <FormItem>
               <FormLabel className="text-xs sm:text-sm">Description</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="Add a description..."
-                  className="resize-none text-sm sm:text-base"
-                  {...field}
-                />
+                <Textarea placeholder="Add a description..." className="resize-none" {...field} />
               </FormControl>
               <FormMessage className="min-h-[1rem] text-xs font-light" />
             </FormItem>

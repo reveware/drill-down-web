@@ -120,7 +120,7 @@ const PendingFollowerBanner = ({ user }: { user: UserDetail }) => {
         </Button>
         <Button
           size="sm"
-          variant="accent"
+          variant="default"
           onClick={() => {
             approveFollowRequest(user.follow_request_id!);
           }}

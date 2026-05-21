@@ -9,6 +9,7 @@ import { useIsActorSelf } from '../../hooks/useIsActorSelf';
 import { ChatBody } from '../ChatBody/ChatBody';
 import { ChatHeader } from '../ChatHeader/ChatHeader';
 import { JoinErrorState } from '../JoinErrorState/JoinErrorState';
+import { EmptyState } from '@/components/shared';
 
 interface ChatProps {
   /** Pass `null` for the welcome state. */
@@ -89,15 +90,15 @@ export const Chat = ({
 
 const BodyLoading = () => (
   <div className="flex h-full flex-1 items-center justify-center">
-    <div className="border-accent h-6 w-6 animate-spin rounded-full border-2 border-t-transparent" />
+    <div className="border-primary h-6 w-6 animate-spin rounded-full border-2 border-t-transparent" />
   </div>
 );
 
 const WelcomeState = ({ onStart }: { onStart?: () => void }) => (
-  <div className="flex h-full flex-col items-center justify-center p-8 text-center">
-    <div className="mb-4 text-6xl">💭</div>
-    <h2 className="mb-2 text-2xl font-bold">Welcome to Chat</h2>
-    <p className="text-muted-foreground mb-4 max-w-md">Select or start a conversation</p>
-    {onStart && <Button onClick={onStart}>Start new conversation</Button>}
-  </div>
+  <EmptyState
+    emoji="💬"
+    title="Welcome to Chat"
+    subtitle="Select or start a conversation"
+    action={onStart && <Button onClick={onStart}>Start new conversation</Button>}
+  />
 );

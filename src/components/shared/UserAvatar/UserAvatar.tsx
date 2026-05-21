@@ -17,7 +17,7 @@ export const UserAvatar = ({ src, initials, href, alt, className }: UserAvatarPr
   const avatar = (
     <Avatar className={cn('h-10 w-10', className)}>
       <AvatarImage src={src} alt={alt} className="object-cover" />
-      <AvatarFallback className="from-accent/90 to-primary/90 bg-gradient-to-r text-white">
+      <AvatarFallback className="bg-primary text-primary-foreground">
         {initials || <User className="h-1/2 w-1/2" />}
       </AvatarFallback>
     </Avatar>

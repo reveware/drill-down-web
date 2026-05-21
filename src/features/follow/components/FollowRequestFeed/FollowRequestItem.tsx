@@ -18,7 +18,7 @@ export const FollowRequestItem = ({ followRequest }: FollowRequestItemProps) => 
   return (
     <Card className="card max-w-md border-1">
       <div className="flex flex-col px-4 py-2">
-        <div className="text-muted self-end text-xs">
+        <div className="text-muted-foreground self-end text-xs">
           {formatDistanceToNow(new Date(followRequest.created_at), { addSuffix: true })}
         </div>
 
@@ -42,7 +42,7 @@ export const FollowRequestItem = ({ followRequest }: FollowRequestItemProps) => 
           </Button>
           <Button
             size="sm"
-            variant="accent"
+            variant="default"
             onClick={() => approveFollowRequest(followRequest.id)}
             className="flex-1"
           >

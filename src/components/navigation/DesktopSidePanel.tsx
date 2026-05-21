@@ -11,7 +11,7 @@ interface DesktopSidePanelProps {
 export const DesktopSidePanel: React.FC<DesktopSidePanelProps> = ({ user }) => {
   const { isConnected } = useChatSocket();
   return (
-    <aside className="bg-primary text-on-primary border-border hidden h-screen max-w-md flex-col gap-4 border-r-1 p-4 md:flex lg:w-md">
+    <aside className="bg-sidebar text-sidebar-foreground border-border hidden h-screen max-w-md flex-col gap-4 border-r-1 p-4 md:flex lg:w-md">
       <Brand />
       <UserSection user={user} />
       <div className="mt-auto">

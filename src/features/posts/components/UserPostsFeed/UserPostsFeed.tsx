@@ -4,6 +4,7 @@ import { PostCard } from '../PostCard';
 import { PostCardSkeleton } from '../PostCard/PostCardSkeleton';
 import { useSearchPosts } from '@/features/posts/hooks/useSearchPosts';
 import { Feed } from '@/components/shared/Feed/Feed';
+import { EmptyState } from '@/components/shared';
 
 interface UserPostsFeedProps {
   authorId: string;
@@ -23,15 +24,13 @@ export const UserPostsFeed: React.FC<UserPostsFeedProps> = ({ authorId }) => {
       fetchNextPage={fetchNextPage}
       renderItem={(post) => <PostCard key={post.id} post={post} />}
       renderSkeleton={() => <PostCardSkeleton />}
-      renderEmptyState={() => <EmptyState />}
+      renderEmptyState={() => (
+        <EmptyState
+          emoji="🍃"
+          title="No posts found"
+          subtitle="This user hasn't posted anything yet."
+        />
+      )}
     />
   );
 };
-
-const EmptyState = () => (
-  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
-    <div className="mb-4 text-6xl">🍃</div>
-    <h2 className="mb-2 text-2xl font-bold">No posts found</h2>
-    <p className="text-muted-foreground max-w-md">{`This user hasn't posted anything yet.`}</p>
-  </div>
-);

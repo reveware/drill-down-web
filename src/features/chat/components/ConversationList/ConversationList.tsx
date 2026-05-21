@@ -9,6 +9,7 @@ import { useInfiniteScrollObserver } from '@/hooks/useInfiniteScrollObserver';
 import { cn } from '@/lib/utils';
 import { useConversations } from '../../hooks/useConversations';
 import { ConversationListItem } from '../ConversationListItem/ConversationListItem';
+import { EmptyState } from '@/components/shared';
 
 interface ConversationListProps {
   activeConversationId: string | null;
@@ -73,8 +74,19 @@ export const ConversationList = ({
       <div className="flex flex-1 flex-col gap-1 overflow-y-auto p-3">
         {isLoading ? (
           <ListSkeleton />
+        ) : showEmpty && isSearching ? (
+          <EmptyState emoji="🔍" title="No matches" subtitle="Try a different name or username." />
         ) : showEmpty ? (
-          <EmptyState isSearching={isSearching} onStart={onNewConversation} />
+          <EmptyState
+            emoji="💬"
+            title="No conversations"
+            subtitle="Start a new conversation to begin chatting."
+            action={
+              <Button variant="outline" size="sm" onClick={onNewConversation}>
+                Start new conversation
+              </Button>
+            }
+          />
         ) : (
           <>
             {conversations.map((conversation) => (
@@ -90,30 +102,6 @@ export const ConversationList = ({
           </>
         )}
       </div>
-    </div>
-  );
-};
-
-const EmptyState = ({ isSearching, onStart }: { isSearching: boolean; onStart: () => void }) => {
-  if (isSearching) {
-    return (
-      <div className="flex h-full flex-col items-center justify-center p-8 text-center">
-        <div className="mb-4 text-6xl">🔍</div>
-        <h2 className="mb-2 text-2xl font-bold">No matches</h2>
-        <p className="text-muted-foreground max-w-md">Try a different name or username.</p>
-      </div>
-    );
-  }
-  return (
-    <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
-      <div className="mb-4 text-6xl">💭</div>
-      <h2 className="mb-2 text-2xl font-bold">No conversations</h2>
-      <p className="text-muted-foreground mb-4 max-w-md">
-        Start a new conversation to begin chatting.
-      </p>
-      <Button variant="outline" size="sm" onClick={onStart}>
-        Start new conversation
-      </Button>
     </div>
   );
 };

@@ -2,7 +2,7 @@
 import React from 'react';
 import { TimeBomb } from '@/types/time-bombs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { UserAvatar, userAvatarProps } from '@/components/shared';
+import { UserAvatar, userAvatarProps, EmptyState } from '@/components/shared';
 import { formatDistanceToNow } from 'date-fns';
 
 import { useCountdown } from '../../hooks/useCountdown';
@@ -20,11 +20,17 @@ export const UpcomingTimebomb: React.FC<Props> = ({ timebomb }) => {
   return (
     <Card className="card max-w-lg">
       <CardHeader>
-        <CardTitle className="font-title text-lg font-semibold">Upcoming Timebomb</CardTitle>
+        <CardTitle className="font-sans text-lg font-semibold">Upcoming Timebomb</CardTitle>
       </CardHeader>
 
       <CardContent className="flex h-full flex-col gap-4 px-4">
-        {!timebomb && <EmptyState />}
+        {!timebomb && (
+          <EmptyState
+            emoji="💣"
+            title="No upcoming Timebombs"
+            subtitle="Check back later for surprises!"
+          />
+        )}
         {timebomb && (
           <>
             <div className="flex items-center gap-3">
@@ -40,17 +46,12 @@ export const UpcomingTimebomb: React.FC<Props> = ({ timebomb }) => {
   );
 };
 
-const EmptyState: React.FC = () => (
-  <div className="flex flex-col items-center justify-center py-8 text-center">
-    <div className="mb-3 text-4xl">💣</div>
-    <h3 className="mb-1 text-base font-semibold">No upcoming Timebombs</h3>
-    <p className="text-muted-foreground text-sm">Check back later for surprises!</p>
-  </div>
-);
-
 const Countdown: React.FC<{ time: string }> = ({ time }) => (
-  <div className="bg-primary flex items-center justify-center rounded-md p-4">
-    <div className="font-title neon-text text-lg font-bold tracking-widest sm:text-2xl md:text-3xl lg:text-5xl">
+  <div className="flex items-center justify-center rounded-md border border-zinc-800 bg-black p-4">
+    <div
+      className="font-clock text-destructive text-2xl tracking-widest sm:text-3xl lg:text-4xl"
+      style={{ textShadow: 'var(--glow-xl)' }}
+    >
       {time}
     </div>
   </div>

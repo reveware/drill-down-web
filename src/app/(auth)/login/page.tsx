@@ -7,20 +7,15 @@ export default function LoginPage() {
   const { mutate: login, isPending } = useLogin();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-evenly p-4">
-      <h1 className="text-on-background font-title text-6xl font-bold">Drill Down</h1>
-
-      <Card className="card mx-auto w-full max-w-md p-6 shadow-none">
-        <CardHeader className="text-center">
-          <CardTitle className="font-title text-2xl font-bold">Welcome Back</CardTitle>
-          <CardDescription className="text-accent text-sm">Sign in to your account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <LoginForm onSubmit={login} isLoading={isPending} />
-
-          <SsoActions />
-        </CardContent>
-      </Card>
-    </main>
+    <Card className="border-none p-4 shadow-none">
+      <CardHeader className="text-center">
+        <CardTitle className="font-sans text-2xl font-bold">Welcome Back</CardTitle>
+        <CardDescription className="text-primary text-sm">Sign in to your account</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <LoginForm onSubmit={login} isLoading={isPending} />
+        <SsoActions />
+      </CardContent>
+    </Card>
   );
 }

@@ -1,13 +1,20 @@
-import { Logo } from '@/assets/images';
+import { LogoDark, LogoLight } from '@/assets/images';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 
 export const Brand: React.FC = () => {
   return (
-    <Link href="/" className="flex items-center gap-1 cursor-pointer">
-      <Image src={Logo} alt="Logo" width={48} height={48} className="rounded" />
-      <span className="font-title text-xl font-bold tracking-widest">Drill Down</span>
+    <Link href="/" className="flex cursor-pointer items-center gap-2">
+      <Image src={LogoDark} alt="Logo" width={56} height={56} className="rounded dark:hidden" />
+      <Image
+        src={LogoLight}
+        alt="Logo"
+        width={56}
+        height={56}
+        className="hidden rounded dark:block"
+      />
+      <span className="font-brand text-2xl font-bold tracking-widest">Drill Down</span>
     </Link>
   );
 };

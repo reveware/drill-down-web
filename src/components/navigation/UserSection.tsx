@@ -32,26 +32,29 @@ export const UserSection = ({ user }: UserSectionProps) => {
       <Separator />
       <Link
         href={`/user/${user.id}`}
-        className="hover:bg-muted flex items-center gap-2 rounded-md p-2"
+        className="hover:bg-sidebar-accent flex items-center gap-2 rounded-md p-2"
       >
         <User size={20} /> Profile
       </Link>
 
-      <div className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+      <div className="hover:bg-sidebar-accent flex items-center gap-2 rounded-md p-2">
         <Notifications size={20} /> <Link href="/notifications">Notifications</Link>
       </div>
 
-      <Link href="/chat" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+      <Link href="/chat" className="hover:bg-sidebar-accent flex items-center gap-2 rounded-md p-2">
         <MessageCircle size={20} /> Chat
       </Link>
 
-      <Link href="/rewards" className="hover:bg-muted flex items-center gap-2 rounded-md p-2">
+      <Link
+        href="/rewards"
+        className="hover:bg-sidebar-accent flex items-center gap-2 rounded-md p-2"
+      >
         <Gift size={20} /> Rewards
       </Link>
 
       <Link
         href={`/user/${user.id}/insights`}
-        className="hover:bg-muted flex items-center gap-2 rounded-md p-2"
+        className="hover:bg-sidebar-accent flex items-center gap-2 rounded-md p-2"
       >
         <Activity size={20} /> Insights
       </Link>
@@ -59,7 +62,7 @@ export const UserSection = ({ user }: UserSectionProps) => {
       <Separator />
 
       <div
-        className="hover:bg-muted flex cursor-pointer items-center gap-2 rounded-md p-2"
+        className="hover:bg-sidebar-accent flex cursor-pointer items-center gap-2 rounded-md p-2"
         onClick={handleLogout}
       >
         <LogOut size={20} /> <span>Logout</span>

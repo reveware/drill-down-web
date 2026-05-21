@@ -8,12 +8,12 @@ export default function OnboardingPage() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-evenly p-4">
-      <h1 className="text-on-background font-title text-6xl font-bold">Drill Down</h1>
+      <h1 className="text-foreground font-sans text-6xl font-bold">Drill Down</h1>
 
       <Card className="card mx-auto w-full max-w-md p-6 shadow-none">
         <CardHeader className="text-center">
-          <CardTitle className="font-title text-2xl font-bold">Almost there</CardTitle>
-          <CardDescription className="text-accent text-sm">
+          <CardTitle className="font-sans text-2xl font-bold">Almost there</CardTitle>
+          <CardDescription className="text-primary text-sm">
             Pick a username and confirm your date of birth
           </CardDescription>
         </CardHeader>

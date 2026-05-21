@@ -2,13 +2,16 @@
 import { UserReward } from '@/types/reward';
 import Image from 'next/image';
 import { formatDistanceToNow } from 'date-fns';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { PixelTransition } from '@/components/shared/PixelTransition/PixelTransition';
 import { useRewardReveal } from '../hooks/useRewardReveal';
 
 interface RewardCardProps {
   reward: UserReward;
 }
+
+const HOLD_MS = 300;
 
 export const RewardCard = ({ reward }: RewardCardProps) => {
   const [isRevealed, setIsRevealed] = useState(Boolean(reward.revealed_at));
@@ -21,61 +24,93 @@ export const RewardCard = ({ reward }: RewardCardProps) => {
     }
   };
 
-  const HiddenContent = () => {
-    return (
-      <div
-        className="bg-primary flex h-full w-full cursor-pointer flex-col p-4 text-white"
-        onClick={handleReveal}
-      >
-        <div className="flex flex-1 flex-col items-center justify-center">
-          <div className="text-2xl font-bold tracking-widest">🔒</div>
-          <div className="text-xl font-bold tracking-widest">Tap to reveal</div>
-        </div>
-
-        <div className="overflow-hidden">
-          <div className="line-clamp-6 text-xs leading-relaxed opacity-70">
-            {reward.description}
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const RevealedContent = () => {
-    return (
-      <div>
-        <Image
-          src={reward.content}
-          alt={reward.description}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-        />
-        <div className="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <div className="flex h-full flex-col justify-end p-4">
-            <p className="mb-1 text-sm font-medium text-white">{reward.description}</p>
-            <p className="text-xs text-gray-200">
-              {formatDistanceToNow(new Date(reward.created_at), { addSuffix: true })}
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <div className={`group bg-card relative h-full w-full overflow-hidden rounded-lg`}>
+    <div className="bg-card relative h-full w-full overflow-hidden rounded-lg">
       <div className="relative h-full overflow-hidden">
         {isRevealed ? (
-          <RevealedContent />
+          <UnlockedContent reward={reward} />
         ) : (
           <PixelTransition
             pixelColor="black"
-            firstContent={<HiddenContent />}
-            secondContent={<RevealedContent />}
+            firstContent={<LockedContent onReveal={handleReveal} />}
+            secondContent={<UnlockedContent reward={reward} />}
           />
         )}
       </div>
+    </div>
+  );
+};
+
+const LockedContent = ({ onReveal }: { onReveal: () => void }) => (
+  <div
+    className="bg-card text-card-foreground flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 p-4 text-center"
+    onClick={onReveal}
+  >
+    <div className="text-2xl">🔒</div>
+    <div className="font-semibold tracking-widest">Tap to reveal</div>
+  </div>
+);
+
+const UnlockedContent = ({ reward }: { reward: UserReward }) => {
+  const [view, setView] = useState<'image' | 'description'>('image');
+  const holdTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const startHold = () => {
+    cancelHold();
+    holdTimer.current = setTimeout(() => {
+      setView((v) => (v === 'image' ? 'description' : 'image'));
+      holdTimer.current = null;
+    }, HOLD_MS);
+  };
+  const cancelHold = () => {
+    if (holdTimer.current) {
+      clearTimeout(holdTimer.current);
+      holdTimer.current = null;
+    }
+  };
+
+  return (
+    <div
+      className="relative h-full w-full select-none"
+      onPointerDown={startHold}
+      onPointerUp={cancelHold}
+      onPointerLeave={cancelHold}
+      onPointerCancel={cancelHold}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {view === 'image' ? (
+          <motion.div
+            key="image"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={reward.content}
+              alt={reward.description}
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="description"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="bg-card text-card-foreground absolute inset-0 overflow-y-auto p-4"
+          >
+            <p className="text-sm leading-relaxed">{reward.description}</p>
+            <p className="text-muted-foreground mt-3 text-xs">
+              {formatDistanceToNow(new Date(reward.created_at), { addSuffix: true })}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { useIsActorSelf } from '../../hooks/useIsActorSelf';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { differenceInMinutes } from 'date-fns';
+import { EmptyState } from '@/components/shared';
 
 interface ChatHistoryProps {
   messages: WireMessage[];
@@ -23,12 +24,12 @@ const TypingIndicator = () => (
     exit={{ opacity: 0, y: -10 }}
     className="mr-auto flex max-w-[85%] gap-3"
   >
-    <div className="bg-secondary text-on-primary rounded-2xl rounded-bl-md px-4 py-2">
+    <div className="bg-secondary text-foreground rounded-2xl rounded-bl-md px-4 py-2">
       <div className="flex items-center gap-1">
         {[0, 0.2, 0.4].map((delay) => (
           <motion.div
             key={delay}
-            className="bg-on-primary h-2 w-2 rounded-full"
+            className="bg-muted-foreground h-2 w-2 rounded-full"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 1, repeat: Infinity, delay }}
           />
@@ -92,7 +93,7 @@ export const ChatHistory = ({
   if (isLoading) {
     return (
       <div className={cn('flex h-full items-center justify-center', className)}>
-        <div className="border-accent h-6 w-6 animate-spin rounded-full border-2 border-t-transparent" />
+        <div className="border-primary h-6 w-6 animate-spin rounded-full border-2 border-t-transparent" />
       </div>
     );
   }
@@ -106,7 +107,7 @@ export const ChatHistory = ({
       >
         <div className={cn('flex flex-col gap-4 py-4', messages.length === 0 && 'h-full')}>
           {messages.length === 0 ? (
-            <EmptyState />
+            <EmptyState emoji="💬" title="No messages yet" subtitle="Start the conversation!" />
           ) : (
             messages.map((message, index) => {
               const own = isSelf(message.sender);
@@ -160,11 +161,3 @@ export const ChatHistory = ({
     </div>
   );
 };
-
-const EmptyState = () => (
-  <div className="flex h-full flex-col items-center justify-center p-8 text-center">
-    <div className="mb-4 text-6xl">💭</div>
-    <h2 className="mb-2 text-2xl font-bold">No messages yet</h2>
-    <p className="text-muted-foreground max-w-md">Start the conversation!</p>
-  </div>
-);

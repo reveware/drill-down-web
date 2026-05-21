@@ -94,7 +94,7 @@ export const AffinityTimelineFilter = ({
             onClick={() => onValueChange(option.value)}
             className={`text-lg ${
               selectedValue === option.value
-                ? 'bg-surface-50 text-accent font-medium'
+                ? 'bg-card-50 text-primary font-medium'
                 : 'text-foreground'
             }`}
           >

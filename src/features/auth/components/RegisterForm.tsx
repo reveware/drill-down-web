@@ -2,12 +2,10 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Eye, EyeOff } from '@/components/shared/Icons';
 import Link from 'next/link';
 import { RegisterFormSchema, RegisterDto } from '@/types/auth';
-import { AvatarUpload } from '@/components/shared';
-import { getInitials } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -32,32 +30,21 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
   const form = useForm({
     resolver: zodResolver(RegisterFormSchema),
     mode: 'onChange',
+    defaultValues: {
+      username: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      date_of_birth: '',
+      tagline: '',
+    },
   });
-
-  const firstName = form.watch('first_name');
-  const lastName = form.watch('last_name');
-  const initials = useMemo(() => getInitials([firstName, lastName]), [firstName, lastName]);
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4"
-        encType="multipart/form-data"
-      >
-        <FormField
-          control={form.control}
-          name="avatar"
-          render={({ field }) => (
-            <FormItem className="flex flex-col items-center space-y-2">
-              <AvatarUpload value={field.value} onChange={field.onChange} initials={initials} />
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
-
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2" autoComplete="on">
         <FormField
           control={form.control}
           name="username"
@@ -67,14 +54,12 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage className="text-xs font-light" />
             </FormItem>
           )}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2 md:gap-4">
           <FormField
             control={form.control}
             name="first_name"
@@ -116,14 +101,12 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage className="text-xs font-light" />
             </FormItem>
           )}
         />
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4">
           <FormField
             control={form.control}
             name="password"
@@ -142,7 +125,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                       type="button"
                       size="sm"
                       variant="ghost"
-                      className="bg-input text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
+                      className="bg-muted text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -174,7 +157,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                       type="button"
                       size="sm"
                       variant="ghost"
-                      className="bg-input text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
+                      className="bg-muted text-muted-foreground absolute top-0 right-0 h-full rounded-l-none rounded-r-md"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? (
@@ -193,7 +176,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4">
           <FormField
             control={form.control}
             name="date_of_birth"
@@ -226,13 +209,17 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
           />
         </div>
 
-        <Button type="submit" className="w-full" disabled={!form.formState.isValid || isLoading}>
+        <Button
+          type="submit"
+          className="mt-4 w-full"
+          disabled={!form.formState.isValid || isLoading}
+        >
           {isLoading ? 'Creating Account...' : 'Create Account'}
         </Button>
 
         <div className="mt-4 text-center text-sm">
-          <span className="text-muted">Already have an account? </span>
-          <span className="text-info font-medium">
+          <span className="text-muted-foreground">Already have an account? </span>
+          <span className="text-primary font-medium">
             <Link href="/login">Sign in</Link>
           </span>
         </div>

@@ -4,6 +4,7 @@ import { usePostLikes } from '@/features/likes/hooks/usePostLikes';
 import { Feed } from '@/components/shared/Feed/Feed';
 import { UserItem } from '@/features/user/components/UserItem/UserItem';
 import { UserItemSkeleton } from '@/features/user/components/UserItem/UserItemSkeleton';
+import { EmptyState } from '@/components/shared';
 
 interface PostLikesFeedProps {
   postId: string;
@@ -23,15 +24,9 @@ export const PostLikesFeed: React.FC<PostLikesFeedProps> = ({ postId }) => {
       fetchNextPage={fetchNextPage}
       renderItem={(user) => <UserItem key={user.id} user={user} />}
       renderSkeleton={() => <UserItemSkeleton />}
-      renderEmptyState={() => <EmptyState />}
+      renderEmptyState={() => (
+        <EmptyState emoji="🥀" title="No Likes Yet" subtitle="Be the first to like this post!" />
+      )}
     />
   );
 };
-
-const EmptyState = () => (
-  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
-    <div className="mb-4 text-6xl">🥀</div>
-    <h2 className="mb-2 text-2xl font-bold">No Likes Yet</h2>
-    <p className="text-muted-foreground max-w-md">Be the first to like this post!</p>
-  </div>
-);

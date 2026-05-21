@@ -37,7 +37,7 @@ export const UserRecommendations: React.FC<UserRecommendationsProps> = ({ userId
   return (
     <Card className="card mx-auto max-w-lg">
       <CardHeader>
-        <CardTitle className="font-title text-lg font-semibold">Recommended users</CardTitle>
+        <CardTitle className="font-sans text-lg font-semibold">Recommended users</CardTitle>
       </CardHeader>
 
       <CardContent className="h-full">
@@ -67,34 +67,30 @@ const UserRecommendationCard: React.FC<{
   const { user, reason, match } = userRecommendation;
 
   const MatchLabel = () => (
-    <div className="mb-4 self-end">
-      {reason === RecommendationReason.AFFINITY ? (
-        <div className="text-accent flex items-center gap-2 text-xs font-extrabold">
+    <div className="mb-4 flex h-5 items-center self-end text-xs font-extrabold">
+      {reason === RecommendationReason.AFFINITY && (
+        <span className="text-primary flex items-center gap-2">
           <Dna className="mr-1 h-4 w-4" />
           {match?.overall || 0}%
-        </div>
-      ) : (
-        <div className="h-6 w-16"></div> // Placeholder to maintain layout
+        </span>
       )}
     </div>
   );
 
   return (
-    <div className="card flex w-full max-w-48 flex-col items-center rounded-lg p-3 shadow-sm">
+    <div className="bg-popover text-popover-foreground border-border flex w-full max-w-48 flex-col items-center rounded-lg border p-3">
       <MatchLabel />
 
       <UserAvatar {...userAvatarProps(user)} className="mb-2 h-12 w-12 rounded-full" />
 
       <Link href={`/user/${user.id}`}>
-        <div className="text-on-surface text-foreground text-center text-sm font-bold">
-          @{user.username}
-        </div>
-        <div className="text-muted mb-2 text-center text-xs">
+        <div className="text-foreground text-center text-sm font-bold">@{user.username}</div>
+        <div className="text-muted-foreground mb-2 text-center text-xs">
           {user.first_name} {user.last_name}
         </div>
       </Link>
 
-      <div className="text-accent mb-3 text-center text-xs font-medium tracking-widest uppercase">
+      <div className="text-primary mb-3 text-center text-xs font-medium tracking-widest uppercase">
         {reason}
       </div>
 

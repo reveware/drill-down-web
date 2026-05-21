@@ -11,7 +11,9 @@ export const RewardPendingCard = () => {
           <div className="text-muted-foreground text-sm font-medium">
             Your reward is being generated
           </div>
-          <div className="text-muted text-xs">Personalized assets can take a little while.</div>
+          <div className="text-muted-foreground text-xs">
+            Personalized assets can take a little while.
+          </div>
         </div>
       </CardContent>
     </Card>

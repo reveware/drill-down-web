@@ -50,7 +50,7 @@ export const TagInput: React.FC<TagInputProps> = ({ value, onChange, className }
     <div className="relative w-full">
       <div
         className={cn(
-          'border-input flex flex-wrap items-center gap-2 rounded-md border bg-transparent px-2 py-1 transition-all',
+          'border-input dark:bg-input/30 flex min-h-9 w-full flex-wrap items-center gap-2 rounded-md border bg-transparent px-3 py-1 shadow-xs transition-all',
           isFocused && 'border-ring ring-ring/50 ring-2',
           showSuggestions ? 'rounded-b-none' : '',
           className
@@ -73,7 +73,7 @@ export const TagInput: React.FC<TagInputProps> = ({ value, onChange, className }
         <input
           ref={inputRef}
           type="text"
-          className="placeholder:text-input min-w-[60px] flex-1 bg-transparent text-sm outline-none sm:text-base"
+          className="placeholder:text-muted-foreground min-w-[60px] flex-1 bg-transparent text-base outline-none md:text-sm"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -113,7 +113,7 @@ const TagSuggestions = ({ suggestions, onSelect }: TagSuggestionsProps) => {
             e.preventDefault();
             onSelect(tag.name);
           }}
-          className="cursor-pointer px-3 py-2 hover:bg-gray-100"
+          className="hover:bg-accent cursor-pointer px-3 py-2"
         >
           #{tag.name}
         </li>

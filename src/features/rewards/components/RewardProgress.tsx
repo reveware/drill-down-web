@@ -42,7 +42,7 @@ export const RewardProgress = () => {
             <h3 className="text-lg font-semibold">Next Reward</h3>
 
             <div className="space-y-2">
-              <div className="text-muted flex items-center justify-between text-xs">
+              <div className="text-muted-foreground flex items-center justify-between text-xs">
                 <span>{getProgressMessage()}</span>
                 <span>
                   {displayProgress}/{POSTS_PER_REWARD} posts

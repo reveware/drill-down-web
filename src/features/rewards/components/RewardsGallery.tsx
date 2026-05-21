@@ -3,20 +3,11 @@ import { useRewards } from '../hooks/useRewards';
 import { RewardCard } from './RewardCard';
 import { RewardCardSkeleton } from './RewardCardSkeleton';
 import { MasonryGallery } from '@/components/shared/MasonryGallery';
+import { EmptyState } from '@/components/shared';
 import { UserReward } from '@/types/reward';
 
 export const RewardsGallery = () => {
   const { rewards, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } = useRewards();
-
-  const EmptyState = () => (
-    <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
-      <div className="mb-4 text-6xl">🎁</div>
-      <h2 className="mb-2 text-2xl font-bold">No Rewards Yet</h2>
-      <p className="text-muted-foreground max-w-md">
-        Keep engaging with the platform to earn rewards.
-      </p>
-    </div>
-  );
 
   return (
     <MasonryGallery<UserReward>
@@ -27,7 +18,13 @@ export const RewardsGallery = () => {
       fetchNextPage={fetchNextPage}
       renderItem={(reward) => <RewardCard key={reward.id} reward={reward} />}
       renderSkeleton={() => <RewardCardSkeleton />}
-      renderEmptyState={() => <EmptyState />}
+      renderEmptyState={() => (
+        <EmptyState
+          emoji="🎁"
+          title="No Rewards Yet"
+          subtitle="Keep engaging with the platform to earn rewards."
+        />
+      )}
     />
   );
 };

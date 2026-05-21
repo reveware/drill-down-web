@@ -71,7 +71,7 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
               <TooltipTrigger asChild>
                 <motion.button
                   onClick={() => handleActionClick(action)}
-                  className={`bg-secondary flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md ${action.disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+                  className={`bg-secondary text-secondary-foreground flex h-12 w-12 items-center justify-center rounded-full shadow-md ${action.disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                   initial={{ opacity: 0, y: 12 }}
                   animate={actionButtonAnimation.animate(index)}
                   exit={actionButtonAnimation.exit}
@@ -100,18 +100,16 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
         <motion.button
           onClick={() => setIsExpanded(!isExpanded)}
           className={cn(
-            'h-14 w-14 rounded-full text-white shadow-lg',
+            'h-14 w-14 rounded-full',
+            'bg-primary text-primary glow-md',
             'flex items-center justify-center',
-
-            'hover:cursor-pointer',
-            'from-accent/90 to-primary/90 bg-gradient-to-r',
-            'bg-[length:200%_200%] bg-[position:0%_50%]'
+            'hover:cursor-pointer'
           )}
           animate={mainButtonAnimation.animate(isExpanded)}
           transition={mainButtonAnimation.transition}
           whileHover={mainButtonAnimation.whileHover}
         >
-          <Bot className="text-on-primary" size={40} />
+          <Bot className="text-primary-foreground" size={40} />
         </motion.button>
       </div>
     </div>

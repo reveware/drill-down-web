@@ -23,7 +23,7 @@ export const SsoActions = ({ className }: SsoActionsProps) => {
     <div className={cn('mt-4 space-y-4', className)}>
       <div className="flex items-center gap-3">
         <span className="bg-border h-px flex-1" />
-        <span className="text-muted text-xs">or</span>
+        <span className="text-muted-foreground text-xs">or</span>
         <span className="bg-border h-px flex-1" />
       </div>
 

@@ -21,7 +21,7 @@ export default function HomePage() {
         <PostFeed />
       </section>
 
-      <aside className="border-border order-1 flex flex-col items-center gap-8 border-l-1 px-2 py-4 lg:order-2 lg:col-span-3 lg:p-4">
+      <aside className="border-border order-1 flex flex-col items-center gap-6 border-l-1 px-2 py-4 lg:order-2 lg:col-span-3 lg:p-4">
         <UpcomingTimebomb timebomb={mockTimeBomb} />
         <RecommendedImages userId={user.id} />
         <UserRecommendations userId={user.id} />

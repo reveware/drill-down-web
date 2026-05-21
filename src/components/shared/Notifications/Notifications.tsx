@@ -24,7 +24,7 @@ export const Notifications = ({ className, size = 24 }: NotificationsProps) => {
     >
       <Bell size={size} />
       {pendingCount > 0 && (
-        <span className="bg-accent text-accent-foreground absolute -top-1 -right-1 flex h-5 w-5 min-w-[20px] items-center justify-center rounded-full text-xs font-bold">
+        <span className="bg-destructive absolute -top-1 -right-1 flex h-5 w-5 min-w-[20px] items-center justify-center rounded-full text-xs font-bold text-white">
           {pendingCount > 99 ? '99+' : pendingCount}
         </span>
       )}

@@ -10,35 +10,15 @@
   }
 }
 
-@keyframes neon-pulse {
-  0% {
-    box-shadow:
-      0 0 1px #ec4899,
-      0 0 4px #f472b6;
-  }
-
-  25% {
-    box-shadow:
-      0 0 2px #8b5cf6,
-      0 0 6px #c084fc;
-  }
-
-  50% {
-    box-shadow:
-      0 0 1px #22d3ee,
-      0 0 4px #67e8f9;
-  }
-
-  75% {
-    box-shadow:
-      0 0 2px #facc15,
-      0 0 6px #fde047;
-  }
-
+/* Animates opacity only on the ::after layer 
+   The "breathing" comes purely from glow intensity, not from shape change. */
+@keyframes pulse-glow {
+  0%,
   100% {
-    box-shadow:
-      0 0 1px #ec4899,
-      0 0 4px #f472b6;
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.5;
   }
 }
 
@@ -46,8 +26,20 @@
   .animate-fade-in-up {
     animation: fade-in-up 0.4s ease-out forwards;
   }
-
-  .animate-neon-pulse {
-    animation: neon-pulse 1.5s ease-in-out infinite;
+  .glow-pulse {
+    position: relative;
+    border-color: rgb(from var(--glow-color, currentColor) r g b / 0.35);
+  }
+  .glow-pulse::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+      0 0 4px rgb(from var(--glow-color, currentColor) r g b / 0.5),
+      0 0 14px rgb(from var(--glow-color, currentColor) r g b / 0.35);
+    pointer-events: none;
+    will-change: opacity;
+    animation: pulse-glow 6s ease-in-out infinite;
   }
 }

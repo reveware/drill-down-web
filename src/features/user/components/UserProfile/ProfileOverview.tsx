@@ -18,10 +18,10 @@ export const ProfileOverview = ({ user }: ProfileOverviewProps) => {
           <ProfileDetails user={user} />
           <ProfileActions user={user} />
           <div>
-            <p className="text-muted text-xs">
+            <p className="text-muted-foreground text-xs">
               Joined: {formatDistanceToNow(new Date(user.created_at), { addSuffix: true })}
             </p>
-            <p className="text-muted text-xs">
+            <p className="text-muted-foreground text-xs">
               Last seen: {formatDistanceToNow(new Date(user.last_seen), { addSuffix: true })}
             </p>
           </div>
@@ -45,17 +45,17 @@ const UserDetails = ({ user }: { user: UserDetail }) => {
             priority
           />
         ) : (
-          <div className="bg-secondary text-on-primary font-title flex h-full w-full items-center justify-center text-4xl">
+          <div className="bg-secondary text-foreground flex h-full w-full items-center justify-center font-sans text-4xl">
             {getInitials([user.first_name, user.last_name]) || getInitials([user.username])}
           </div>
         )}
       </div>
       <div className="px-4">
-        <h1 className="font-title text-foreground text-2xl font-bold">
+        <h1 className="text-foreground font-sans text-2xl font-bold">
           {user.first_name} {user.last_name}
         </h1>
-        <p className="text-accent text-lg">@{user.username}</p>
-        {user.tagline && <p className="text-muted mt-2 text-sm">{user.tagline}</p>}
+        <p className="text-primary text-lg">@{user.username}</p>
+        {user.tagline && <p className="text-muted-foreground mt-2 text-sm">{user.tagline}</p>}
       </div>
     </div>
   );

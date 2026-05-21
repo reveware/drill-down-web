@@ -95,7 +95,7 @@ export const ChatInput = ({
           'transition-all duration-200',
           disabled || !message.trim()
             ? 'bg-muted text-muted-foreground scale-95'
-            : 'bg-accent hover:bg-accent/90 scale-100'
+            : 'bg-primary hover:bg-primary/90 scale-100'
         )}
       >
         <Send className="h-5 w-5" />

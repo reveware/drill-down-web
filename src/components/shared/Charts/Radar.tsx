@@ -24,7 +24,7 @@ export const Radar = ({
   keys,
   indexBy,
   maxValue = 100,
-  colors = ['#e620a6', '#07d9c4', '#f5ae48'],
+  colors = ['#b084f5', '#00e5a0', '#f5a623'],
   sliceTooltip,
   margin = { top: 50, right: 50, bottom: 50, left: 50 },
 }: RadarProps) => {

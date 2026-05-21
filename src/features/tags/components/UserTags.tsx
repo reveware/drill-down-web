@@ -10,7 +10,7 @@ export const UserTags = ({ userId }: { userId: string }) => {
   return (
     <Card className="card">
       <CardHeader>
-        <CardTitle className="font-title text-lg font-semibold">Popular Tags</CardTitle>
+        <CardTitle className="font-sans text-lg font-semibold">Popular Tags</CardTitle>
       </CardHeader>
       <CardContent className="px-4 py-2">
         {isLoading && (
@@ -41,8 +41,8 @@ export const TagCloud = ({ tags }: { tags: TagCount[] }) => {
             <span
               key={tag.tag}
               className={cn(
-                'font-title text-foreground inline-block cursor-pointer transition-transform select-none',
-                'hover:text-accent animate-fade-in-up hover:scale-110'
+                'text-foreground inline-block cursor-pointer font-sans transition-transform select-none',
+                'hover:text-primary animate-fade-in-up hover:scale-110'
               )}
               style={{
                 fontSize: `${fontSize}px`,

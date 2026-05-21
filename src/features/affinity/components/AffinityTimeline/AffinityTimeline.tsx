@@ -9,23 +9,13 @@ import { AreaBump } from '@/components/shared/Charts/AreaBump';
 import { AffinityTimelineTooltip } from './AffinityTimelineTooltip';
 import { AffinityTimelineFilter } from './AffinityTimelineFilter';
 import { format } from 'date-fns';
+import { EmptyState } from '@/components/shared';
+import { Spinner } from '@/components/shared';
 
 const LoadingState = () => (
-  <div className="flex h-full items-center justify-center">
-    <div className="text-center">
-      <div className="mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-b-2 border-blue-600"></div>
-      <p className="text-gray-500">Loading timeline...</p>
-    </div>
-  </div>
-);
-
-const EmptyState = () => (
-  <div className="flex min-h-4/5 flex-col items-center justify-center p-8 text-center">
-    <div className="mb-4 text-6xl">📉</div>
-    <h2 className="mb-2 text-2xl font-bold">No timeline data available</h2>
-    <p className="text-muted-foreground max-w-md">
-      Try selecting a different date range or affinity type
-    </p>
+  <div className="flex h-full flex-col items-center justify-center">
+    <Spinner />
+    <p className="text-muted-foreground">Loading timeline...</p>
   </div>
 );
 
@@ -79,7 +69,7 @@ export const AffinityTimeline = ({ userId, className = '' }: AffinityTimelinePro
   return (
     <div className={`card flex h-full w-full flex-col gap-2 rounded-lg p-4 ${className}`}>
       <div className="flex justify-between px-4">
-        <div className="font-xl font-title font-semibold">Timeline</div>
+        <div className="font-xl font-sans font-semibold">Timeline</div>
         <AffinityTimelineFilter
           selectedType={selectedType}
           onTypeChange={setSelectedType}
@@ -93,7 +83,11 @@ export const AffinityTimeline = ({ userId, className = '' }: AffinityTimelinePro
         {isLoading ? (
           <LoadingState />
         ) : !timelineData?.buckets || timelineData.buckets.length === 0 ? (
-          <EmptyState />
+          <EmptyState
+            emoji="📉"
+            title="No timeline data available"
+            subtitle="Try selecting a different date range or affinity type"
+          />
         ) : (
           <div className="m-0 h-full w-full p-4">
             <AreaBump

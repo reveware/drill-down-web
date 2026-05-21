@@ -1,5 +1,5 @@
 import { useAffinityMatch } from '@/features/affinity';
-import { Spinner } from '@/components/shared';
+import { EmptyState, Spinner } from '@/components/shared';
 import { UserAffinityScore, AffinityOverlap, AffinityRadar } from '@/features/affinity';
 
 export const AffinityMatch = ({ userId }: { userId: string }) => {
@@ -10,7 +10,7 @@ export const AffinityMatch = ({ userId }: { userId: string }) => {
       <div className="flex min-h-[60vh] items-center justify-center p-6">
         <div className="text-center">
           <Spinner />
-          <p className="text-gray-600">Loading affinity match data...</p>
+          <p className="text-muted-foreground">Loading affinity match data...</p>
         </div>
       </div>
     );
@@ -18,23 +18,23 @@ export const AffinityMatch = ({ userId }: { userId: string }) => {
 
   if (error) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center p-6">
-        <div className="text-center">
-          <h2 className="mb-2 text-xl font-semibold text-red-600">Error Loading Match Data</h2>
-          <p className="text-gray-600">{error.message}</p>
-        </div>
-      </div>
+      <EmptyState
+        className="min-h-[60vh]"
+        emoji="⚠️"
+        title="Error Loading Match Data"
+        subtitle={error.message}
+      />
     );
   }
 
   if (!matchData) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center p-6">
-        <div className="text-center">
-          <h2 className="mb-2 text-xl font-semibold text-gray-600">No Match Data Found</h2>
-          <p className="text-gray-500">Unable to load affinity match information.</p>
-        </div>
-      </div>
+      <EmptyState
+        className="min-h-[60vh]"
+        emoji="🧬"
+        title="No Match Data Found"
+        subtitle="Unable to load affinity match information."
+      />
     );
   }
 

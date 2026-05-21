@@ -1,20 +1,10 @@
 @import 'tailwindcss';
-@import './animation.css';
-@import './utilities.css';
 @import './theme.css';
+@import './utilities.css';
+@import './animation.css';
 
 html {
-  color-scheme: light;
-}
-
-html.dark {
   color-scheme: dark;
-}
-
-body {
-  color: var(--color-foreground);
-  background: var(--color-background);
-  font-family: var(--font-sans);
 }
 
 * {

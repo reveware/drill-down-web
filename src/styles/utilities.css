@@ -1,25 +1,35 @@
 @layer utilities {
-  .neon-text {
-    @apply text-accent;
-    text-shadow:
-      0 0 2px var(--color-accent),
-      0 0 10px var(--color-accent);
+  /*
+    Glow utilities — soft halo around an element.
+    Color resolves from `--glow-color` first, then `currentColor`.
+      <div className="text-destructive glow-sm">…</div>             // red halo
+      <div className="glow-md [--glow-color:var(--success)]">…</div> // green halo
+    Sizes: sm (subtle) → xl (loud). Use .glow-pulse for the breathing variant.
+  */
+  .glow-sm {
+    box-shadow: var(--glow-sm);
+  }
+  .glow-md {
+    box-shadow: var(--glow-md);
+  }
+  .glow-lg {
+    box-shadow: var(--glow-lg);
+  }
+  .glow-xl {
+    box-shadow: var(--glow-xl);
   }
 
-  .neon-border {
-    @apply rounded-xl border border-transparent transition-all;
-    animation: neon-pulse 4s infinite ease-in-out;
-  }
-
+  /* Page-on-page card, elevated surface, no border, no shadow */
   .card {
-    @apply bg-surface text-foreground border-border w-full rounded-xl border-1 shadow-lg;
+    @apply bg-card text-card-foreground w-full rounded-lg;
   }
 
   .photo {
-    @apply transition-transform duration-200 hover:scale-105 hover:opacity-80;
+    @apply transition duration-150;
   }
 
   .liked-heart {
-    fill: var(--color-accent);
+    fill: var(--destructive);
+    color: var(--destructive);
   }
 }

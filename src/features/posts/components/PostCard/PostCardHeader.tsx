@@ -33,7 +33,7 @@ export const PostCardHeader = ({ user, createdAt, onDelete }: PostCardHeaderProp
       {user.is_self && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <button className="hover:bg-muted focus:ring-accent rounded-full p-2 focus:ring-2 focus:outline-none">
+            <button className="hover:bg-muted focus:ring-primary rounded-full p-2 focus:ring-2 focus:outline-none">
               <EllipsisVertical className="text-muted-foreground h-5 w-5" />
             </button>
           </DropdownMenuTrigger>
@@ -41,7 +41,7 @@ export const PostCardHeader = ({ user, createdAt, onDelete }: PostCardHeaderProp
             <DropdownMenuItem className="cursor-pointer">
               <div className="flex items-center gap-2">
                 <button className="flex items-center gap-2" onClick={handleDelete}>
-                  <Trash size={20} className="text-on-surface-variant" />
+                  <Trash size={20} className="text-muted-foreground" />
                   <p className="text-sm font-medium">Delete Post</p>
                 </button>
               </div>

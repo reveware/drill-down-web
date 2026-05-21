@@ -75,7 +75,7 @@ export const AreaBump = (props: AreaBumpProps) => {
                   fontSize={12}
                   fontWeight="bold"
                   stroke="var(--color-background)"
-                  fontFamily="var(--font-title)"
+                  fontFamily="var(--font-sans)"
                   strokeWidth={3}
                   paintOrder="stroke"
                   letterSpacing={1.5}

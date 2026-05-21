@@ -2,7 +2,7 @@
 
 import { usePersonaSearch } from '@/features/persona/hooks/usePersonaSearch';
 import { PersonaOverview } from '@/types/persona';
-import { PickerList, PickerRow } from '@/components/shared';
+import { PickerList, PickerRow, EmptyState } from '@/components/shared';
 
 interface PersonaPickerListProps {
   query: string;
@@ -42,13 +42,9 @@ const PersonaRow = ({
 );
 
 const PersonaEmpty = ({ isSearching }: { isSearching: boolean }) => (
-  <div className="flex h-full flex-col items-center justify-center p-8 text-center">
-    <div className="mb-4 text-6xl">{isSearching ? '🔍' : '🤖'}</div>
-    <h2 className="mb-2 text-2xl font-bold">
-      {isSearching ? 'No matches' : 'No personas available'}
-    </h2>
-    <p className="text-muted-foreground max-w-md">
-      {isSearching ? 'Try a different name.' : 'No active personas right now. Check back later.'}
-    </p>
-  </div>
+  <EmptyState
+    emoji={isSearching ? '🔍' : '🤖'}
+    title={isSearching ? 'No matches' : 'No personas available'}
+    subtitle={isSearching ? 'Try a different name.' : 'No active personas. Check back later.'}
+  />
 );

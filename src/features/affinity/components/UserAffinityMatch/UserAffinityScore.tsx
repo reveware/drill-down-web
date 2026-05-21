@@ -16,14 +16,14 @@ export function UserAffinityScore({ matchData }: UserAffinityScoreProps) {
         <CardContent className="flex flex-col gap-4">
           <div className="flex justify-between">
             <div className="flex flex-col gap-1">
-              <span className="text-foreground font-title text-xl font-semibold">
+              <span className="text-foreground font-sans text-xl font-semibold">
                 Affinity Match
               </span>
 
-              <span className="text-muted text-sm">Overall compatibility score</span>
+              <span className="text-muted-foreground text-sm">Overall compatibility score</span>
             </div>
 
-            <span className="text-accent flex items-center gap-2 text-3xl font-bold tracking-widest">
+            <span className="text-primary flex items-center gap-2 text-3xl font-bold tracking-widest">
               <Dna />
               {matchData.score.overall}%
             </span>

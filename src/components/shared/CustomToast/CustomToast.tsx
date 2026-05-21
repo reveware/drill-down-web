@@ -39,11 +39,11 @@ export function CustomToast({
       className={cn(
         'flex items-center',
         'max-w-md min-w-[300px]',
-        'bg-primary',
+        'bg-popover',
         'backdrop-blur-sm',
         'rounded-md',
         'shadow-md',
-        'text-on-primary',
+        'text-popover-foreground',
         'p-1',
         'border-border border-1'
       )}

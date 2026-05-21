@@ -28,7 +28,7 @@ export const AffinityTimelineTooltip = (props: {
           console.log('aksjdalskda');
           onDismiss();
         }}
-        className="absolute top-2 right-2 rounded hover:bg-gray-100"
+        className="hover:bg-accent absolute top-2 right-2 rounded"
       >
         <X size={12} />
       </button>

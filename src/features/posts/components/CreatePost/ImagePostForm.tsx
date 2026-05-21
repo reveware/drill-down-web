@@ -117,7 +117,7 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
               <FormControl>
                 <Textarea
                   placeholder="Add a description..."
-                  className="w-full resize-none text-sm sm:text-base"
+                  className="w-full resize-none"
                   {...field}
                 />
               </FormControl>
@@ -167,7 +167,7 @@ const Preview = ({
       <button
         type="button"
         onClick={triggerFileInput}
-        className="hover:text-accent cursor-pointer underline underline-offset-2"
+        className="hover:text-primary cursor-pointer underline underline-offset-2"
       >
         Change
       </button>
@@ -211,7 +211,7 @@ const UploadArea = ({
     )}
     onClick={triggerFileInput}
   >
-    <div className="text-muted flex flex-col items-center">
+    <div className="text-muted-foreground flex flex-col items-center">
       <Plus className="h-10 w-10" />
       <p className="mt-2 text-sm">Upload photos</p>
     </div>

@@ -1,19 +1,19 @@
 'use client';
 import React from 'react';
 import '../styles/globals.css';
-import { Orbitron, Plus_Jakarta_Sans, JetBrains_Mono, Charm } from 'next/font/google';
+import { DM_Sans, JetBrains_Mono, Share_Tech_Mono, Orbitron } from 'next/font/google';
 import { AppProviders } from '@/components/providers/AppProviders';
 import { Toaster } from '@/components/ui/sonner';
 
-const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans' });
-const title = Orbitron({ subsets: ['latin'], variable: '--font-title' });
+const brand = Orbitron({ subsets: ['latin'], variable: '--font-brand' });
+const sans = DM_Sans({ subsets: ['latin'], variable: '--font-sans' });
 const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
-const cursive = Charm({ subsets: ['latin'], variable: '--font-cursive', weight: ['400', '700'] });
+const clock = Share_Tech_Mono({ subsets: ['latin'], weight: '400', variable: '--font-clock' });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${sans.variable} ${title.variable} ${mono.variable} ${cursive.variable}`}>
+      <body className={`${sans.variable} ${mono.variable} ${clock.variable} ${brand.variable}`}>
         <AppProviders>
           {children}
           <Toaster position="top-right" />
