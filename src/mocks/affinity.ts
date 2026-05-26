@@ -4,6 +4,7 @@ import {
   AffinityType,
   Affinity,
   AffinityTimeline,
+  AffinityTimelineRequest,
   TimelineInterval,
   AffinityTimelineBucket,
 } from '@/types/affinity';
@@ -129,12 +130,7 @@ export const mockFetchAffinityMatch = async (userId: string): Promise<UserAffini
 
 export const mockFetchAffinityTimeline = async (
   userId: string,
-  params?: {
-    type?: AffinityType;
-    start_date?: string;
-    end_date?: string;
-    interval?: TimelineInterval;
-  }
+  params?: AffinityTimelineRequest
 ): Promise<AffinityTimeline> => {
   console.log('mockFetchAffinityTimeline', userId, params);
   await sleep(3);

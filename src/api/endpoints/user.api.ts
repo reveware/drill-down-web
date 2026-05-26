@@ -2,7 +2,13 @@ import { apiClient } from '../client';
 
 import { UserDetail, UserOverview } from '@/types/user';
 import { PaginatedResponse } from '@/types/pagination';
-import { mockCurrentUser, mockFetchTags, mockFetchUser, mockUpdateUser } from '@/mocks/user';
+import {
+  mockCurrentUser,
+  mockFetchTags,
+  mockFetchUser,
+  mockSearchUsers,
+  mockUpdateUser,
+} from '@/mocks/user';
 import { TagCount } from '@/types/tag';
 import { UpdateUserDto } from '@/types/user';
 import { USE_MOCKS } from '../constants';
@@ -65,6 +71,9 @@ export const UserApi = {
   },
 
   searchUsers: async (params: SearchUsersParams): Promise<PaginatedResponse<UserOverview>> => {
+    if (USE_MOCKS) {
+      return mockSearchUsers(params);
+    }
     return (await apiClient.get<PaginatedResponse<UserOverview>>('/users', { params })).data;
   },
 };

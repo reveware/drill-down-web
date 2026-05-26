@@ -11,7 +11,8 @@
 }
 
 /* Animates opacity only on the ::after layer 
-   The "breathing" comes purely from glow intensity, not from shape change. */
+   The "breathing" comes purely from glow intensity, not from shape change. 
+*/
 @keyframes pulse-glow {
   0%,
   100% {

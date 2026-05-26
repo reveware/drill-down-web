@@ -1,6 +1,8 @@
 import { sleep } from '@/lib/utils';
-import { UserDetail, UserOverview, UserRole } from '@/types/user';
+import { UpdateUserDto, UserDetail, UserOverview, UserRole } from '@/types/user';
+import { PaginatedResponse } from '@/types/pagination';
 import { TagCount } from '@/types/tag';
+import { SearchUsersParams } from '@/api/endpoints/user.api';
 
 export const mockUser: UserOverview = {
   id: '1',
@@ -134,9 +136,7 @@ export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
 
 export const mockUpdateUser = async (
   userId: string,
-  payload: Partial<
-    Pick<UserOverview, 'username' | 'first_name' | 'last_name' | 'date_of_birth' | 'tagline'>
-  >
+  payload: Omit<UpdateUserDto, 'avatar'>
 ): Promise<UserDetail> => {
   console.log('mockUpdateUser', userId, payload);
   await sleep(1);
@@ -150,6 +150,40 @@ export const mockUpdateUser = async (
     following_count: 0,
     created_locked_posts: 0,
     received_locked_posts: 0,
+  };
+};
+
+const mockUsers: UserOverview[] = [mockUser, mockAdmin, mockPrivateUser, mockFollowedUser];
+
+export const mockSearchUsers = async (
+  params: SearchUsersParams
+): Promise<PaginatedResponse<UserOverview>> => {
+  await sleep(150);
+
+  const { query = '', is_following, is_follower, is_mutual, page = 1, page_size = 25 } = params;
+
+  const filtered = mockUsers.filter((u) => {
+    const matchesQuery = query
+      ? u.username.toLowerCase().includes(query.toLowerCase()) ||
+        `${u.first_name} ${u.last_name}`.toLowerCase().includes(query.toLowerCase())
+      : true;
+    const matchesFollowing = is_following === undefined ? true : u.is_following === is_following;
+    const matchesFollower = is_follower === undefined ? true : u.is_follower === is_follower;
+    const matchesMutual = is_mutual === undefined ? true : u.is_mutual === is_mutual;
+    return matchesQuery && matchesFollowing && matchesFollower && matchesMutual;
+  });
+
+  const totalItems = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / page_size));
+  const startIndex = (page - 1) * page_size;
+  const items = filtered.slice(startIndex, startIndex + page_size);
+
+  return {
+    data: items,
+    page,
+    total: totalItems,
+    total_pages: totalPages,
+    is_last_page: page >= totalPages,
   };
 };
 
