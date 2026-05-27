@@ -1,8 +1,10 @@
 import * as React from 'react';
+import Link from 'next/link';
 import { ChevronDown, ChevronUp } from '@/components/shared/Icons';
+import { PostTag } from '@/types/post';
 
 interface TagListProps {
-  tags: string[];
+  tags: PostTag[];
 }
 
 export const TagList: React.FC<TagListProps> = ({ tags }) => {
@@ -17,12 +19,13 @@ export const TagList: React.FC<TagListProps> = ({ tags }) => {
   return (
     <div className="flex w-full flex-wrap gap-2 p-1">
       {visible.map((tag) => (
-        <span
-          key={tag}
+        <Link
+          key={tag.slug}
+          href={`/posts/search?tags=${encodeURIComponent(tag.slug)}`}
           className="text-muted-foreground cursor-pointer text-xs font-light tracking-wide hover:underline"
         >
-          #{tag}
-        </span>
+          #{tag.name}
+        </Link>
       ))}
 
       {hiddenCount > 0 && (

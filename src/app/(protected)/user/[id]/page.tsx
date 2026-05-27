@@ -1,6 +1,6 @@
 'use client';
 import { useParams } from 'next/navigation';
-import { ProfileOverview, UserTags, useUserProfile, ProfileContent } from '@/features/user';
+import { ProfileOverview, useUserProfile, ProfileContent } from '@/features/user';
 import { Spinner } from '@/components/shared';
 
 export default function UserProfilePage() {
@@ -21,28 +21,24 @@ export default function UserProfilePage() {
 
   if (!canViewFullProfile) {
     return (
-      <div className="flex min-h-[60vh] items-center justify-center p-6">
-        <div className="w-full max-w-2xl">
-          <ProfileOverview user={user} />
-        </div>
+      <div className="mx-auto flex h-full w-full max-w-2xl flex-col p-4">
+        <ProfileOverview user={user} />
       </div>
     );
   }
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-4 px-2 py-4">
-      <div className="flex w-full flex-col gap-6 md:hidden">
+    <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 p-4 md:h-full md:min-h-0">
+      <div className="flex w-full flex-col gap-4 md:hidden">
         <ProfileOverview user={user} />
-        <UserTags userId={user.id} />
         <ProfileContent user={user} />
       </div>
 
-      <div className="hidden h-full w-full justify-center gap-6 md:flex">
-        <div className="flex min-w-sm flex-col gap-4">
+      <div className="hidden min-h-0 w-full flex-1 justify-center gap-4 md:flex">
+        <div className="flex min-w-sm flex-col">
           <ProfileOverview user={user} />
-          <UserTags userId={user.id} />
         </div>
-        <div className="flex w-full items-center justify-center">
+        <div className="flex min-h-0 w-full flex-1">
           <ProfileContent user={user} />
         </div>
       </div>

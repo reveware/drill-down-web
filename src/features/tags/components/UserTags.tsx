@@ -1,14 +1,15 @@
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { TagCount } from '@/types/tag';
 import { useUserTags } from '../hooks/useUserTags';
-import { Spinner } from '@/components/shared';
+import { EmptyState, Spinner } from '@/components/shared';
 
 export const UserTags = ({ userId }: { userId: string }) => {
   const { data: tags, isPending: isLoading } = useUserTags(userId);
 
   return (
-    <Card className="card">
+    <Card className="card w-full max-w-lg">
       <CardHeader>
         <CardTitle className="font-sans text-lg font-semibold">Popular Tags</CardTitle>
       </CardHeader>
@@ -18,7 +19,14 @@ export const UserTags = ({ userId }: { userId: string }) => {
             <Spinner />
           </div>
         )}
-        {tags && <TagCloud tags={tags} />}
+        {!isLoading && tags && tags.length > 0 && <TagCloud tags={tags} />}
+        {!isLoading && (!tags || tags.length === 0) && (
+          <EmptyState
+            emoji="🌿"
+            title="No tags yet"
+            subtitle="Your interests will surface here as you post."
+          />
+        )}
       </CardContent>
     </Card>
   );
@@ -38,8 +46,9 @@ export const TagCloud = ({ tags }: { tags: TagCount[] }) => {
           const delay = i * 50; // ms
 
           return (
-            <span
-              key={tag.tag}
+            <Link
+              key={tag.slug}
+              href={`/posts/search?tags=${encodeURIComponent(tag.slug)}`}
               className={cn(
                 'text-foreground inline-block cursor-pointer font-sans transition-transform select-none',
                 'hover:text-primary animate-fade-in-up hover:scale-110'
@@ -51,8 +60,8 @@ export const TagCloud = ({ tags }: { tags: TagCount[] }) => {
                 animationDelay: `${delay}ms`,
               }}
             >
-              #{tag.tag}
-            </span>
+              #{tag.name}
+            </Link>
           );
         })}
       </div>

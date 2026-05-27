@@ -16,7 +16,7 @@ const TOAST_STYLES = {
   },
   error: {
     icon: XCircle,
-    color: 'var(--color-danger)',
+    color: 'var(--color-destructive)',
   },
 } as const;
 

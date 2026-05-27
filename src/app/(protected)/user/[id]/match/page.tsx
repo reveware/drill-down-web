@@ -7,7 +7,7 @@ export default function UserMatchPage() {
   const userId = params.id as string;
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-4 px-2 py-4">
+    <div className="mx-auto flex max-w-7xl flex-col gap-4 p-4">
       <AffinityMatch userId={userId} />
     </div>
   );

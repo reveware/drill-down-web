@@ -189,19 +189,23 @@ export const mockSearchUsers = async (
 
 export const mockFetchTags = async (_: string): Promise<TagCount[]> => {
   await sleep(3);
-  const tags: TagCount[] = [
-    { tag: 'nostalgia', count: 500 },
-    { tag: 'movies', count: 300 },
-    { tag: 'music', count: 1000 },
-    { tag: 'sexy', count: 400 },
-    { tag: 'quotes', count: 600 },
-    { tag: 'illustration', count: 800 },
-    { tag: 'dogs', count: 200 },
-    { tag: 'cats', count: 200 },
-    { tag: 'food', count: 14 },
-    { tag: 'travel', count: 200 },
-    { tag: 'fashion', count: 200 },
-    { tag: 'art', count: 200 },
+  const names: Array<[string, number]> = [
+    ['nostalgia', 500],
+    ['movies', 300],
+    ['music', 1000],
+    ['the legend of zelda', 400],
+    ['quotes', 600],
+    ['illustration', 800],
+    ['dogs', 200],
+    ['cats', 200],
+    ['food', 14],
+    ['travel', 200],
+    ['fashion', 200],
+    ['art', 200],
   ];
-  return tags;
+  return names.map(([name, count]) => ({
+    name,
+    slug: name.toLowerCase().replace(/\s+/g, '-'),
+    count,
+  }));
 };

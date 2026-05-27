@@ -10,7 +10,7 @@ interface ProfileContentProps {
 }
 
 const TabContent = ({ value, children }: { value: string; children: React.ReactNode }) => (
-  <TabsContent value={value} className="bg-muted/10 flex-1 overflow-hidden rounded-lg">
+  <TabsContent value={value} className="bg-background flex-1 overflow-hidden rounded-lg">
     {children}
   </TabsContent>
 );

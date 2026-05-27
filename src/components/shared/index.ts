@@ -7,3 +7,4 @@ export { ModeToggle } from './ModeToggle/ModeToggle';
 export { PickerList } from './PickerList/PickerList';
 export { PickerRow } from './PickerList/PickerRow';
 export { PickerRowSkeleton } from './PickerList/PickerRowSkeleton';
+export { DateOfBirthPicker } from './DateOfBirthPicker/DateOfBirthPicker';

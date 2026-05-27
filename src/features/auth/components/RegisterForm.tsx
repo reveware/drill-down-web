@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Eye, EyeOff } from '@/components/shared/Icons';
 import Link from 'next/link';
 import { RegisterFormSchema, RegisterDto } from '@/types/auth';
+import { DateOfBirthPicker } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -16,7 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { format } from 'date-fns';
 
 interface RegisterFormProps {
   onSubmit: (data: RegisterDto) => void;
@@ -184,7 +184,11 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormItem>
                 <FormLabel>Date of Birth*</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} max={format(new Date(), 'yyyy-MM-dd')} />
+                  <DateOfBirthPicker
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                  />
                 </FormControl>
                 <div className="min-h-[1rem] text-xs font-light">
                   <FormMessage />

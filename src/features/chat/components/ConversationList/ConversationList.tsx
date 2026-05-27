@@ -45,7 +45,7 @@ export const ConversationList = ({
         // Mobile: full width when no active conversation, hidden when viewing one.
         // Desktop: always visible as sidebar.
         activeConversationId ? 'hidden md:flex' : 'flex w-full',
-        'md:w-80'
+        'md:w-100'
       )}
     >
       <div className="flex h-[4.5rem] items-center justify-between border-b px-4">

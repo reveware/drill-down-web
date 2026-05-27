@@ -2,9 +2,8 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
 import { OnboardingFormSchema, OnboardingDto } from '@/types/user';
-import { AvatarUpload } from '@/components/shared';
+import { AvatarUpload, DateOfBirthPicker } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -71,7 +70,11 @@ export const OnboardingForm = ({ onSubmit, isLoading = false }: OnboardingFormPr
             <FormItem>
               <FormLabel>Date of Birth*</FormLabel>
               <FormControl>
-                <Input type="date" max={format(new Date(), 'yyyy-MM-dd')} {...field} />
+                <DateOfBirthPicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                />
               </FormControl>
               <div className="min-h-[1rem] text-xs font-light">
                 <FormMessage />

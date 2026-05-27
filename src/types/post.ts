@@ -6,13 +6,20 @@ export enum PostTypes {
   QUOTE = 'QUOTE',
 }
 
+export const PostTagSchema = z.object({
+  name: z.string(),
+  slug: z.string(),
+});
+
+export type PostTag = z.infer<typeof PostTagSchema>;
+
 const BasePostSchema = z.object({
   id: z.string(),
   author: UserOverviewSchema,
   description: z.string().nullable(),
   like_count: z.number(),
   comment_count: z.number(),
-  tags: z.array(z.string()).min(1, 'At least one tag is required'),
+  tags: z.array(PostTagSchema).min(1, 'At least one tag is required'),
   is_liked: z.boolean(),
   created_at: z.string().datetime(),
   updated_at: z.string().datetime(),

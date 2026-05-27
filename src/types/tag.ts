@@ -1,7 +1,8 @@
 import { z } from 'zod';
 
 export const TagCountSchema = z.object({
-  tag: z.string(),
+  name: z.string(),
+  slug: z.string(),
   count: z.number(),
 });
 

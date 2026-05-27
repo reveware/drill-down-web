@@ -1,8 +1,10 @@
 import { mockUser } from './user';
 import { sleep } from '@/lib/utils';
 import { PaginatedResponse } from '@/types/pagination';
-import { ImagePost, PostOverview, PostTypes } from '@/types/post';
+import { ImagePost, PostOverview, PostTag, PostTypes } from '@/types/post';
 import { QuotePost } from '@/types/post';
+
+const tag = (name: string): PostTag => ({ name, slug: name.toLowerCase().replace(/\s+/g, '-') });
 
 export const imagePost = (id: string, seed?: number): PostOverview => ({
   id,
@@ -10,7 +12,7 @@ export const imagePost = (id: string, seed?: number): PostOverview => ({
   description: 'Lorem ipsum dolor sit amet...',
   like_count: Math.floor(Math.random() * 50) + 1,
   comment_count: Math.floor(Math.random() * 20) + 1,
-  tags: ['random', 'tag', 'another tag'],
+  tags: [tag('random'), tag('tag'), tag('another tag')],
   type: PostTypes.IMAGE,
   images: [
     {
@@ -36,15 +38,15 @@ export const quotePost = (id: string): PostOverview => ({
   like_count: Math.floor(Math.random() * 30) + 1,
   comment_count: Math.floor(Math.random() * 10) + 1,
   tags: [
-    'quote',
-    'tag',
-    'another tag',
-    'random',
-    'tag',
-    'another tag',
-    'random',
-    'tag',
-    'another tag',
+    tag('quote'),
+    tag('tag'),
+    tag('another tag'),
+    tag('random'),
+    tag('photography'),
+    tag('travel'),
+    tag('nature'),
+    tag('art'),
+    tag('design'),
   ],
   created_at: '2024-06-01T12:00:00.000Z',
   updated_at: '2024-06-01T12:00:00.000Z',

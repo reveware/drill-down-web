@@ -11,21 +11,12 @@ interface ProfileOverviewProps {
 
 export const ProfileOverview = ({ user }: ProfileOverviewProps) => {
   return (
-    <Card className="card">
-      <CardContent className="p-4">
-        <div className="flex flex-col items-start gap-6">
-          <UserDetails user={user} />
-          <ProfileDetails user={user} />
-          <ProfileActions user={user} />
-          <div>
-            <p className="text-muted-foreground text-xs">
-              Joined: {formatDistanceToNow(new Date(user.created_at), { addSuffix: true })}
-            </p>
-            <p className="text-muted-foreground text-xs">
-              Last seen: {formatDistanceToNow(new Date(user.last_seen), { addSuffix: true })}
-            </p>
-          </div>
-        </div>
+    <Card className="card flex-1">
+      <CardContent className="flex h-full flex-col items-start gap-6 p-4">
+        <UserDetails user={user} />
+        <ProfileDetails user={user} />
+        <ProfileActions user={user} />
+        <ProfileMeta user={user} />
       </CardContent>
     </Card>
   );
@@ -76,6 +67,19 @@ const ProfileDetails = ({ user }: { user: UserDetail }) => {
           <span className="text-xs font-light">{key}</span>
         </div>
       ))}
+    </div>
+  );
+};
+
+const ProfileMeta = ({ user }: { user: UserDetail }) => {
+  return (
+    <div className="mt-auto">
+      <p className="text-muted-foreground text-xs">
+        Joined: {formatDistanceToNow(new Date(user.created_at), { addSuffix: true })}
+      </p>
+      <p className="text-muted-foreground text-xs">
+        Last seen: {formatDistanceToNow(new Date(user.last_seen), { addSuffix: true })}
+      </p>
     </div>
   );
 };

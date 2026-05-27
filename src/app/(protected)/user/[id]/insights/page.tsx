@@ -7,7 +7,7 @@ export default function UserInsightsPage() {
   const userId = params.id as string;
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-4 px-2 py-4">
+    <div className="mx-auto flex max-w-7xl flex-col gap-4 p-4">
       <h2 className="text-md font-sans text-2xl font-bold">Insights</h2>
       <p className="text-muted-foreground text-sm">Explore your affinity patterns over time.</p>
 
