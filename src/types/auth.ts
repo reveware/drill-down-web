@@ -42,6 +42,24 @@ export const GoogleSsoSchema = z.object({
 
 export type GoogleSsoDto = z.infer<typeof GoogleSsoSchema>;
 
+export const SetPasswordSchema = z
+  .object({
+    old_password: z.string().optional(),
+    new_password: z.string().min(9, 'must be at least 9 characters'),
+    confirm_password: z.string(),
+  })
+  .refine((data) => data.new_password === data.confirm_password, {
+    message: "Passwords don't match",
+    path: ['confirm_password'],
+  });
+
+export type SetPasswordFormDto = z.infer<typeof SetPasswordSchema>;
+
+export interface SetPasswordDto {
+  old_password?: string;
+  new_password: string;
+}
+
 export type RegisterDto = z.infer<typeof RegisterFormSchema>;
 export type CreateUserDto = z.infer<typeof CreateUserDto>;
 export type LoginDto = z.infer<typeof LoginFormSchema>;

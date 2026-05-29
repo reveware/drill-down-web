@@ -9,6 +9,7 @@ import { RegisterFormSchema, RegisterDto } from '@/types/auth';
 import { DateOfBirthPicker } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PASSWORD_PLACEHOLDER } from '@/lib/utils';
 import {
   Form,
   FormControl,
@@ -117,7 +118,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                   <div className="relative">
                     <Input
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="••••••••"
+                      placeholder={PASSWORD_PLACEHOLDER}
                       className="pr-10"
                       {...field}
                     />
@@ -149,7 +150,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                   <div className="relative">
                     <Input
                       type={showConfirmPassword ? 'text' : 'password'}
-                      placeholder="••••••••"
+                      placeholder={PASSWORD_PLACEHOLDER}
                       className="pr-10"
                       {...field}
                     />

@@ -35,6 +35,14 @@ export const UserOverviewSchema = z.object({
 
 export type UserOverview = z.infer<typeof UserOverviewSchema>;
 
+export enum AuthProvider {
+  GOOGLE = 'GOOGLE',
+}
+
+export const AUTH_PROVIDER_LABEL: Record<AuthProvider, string> = {
+  [AuthProvider.GOOGLE]: 'Google',
+};
+
 export const UserDetailSchema = UserOverviewSchema.extend({
   posts_count: z.number(),
   likes_count: z.number(),
@@ -42,11 +50,15 @@ export const UserDetailSchema = UserOverviewSchema.extend({
   following_count: z.number(),
   created_locked_posts: z.number(),
   received_locked_posts: z.number(),
+  has_password: z.boolean(),
+  sso_providers: z.array(z.nativeEnum(AuthProvider)),
 });
 
 export type UserDetail = z.infer<typeof UserDetailSchema>;
 
-export const UpdateUserSchema = UserFieldsSchema.partial();
+export const UpdateUserSchema = UserFieldsSchema.partial().extend({
+  is_private: z.boolean().optional(),
+});
 
 export type UpdateUserDto = z.infer<typeof UpdateUserSchema>;
 

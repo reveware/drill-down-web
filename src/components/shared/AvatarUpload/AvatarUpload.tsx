@@ -14,14 +14,21 @@ interface AvatarUploadProps {
   onChange: (file: File) => void;
   initials?: string;
   currentUrl?: string | null;
+  size?: 'sm' | 'md';
   className?: string;
 }
+
+const SIZE = {
+  md: { avatar: 'h-20 w-20 text-sm', badge: 'p-1.5', icon: 'h-3 w-3' },
+  sm: { avatar: 'h-16 w-16 text-xs', badge: 'p-1', icon: 'h-2.5 w-2.5' },
+};
 
 export const AvatarUpload = ({
   value,
   onChange,
   initials,
   currentUrl,
+  size = 'md',
   className,
 }: AvatarUploadProps) => {
   const inputId = useId();
@@ -47,17 +54,22 @@ export const AvatarUpload = ({
     onChange(file);
   };
 
+  const s = SIZE[size];
+
   return (
     <div className={cn('flex flex-col items-center', className)}>
       <div className="relative">
         <Label htmlFor={inputId} className="block cursor-pointer">
-          <UserAvatar src={src} initials={initials} className="h-20 w-20 text-sm" />
+          <UserAvatar src={src} initials={initials} className={s.avatar} />
         </Label>
         <Label
           htmlFor={inputId}
-          className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full p-1.5 transition-colors"
+          className={cn(
+            'bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full transition-colors',
+            s.badge
+          )}
         >
-          <Upload className="h-3 w-3" />
+          <Upload className={s.icon} />
         </Label>
       </div>
       <Input id={inputId} type="file" accept="image/*" className="hidden" onChange={handleChange} />

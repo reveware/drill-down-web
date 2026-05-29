@@ -8,3 +8,4 @@ export { PickerList } from './PickerList/PickerList';
 export { PickerRow } from './PickerList/PickerRow';
 export { PickerRowSkeleton } from './PickerList/PickerRowSkeleton';
 export { DateOfBirthPicker } from './DateOfBirthPicker/DateOfBirthPicker';
+export { ImageLightbox } from './ImageLightbox/ImageLightbox';

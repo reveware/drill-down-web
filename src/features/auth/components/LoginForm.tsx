@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { LoginFormSchema, LoginDto } from '@/types/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PASSWORD_PLACEHOLDER } from '@/lib/utils';
 
 import {
   Form,
@@ -67,7 +68,7 @@ export const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
                 <div className="relative">
                   <Input
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="••••••••"
+                    placeholder={PASSWORD_PLACEHOLDER}
                     className="pr-10"
                     {...field}
                     autoComplete="current-password"

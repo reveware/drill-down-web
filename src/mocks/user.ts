@@ -1,5 +1,5 @@
 import { sleep } from '@/lib/utils';
-import { UpdateUserDto, UserDetail, UserOverview, UserRole } from '@/types/user';
+import { AuthProvider, UpdateUserDto, UserDetail, UserOverview, UserRole } from '@/types/user';
 import { PaginatedResponse } from '@/types/pagination';
 import { TagCount } from '@/types/tag';
 import { SearchUsersParams } from '@/api/endpoints/user.api';
@@ -106,6 +106,8 @@ export const mockCurrentUser = async (): Promise<UserDetail> => {
     following_count: 0,
     created_locked_posts: 0,
     received_locked_posts: 0,
+    has_password: true,
+    sso_providers: [AuthProvider.GOOGLE],
   };
 };
 
@@ -131,6 +133,8 @@ export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
     following_count,
     created_locked_posts,
     received_locked_posts,
+    has_password: true,
+    sso_providers: [],
   };
 };
 
@@ -150,6 +154,8 @@ export const mockUpdateUser = async (
     following_count: 0,
     created_locked_posts: 0,
     received_locked_posts: 0,
+    has_password: true,
+    sso_providers: [AuthProvider.GOOGLE],
   };
 };
 

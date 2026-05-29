@@ -8,10 +8,12 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import { ChevronLeft, ChevronRight } from '@/components/shared/Icons';
+import { ImageLightbox } from '@/components/shared';
 
 export const ImagePostContent = ({ post }: { post: ImagePost }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
+  const [lightboxOpen, setLightboxOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (!api) return;
@@ -25,23 +27,7 @@ export const ImagePostContent = ({ post }: { post: ImagePost }) => {
   if (!images.length) return null;
 
   const count = images.length;
-
-  if (count === 1) {
-    const { url, meta } = images[0];
-    return (
-      <div className="relative w-full overflow-hidden">
-        <div style={{ aspectRatio: `${meta.width}/${meta.height}` }}>
-          <Image
-            src={url}
-            alt="Post photo"
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </div>
-      </div>
-    );
-  }
+  const active = images[current];
 
   return (
     <div className="relative w-full">
@@ -50,8 +36,9 @@ export const ImagePostContent = ({ post }: { post: ImagePost }) => {
           {images.map((img, idx) => (
             <CarouselItem key={img.url} className={idx === 0 ? 'pl-0' : 'pl-4'}>
               <div
-                className="relative w-full overflow-hidden"
+                className="relative w-full cursor-zoom-in overflow-hidden"
                 style={{ aspectRatio: `${img.meta.width}/${img.meta.height}` }}
+                onClick={() => setLightboxOpen(true)}
               >
                 <Image
                   src={img.url}
@@ -64,9 +51,15 @@ export const ImagePostContent = ({ post }: { post: ImagePost }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <OverlayNavigation api={api} />
+        {count > 1 && <OverlayNavigation api={api} />}
       </Carousel>
-      <OverlayIndicators total={count} current={current} />
+      {count > 1 && <OverlayIndicators total={count} current={current} />}
+      <ImageLightbox
+        open={lightboxOpen}
+        onOpenChange={setLightboxOpen}
+        src={active.url}
+        alt={`Post photo ${current + 1}`}
+      />
     </div>
   );
 };

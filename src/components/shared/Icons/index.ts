@@ -47,4 +47,5 @@ export {
   ExternalLink,
   Send,
   Smile,
+  Settings,
 } from 'lucide-react';
