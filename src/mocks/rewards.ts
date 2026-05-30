@@ -1,6 +1,7 @@
 import { sleep } from '@/lib/utils';
 import { PaginatedResponse } from '@/types/pagination';
 import { UserReward, RewardAssetType } from '@/types/reward';
+import { JobStatus, RewardGeneration } from '@/types/rewardGeneration';
 
 export const generateRewards = (length: number): UserReward[] => {
   const rewards: UserReward[] = [];
@@ -25,7 +26,7 @@ export const generateRewards = (length: number): UserReward[] => {
 
   for (let i = 1; i <= length; i++) {
     const date = new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString();
-    const isRevealed = Math.random() > 0.3; // 70% chance of being revealed
+    const isRevealed = Math.random() > 0.3;
 
     rewards.push({
       id: i.toString(),
@@ -49,7 +50,7 @@ export async function mockFetchRewards(
 ): Promise<PaginatedResponse<UserReward>> {
   await sleep(3);
 
-  const allRewards = generateRewards(50); // Generate 50 mock rewards
+  const allRewards = generateRewards(50);
 
   const start = page * pageSize;
   const totalPages = Math.ceil(allRewards.length / pageSize);
@@ -63,5 +64,58 @@ export async function mockFetchRewards(
     data: allRewards.slice(actualStart, actualEnd),
     total_pages: totalPages,
     is_last_page: actualEnd >= allRewards.length,
+  };
+}
+
+const MOCK_USER_ID = 'mock-user-id';
+
+const buildMockGenerations = (): RewardGeneration[] => {
+  const now = Date.now();
+  return [
+    {
+      id: 'gen-1',
+      user_id: MOCK_USER_ID,
+      status: JobStatus.IN_PROGRESS,
+      enqueued_at: new Date(now - 30_000).toISOString(),
+      started_at: new Date(now - 25_000).toISOString(),
+      finished_at: null,
+      error_message: null,
+    },
+    {
+      id: 'gen-2',
+      user_id: MOCK_USER_ID,
+      status: JobStatus.FAILED,
+      enqueued_at: new Date(now - 5 * 60_000).toISOString(),
+      started_at: new Date(now - 4 * 60_000).toISOString(),
+      finished_at: new Date(now - 3 * 60_000).toISOString(),
+      error_message: 'OpenAI request timed out after 480 seconds',
+    },
+  ];
+};
+
+export async function mockFetchActiveRewardGenerations(
+  statuses: JobStatus[]
+): Promise<PaginatedResponse<RewardGeneration>> {
+  await sleep(0.5);
+  const generations = buildMockGenerations().filter((g) => statuses.includes(g.status));
+  return {
+    page: 1,
+    total: generations.length,
+    data: generations,
+    total_pages: 1,
+    is_last_page: true,
+  };
+}
+
+export async function mockRetryRewardGeneration(id: string): Promise<RewardGeneration> {
+  await sleep(0.5);
+  return {
+    id,
+    user_id: MOCK_USER_ID,
+    status: JobStatus.QUEUED,
+    enqueued_at: new Date().toISOString(),
+    started_at: null,
+    finished_at: null,
+    error_message: null,
   };
 }

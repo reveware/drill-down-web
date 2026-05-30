@@ -48,4 +48,7 @@ export {
   Send,
   Smile,
   Settings,
+  Loader2,
+  RotateCw,
+  Sparkles,
 } from 'lucide-react';

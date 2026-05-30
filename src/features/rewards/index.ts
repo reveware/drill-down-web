@@ -1,6 +1,9 @@
 export { RewardsGallery } from './components/RewardsGallery';
 export { RewardCard } from './components/RewardCard';
 export { RewardCardSkeleton } from './components/RewardCardSkeleton';
+export { RewardGenerationCard } from './components/RewardGenerationCard';
 export { RewardProgress } from './components/RewardProgress';
 export { useRewards } from './hooks/useRewards';
 export { useRewardReveal } from './hooks/useRewardReveal';
+export { useActiveRewardGenerations } from './hooks/useActiveRewardGenerations';
+export { useRetryRewardGeneration } from './hooks/useRetryRewardGeneration';

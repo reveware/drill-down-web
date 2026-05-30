@@ -9,13 +9,20 @@ export enum JobStatus {
 
 export const JobStatusSchema = z.nativeEnum(JobStatus);
 
-export const RewardJobSchema = z.object({
+export const RewardGenerationSchema = z.object({
   id: z.string(),
   user_id: z.string(),
   status: JobStatusSchema,
   enqueued_at: z.string().datetime(),
   started_at: z.string().datetime().nullable(),
-  completed_at: z.string().datetime().nullable(),
+  finished_at: z.string().datetime().nullable(),
+  error_message: z.string().nullable(),
 });
 
-export type RewardJob = z.infer<typeof RewardJobSchema>;
+export type RewardGeneration = z.infer<typeof RewardGenerationSchema>;
+
+export const ACTIVE_GENERATION_STATUSES: JobStatus[] = [
+  JobStatus.QUEUED,
+  JobStatus.IN_PROGRESS,
+  JobStatus.FAILED,
+];

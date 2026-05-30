@@ -1,8 +1,12 @@
 import { apiClient } from '../client';
 import { UserReward, RewardAssetType } from '@/types/reward';
-import { mockFetchRewards } from '@/mocks/rewards';
+import {
+  mockFetchActiveRewardGenerations,
+  mockFetchRewards,
+  mockRetryRewardGeneration,
+} from '@/mocks/rewards';
 import { PaginatedResponse } from '@/types/pagination';
-import { RewardJob, JobStatus } from '@/types/rewardJob';
+import { JobStatus, RewardGeneration } from '@/types/rewardGeneration';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 
 export const RewardsApi = {
@@ -31,15 +35,23 @@ export const RewardsApi = {
     return (await apiClient.post<UserReward>(`/rewards/${rewardId}/reveal`)).data;
   },
 
-  getRewardJobs: async (
-    params: { userId?: string; status?: JobStatus },
-    page: number = PAGE_NUMBER,
-    pageSize: number = PAGE_SIZE
-  ): Promise<PaginatedResponse<RewardJob>> => {
+  getActiveRewardGenerations: async (
+    statuses: JobStatus[]
+  ): Promise<PaginatedResponse<RewardGeneration>> => {
+    if (USE_MOCKS) {
+      return await mockFetchActiveRewardGenerations(statuses);
+    }
     return (
-      await apiClient.get<PaginatedResponse<RewardJob>>('/reward-generation-jobs/', {
-        params: { userId: params.userId, status: params.status, page, page_size: pageSize },
+      await apiClient.get<PaginatedResponse<RewardGeneration>>('/reward-generations', {
+        params: { status: statuses, page: 1, page_size: 50 },
       })
     ).data;
+  },
+
+  retryRewardGeneration: async (id: string): Promise<RewardGeneration> => {
+    if (USE_MOCKS) {
+      return await mockRetryRewardGeneration(id);
+    }
+    return (await apiClient.post<RewardGeneration>(`/reward-generations/${id}/retry`)).data;
   },
 };

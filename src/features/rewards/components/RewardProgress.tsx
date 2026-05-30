@@ -3,15 +3,12 @@ import { useAuth } from '@/hooks/useAuth';
 import { useUserProfile } from '@/features/user/hooks/useUserProfile';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
-import { usePendingRewardJob } from '../hooks/usePendingRewardJob';
-import { RewardPendingCard } from './RewardPendingCard';
 
 const POSTS_PER_REWARD = 10;
 
 export const RewardProgress = () => {
   const { user: authUser } = useAuth();
   const { data: user, isLoading } = useUserProfile(authUser?.id || '');
-  const { hasPending } = usePendingRewardJob(authUser?.id);
 
   if (!user || isLoading) {
     return null;
@@ -34,27 +31,21 @@ export const RewardProgress = () => {
         ? 'Just 1 more post until your next reward!'
         : `Continue posting to earn a new reward!`;
   };
+
   return (
-    <div className="flex flex-col gap-2">
-      <Card className="card">
-        <CardContent className="px-4 py-2">
-          <div>
-            <h3 className="text-lg font-semibold">Next Reward</h3>
-
-            <div className="space-y-2">
-              <div className="text-muted-foreground flex items-center justify-between text-xs">
-                <span>{getProgressMessage()}</span>
-                <span>
-                  {displayProgress}/{POSTS_PER_REWARD} posts
-                </span>
-              </div>
-
-              <Progress value={displayPercentage} className="h-2" />
-            </div>
+    <Card className="card">
+      <CardContent className="px-4 py-2">
+        <h3 className="text-lg font-semibold">Next Reward</h3>
+        <div className="space-y-2">
+          <div className="text-muted-foreground flex items-center justify-between text-xs">
+            <span>{getProgressMessage()}</span>
+            <span>
+              {displayProgress}/{POSTS_PER_REWARD} posts
+            </span>
           </div>
-        </CardContent>
-      </Card>
-      {hasPending && <RewardPendingCard />}
-    </div>
+          <Progress value={displayPercentage} className="h-2" />
+        </div>
+      </CardContent>
+    </Card>
   );
 };
