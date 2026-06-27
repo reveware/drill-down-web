@@ -2,6 +2,7 @@
   "name": "drill-down-web",
   "version": "0.1.0",
   "private": true,
+  "license": "PROPRIETARY",
   "scripts": {
     "preinstall": "cross-env TAILWIND_DISABLE_WASM=1",
     "prepare": "husky",
