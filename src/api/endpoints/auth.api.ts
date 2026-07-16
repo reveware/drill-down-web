@@ -46,7 +46,7 @@ export const AuthApi = {
     ).data;
   },
 
-  // No USE_MOCKS branch: SSO requires the real GIS widget + backend verification
+  // No USE_MOCKS branch: SSO requires the real Google widget + backend verification
   loginWithGoogle: async (payload: GoogleSsoDto): Promise<LoginResult> => {
     return (await apiClient.post<LoginResult>('/auth/sso/google', payload)).data;
   },

@@ -1,4 +1,4 @@
-// Backend global error body
+// Backend global error body (from HttpExceptionFilter).
 // `errors` is a class-validator dump for 400s
 export interface ApiError {
   status_code: number;
@@ -16,8 +16,6 @@ export const isApiError = (value: unknown): value is ApiError =>
 export const getApiErrorStatus = (value: unknown): number | undefined =>
   isApiError(value) ? value.status_code : undefined;
 
-// Used when the server doesn't return a usable message.
-// (Eg- transport failure or an error that bypassed the global filter.)
 export const GENERIC_ERROR_MESSAGE = 'Something went wrong. Please try again.';
 
 export const getApiErrorMessage = (
