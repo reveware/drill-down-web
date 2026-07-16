@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { Eye, EyeOff } from '@/components/shared/Icons';
 import Link from 'next/link';
-import { RegisterFormSchema, RegisterDto } from '@/types/auth';
+import { RegisterFormSchema, RegisterDto } from '@/types/auth.types';
 import { DateOfBirthPicker } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

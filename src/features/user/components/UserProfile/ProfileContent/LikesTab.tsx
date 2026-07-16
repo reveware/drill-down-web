@@ -1,4 +1,4 @@
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { UserLikesFeed } from '@/features/likes/components/UserLikesFeed/UserLikesFeed';
 
 export const LikesTab = ({ user }: { user: UserOverview }) => {

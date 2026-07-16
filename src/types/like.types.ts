@@ -1,5 +1,5 @@
-import { PostOverview } from './post';
-import { UserOverview } from './user';
+import { PostOverview } from './post.types';
+import { UserOverview } from './user.types';
 
 export interface Like {
   id: string;

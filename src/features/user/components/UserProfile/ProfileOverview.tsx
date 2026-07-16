@@ -1,4 +1,4 @@
-import { UserDetail } from '@/types/user';
+import { UserDetail } from '@/types/user.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { formatDistanceToNow } from 'date-fns';
 import { getInitials } from '@/lib/utils';

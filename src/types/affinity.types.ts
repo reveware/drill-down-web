@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { UserOverviewSchema } from './user';
+import { UserOverviewSchema } from './user.types';
 
 export enum AffinityType {
   TAG = 'TAG',

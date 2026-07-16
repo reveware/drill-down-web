@@ -1,4 +1,4 @@
-import { WireActor, WireParticipant, Participant } from '@/types/chat';
+import { WireActor, WireParticipant, Participant } from '@/types/chat.types';
 
 export const getActorDisplayName = (actor: WireActor): string => {
   if (actor.persona) return actor.persona.name;

@@ -1,6 +1,6 @@
 import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { CardHeader } from '@/components/ui/card';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { formatDistanceToNow } from 'date-fns';
 import {
   DropdownMenu,

@@ -1,4 +1,4 @@
-import { ImagePost } from '@/types/post';
+import { ImagePost } from '@/types/post.types';
 import Image from 'next/image';
 import React from 'react';
 import {

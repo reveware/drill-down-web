@@ -3,7 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthApi } from '@/api/endpoints/auth.api';
 import { UserApi } from '@/api/endpoints/user.api';
-import { SetPasswordDto } from '@/types/auth';
+import { SetPasswordDto } from '@/types/auth.types';
 import { useAuth } from '@/hooks/useAuth';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { ChatWebSocketService } from '@/features/chat/services/chat-websocket.service';
-import { ConnectionStatus } from '@/types/chat';
+import { ConnectionStatus } from '@/types/chat.types';
 import { useAuth } from '@/hooks/useAuth';
 
 interface ChatSocketContextValue {

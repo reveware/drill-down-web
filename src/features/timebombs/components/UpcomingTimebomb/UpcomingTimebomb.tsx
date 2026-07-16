@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { TimeBomb } from '@/types/time-bombs';
+import { TimeBomb } from '@/types/time-bombs.types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserAvatar, userAvatarProps, EmptyState } from '@/components/shared';
 import { formatDistanceToNow } from 'date-fns';

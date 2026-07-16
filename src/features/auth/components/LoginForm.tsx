@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { Eye, EyeOff } from '@/components/shared/Icons';
 import Link from 'next/link';
-import { LoginFormSchema, LoginDto } from '@/types/auth';
+import { LoginFormSchema, LoginDto } from '@/types/auth.types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PASSWORD_PLACEHOLDER } from '@/lib/utils';

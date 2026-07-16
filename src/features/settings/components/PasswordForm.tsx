@@ -2,8 +2,8 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SetPasswordFormDto, SetPasswordSchema } from '@/types/auth';
-import { AUTH_PROVIDER_LABEL, AuthProvider } from '@/types/user';
+import { SetPasswordFormDto, SetPasswordSchema } from '@/types/auth.types';
+import { AUTH_PROVIDER_LABEL, AuthProvider } from '@/types/user.types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {

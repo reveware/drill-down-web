@@ -1,6 +1,6 @@
 'use client';
 
-import { UserDetail } from '@/types/user';
+import { UserDetail } from '@/types/user.types';
 import { useUpdateUser } from '@/features/user';
 import { Switch } from '@/components/ui/switch';
 import { SettingsSection } from './SettingsSection';

@@ -1,7 +1,7 @@
 import { apiClient } from '../client';
 import { USE_MOCKS } from '../constants';
-import { PersonaOverview } from '@/types/persona';
-import { PaginatedResponse } from '@/types/pagination';
+import { PersonaOverview } from '@/types/persona.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { mockGetCompanion, mockSearchPersonas } from '@/mocks/persona';
 
 export interface SearchPersonasParams {

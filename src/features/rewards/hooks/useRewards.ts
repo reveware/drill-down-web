@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { UserReward } from '@/types/reward';
+import { UserReward } from '@/types/reward.types';
 import { RewardsApi } from '@/api/endpoints/rewards.api';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 export const useRewards = () => {
   const query = useInfiniteQuery<PaginatedResponse<UserReward>>({

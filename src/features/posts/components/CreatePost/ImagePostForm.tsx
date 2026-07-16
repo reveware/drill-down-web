@@ -2,7 +2,12 @@
 import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateImagePost, createImagePostSchema, PostOverview, PostTypes } from '@/types/post';
+import {
+  CreateImagePost,
+  createImagePostSchema,
+  PostOverview,
+  PostTypes,
+} from '@/types/post.types';
 import { Button } from '@/components/ui/button';
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { X, Plus } from '@/components/shared/Icons';

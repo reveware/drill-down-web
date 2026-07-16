@@ -1,6 +1,6 @@
-import { FollowRequest } from '@/types/follow';
-import { UserOverview } from '@/types/user';
-import { PaginatedResponse } from '@/types/pagination';
+import { FollowRequest } from '@/types/follow.types';
+import { UserOverview } from '@/types/user.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { mockUser, mockAdmin, mockPrivateUser, mockFollowedUser } from './user';
 import { sleep } from '@/lib/utils';
 

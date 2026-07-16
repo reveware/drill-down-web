@@ -2,7 +2,7 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserApi } from '@/api/endpoints/user.api';
-import { UpdateUserDto } from '@/types/user';
+import { UpdateUserDto } from '@/types/user.types';
 import { useAuth } from '@/hooks/useAuth';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';

@@ -1,9 +1,9 @@
 'use client';
 import React, { createContext, useEffect, useState, ReactNode, useCallback } from 'react';
 import { TokenManager } from '@/lib/token-manager';
-import { AuthState } from '@/types/auth';
+import { AuthState } from '@/types/auth.types';
 import { UserApi } from '@/api/endpoints/user.api';
-import { UserDetail } from '@/types/user';
+import { UserDetail } from '@/types/user.types';
 import { useRouter } from 'next/navigation';
 
 interface AuthContextType extends AuthState {

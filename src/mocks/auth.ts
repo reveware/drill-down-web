@@ -1,4 +1,4 @@
-import { CreateUserDto, LoginDto, SetPasswordDto } from '@/types/auth';
+import { CreateUserDto, LoginDto, SetPasswordDto } from '@/types/auth.types';
 import { mockUser } from './user';
 import { sleep } from '@/lib/utils';
 

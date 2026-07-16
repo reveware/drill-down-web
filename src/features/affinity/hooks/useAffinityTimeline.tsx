@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { AffinityTimeline, AffinityTimelineRequest } from '@/types/affinity';
+import { AffinityTimeline, AffinityTimelineRequest } from '@/types/affinity.types';
 import { AffinityApi } from '@/api/endpoints/affinity.api';
 
 export const useAffinityTimeline = (userId: string, params?: AffinityTimelineRequest) => {

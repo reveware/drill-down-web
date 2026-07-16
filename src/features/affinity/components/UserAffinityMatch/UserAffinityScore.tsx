@@ -1,5 +1,5 @@
 'use client';
-import { UserAffinityScore as Score } from '@/types/affinity';
+import { UserAffinityScore as Score } from '@/types/affinity.types';
 import { Card, CardContent } from '@/components/ui/card';
 import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
 import { UserAvatar, userAvatarProps } from '@/components/shared';

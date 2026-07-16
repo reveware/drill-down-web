@@ -1,6 +1,6 @@
 import { apiClient } from '../client';
-import { Comment, CreateComment } from '@/types/comment';
-import { PaginatedResponse } from '@/types/pagination';
+import { Comment, CreateComment } from '@/types/comment.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { USE_MOCKS } from '../constants';
 import { mockGetComments, mockCreateComment, mockDeleteComment } from '@/mocks/comment';
 

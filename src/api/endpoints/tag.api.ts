@@ -1,6 +1,6 @@
-import { Tag } from '@/types/tag';
+import { Tag } from '@/types/tag.types';
 import { apiClient } from '../client';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 import { mockSearchTags } from '@/mocks/tag';
 

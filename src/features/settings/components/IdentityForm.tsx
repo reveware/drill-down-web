@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { UpdateUserDto, UpdateUserSchema, UserDetail } from '@/types/user';
+import { UpdateUserDto, UpdateUserSchema, UserDetail } from '@/types/user.types';
 import { useUpdateUser } from '@/features/user';
 import { AvatarUpload, DateOfBirthPicker } from '@/components/shared';
 import { Button } from '@/components/ui/button';

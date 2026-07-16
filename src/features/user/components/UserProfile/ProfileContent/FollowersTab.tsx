@@ -1,4 +1,4 @@
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { FollowerFeed } from '@/features/follow';
 
 export const FollowersTab = ({ user }: { user: UserOverview }) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { Brand } from '../shared/Brand/Brand';
 import { UserSection } from './UserSection';
 import { OnlineIndicator } from '../shared/OnlineIndicator/OnlineIndicator';

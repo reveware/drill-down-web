@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PersonaApi, SearchPersonasParams } from '@/api/endpoints/persona.api';
-import { PersonaOverview } from '@/types/persona';
-import { PaginatedResponse } from '@/types/pagination';
+import { PersonaOverview } from '@/types/persona.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { useDebounce } from '@/hooks/useDebounce';
 
 interface UsePersonaSearchOptions {

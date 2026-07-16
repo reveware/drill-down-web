@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useRef } from 'react';
-import { AffinityType, TimelineInterval } from '@/types/affinity';
+import { AffinityType, TimelineInterval } from '@/types/affinity.types';
 import { useAffinityTimeline } from '@/features/affinity/hooks/useAffinityTimeline';
 import { toAreaBumpSeries } from './toAreaBumpSeries';
 import { AreaBump } from '@/components/shared/Charts/AreaBump';

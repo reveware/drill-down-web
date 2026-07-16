@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { UserOverview } from './user';
-import { AffinityScoreSchema } from './affinity';
-import { PostOverview } from './post';
+import { UserOverview } from './user.types';
+import { AffinityScoreSchema } from './affinity.types';
+import { PostOverview } from './post.types';
 
 export enum RecommendationReason {
   AFFINITY = 'AFFINITY',

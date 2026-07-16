@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Comment } from '@/types/comment';
+import { Comment } from '@/types/comment.types';
 import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, ChevronDown, ChevronRight } from '@/components/shared/Icons';

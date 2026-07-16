@@ -1,5 +1,5 @@
 'use client';
-import { Affinity, AffinityType } from '@/types/affinity';
+import { Affinity, AffinityType } from '@/types/affinity.types';
 import { ColorDot } from '@/components/shared/ColorDot/ColorDot';
 import { Separator } from '@/components/ui/separator';
 

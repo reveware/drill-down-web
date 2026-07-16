@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import { Menu } from '@/components/shared/Icons';
 import { MobileSidebar } from './MobileSidebar';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { Brand } from '@/components/shared/Brand/Brand';
 import { Search } from '@/components/shared/Search/Search';
 import { Notifications } from '@/components/shared/Notifications';

@@ -3,7 +3,7 @@ import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { FollowRequest } from '@/types/follow';
+import { FollowRequest } from '@/types/follow.types';
 import { useApproveFollowRequest, useRejectFollowRequests } from '@/features/follow/hooks';
 import { formatDistanceToNow } from 'date-fns';
 

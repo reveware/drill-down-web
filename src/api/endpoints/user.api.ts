@@ -1,7 +1,7 @@
 import { apiClient } from '../client';
 
-import { UserDetail, UserOverview } from '@/types/user';
-import { PaginatedResponse } from '@/types/pagination';
+import { UserDetail, UserOverview } from '@/types/user.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import {
   mockCurrentUser,
   mockFetchTags,
@@ -9,8 +9,8 @@ import {
   mockSearchUsers,
   mockUpdateUser,
 } from '@/mocks/user';
-import { TagCount } from '@/types/tag';
-import { UpdateUserDto } from '@/types/user';
+import { TagCount } from '@/types/tag.types';
+import { UpdateUserDto } from '@/types/user.types';
 import { USE_MOCKS } from '../constants';
 
 export interface SearchUsersParams {

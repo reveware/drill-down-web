@@ -1,5 +1,5 @@
-import { ImagePost, QuotePost } from './post';
-import { UserOverview } from './user';
+import { ImagePost, QuotePost } from './post.types';
+import { UserOverview } from './user.types';
 
 export interface TimeBomb {
   id: number;

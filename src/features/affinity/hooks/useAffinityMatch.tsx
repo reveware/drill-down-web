@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { UserAffinityScore } from '@/types/affinity';
+import { UserAffinityScore } from '@/types/affinity.types';
 import { AffinityApi } from '@/api/endpoints/affinity.api';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';

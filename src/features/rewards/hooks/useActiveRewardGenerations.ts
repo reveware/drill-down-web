@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useRef } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { PaginatedResponse } from '@/types/pagination';
-import { ACTIVE_GENERATION_STATUSES, RewardGeneration } from '@/types/rewardGeneration';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { ACTIVE_GENERATION_STATUSES, RewardGeneration } from '@/types/rewardGeneration.types';
 import { RewardsApi } from '@/api/endpoints/rewards.api';
 
 export const ACTIVE_REWARD_GENERATIONS_KEY = ['reward-generations', 'active'] as const;

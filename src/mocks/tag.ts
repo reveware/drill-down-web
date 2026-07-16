@@ -1,5 +1,5 @@
-import { Tag } from '@/types/tag';
-import { PaginatedResponse } from '@/types/pagination';
+import { Tag } from '@/types/tag.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 const mockTags: Tag[] = [
   { id: '1', name: 'javascript', slug: 'javascript', usage_count: 1250 },

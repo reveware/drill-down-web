@@ -1,4 +1,4 @@
-import { QuotePost } from '@/types/post';
+import { QuotePost } from '@/types/post.types';
 
 export const QuotePostContent = ({ post }: { post: QuotePost }) => {
   const maxLength = 240;

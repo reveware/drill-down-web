@@ -1,7 +1,13 @@
 import { sleep } from '@/lib/utils';
-import { AuthProvider, UpdateUserDto, UserDetail, UserOverview, UserRole } from '@/types/user';
-import { PaginatedResponse } from '@/types/pagination';
-import { TagCount } from '@/types/tag';
+import {
+  AuthProvider,
+  UpdateUserDto,
+  UserDetail,
+  UserOverview,
+  UserRole,
+} from '@/types/user.types';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { TagCount } from '@/types/tag.types';
 import { SearchUsersParams } from '@/api/endpoints/user.api';
 
 export const mockUser: UserOverview = {

@@ -1,6 +1,6 @@
 'use client';
 
-import { Conversation } from '@/types/chat';
+import { Conversation } from '@/types/chat.types';
 import { ChatHistory } from '../ChatHistory/ChatHistory';
 import { ChatInput } from '../ChatInput/ChatInput';
 

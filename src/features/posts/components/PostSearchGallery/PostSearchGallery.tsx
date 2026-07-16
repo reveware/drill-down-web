@@ -4,7 +4,7 @@ import { MasonryGallery } from '@/components/shared/MasonryGallery';
 import { EmptyState } from '@/components/shared';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
-import { PostOverview, PostSearchParams } from '@/types/post';
+import { PostOverview, PostSearchParams } from '@/types/post.types';
 import { useSearchPosts } from '@/features/posts/hooks/useSearchPosts';
 import { PostCard } from '../PostCard';
 import { PostThumbnail } from '../PostThumbnail/PostThumbnail';

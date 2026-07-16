@@ -1,4 +1,4 @@
-import { UserDetail } from '@/types/user';
+import { UserDetail } from '@/types/user.types';
 import { useFollowUser } from '@/features/follow/hooks/useFollowUser';
 import { useUnfollowUser } from '@/features/follow/hooks/useUnfollowUser';
 import { Button } from '@/components/ui/button';

@@ -1,6 +1,6 @@
-import { Comment, CreateComment } from '@/types/comment';
-import { PaginatedResponse } from '@/types/pagination';
-import { UserOverview } from '@/types/user';
+import { Comment, CreateComment } from '@/types/comment.types';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { UserOverview } from '@/types/user.types';
 import { mockUser, mockFollowedUser, mockPrivateUser } from './user';
 
 const mockUsers: UserOverview[] = [mockUser, mockFollowedUser, mockPrivateUser];

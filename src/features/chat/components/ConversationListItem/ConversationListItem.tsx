@@ -3,7 +3,7 @@
 import { UserAvatar } from '@/components/shared/UserAvatar/UserAvatar';
 import { Badge } from '@/components/ui/badge';
 import { cn, getInitials } from '@/lib/utils';
-import { Conversation, MessagePart } from '@/types/chat';
+import { Conversation, MessagePart } from '@/types/chat.types';
 import { useIsActorSelf } from '../../hooks/useIsActorSelf';
 
 interface ConversationListItemProps {

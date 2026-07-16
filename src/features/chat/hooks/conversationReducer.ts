@@ -1,4 +1,4 @@
-import { ChatEvents, Conversation } from '@/types/chat';
+import { ChatEvents, Conversation } from '@/types/chat.types';
 import { toParticipant } from '../utils';
 
 /**

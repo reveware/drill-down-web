@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRecommendation, RecommendationReason } from '@/types/recommendations';
+import { UserRecommendation, RecommendationReason } from '@/types/recommendations.types';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import { Button } from '@/components/ui/button';
 import { useUserRecommendations } from '@/features/user/hooks/useUserRecommendations';

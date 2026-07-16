@@ -7,7 +7,7 @@ import {
 } from '@/api/endpoints/conversations.api';
 import { useChatSocket } from '@/components/providers/ChatSocketProvider';
 import { useDebounce } from '@/hooks/useDebounce';
-import { Conversation } from '@/types/chat';
+import { Conversation } from '@/types/chat.types';
 import { useIsActorSelf } from './useIsActorSelf';
 
 interface UseConversationsOptions {

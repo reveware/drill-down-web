@@ -1,6 +1,6 @@
 import { PostApi } from '@/api/endpoints/post.api';
-import { PaginatedResponse } from '@/types/pagination';
-import { PostOverview, PostSearchParams } from '@/types/post';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { PostOverview, PostSearchParams } from '@/types/post.types';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const useSearchPosts = (search: PostSearchParams) => {

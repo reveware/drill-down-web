@@ -1,4 +1,4 @@
-import { AffinityTimelineBucket } from '@/types/affinity';
+import { AffinityTimelineBucket } from '@/types/affinity.types';
 
 export function toAreaBumpSeries(
   buckets: AffinityTimelineBucket[],

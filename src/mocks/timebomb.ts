@@ -1,4 +1,4 @@
-import { TimeBomb } from '@/types/time-bombs';
+import { TimeBomb } from '@/types/time-bombs.types';
 
 import { mockUser } from './user';
 import { add } from 'date-fns';

@@ -1,7 +1,7 @@
 import { sleep } from '@/lib/utils';
-import { PaginatedResponse } from '@/types/pagination';
-import { UserReward, RewardAssetType } from '@/types/reward';
-import { JobStatus, RewardGeneration } from '@/types/rewardGeneration';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { UserReward, RewardAssetType } from '@/types/reward.types';
+import { JobStatus, RewardGeneration } from '@/types/rewardGeneration.types';
 
 export const generateRewards = (length: number): UserReward[] => {
   const rewards: UserReward[] = [];

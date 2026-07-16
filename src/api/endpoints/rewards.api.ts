@@ -1,12 +1,12 @@
 import { apiClient } from '../client';
-import { UserReward, RewardAssetType } from '@/types/reward';
+import { UserReward, RewardAssetType } from '@/types/reward.types';
 import {
   mockFetchActiveRewardGenerations,
   mockFetchRewards,
   mockRetryRewardGeneration,
 } from '@/mocks/rewards';
-import { PaginatedResponse } from '@/types/pagination';
-import { JobStatus, RewardGeneration } from '@/types/rewardGeneration';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { JobStatus, RewardGeneration } from '@/types/rewardGeneration.types';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 
 export const RewardsApi = {

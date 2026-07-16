@@ -7,8 +7,8 @@ import { RewardCardSkeleton } from './RewardCardSkeleton';
 import { RewardGenerationCard } from './RewardGenerationCard';
 import { MasonryGallery } from '@/components/shared/MasonryGallery';
 import { EmptyState } from '@/components/shared';
-import { UserReward } from '@/types/reward';
-import { RewardGeneration } from '@/types/rewardGeneration';
+import { UserReward } from '@/types/reward.types';
+import { RewardGeneration } from '@/types/rewardGeneration.types';
 
 type GalleryItem =
   | { kind: 'generation'; key: string; generation: RewardGeneration }

@@ -1,7 +1,7 @@
-import { Like } from '@/types/like';
+import { Like } from '@/types/like.types';
 import { apiClient } from '../client';
 import { mockFetchLikes } from '@/mocks/like';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 
 export const LikeApi = {

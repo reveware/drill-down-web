@@ -2,7 +2,7 @@ import { UserAvatar, userAvatarProps } from '@/components/shared';
 import { UserPlus, UserMinus } from '@/components/shared/Icons';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { UserInfo } from '@/components/shared/UserInfo/UserInfo';
 import { useFollowUser } from '@/features/follow/hooks/useFollowUser';
 import { useUnfollowUser } from '@/features/follow/hooks/useUnfollowUser';

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { UserDetail, UserRole } from './user';
-import { UserFieldsSchema } from './user-fields';
+import { UserDetail, UserRole } from './user.types';
+import { UserFieldsSchema } from './user-fields.types';
 
 const RegisterSchema = UserFieldsSchema.extend({
   email: z.string().email('Invalid email address'),

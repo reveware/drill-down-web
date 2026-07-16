@@ -7,7 +7,7 @@ import {
   AffinityTimelineRequest,
   TimelineInterval,
   AffinityTimelineBucket,
-} from '@/types/affinity';
+} from '@/types/affinity.types';
 import { mockUser, mockFollowedUser } from './user';
 import { subDays } from 'date-fns';
 

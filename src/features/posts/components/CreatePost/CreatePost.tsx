@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { PostOverview, PostTypes } from '@/types/post';
+import { PostOverview, PostTypes } from '@/types/post.types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ImagePostForm } from './ImagePostForm';
 import { QuotePostForm } from './QuotePostForm';

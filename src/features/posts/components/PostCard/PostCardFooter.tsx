@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator';
 import { TagList } from './TagList';
 import { useModal } from '@/hooks/useModal';
 import { Comments } from '../Comments/Comments';
-import { PostOverview } from '@/types/post';
+import { PostOverview } from '@/types/post.types';
 import { PostLikesFeed } from '@/features/likes';
 
 interface PostCardFooterProps {

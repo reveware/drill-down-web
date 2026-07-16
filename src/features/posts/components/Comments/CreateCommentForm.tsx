@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateComment, CreateCommentSchema } from '@/types/comment';
+import { CreateComment, CreateCommentSchema } from '@/types/comment.types';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { X } from '@/components/shared/Icons';

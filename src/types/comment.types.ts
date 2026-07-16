@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { UserOverview, UserOverviewSchema } from './user';
+import { UserOverview, UserOverviewSchema } from './user.types';
 
 export type Comment = {
   id: string;

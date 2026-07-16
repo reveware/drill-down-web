@@ -4,7 +4,13 @@ import { useChatSocket } from '@/components/providers/ChatSocketProvider';
 import { useAuth } from '@/hooks/useAuth';
 import { useDebouncedCallback } from '@/hooks/useDebounce';
 import { ConversationsApi } from '@/api/endpoints/conversations.api';
-import { Conversation, ConversationInit, Participant, WireMessage, JoinError } from '@/types/chat';
+import {
+  Conversation,
+  ConversationInit,
+  Participant,
+  WireMessage,
+  JoinError,
+} from '@/types/chat.types';
 import { JOIN_ERROR_CODES, SEND_ERROR_CODES } from '../services/chat-websocket.service';
 import { getActorAvatar, getActorDisplayName } from '../utils';
 import { applyJoined, applyMessageRead } from './conversationReducer';

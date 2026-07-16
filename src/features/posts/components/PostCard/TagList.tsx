@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { ChevronDown, ChevronUp } from '@/components/shared/Icons';
-import { PostTag } from '@/types/post';
+import { PostTag } from '@/types/post.types';
 
 interface TagListProps {
   tags: PostTag[];

@@ -1,7 +1,7 @@
 'use client';
 
 import { useUserSearch } from '@/features/user/hooks/useUserSearch';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { PickerList, PickerRow, EmptyState } from '@/components/shared';
 
 interface UserPickerListProps {

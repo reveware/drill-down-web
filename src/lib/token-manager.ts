@@ -1,5 +1,5 @@
 import { decodeJwt } from 'jose';
-import { JWTPayload } from '@/types/auth';
+import { JWTPayload } from '@/types/auth.types';
 import { mockJWTPayload } from '@/mocks/auth';
 import { USE_MOCKS } from '@/api/constants';
 

@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { Comment } from '@/types/comment';
+import { Comment } from '@/types/comment.types';
 import { CommentApi } from '@/api/endpoints/comment.api';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 export const useComments = (postId: string) => {
   const query = useInfiniteQuery<PaginatedResponse<Comment>>({

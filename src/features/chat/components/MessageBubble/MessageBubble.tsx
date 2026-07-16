@@ -1,6 +1,6 @@
 'use client';
 
-import { WireMessage, MessagePart } from '@/types/chat';
+import { WireMessage, MessagePart } from '@/types/chat.types';
 import { cn, formatTimestamp, copyToClipboard } from '@/lib/utils';
 import { useLongPress } from '@/hooks/useLongPress';
 import { Check, CheckCheck, Clock, XCircle } from '@/components/shared/Icons';

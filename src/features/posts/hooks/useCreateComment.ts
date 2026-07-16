@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CommentApi } from '@/api/endpoints/comment.api';
-import { CreateComment, Comment } from '@/types/comment';
+import { CreateComment, Comment } from '@/types/comment.types';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 

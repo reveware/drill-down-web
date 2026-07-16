@@ -1,5 +1,5 @@
 import { apiClient } from '@/api/client';
-import { Conversation, WireMessage, WireConversation } from '@/types/chat';
+import { Conversation, WireMessage, WireConversation } from '@/types/chat.types';
 import { toParticipant } from '@/features/chat/utils';
 
 export interface ListConversationsParams {

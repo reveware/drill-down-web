@@ -2,7 +2,7 @@
 
 import { useMutation } from '@tanstack/react-query';
 import { AuthApi } from '@/api/endpoints/auth.api';
-import { RegisterDto } from '@/types/auth';
+import { RegisterDto } from '@/types/auth.types';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 import { useAuth } from '@/hooks/useAuth';

@@ -1,4 +1,4 @@
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 

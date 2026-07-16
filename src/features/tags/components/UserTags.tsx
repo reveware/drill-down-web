@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { TagCount } from '@/types/tag';
+import { TagCount } from '@/types/tag.types';
 import { useUserTags } from '../hooks/useUserTags';
 import { EmptyState, Spinner } from '@/components/shared';
 

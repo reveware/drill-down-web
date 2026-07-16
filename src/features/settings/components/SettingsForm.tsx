@@ -1,6 +1,6 @@
 'use client';
 
-import { UserDetail } from '@/types/user';
+import { UserDetail } from '@/types/user.types';
 import { PrivacyForm } from './PrivacyForm';
 import { IdentityForm } from './IdentityForm';
 import { PasswordForm } from './PasswordForm';

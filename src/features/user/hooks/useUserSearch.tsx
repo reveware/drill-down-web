@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { UserApi, SearchUsersParams } from '@/api/endpoints/user.api';
-import { UserOverview } from '@/types/user';
-import { PaginatedResponse } from '@/types/pagination';
+import { UserOverview } from '@/types/user.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { useDebounce } from '@/hooks/useDebounce';
 
 interface UseUserSearchOptions {

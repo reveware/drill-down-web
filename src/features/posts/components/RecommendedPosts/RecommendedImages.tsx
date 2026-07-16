@@ -7,7 +7,7 @@ import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { EmptyState } from '@/components/shared';
 import { useRecommendedPosts } from '../../hooks/useRecommendedPosts';
 import { RecommendedImagesSkeleton } from './RecomendedImagesSkeleton';
-import { ImagePost, PostTypes } from '@/types/post';
+import { ImagePost, PostTypes } from '@/types/post.types';
 
 interface RecommendedImagesProps {
   userId: string;

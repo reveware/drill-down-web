@@ -2,10 +2,10 @@ import {
   UserRecommendation,
   RecommendationReason,
   PostRecommendation,
-} from '@/types/recommendations';
-import { AffinityType, AffinityScore, Affinity } from '@/types/affinity';
+} from '@/types/recommendations.types';
+import { AffinityType, AffinityScore, Affinity } from '@/types/affinity.types';
 import { mockAdmin, mockUser } from './user';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { imagePost } from './post';
 
 const mockSharedAffinities: Affinity[] = [

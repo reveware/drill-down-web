@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { WireMessage, Participant } from '@/types/chat';
+import { WireMessage, Participant } from '@/types/chat.types';
 import { MessageBubble } from '../MessageBubble/MessageBubble';
 import { useIsActorSelf } from '../../hooks/useIsActorSelf';
 import { cn } from '@/lib/utils';

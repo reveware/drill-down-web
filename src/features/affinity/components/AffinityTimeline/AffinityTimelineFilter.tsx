@@ -1,4 +1,4 @@
-import { AffinityType, TimelineInterval } from '@/types/affinity';
+import { AffinityType, TimelineInterval } from '@/types/affinity.types';
 import {
   DropdownMenu,
   DropdownMenuContent,

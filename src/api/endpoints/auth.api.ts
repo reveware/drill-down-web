@@ -1,5 +1,11 @@
 import { apiClient } from '../client';
-import { LoginDto, LoginResult, CreateUserDto, GoogleSsoDto, SetPasswordDto } from '@/types/auth';
+import {
+  LoginDto,
+  LoginResult,
+  CreateUserDto,
+  GoogleSsoDto,
+  SetPasswordDto,
+} from '@/types/auth.types';
 import { mockLogin, mockRegister, mockSetPassword } from '@/mocks/auth';
 import { USE_MOCKS } from '../constants';
 

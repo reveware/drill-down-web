@@ -1,5 +1,5 @@
 'use client';
-import { UserReward } from '@/types/reward';
+import { UserReward } from '@/types/reward.types';
 import Image from 'next/image';
 import { formatDistanceToNow } from 'date-fns';
 import { useRef, useState } from 'react';

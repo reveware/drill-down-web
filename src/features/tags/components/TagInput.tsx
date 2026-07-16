@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { X } from 'lucide-react';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useTagSearch } from '../hooks/useTagSearch';
-import { Tag } from '@/types/tag';
+import { Tag } from '@/types/tag.types';
 import { cn } from '@/lib/utils';
 
 interface TagInputProps {

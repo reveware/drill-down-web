@@ -5,7 +5,7 @@ import {
   ConversationInit,
   MessagePart,
   WireMessage,
-} from '@/types/chat';
+} from '@/types/chat.types';
 
 /** Function returned by every `onX` listener, call to unsubscribe. */
 export type Unsubscribe = () => void;

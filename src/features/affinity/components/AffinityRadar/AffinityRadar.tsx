@@ -1,7 +1,7 @@
 'use client';
 
 import { ResponsiveRadar } from '@nivo/radar';
-import { AffinityType, UserAffinityScore } from '@/types/affinity';
+import { AffinityType, UserAffinityScore } from '@/types/affinity.types';
 import { cn } from '@/lib/utils';
 import { AffinityRadarTooltip } from './AffinityRadarTooltip';
 import { ColorDot } from '@/components/shared/ColorDot/ColorDot';

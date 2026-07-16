@@ -1,7 +1,12 @@
 'use client';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateQuotePost, createQuotePostSchema, PostOverview, PostTypes } from '@/types/post';
+import {
+  CreateQuotePost,
+  createQuotePostSchema,
+  PostOverview,
+  PostTypes,
+} from '@/types/post.types';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { TagInput } from '@/features/tags/components/TagInput';

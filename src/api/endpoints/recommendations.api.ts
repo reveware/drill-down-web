@@ -1,11 +1,11 @@
 import { apiClient } from '../client';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 import {
   PostRecommendation,
   RecommendationReason,
   UserRecommendation,
-} from '@/types/recommendations';
+} from '@/types/recommendations.types';
 import {
   mockFetchPostRecommendations,
   mockFetchUserRecommendations,

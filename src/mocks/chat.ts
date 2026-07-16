@@ -1,4 +1,4 @@
-import { Conversation, WireMessage } from '@/types/chat';
+import { Conversation, WireMessage } from '@/types/chat.types';
 
 const AOI_AVATAR = 'https://randomuser.me/api/portraits/women/1.jpg';
 

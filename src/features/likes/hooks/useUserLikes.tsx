@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { LikeApi } from '@/api/endpoints/like.api';
-import { Like } from '@/types/like';
-import { PaginatedResponse } from '@/types/pagination';
+import { Like } from '@/types/like.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 export const useUserLikes = (userId: string) => {
   const query = useInfiniteQuery<PaginatedResponse<Like>>({

@@ -1,7 +1,7 @@
 import { PAGE_NUMBER, PAGE_SIZE } from '@/api/constants';
 import { RecommendationApi } from '@/api/endpoints/recommendations.api';
-import { PaginatedResponse } from '@/types/pagination';
-import { UserRecommendation, RecommendationReason } from '@/types/recommendations';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { UserRecommendation, RecommendationReason } from '@/types/recommendations.types';
 import { useQuery } from '@tanstack/react-query';
 
 export const useUserRecommendations = (

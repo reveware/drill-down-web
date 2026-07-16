@@ -1,7 +1,7 @@
 'use client';
 
 import { usePersonaSearch } from '@/features/persona/hooks/usePersonaSearch';
-import { PersonaOverview } from '@/types/persona';
+import { PersonaOverview } from '@/types/persona.types';
 import { PickerList, PickerRow, EmptyState } from '@/components/shared';
 
 interface PersonaPickerListProps {

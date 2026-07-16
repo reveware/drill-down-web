@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { AlertTriangle, Loader2, RotateCw, Sparkles } from '@/components/shared/Icons';
 import { cn } from '@/lib/utils';
-import { JobStatus, RewardGeneration } from '@/types/rewardGeneration';
+import { JobStatus, RewardGeneration } from '@/types/rewardGeneration.types';
 import { useRetryRewardGeneration } from '../hooks/useRetryRewardGeneration';
 
 interface RewardGenerationCardProps {

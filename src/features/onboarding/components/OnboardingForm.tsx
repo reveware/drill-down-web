@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { OnboardingFormSchema, OnboardingDto } from '@/types/user';
+import { OnboardingFormSchema, OnboardingDto } from '@/types/user.types';
 import { AvatarUpload, DateOfBirthPicker } from '@/components/shared';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

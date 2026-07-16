@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { ConversationInit } from '@/types/chat';
+import { ConversationInit } from '@/types/chat.types';
 import { useChatSocket } from '@/components/providers/ChatSocketProvider';
 import { useActiveConversation } from '../../hooks/useActiveConversation';
 import { useAutoMarkRead } from '../../hooks/useAutoMarkRead';

@@ -1,8 +1,8 @@
-import { Like } from '@/types/like';
+import { Like } from '@/types/like.types';
 import { mockFetchPosts } from './post';
 import { mockUser } from './user';
-import { PaginatedResponse } from '@/types/pagination';
-import { PostTypes } from '@/types/post';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { PostTypes } from '@/types/post.types';
 
 export const mockFetchLikes = async (
   page: number,

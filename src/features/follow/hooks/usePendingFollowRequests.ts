@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { FollowApi } from '@/api/endpoints/follow.api';
-import { FollowRequest } from '@/types/follow';
-import { PaginatedResponse } from '@/types/pagination';
+import { FollowRequest } from '@/types/follow.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 const PAGE_SIZE = 25;
 

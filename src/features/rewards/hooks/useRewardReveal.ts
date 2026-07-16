@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RewardsApi } from '@/api/endpoints/rewards.api';
-import { UserReward } from '@/types/reward';
+import { UserReward } from '@/types/reward.types';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 

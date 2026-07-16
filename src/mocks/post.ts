@@ -1,8 +1,8 @@
 import { mockUser } from './user';
 import { sleep } from '@/lib/utils';
-import { PaginatedResponse } from '@/types/pagination';
-import { ImagePost, PostOverview, PostTag, PostTypes } from '@/types/post';
-import { QuotePost } from '@/types/post';
+import { PaginatedResponse } from '@/types/pagination.types';
+import { ImagePost, PostOverview, PostTag, PostTypes } from '@/types/post.types';
+import { QuotePost } from '@/types/post.types';
 
 const tag = (name: string): PostTag => ({ name, slug: name.toLowerCase().replace(/\s+/g, '-') });
 

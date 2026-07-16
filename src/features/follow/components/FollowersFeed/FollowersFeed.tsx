@@ -3,7 +3,7 @@ import { UserItem } from '@/features/user/components/UserItem/UserItem';
 import { UserItemSkeleton } from '@/features/user/components/UserItem/UserItemSkeleton';
 import { Feed } from '@/components/shared/Feed/Feed';
 import { EmptyState } from '@/components/shared';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 
 export const FollowerFeed = ({ userId }: { userId: string }) => {
   const { followers, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =

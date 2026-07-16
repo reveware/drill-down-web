@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { PostCard } from './PostCard';
 import { imagePost, quotePost } from '@/mocks/post';
 
-import { PostTypes } from '@/types/post';
+import { PostTypes } from '@/types/post.types';
 
 const meta: Meta<typeof PostCard> = {
   title: 'Features/Posts/PostCard',

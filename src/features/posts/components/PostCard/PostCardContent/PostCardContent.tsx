@@ -1,5 +1,5 @@
 import React from 'react';
-import { PostOverview, PostTypes } from '@/types/post';
+import { PostOverview, PostTypes } from '@/types/post.types';
 import { ImagePostContent } from './ImagePostContent';
 import { QuotePostContent } from './QuotePostContent';
 

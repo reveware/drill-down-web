@@ -1,6 +1,6 @@
 import { sleep } from '@/lib/utils';
-import { PersonaOverview } from '@/types/persona';
-import { PaginatedResponse } from '@/types/pagination';
+import { PersonaOverview } from '@/types/persona.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { SearchPersonasParams } from '@/api/endpoints/persona.api';
 
 export const mockCompanion: PersonaOverview = {

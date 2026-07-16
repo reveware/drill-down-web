@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PostOverview, PostTypes } from '@/types/post';
+import { PostOverview, PostTypes } from '@/types/post.types';
 
 interface PostThumbnailProps {
   post: PostOverview;

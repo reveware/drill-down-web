@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Card } from '@/components/ui/card';
-import { PostOverview } from '@/types/post';
+import { PostOverview } from '@/types/post.types';
 import { PostCardHeader } from './PostCardHeader';
 import { PostCardFooter } from './PostCardFooter';
 import { PostCardContent } from './PostCardContent/PostCardContent';

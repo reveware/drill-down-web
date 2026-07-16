@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { PostOverview } from '@/types/post';
+import { PostOverview } from '@/types/post.types';
 import { PostApi } from '@/api/endpoints/post.api';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 export const useFeedPosts = () => {
   const query = useInfiniteQuery<PaginatedResponse<PostOverview>>({

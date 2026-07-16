@@ -1,5 +1,5 @@
-import { ChatEvents, Participant, WireMessage } from '@/types/chat';
-import { UserDetail } from '@/types/user';
+import { ChatEvents, Participant, WireMessage } from '@/types/chat.types';
+import { UserDetail } from '@/types/user.types';
 
 export const buildOptimisticMessage = (
   conversationId: string,

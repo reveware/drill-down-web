@@ -4,7 +4,7 @@ import {
   AffinityTimeline,
   AffinityTimelineRequest,
   AffinityType,
-} from '@/types/affinity';
+} from '@/types/affinity.types';
 import { mockFetchAffinityMatch, mockFetchAffinityTimeline } from '@/mocks/affinity';
 import { USE_MOCKS } from '../constants';
 

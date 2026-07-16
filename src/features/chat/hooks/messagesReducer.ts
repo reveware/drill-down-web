@@ -1,4 +1,4 @@
-import { ChatEvents, Participant, WireMessage } from '@/types/chat';
+import { ChatEvents, Participant, WireMessage } from '@/types/chat.types';
 import { buildStreamErrorMessage } from './messageFactory';
 
 /**

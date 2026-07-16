@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Conversation } from '@/types/chat';
+import { Conversation } from '@/types/chat.types';
 import { useIsActorSelf } from './useIsActorSelf';
 
 export const useAutoMarkRead = (

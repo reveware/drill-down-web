@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostApi } from '@/api/endpoints/post.api';
-import { PostTypes, CreateQuotePost, PostOverview, CreateImagePost } from '@/types/post';
+import { PostTypes, CreateQuotePost, PostOverview, CreateImagePost } from '@/types/post.types';
 import { toast } from '@/lib/toast';
 import { getApiErrorMessage } from '@/api/errors';
 import { useAuth } from '@/hooks/useAuth';

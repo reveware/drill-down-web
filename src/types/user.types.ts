@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { UserFieldsSchema } from './user-fields';
+import { UserFieldsSchema } from './user-fields.types';
 
 export enum UserRole {
   ADMIN = 'ADMIN',
@@ -62,7 +62,7 @@ export const UpdateUserSchema = UserFieldsSchema.partial().extend({
 
 export type UpdateUserDto = z.infer<typeof UpdateUserSchema>;
 
-// Stricter than UpdateUserSchema: onboarding requires username + date_of_birth
+// Stricter onboarding schema: requires username + date_of_birth
 export const OnboardingFormSchema = UserFieldsSchema.pick({
   username: true,
   date_of_birth: true,

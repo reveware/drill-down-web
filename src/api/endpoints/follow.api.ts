@@ -1,8 +1,8 @@
-import { UserOverview } from '@/types/user';
-import { FollowRequest } from '@/types/follow';
+import { UserOverview } from '@/types/user.types';
+import { FollowRequest } from '@/types/follow.types';
 import { apiClient } from '../client';
 import { mockFetchPendingFollowRequests, mockFetchFollowers } from '@/mocks/follow';
-import { PaginatedResponse } from '@/types/pagination';
+import { PaginatedResponse } from '@/types/pagination.types';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 
 export const FollowApi = {

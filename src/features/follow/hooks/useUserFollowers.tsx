@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { FollowApi } from '@/api/endpoints/follow.api';
-import { UserOverview } from '@/types/user';
-import { PaginatedResponse } from '@/types/pagination';
+import { UserOverview } from '@/types/user.types';
+import { PaginatedResponse } from '@/types/pagination.types';
 
 export const useUserFollowers = (userId: string) => {
   const query = useInfiniteQuery<PaginatedResponse<UserOverview>>({

@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { UserApi } from '@/api/endpoints/user.api';
-import { OnboardingDto } from '@/types/user';
+import { OnboardingDto } from '@/types/user.types';
 import { getApiErrorMessage } from '@/api/errors';
 import { toast } from '@/lib/toast';
 

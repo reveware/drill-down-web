@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from '@/components/shared/Icons';
-import { JoinError } from '@/types/chat';
+import { JoinError } from '@/types/chat.types';
 
 interface JoinErrorStateProps {
   error: JoinError;

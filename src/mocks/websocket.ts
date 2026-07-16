@@ -1,4 +1,4 @@
-import { ChatEvents, ConnectionStatus, WireParticipant } from '@/types/chat';
+import { ChatEvents, ConnectionStatus, WireParticipant } from '@/types/chat.types';
 import { sleep } from '@/lib/utils';
 import { generateResponse } from '@/mocks/chat';
 import type { WebSocketAdapter } from '@/lib/websocket/websocket-adapter';

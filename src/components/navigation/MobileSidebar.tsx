@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Sheet, SheetContent, SheetTitle } from '../ui/sheet';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { UserSection } from './UserSection';
 import { OnlineIndicator } from '@/components/shared/OnlineIndicator/OnlineIndicator';

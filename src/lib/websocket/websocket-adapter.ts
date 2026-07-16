@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { ChatEvents, ConnectionStatus } from '@/types/chat';
+import { ChatEvents, ConnectionStatus } from '@/types/chat.types';
 import { USE_MOCKS } from '@/api/constants';
 import { MockWebSocketAdapter } from '@/mocks/websocket';
 

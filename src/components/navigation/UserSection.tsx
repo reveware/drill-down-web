@@ -18,7 +18,7 @@ import {
 } from '../ui/dropdown-menu';
 import { ThemeToggle } from './ThemeToggle';
 import { UserAvatar, userAvatarProps } from '../shared';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 import { UserInfo } from '../shared/UserInfo/UserInfo';

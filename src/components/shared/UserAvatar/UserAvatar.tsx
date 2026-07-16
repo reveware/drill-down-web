@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User } from '@/components/shared/Icons';
 import { cn, getInitials } from '@/lib/utils';

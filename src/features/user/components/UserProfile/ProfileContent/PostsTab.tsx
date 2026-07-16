@@ -1,4 +1,4 @@
-import { UserOverview } from '@/types/user';
+import { UserOverview } from '@/types/user.types';
 import { UserPostsFeed } from '@/features/posts/components/UserPostsFeed';
 
 export const PostsTab = ({ user }: { user: UserOverview }) => {
