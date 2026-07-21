@@ -121,7 +121,6 @@ export interface ChatEvents {
     stream_id: string;
     conversation_id: string;
     code: 'persona_response_failed';
-    reason?: string;
     message: string;
   };
   // typing is bidirectional:
