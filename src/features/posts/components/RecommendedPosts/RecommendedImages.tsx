@@ -7,7 +7,7 @@ import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { EmptyState } from '@/components/shared';
 import { useRecommendedPosts } from '../../hooks/useRecommendedPosts';
 import { RecommendedImagesSkeleton } from './RecomendedImagesSkeleton';
-import { ImagePost, PostTypes } from '@/types/post.types';
+import { PostOverview } from '@/types/post.types';
 
 interface RecommendedImagesProps {
   userId: string;
@@ -18,9 +18,7 @@ export const RecommendedImages = ({ userId }: RecommendedImagesProps) => {
   const isMobile = useMediaQuery('mobile'); // < 768 px
   const { recommendations, isLoading } = useRecommendedPosts(userId);
 
-  const posts = recommendations
-    .map((recommendation) => recommendation.post)
-    .filter((post) => post.type === PostTypes.IMAGE);
+  const posts = recommendations.map((recommendation) => recommendation.post);
 
   const visiblePosts = posts.slice(0, isMobile ? 6 : 12);
 
@@ -47,7 +45,7 @@ export const RecommendedImages = ({ userId }: RecommendedImagesProps) => {
   );
 };
 
-const ImageGrid: React.FC<{ posts: ImagePost[] }> = ({ posts }) => (
+const ImageGrid: React.FC<{ posts: PostOverview[] }> = ({ posts }) => (
   <GridContainer>
     {posts.map((post) => (
       <button

@@ -2,12 +2,7 @@
 import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  CreateImagePost,
-  createImagePostSchema,
-  PostOverview,
-  PostTypes,
-} from '@/types/post.types';
+import { CreatePost, createPostSchema, PostOverview } from '@/types/post.types';
 import { Button } from '@/components/ui/button';
 import { GridContainer } from '@/components/shared/GridContainer/GridContainer';
 import { X, Plus } from '@/components/shared/Icons';
@@ -32,14 +27,13 @@ interface ImagePostFormProps {
 }
 
 export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
-  const { mutate: createImagePost } = useCreatePost(PostTypes.IMAGE, onSuccess);
+  const { mutate: createPost } = useCreatePost(onSuccess);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm({
-    resolver: zodResolver(createImagePostSchema),
+    resolver: zodResolver(createPostSchema),
     defaultValues: {
-      type: PostTypes.IMAGE,
       images: [],
       tags: [],
       description: '',
@@ -69,8 +63,8 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
     fileInputRef.current?.click();
   };
 
-  const onSubmit = async (data: CreateImagePost) => {
-    createImagePost(data);
+  const onSubmit = async (data: CreatePost) => {
+    createPost(data);
   };
 
   return (
@@ -150,7 +144,7 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
           className="mt-auto mb-2 w-full justify-self-end py-2 text-xs sm:text-sm"
           disabled={!form.formState.isValid}
         >
-          Create Image Post
+          Create Post
         </Button>
       </form>
     </Form>

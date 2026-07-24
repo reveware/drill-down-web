@@ -1,11 +1,6 @@
 import { apiClient } from '../client';
-import {
-  PostOverview,
-  PostSearchParams,
-  CreateQuotePost,
-  CreateImagePost,
-} from '@/types/post.types';
-import { mockFetchPosts, quotePost } from '@/mocks/post';
+import { PostOverview, PostSearchParams, CreatePost } from '@/types/post.types';
+import { mockFetchPosts } from '@/mocks/post';
 import { PaginatedResponse } from '@/types/pagination.types';
 import { PAGE_NUMBER, PAGE_SIZE, USE_MOCKS } from '../constants';
 
@@ -39,9 +34,8 @@ export const PostApi = {
     ).data;
   },
 
-  createImagePost: async (post: CreateImagePost): Promise<PostOverview> => {
+  createPost: async (post: CreatePost): Promise<PostOverview> => {
     const formData = new FormData();
-    formData.append('type', post.type);
     post.images.forEach((file) => formData.append('images', file));
     post.tags.forEach((tag, i) => formData.append(`tags[${i}]`, tag));
 
@@ -54,13 +48,6 @@ export const PostApi = {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
     ).data;
-  },
-
-  createQuotePost: async (post: CreateQuotePost): Promise<PostOverview> => {
-    if (USE_MOCKS) {
-      return quotePost(Math.random().toString(36).substring(2, 15));
-    }
-    return (await apiClient.post('/posts/quote', post)).data;
   },
 
   deletePost: async (postId: string): Promise<boolean> => {

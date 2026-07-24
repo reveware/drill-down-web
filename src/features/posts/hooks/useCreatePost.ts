@@ -1,33 +1,16 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { PostApi } from '@/api/endpoints/post.api';
-import { PostTypes, CreateQuotePost, PostOverview, CreateImagePost } from '@/types/post.types';
+import { CreatePost, PostOverview } from '@/types/post.types';
 import { toast } from '@/lib/toast';
 import { getApiErrorMessage } from '@/api/errors';
 import { useAuth } from '@/hooks/useAuth';
 
-type PostTypeToDto<T extends PostTypes> = T extends PostTypes.IMAGE
-  ? CreateImagePost
-  : T extends PostTypes.QUOTE
-    ? CreateQuotePost
-    : never;
-
-export function useCreatePost<T extends PostTypes>(
-  type: T,
-  onSuccess: (post: PostOverview) => void
-) {
+export function useCreatePost(onSuccess: (post: PostOverview) => void) {
   const queryClient = useQueryClient();
   const { user } = useAuth();
 
-  return useMutation<PostOverview, Error, PostTypeToDto<T>>({
-    mutationFn: async (data) => {
-      if (type === PostTypes.IMAGE) {
-        return await PostApi.createImagePost(data as CreateImagePost);
-      }
-      if (type === PostTypes.QUOTE) {
-        return await PostApi.createQuotePost(data as CreateQuotePost);
-      }
-      throw new Error('Invalid post type');
-    },
+  return useMutation<PostOverview, Error, CreatePost>({
+    mutationFn: (data) => PostApi.createPost(data),
     onError: (error) => {
       toast.error(getApiErrorMessage(error));
     },

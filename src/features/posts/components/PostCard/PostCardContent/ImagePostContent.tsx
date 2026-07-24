@@ -1,4 +1,4 @@
-import { ImagePost } from '@/types/post.types';
+import { PostOverview } from '@/types/post.types';
 import Image from 'next/image';
 import React from 'react';
 import {
@@ -10,7 +10,7 @@ import {
 import { ChevronLeft, ChevronRight } from '@/components/shared/Icons';
 import { ImageLightbox } from '@/components/shared';
 
-export const ImagePostContent = ({ post }: { post: ImagePost }) => {
+export const ImagePostContent = ({ post }: { post: PostOverview }) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [lightboxOpen, setLightboxOpen] = React.useState(false);
