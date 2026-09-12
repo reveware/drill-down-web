@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { cn } from '@/lib/utils';
 import { toast } from '@/lib/toast';
 import { GOOGLE_CLIENT_ID } from '@/api/constants';
@@ -28,20 +28,18 @@ export const SsoActions = ({ className }: SsoActionsProps) => {
       </div>
 
       <div className="flex w-full justify-center">
-        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-          <GoogleLogin
-            nonce={nonce}
-            text="continue_with"
-            onSuccess={(credentialResponse) => {
-              if (!credentialResponse.credential) {
-                toast.error('Google did not return a credential. Please try again.');
-                return;
-              }
-              mutate({ id_token: credentialResponse.credential, nonce });
-            }}
-            onError={() => toast.error('Google sign-in was cancelled or failed.')}
-          />
-        </GoogleOAuthProvider>
+        <GoogleLogin
+          nonce={nonce}
+          text="continue_with"
+          onSuccess={(credentialResponse) => {
+            if (!credentialResponse.credential) {
+              toast.error('Google did not return a credential. Please try again.');
+              return;
+            }
+            mutate({ id_token: credentialResponse.credential, nonce });
+          }}
+          onError={() => toast.error('Google sign-in was cancelled or failed.')}
+        />
       </div>
     </div>
   );

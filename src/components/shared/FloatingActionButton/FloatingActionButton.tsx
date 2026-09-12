@@ -1,9 +1,8 @@
 'use client';
-import { Pen, Bomb, MessageCircle, Bot } from '@/components/shared/Icons';
+import { Pen, Bomb, MessageCircle, Bot, type IconComponent } from '@/components/shared/Icons';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { LucideIcon } from 'lucide-react';
 import { CreatePost } from '../../../features/posts/';
 import { Chat } from '@/features/chat/components/Chat/Chat';
 import { useCompanion } from '@/features/persona/hooks/useCompanion';
@@ -16,7 +15,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { useModal } from '@/hooks/useModal';
 
 interface Action {
-  icon: LucideIcon;
+  icon: IconComponent;
   title: string;
   content: React.ReactNode;
   disabled?: boolean;

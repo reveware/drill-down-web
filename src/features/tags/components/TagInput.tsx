@@ -3,7 +3,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { Badge } from '@/components/ui/badge';
 
-import { X } from 'lucide-react';
+import { X } from '@/components/shared/Icons';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useTagSearch } from '../hooks/useTagSearch';
 import { Tag } from '@/types/tag.types';

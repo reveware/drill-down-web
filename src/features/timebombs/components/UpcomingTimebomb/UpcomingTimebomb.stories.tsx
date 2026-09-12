@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { UpcomingTimebomb } from './UpcomingTimebomb';
 import { mockTimeBomb } from '@/mocks/timebomb';
 

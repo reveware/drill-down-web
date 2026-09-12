@@ -1,3 +1,6 @@
+// Centralized icon exports from lucide-react
+// This makes it easy to replace the icon library in the future
+
 export {
   Sun,
   Moon,
@@ -52,3 +55,5 @@ export {
   RotateCw,
   Sparkles,
 } from 'lucide-react';
+
+export type { LucideIcon as IconComponent } from 'lucide-react';

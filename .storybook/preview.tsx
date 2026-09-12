@@ -1,8 +1,8 @@
 import React from 'react';
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/nextjs-vite';
 import '../src/styles/globals.css';
 import { withThemeByClassName } from '@storybook/addon-themes';
-import { QueryProvider } from '../src/providers/QueryProvider';
+import { QueryProvider } from '../src/components/providers/QueryProvider';
 
 const parameters = {
   layout: 'padded',

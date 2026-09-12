@@ -3,7 +3,7 @@ import { toast } from '@/lib/toast';
 
 const createApiClient = (): AxiosInstance => {
   const client = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080',
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL ?? ''}/api`,
     timeout: 10000,
     headers: {
       'Content-Type': 'application/json',
