@@ -65,9 +65,7 @@ export const PasswordForm = ({ hasPassword, ssoProviders }: PasswordFormProps) =
               name="old_password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-muted-foreground text-xs font-normal">
-                    Current password
-                  </FormLabel>
+                  <FormLabel>Current password</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
@@ -89,9 +87,7 @@ export const PasswordForm = ({ hasPassword, ssoProviders }: PasswordFormProps) =
               name="new_password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-muted-foreground text-xs font-normal">
-                    New password
-                  </FormLabel>
+                  <FormLabel>New password</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
@@ -110,9 +106,7 @@ export const PasswordForm = ({ hasPassword, ssoProviders }: PasswordFormProps) =
               name="confirm_password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-muted-foreground text-xs font-normal">
-                    Confirm new password
-                  </FormLabel>
+                  <FormLabel>Confirm new password</FormLabel>
                   <FormControl>
                     <Input
                       type="password"

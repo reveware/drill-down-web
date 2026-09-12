@@ -71,7 +71,7 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex h-full min-h-0 w-full flex-col space-y-2 sm:space-y-4"
+        className="flex h-full min-h-0 w-full flex-col gap-4"
       >
         <input
           type="file"
@@ -87,7 +87,7 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
           name="images"
           render={() => (
             <FormItem className="flex min-h-0 flex-1 flex-col">
-              <FormLabel className="text-xs sm:text-sm">Photos*</FormLabel>
+              <FormLabel>Photos*</FormLabel>
               {selectedFiles.length === 0 ? (
                 <UploadArea
                   triggerFileInput={triggerFileInput}
@@ -100,19 +100,19 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
                   triggerFileInput={triggerFileInput}
                 />
               )}
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <FormMessage />
             </FormItem>
           )}
         />
 
-        <Separator className="my-4" />
+        <Separator />
 
         <FormField
           control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-xs sm:text-sm">Description</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Add a description..."
@@ -120,7 +120,7 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -130,20 +130,16 @@ export const ImagePostForm = ({ onSuccess }: ImagePostFormProps) => {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-xs sm:text-sm">Tags*</FormLabel>
+              <FormLabel>Tags*</FormLabel>
               <FormControl>
                 <TagInput value={field.value} onChange={(tags) => field.onChange(tags)} />
               </FormControl>
-              <FormMessage className="min-h-[1rem] text-xs font-light" />
+              <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button
-          type="submit"
-          className="mt-auto mb-2 w-full justify-self-end py-2 text-xs sm:text-sm"
-          disabled={!form.formState.isValid}
-        >
+        <Button type="submit" className="mt-auto mb-2 w-full" disabled={!form.formState.isValid}>
           Create Post
         </Button>
       </form>
@@ -162,11 +158,11 @@ const Preview = ({
 }) => (
   <>
     <div className="text-foreground mb-2 self-end text-xs">
-      {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected —{' '}
+      {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected
       <button
         type="button"
         onClick={triggerFileInput}
-        className="hover:text-primary cursor-pointer underline underline-offset-2"
+        className="hover:text-primary ml-2 cursor-pointer underline underline-offset-2"
       >
         Change
       </button>

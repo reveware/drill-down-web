@@ -45,7 +45,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2" autoComplete="on">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" autoComplete="on">
         <FormField
           control={form.control}
           name="username"
@@ -55,12 +55,12 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormControl>
                 <Input placeholder="johndoe" {...field} />
               </FormControl>
-              <FormMessage className="text-xs font-light" />
+              <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="grid grid-cols-2 gap-2 md:gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="first_name"
@@ -70,9 +70,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input placeholder="John" {...field} />
                 </FormControl>
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -85,9 +83,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input placeholder="Doe" {...field} />
                 </FormControl>
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -102,12 +98,12 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
               </FormControl>
-              <FormMessage className="text-xs font-light" />
+              <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
             name="password"
@@ -133,9 +129,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     </Button>
                   </div>
                 </FormControl>
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -169,15 +163,13 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     </Button>
                   </div>
                 </FormControl>
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
         </div>
 
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <FormField
             control={form.control}
             name="date_of_birth"
@@ -191,9 +183,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                     onBlur={field.onBlur}
                   />
                 </FormControl>
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -206,9 +196,7 @@ export const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps)
                 <FormControl>
                   <Input placeholder="Slow down..." {...field} />
                 </FormControl>
-                <div className="min-h-[1rem] text-xs font-light">
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </FormItem>
             )}
           />
