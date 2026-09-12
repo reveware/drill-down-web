@@ -3,16 +3,11 @@ import { PaginatedResponse } from '@/types/pagination.types';
 import { PostRecommendation, RecommendationReason } from '@/types/recommendations.types';
 import { RecommendationApi } from '@/api/endpoints/recommendations.api';
 
-export const useRecommendedPosts = (userId: string) => {
+export const useRecommendedPosts = () => {
   const query = useQuery({
     queryKey: ['recommended-posts'],
     queryFn: async (): Promise<PaginatedResponse<PostRecommendation>> => {
-      return await RecommendationApi.getRecommendedPosts(
-        userId,
-        RecommendationReason.AFFINITY,
-        1,
-        12
-      );
+      return await RecommendationApi.getRecommendedPosts(RecommendationReason.AFFINITY, 1, 12);
     },
 
     retry: false,

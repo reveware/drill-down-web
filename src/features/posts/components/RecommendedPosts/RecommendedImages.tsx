@@ -9,14 +9,10 @@ import { useRecommendedPosts } from '../../hooks/useRecommendedPosts';
 import { RecommendedImagesSkeleton } from './RecomendedImagesSkeleton';
 import { PostOverview } from '@/types/post.types';
 
-interface RecommendedImagesProps {
-  userId: string;
-}
-
-export const RecommendedImages = ({ userId }: RecommendedImagesProps) => {
+export const RecommendedImages = () => {
   const title = 'Recommended Photos';
   const isMobile = useMediaQuery('mobile'); // < 768 px
-  const { recommendations, isLoading } = useRecommendedPosts(userId);
+  const { recommendations, isLoading } = useRecommendedPosts();
 
   const posts = recommendations.map((recommendation) => recommendation.post);
 

@@ -34,7 +34,6 @@ export const RecommendationApi = {
   },
 
   getRecommendedPosts: async (
-    userId: string,
     reason: RecommendationReason,
     page: number = PAGE_NUMBER,
     pageSize: number = PAGE_SIZE
@@ -44,7 +43,7 @@ export const RecommendationApi = {
     }
     return (
       await apiClient.get<PaginatedResponse<PostRecommendation>>('/recommendations/posts', {
-        params: { userId, reason, page, page_size: pageSize },
+        params: { reason, page, page_size: pageSize },
       })
     ).data;
   },
