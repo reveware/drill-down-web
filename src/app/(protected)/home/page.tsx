@@ -25,7 +25,7 @@ export default function HomePage() {
       <aside className="border-border order-1 flex flex-col items-center gap-6 border-l-1 p-4 lg:order-2 lg:col-span-3">
         <UserTags userId={user.id} />
         <UpcomingTimebomb timebomb={mockTimeBomb} />
-        <RecommendedImages userId={user.id} />
+        <RecommendedImages />
         <UserRecommendations userId={user.id} />
       </aside>
 
