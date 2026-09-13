@@ -1,5 +1,5 @@
 'use client';
-import { Pen, Bomb, MessageCircle, Bot, type IconComponent } from '@/components/shared/Icons';
+import { Pen, MessageCircle, Bot, type IconComponent } from '@/components/shared/Icons';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -43,11 +43,6 @@ export const FloatingActionButton = ({ className }: FloatingActionButtonProps) =
     {
       icon: Pen,
       title: 'Create Post',
-      content: <CreatePost onSuccess={closeModal} />,
-    },
-    {
-      icon: Bomb,
-      title: 'Locked Post',
       content: <CreatePost onSuccess={closeModal} />,
     },
     {

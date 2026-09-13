@@ -23,7 +23,6 @@ export {
   UserMinus,
   UserPlus,
   Trash,
-  Bomb,
   Pen,
   Bot,
   Plus,
