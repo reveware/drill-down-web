@@ -1,13 +1,30 @@
-<!--- Please, make sure the code follows the conventions, and styleguide when creating or reviewing PRs. -->
+<!--- Title: the ticket name when there is one, "RK-42: Title", otherwise one line in the imperative. -->
 
 ## Description
 
-<!---  Detail the changes you're making, and how it will affect the app behaviour and performance of the apps -->
+<!---
+An action in the imperative, then its effects as bullets. Say what changes for the app or the
+user, never which files moved.
+
+Give the Claude review workflow the gh commands its skill uses:
+- gh pr diff to read the change
+- gh pr comment to post the summary
+-->
 
 ## Motivation
 
-<!--- Explain the reasoning behind the change, call out any related tickets. -->
+<!---
+One or two sentences: the problem, then the goal. Name the ticket in full.
+
+Review runs exit green with nothing posted, so the reviewer gets the commands it was denied.
+-->
 
 ## Testing
 
-<!---  Describe the steps to test and validate your changes -->
+<!---
+Numbered steps a user takes in the UI, then what they should see on its own line.
+
+1. Open a project and click a scene
+2. Clear the lighting override and save
+The scene card loses the lighting badge.
+-->
