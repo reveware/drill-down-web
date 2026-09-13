@@ -38,7 +38,7 @@ export const UserSection = ({ user }: UserSectionProps) => {
         className="hover:bg-sidebar-accent flex items-center gap-3 rounded-md p-2"
       >
         <UserAvatar {...userAvatarProps(user)} href={undefined} />
-        <UserInfo user={user} />
+        <UserInfo user={user} href={null} />
       </Link>
 
       <ThemeToggle />
