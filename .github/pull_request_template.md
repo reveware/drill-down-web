@@ -14,7 +14,7 @@ Give the Claude review workflow the gh commands its skill uses:
 ## Motivation
 
 <!---
-One or two sentences: the problem, then the goal. Name the ticket in full.
+One or two sentences: the problem, then the goal.
 
 Review runs exit green with nothing posted, so the reviewer gets the commands it was denied.
 -->
