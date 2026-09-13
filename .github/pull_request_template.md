@@ -10,6 +10,29 @@ Add password reset:
 - a link works once and expires after an hour
 -->
 
+### Components
+
+<!---
+(when adding or changing components)
+Short sentences on what changed, along a table of the components touched.
+
+| component | change |
+| --- | --- |
+| LoginForm | gains a Forgot password link |
+| ForgotPasswordForm | new, asks for the email and shows the sent state |
+| ResetPasswordForm | new, sets the password or shows the expired message |
+-->
+
+### Screens
+
+<!---
+(when adding or changing a route)
+One bullet per route touched: the path, then what the user does there.
+
+- /forgot-password: enter the email, then see that a link was sent
+- /reset-password/:token: set the new password; an expired link says so
+-->
+
 ## Motivation
 
 <!---
