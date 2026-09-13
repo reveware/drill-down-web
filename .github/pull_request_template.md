@@ -6,9 +6,9 @@
 An action in the imperative, then its effects as bullets. Say what changes for the app or the
 user, never which files moved.
 
-Give the Claude review workflow the gh commands its skill uses:
-- gh pr diff to read the change
-- gh pr comment to post the summary
+Add a tagline to scenes:
+- the scene form gets a one line field under the title
+- the scene card and the screenplay show it
 -->
 
 ## Motivation
@@ -16,7 +16,8 @@ Give the Claude review workflow the gh commands its skill uses:
 <!---
 One or two sentences: the problem, then the goal.
 
-Review runs exit green with nothing posted, so the reviewer gets the commands it was denied.
+The scene description leaked into every shot's prompt, so the scene keeps one line of story and
+the shots carry the action.
 -->
 
 ## Testing
