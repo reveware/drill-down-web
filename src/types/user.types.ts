@@ -52,6 +52,7 @@ export const UserDetailSchema = UserOverviewSchema.extend({
   received_locked_posts: z.number(),
   has_password: z.boolean(),
   sso_providers: z.array(z.nativeEnum(AuthProvider)),
+  reward_cycle: z.object({ previous: z.number(), next: z.number() }),
 });
 
 export type UserDetail = z.infer<typeof UserDetailSchema>;
