@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "cross-env TAILWIND_DISABLE_WASM=1",
     "prepare": "husky",
-    "start:dev": "next dev --turbopack",
+    "start:dev": "next dev --turbopack -p 3001",
     "start:prod": "next start",
     "start": "npm run start:dev",
     "build": "next build",
