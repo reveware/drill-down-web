@@ -70,9 +70,7 @@ export const IdentityForm = ({ user }: IdentityFormProps) => {
                 name="first_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-muted-foreground text-xs font-normal">
-                      First name
-                    </FormLabel>
+                    <FormLabel>First name</FormLabel>
                     <FormControl>
                       <Input {...field} value={field.value ?? ''} />
                     </FormControl>
@@ -86,9 +84,7 @@ export const IdentityForm = ({ user }: IdentityFormProps) => {
                 name="last_name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-muted-foreground text-xs font-normal">
-                      Last name
-                    </FormLabel>
+                    <FormLabel>Last name</FormLabel>
                     <FormControl>
                       <Input {...field} value={field.value ?? ''} />
                     </FormControl>
@@ -104,7 +100,7 @@ export const IdentityForm = ({ user }: IdentityFormProps) => {
             name="tagline"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted-foreground text-xs font-normal">Tagline</FormLabel>
+                <FormLabel>Tagline</FormLabel>
                 <FormControl>
                   <Input {...field} value={field.value ?? ''} placeholder="Slow down..." />
                 </FormControl>
@@ -118,9 +114,7 @@ export const IdentityForm = ({ user }: IdentityFormProps) => {
             name="date_of_birth"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-muted-foreground text-xs font-normal">
-                  Date of birth
-                </FormLabel>
+                <FormLabel>Date of birth</FormLabel>
                 <FormControl>
                   <DateOfBirthPicker
                     value={field.value}

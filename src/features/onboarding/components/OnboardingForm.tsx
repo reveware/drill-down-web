@@ -40,9 +40,7 @@ export const OnboardingForm = ({ onSubmit, isLoading = false }: OnboardingFormPr
           render={({ field }) => (
             <FormItem className="flex flex-col items-center space-y-2">
               <AvatarUpload value={field.value} onChange={field.onChange} />
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -56,9 +54,7 @@ export const OnboardingForm = ({ onSubmit, isLoading = false }: OnboardingFormPr
               <FormControl>
                 <Input placeholder="johndoe" autoComplete="username" {...field} />
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -76,9 +72,7 @@ export const OnboardingForm = ({ onSubmit, isLoading = false }: OnboardingFormPr
                   onBlur={field.onBlur}
                 />
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -92,9 +86,7 @@ export const OnboardingForm = ({ onSubmit, isLoading = false }: OnboardingFormPr
               <FormControl>
                 <Input placeholder="Slow down..." {...field} />
               </FormControl>
-              <div className="min-h-[1rem] text-xs font-light">
-                <FormMessage />
-              </div>
+              <FormMessage />
             </FormItem>
           )}
         />

@@ -114,6 +114,7 @@ export const mockCurrentUser = async (): Promise<UserDetail> => {
     received_locked_posts: 0,
     has_password: true,
     sso_providers: [AuthProvider.GOOGLE],
+    reward_cycle: { previous: 0, next: 1 },
   };
 };
 
@@ -141,6 +142,7 @@ export const mockFetchUser = async (userId: string): Promise<UserDetail> => {
     received_locked_posts,
     has_password: true,
     sso_providers: [],
+    reward_cycle: mockRewardCycle(posts_count),
   };
 };
 
@@ -162,6 +164,7 @@ export const mockUpdateUser = async (
     received_locked_posts: 0,
     has_password: true,
     sso_providers: [AuthProvider.GOOGLE],
+    reward_cycle: { previous: 0, next: 1 },
   };
 };
 
@@ -220,4 +223,12 @@ export const mockFetchTags = async (_: string): Promise<TagCount[]> => {
     slug: name.toLowerCase().replace(/\s+/g, '-'),
     count,
   }));
+};
+
+const mockRewardCycle = (postsCount: number) => {
+  if (postsCount < 1) {
+    return { previous: 0, next: 1 };
+  }
+  const completed = Math.floor(postsCount / 5) * 5;
+  return { previous: Math.max(completed, 1), next: completed + 5 };
 };

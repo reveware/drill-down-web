@@ -2,9 +2,7 @@
 
 import { PostFeed } from '@/features/posts/components/PostFeed/PostFeed';
 import { RecommendedImages } from '@/features/posts';
-import { UpcomingTimebomb } from '@/features/timebombs/components/UpcomingTimebomb/UpcomingTimebomb';
 import { FloatingActionButton } from '@/components/shared/FloatingActionButton/FloatingActionButton';
-import { mockTimeBomb } from '@/mocks/timebomb';
 import { useAuth } from '@/hooks/useAuth';
 import { UserRecommendations } from '@/features/user/components/UserRecommendations/UserRecommendations';
 import { UserTags } from '@/features/user';
@@ -24,7 +22,6 @@ export default function HomePage() {
 
       <aside className="border-border order-1 flex flex-col items-center gap-6 border-l-1 p-4 lg:order-2 lg:col-span-3">
         <UserTags userId={user.id} />
-        <UpcomingTimebomb timebomb={mockTimeBomb} />
         <RecommendedImages />
         <UserRecommendations userId={user.id} />
       </aside>

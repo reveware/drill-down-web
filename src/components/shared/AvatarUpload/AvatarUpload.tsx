@@ -65,7 +65,7 @@ export const AvatarUpload = ({
         <Label
           htmlFor={inputId}
           className={cn(
-            'bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 cursor-pointer rounded-full transition-colors',
+            'bg-primary text-primary-foreground hover:bg-primary/90 absolute right-0 bottom-0 flex cursor-pointer rounded-full transition-colors',
             s.badge
           )}
         >
