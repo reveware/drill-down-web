@@ -48,10 +48,10 @@ export const RewardsApi = {
     ).data;
   },
 
-  retryRewardGeneration: async (id: string): Promise<RewardGeneration> => {
+  retryRewardGeneration: async (id: string): Promise<void> => {
     if (USE_MOCKS) {
-      return await mockRetryRewardGeneration(id);
+      return await mockRetryRewardGeneration();
     }
-    return (await apiClient.post<RewardGeneration>(`/reward-generations/${id}/retry`)).data;
+    await apiClient.post<void>(`/reward-generations/${id}/retry`);
   },
 };
