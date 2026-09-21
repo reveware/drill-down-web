@@ -20,7 +20,7 @@ export const RewardsGallery = () => {
 
   const items = useMemo<GalleryItem[]>(() => {
     const sortedGenerations = [...generations].sort(
-      (a, b) => new Date(b.enqueued_at).getTime() - new Date(a.enqueued_at).getTime()
+      (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
     );
     return [
       ...sortedGenerations.map<GalleryItem>((g) => ({

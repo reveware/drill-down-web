@@ -73,22 +73,34 @@ const buildMockGenerations = (): RewardGeneration[] => {
   const now = Date.now();
   return [
     {
+      id: 'gen-0',
+      user_id: MOCK_USER_ID,
+      status: JobStatus.PENDING,
+      created_at: new Date(now - 2_000).toISOString(),
+      started_at: null,
+      finished_at: null,
+      error_message: null,
+      reward: null,
+    },
+    {
       id: 'gen-1',
       user_id: MOCK_USER_ID,
       status: JobStatus.IN_PROGRESS,
-      enqueued_at: new Date(now - 30_000).toISOString(),
+      created_at: new Date(now - 30_000).toISOString(),
       started_at: new Date(now - 25_000).toISOString(),
       finished_at: null,
       error_message: null,
+      reward: null,
     },
     {
       id: 'gen-2',
       user_id: MOCK_USER_ID,
       status: JobStatus.FAILED,
-      enqueued_at: new Date(now - 5 * 60_000).toISOString(),
+      created_at: new Date(now - 5 * 60_000).toISOString(),
       started_at: new Date(now - 4 * 60_000).toISOString(),
       finished_at: new Date(now - 3 * 60_000).toISOString(),
       error_message: 'OpenAI request timed out after 480 seconds',
+      reward: null,
     },
   ];
 };
@@ -107,15 +119,6 @@ export async function mockFetchActiveRewardGenerations(
   };
 }
 
-export async function mockRetryRewardGeneration(id: string): Promise<RewardGeneration> {
+export async function mockRetryRewardGeneration(): Promise<void> {
   await sleep(0.5);
-  return {
-    id,
-    user_id: MOCK_USER_ID,
-    status: JobStatus.QUEUED,
-    enqueued_at: new Date().toISOString(),
-    started_at: null,
-    finished_at: null,
-    error_message: null,
-  };
 }
