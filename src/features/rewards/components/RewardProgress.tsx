@@ -4,8 +4,6 @@ import { useUserProfile } from '@/features/user/hooks/useUserProfile';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 
-const POSTS_PER_REWARD = 10;
-
 export const RewardProgress = () => {
   const { user: authUser } = useAuth();
   const { data: user, isLoading } = useUserProfile(authUser?.id || '');
@@ -14,23 +12,17 @@ export const RewardProgress = () => {
     return null;
   }
 
-  const postsCount = user.posts_count;
-  const postsInCurrentCycle = postsCount % POSTS_PER_REWARD;
-  const postsUntilNextReward = POSTS_PER_REWARD - postsInCurrentCycle;
-  const progressPercentage = (postsInCurrentCycle / POSTS_PER_REWARD) * 100;
+  const { previous, next } = user.reward_cycle;
+  const cycleLength = next - previous;
+  const postsInCycle = user.posts_count - previous;
+  const postsLeft = next - user.posts_count;
 
-  // If user just completed a reward cycle, show they're at 0/10 for next reward
-  const isStartOfCycle = postsCount === 0 || (postsInCurrentCycle === 0 && postsCount > 0);
-  const displayProgress = isStartOfCycle ? 0 : postsInCurrentCycle;
-  const displayPercentage = isStartOfCycle ? 0 : progressPercentage;
-
-  const getProgressMessage = () => {
-    return postsUntilNextReward === POSTS_PER_REWARD
-      ? 'Start posting to earn rewards!'
-      : postsUntilNextReward === 1
+  const message =
+    user.posts_count === 0
+      ? 'Post once to earn your first reward!'
+      : postsLeft === 1
         ? 'Just 1 more post until your next reward!'
-        : `Continue posting to earn a new reward!`;
-  };
+        : `${postsLeft} more posts until your next reward`;
 
   return (
     <Card className="card">
@@ -38,12 +30,12 @@ export const RewardProgress = () => {
         <h3 className="text-lg font-semibold">Next Reward</h3>
         <div className="space-y-2">
           <div className="text-muted-foreground flex items-center justify-between text-xs">
-            <span>{getProgressMessage()}</span>
+            <span>{message}</span>
             <span>
-              {displayProgress}/{POSTS_PER_REWARD} posts
+              {postsInCycle}/{cycleLength} posts
             </span>
           </div>
-          <Progress value={displayPercentage} className="h-2" />
+          <Progress value={(postsInCycle / cycleLength) * 100} className="h-2" />
         </div>
       </CardContent>
     </Card>
