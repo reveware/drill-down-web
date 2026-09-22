@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['*.ngrok-free.app'], // ngrok host rotates on every agent restart, hence the wildcard.
+  allowedDevOrigins: ['*.ngrok-free.app', '*.ngrok-free.dev'], // ngrok reserved and random domains
   experimental: {
     optimizePackageImports: ['date-fns', 'react-day-picker'],
   },
